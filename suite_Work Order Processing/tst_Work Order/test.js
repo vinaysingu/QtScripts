@@ -1,7 +1,7 @@
 function main()
 {
     
-    //-----includes-----
+    //-----includes-----------
     source(findFile("scripts","functions.js"));
     
     //-----login Application-----
