@@ -2,6 +2,7 @@ The functions.js file placed in shared folder has the common code libraries requ
 
 The functions.js can be shared across multiple test suites 
 
+
 Please find the instructions below for configuring the global scripts
 
 1. This feature is available from squish  4.1.1 build
