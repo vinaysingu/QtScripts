@@ -1,6 +1,6 @@
 The functions.js file placed in shared folder has the common code libraries required for all test suites except PopulateEmptyDB,Batch manager Submissions and MRP-MPS-DRP scenarios
 
-The functions.js can be shared across multiple test suites 
+The functions.js can be shared across multiple test suites new
 
 
 Please find the instructions below for configuring the global scripts
