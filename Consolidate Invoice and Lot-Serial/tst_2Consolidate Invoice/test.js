@@ -7,7 +7,9 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     snooze(6);
-    
+     //--------------- Set the window to Tab view mode -------------
+
+    tabView();
     //---Create Sales Orders for same customer---
     var sonumber1 = createSalesOrder("YTRUCK1","100");
     var sonumber2 = createSalesOrder("YTRUCK1","100");
