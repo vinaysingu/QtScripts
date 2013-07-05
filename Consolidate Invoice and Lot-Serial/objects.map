@@ -262,12 +262,16 @@
 :List Unposted Invoices.Unposted Invoices:_QLabel	{name='_purchaseOrdersLit' text='Unposted Invoices:' type='QLabel' visible='1'}
 :List Unposted Invoices.Yes_QPushButton	{container=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin.List Unposted Invoices_QWorkspaceChild' text='Yes' type='QPushButton' unnamed='1' visible='1'}
 :Log In.Login_QPushButton	{name='_login' text='Login' type='QPushButton' visible='1' window=':Log In_login2'}
+:Log In.Login_QPushButton_2	{text='Login' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
 :Log In.Options..._QPushButton	{name='_options' text='Options...' type='QPushButton' visible='1' window=':Log In_login2'}
 :Log In.Options..._QPushButton_2	{text='Options...' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
 :Log In.Recent_QPushButton	{name='_recent' text='Recent' type='QPushButton' visible='1' window=':Log In_login2'}
 :Log In.Recent_QPushButton_2	{text='Recent' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
+:Log In._database_QComboBox	{name='_database' type='QComboBox' visible='1' window=':Log In_login2'}
 :Log In._frame_QFrame	{name='_frame' type='QFrame' visible='1' window=':Log In_login2'}
 :Log In._logo_QLabel	{name='_logo' type='QLabel' visible='1' window=':Log In_login2'}
+:Log In._port_QLineEdit	{name='_port' type='QLineEdit' visible='1' window=':Log In_login2'}
+:Log In._server_QLineEdit	{name='_server' type='QLineEdit' visible='1' window=':Log In_login2'}
 :Log In_login2	{name='login2' type='login2' visible='1' windowTitle='Log In'}
 :Login Options.Database:_QLabel	{name='_databaseLit' text='Database:' type='QLabel' visible='1' window=':Login Options_login2Options'}
 :Login Options.Port:_QLabel	{name='_portLit' text='Port:' type='QLabel' visible='1' window=':Login Options_login2Options'}
@@ -627,6 +631,7 @@
 :_custhist.60091_QModelIndex	{column='2' container=':_frame._custhist_XTreeWidget' text='60091' type='QModelIndex'}
 :_customerType.All Customer Types_QRadioButton	{name='_all' text='All Customer Types' type='QRadioButton' visible='1'}
 :_database_QLineEdit	{buddy=':Login Options.Database:_QLabel' name='_database' type='QLineEdit' visible='1'}
+:_database_QLineEdit_2	{parentWidget=':Log In._database_QComboBox' type='QLineEdit' unnamed='1' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit	{container=':General Ledger Transactions._dateGroup_QGroupBox' name='XDateEdit' type='XDateEdit' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit_2	{container=':General Ledger Transactions._dateGroup_QGroupBox' name='XDateEdit' occurrence='2' type='XDateEdit' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit_3	{container=':xTuple ERP:*._dateGroup_QGroupBox' name='XDateEdit' occurrence='2' type='XDateEdit' visible='1'}
@@ -925,7 +930,7 @@
 :_orderMultiple_XLineEdit	{buddy=':Enforce Order Parameters.Order Multiple:_QLabel' name='_orderMultiple' type='XLineEdit' visible='1'}
 :_ordered_XLineEdit	{buddy=':_qtyGroup.Qty. Ordered:_QLabel' name='_ordered' type='XLineEdit' visible='1'}
 :_orderitem.WTRUCK1_QModelIndex	{column='2' container=':_frame._orderitem_XTreeWidget' text='WTRUCK1' type='QModelIndex'}
-:_password_QLineEdit	{name='_password' type='QLineEdit' visible='1'}
+:_password_QLineEdit	{name='_password' type='QLineEdit' visible='1' window=':Log In_login2'}
 :_planGroup._sequence_XSpinBox	{container=':_whsTypeStack._planGroup_QGroupBox' name='_sequence' type='XSpinBox' visible='1'}
 :_planGroup.qt_spinbox_lineedit_QLineEdit	{container=':_whsTypeStack._planGroup_QGroupBox' name='qt_spinbox_lineedit' type='QLineEdit' visible='1'}
 :_plannerCode.All Planner Codes_QRadioButton	{container=':Run MRP by Planner Code._plannerCode_ParameterGroup' name='_all' text='All Planner Codes' type='QRadioButton' visible='1'}
@@ -1046,7 +1051,7 @@
 :_typeGroup.Transfer Order_QRadioButton	{container=':Planned Order._typeGroup_QGroupBox' name='_toButton' text='Transfer Order' type='QRadioButton' visible='1'}
 :_typeGroup._fromWarehouse_WComboBox	{container=':Planned Order._typeGroup_QGroupBox' name='_fromWarehouse' type='WComboBox' visible='1'}
 :_typeGroup.groupBox_2_QGroupBox	{container=':Purchase Order Item._typeGroup_QGroupBox' name='groupBox_2' type='QGroupBox' visible='1'}
-:_username_QLineEdit	{name='_username' type='QLineEdit' visible='1'}
+:_username_QLineEdit	{name='_username' type='QLineEdit' visible='1' window=':Log In_login2'}
 :_value_XLineEdit	{buddy=':Lot Serial Characteristic.Value:_QLabel' name='_value' type='XLineEdit' visible='1'}
 :_voucherGroup.VirtualClusterLineEdit_VendorLineEdit	{container=':xTuple ERP:*._voucherGroup_QGroupBox' name='VirtualClusterLineEdit' type='VendorLineEdit' visible='1'}
 :_voucherGroup.Voucher #:_QLabel	{container=':xTuple ERP:*._voucherGroup_QGroupBox' name='_voucherNumLit' text='Voucher #:' type='QLabel' visible='1'}
