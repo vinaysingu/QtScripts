@@ -1547,7 +1547,7 @@ try
         for(var i=0;i<obj;i++)
         {
             var obj_TreeTopLevelItem = obj_TreeWidget.topLevelItem(i);
-            var sNameOfRootItem = obj_TreeTopLevelItem.text(4);
+            var sNameOfRootItem = obj_TreeTopLevelItem.text(5);
             var bool = pat.test(sNameOfRootItem);
             if(bool)
             {    
@@ -1654,37 +1654,33 @@ catch(e)
     test.fail("Error in creating a sales order" + e);
 }
 
+
 //-------Credit Card (Discover type) Creation -------
 try{
     function createCreditCard()
     {
-        waitForObject(":_settingsStack.New_QPushButton");
+      waitForObject(":_settingsStack.New_QPushButton");
         clickButton(":_settingsStack.New_QPushButton");
         waitForObject(":Credit Card._fundsType2_XComboBox");
          clickItem(":Credit Card._fundsType2_XComboBox","Discover",0, 0, 5, Qt.LeftButton);
         waitForObject(":_creditCardNumber_XLineEdit");
-        mouseClick(":_creditCardNumber_XLineEdit", 104, 15, 0, Qt.LeftButton);
-        waitForObject(":_creditCardNumber_XLineEdit");
-        type(":_creditCardNumber_XLineEdit", "6011000000000012");
-        waitForObject(":xTuple ERP:*.Active_QCheckBox");
-        if(!findObject(":xTuple ERP:*.Active_QCheckBox").checked)
-            clickButton(":xTuple ERP:*.Active_QCheckBox");
-        waitForObject(":_name_XLineEdit");
-        type(":_name_XLineEdit", "ZEN QA");
-         waitForObject(":Cash Receipt.XLineEdit_XLineEdit");
-    type(":Cash Receipt.XLineEdit_XLineEdit", "<Tab>");
-        waitForObject(":_name_XLineEdit");
-        mouseClick(":_name_XLineEdit", 55, 5, 0, Qt.LeftButton);
-        nativeType("<Tab>");
+       type(":_creditCardNumber_XLineEdit", "6011000000000012");
+        snooze(0.5);
+        waitForObject(":Credit Card.Active_QCheckBox_2");
+        if(!findObject(":Credit Card.Active_QCheckBox_2").checked)
+            clickButton(":Credit Card.Active_QCheckBox_2");
+        waitForObject(":_name_XLineEdit_2");
+        type(":_name_XLineEdit_2", "ZEN Q");
         waitForObject(":_expireMonth_XLineEdit");
         type(":_expireMonth_XLineEdit", "11");
         nativeType("<Tab>");
         waitForObject(":_expireYear_XLineEdit");
         type(":_expireYear_XLineEdit", "2025");
         nativeType("<Tab>");
+        snooze(0.5);
         waitForObject(":Select Order for Billing.Save_QPushButton_2");
     clickButton(":Select Order for Billing.Save_QPushButton_2");
-     if(object.exists(":Third Address Line Ignored_QMessageBox"))
+     if(object.exists(":Sales Order.Yes_QPushButton"))
       {           
           waitForObject(":Sales Order.Yes_QPushButton");
           clickButton(":Sales Order.Yes_QPushButton");
@@ -1692,13 +1688,13 @@ try{
       }
 
         test.log("New Credit Card of type 'Discover' created for TTOYS");
+
     }
 }
 catch(e)
 {
-    test.fail("Error in creating a Credit Card of type 'Visa'"+e);
-}
-//------ finding the Credit Memo number created on charging the SO ------
+    test.fail("Error in creating a Credit Card of type 'Discover'"+e);
+}//------ finding the Credit Memo number created on charging the SO ------
 try{
     function creditMemoNum()
     {
@@ -2219,16 +2215,16 @@ function COA(COACompany,COAProfit,COANumber,COASub,COADesc,COAType,COASubType)
         snooze(1);
         waitForObject(":Account Number._company_XComboBox");
         if(findObject(":Account Number._company_XComboBox").currentText!=COACompany)
-            clickItem(":Account Number._company_XComboBox","01",0,0,1,Qt.LeftButton);
+            clickItem(":Account Number._company_XComboBox",COACompany,0,0,1,Qt.LeftButton);
         snooze(1);
         waitForObject(":Account Number._profit_XComboBox");
         if(findObject(":Account Number._profit_XComboBox").currentText!=COAProfit)
-            clickItem(":Account Number._profit_XComboBox", "01",0,0,1,Qt.LeftButton);
+            clickItem(":Account Number._profit_XComboBox", COAProfit,0,0,1,Qt.LeftButton);
         snooze(0.5);
         waitForObject(":Account Number._sub_XComboBox");
         snooze(1);
         if(findObject(":Account Number._sub_XComboBox").currentText!=COASub)
-            clickItem(":Chart of Accounts._sub_XComboBox", "01",0,0,1,Qt.LeftButton);
+            clickItem(":Chart of Accounts._sub_XComboBox", COASub,0,0,1,Qt.LeftButton);
         snooze(0.5);
         type(":_number_XLineEdit_2", COANumber);
         type(":_description_XLineEdit_2", COADesc);
@@ -3421,5 +3417,78 @@ function createCTItem(item,site,appE)
     }
     
 }  
+//------ Creatting and returing the sales order amount ----
 
-
+function createandreturnSalesOrderamnt(item, qty)
+{
+    try{
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
+        activateItem(":xTuple ERP: *_QMenuBar", "Sales");
+        waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Sales Order");
+        activateItem(":xTuple ERP: *.Sales_QMenu", "Sales Order");
+        waitForObjectItem(":xTuple ERP: *.Sales Order_QMenu", "List Open...");
+        activateItem(":xTuple ERP: *.Sales Order_QMenu", "List Open...");
+        
+        waitForObject(":Open Sales Orders.Query_QToolButton");
+        clickButton(":Open Sales Orders.Query_QToolButton");
+        waitForObject(":Open Sales Orders.New_QToolButton");
+        clickButton(":Open Sales Orders.New_QToolButton");
+        waitForObject(":Bill-To.VirtualClusterLineEdit_CLineEdit_2");
+        type(":Bill-To.VirtualClusterLineEdit_CLineEdit_2", "TTOYS");
+        snooze(0.5);
+        nativeType("<Tab>");
+        
+        waitForObject(":_headerPage._custPONumber_XLineEdit_2");
+        type(":_headerPage._custPONumber_XLineEdit_2", "103");
+        
+        if(findObject(":_headerPage.Print on Save_QCheckBox").checked)
+            clickButton(":_headerPage.Print on Save_QCheckBox");
+        
+        sonumber = findObject(":_headerPage._orderNumber_XLineEdit_2").text;
+        
+        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
+        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
+        waitForObject(":_lineItemsPage.New_QPushButton_2");
+        clickButton(":_lineItemsPage.New_QPushButton_2");
+        waitForObject(":_itemGroup.ItemLineEdit_ItemLineEdit");
+        type(":_itemGroup.ItemLineEdit_ItemLineEdit", item);
+        snooze(0.5);
+        nativeType("<Tab>");
+        waitForObject(":_qtyOrdered_XLineEdit_2");
+        findObject(":_qtyOrdered_XLineEdit_2").clear();
+        type(":_qtyOrdered_XLineEdit_2", qty);
+        
+        soitem = findObject(":_itemGroup.ItemLineEdit_ItemLineEdit").text;
+        
+        soqty = findObject(":_qtyOrdered_XLineEdit_2").text;
+        
+        waitForObject(":_schedGroup.XDateEdit_XDateEdit_2");
+        type(":_schedGroup.XDateEdit_XDateEdit_2", "+7");
+        waitForObject(":_schedGroup.XDateEdit_XDateEdit_3");
+        type(":_schedGroup.XDateEdit_XDateEdit_3", "+8");
+        waitForObject(":Sales Order.Save_QPushButton");
+        clickButton(":Sales Order.Save_QPushButton");
+        waitForObject(":Sales Order.Close_QPushButton_2");
+        clickButton(":Sales Order.Close_QPushButton_2");
+        soamnt = findObject(":_lineItemsPage.XLineEdit_XLineEdit").text;
+        waitForObject(":Sales Order.Save_QPushButton_2");
+        clickButton(":Sales Order.Save_QPushButton_2");
+        waitForObject(":Sales Order.Cancel_QPushButton");
+        clickButton(":Sales Order.Cancel_QPushButton");
+        
+        waitForObject(":_list_XTreeWidget_5");
+        if(object.exists("{column='0' container=':_list_XTreeWidget_5' text='"+sonumber+"' type='QModelIndex'}"))
+            test.pass("Sales Order creation successful");
+        else  
+            test.fail("Sales Order creation failed");            
+        
+        waitForObject(":Quotes.Close_QToolButton");
+        clickButton(":Quotes.Close_QToolButton");
+        return soamnt;
+    }
+    catch(e)
+    {
+        test.fail("Error in Creating a sales order "+e);
+    }
+        
+}
