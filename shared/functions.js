@@ -295,7 +295,7 @@ catch(e)
         snooze(0.5);
         if(object.exists(":Enter Miscellaneous Adjustment._lotSerial_XComboBox"))
         {
-        type(":Enter Miscellaneous Adjustment._lotSerial_XComboBox", lname);
+        type(":Enter Miscellaneous Adjustment._lotSerial_XComboBox", name);
         if(findObject(":Enter Miscellaneous Adjustment._qtyToAssign_XLineEdit").enabled)
         {
             type(":Enter Miscellaneous Adjustment._qtyToAssign_XLineEdit", trqty);
@@ -3329,6 +3329,7 @@ try
             }
             nativeType("<Tab>");
             snooze(0.5);
+			  waitForObject(":_filterGroup.widget3_QLineEdit").clear(); 
           }
         snooze(1);
         waitForObject(":Quotes.Close_QToolButton");
