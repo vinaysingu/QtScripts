@@ -7,71 +7,71 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     snooze(3);
-//    //-----Editing of preferences----
-//    try
-//    {
-//        if(OS.name == "Darwin")
-//        {
-//            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-//            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-//        }
-//        else
-//        {
-//            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//            activateItem(":xTuple ERP: *_QMenuBar", "System");
-//            waitForObjectItem(":xTuple ERP:  *.System_QMenu", "Preferences...");
-//            activateItem(":xTuple ERP:  *.System_QMenu", "Preferences..."); 
-//        }
-//        snooze(0.5);
-//        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
-//        {
-//            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-//                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-//        }
-//        snooze(0.3);
-//        if(object.exists(":Notice.Notice_QDialog"))
-//        {
-//            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
-//                clickButton(":Notice.Remind me about this again._QCheckBox");
-//            snooze(0.2);
-//            waitForObject(":Notice.OK_QPushButton");
-//            clickButton(":Notice.OK_QPushButton");
-//        }
-//        
-//        waitForObject(":Cash Receipt.Save_QPushButton_3");
-//        clickButton(":Cash Receipt.Save_QPushButton_3");
-//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//        activateItem(":xTuple ERP: *_QMenuBar", "System");
-//        waitForObjectItem(":xTuple ERP:  *.System_QMenu", "Rescan Privileges");
-//        activateItem(":xTuple ERP:  *.System_QMenu", "Rescan Privileges");
-//        snooze(3);
-//    }
-//    catch(e)
-//    {
-//        test.fail("Error in editing preferences"+ e);
-//    }  
-//    
-//    //--------Exiting the application------
-//    activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
-//    activateItem(waitForObjectItem(":xTuple ERP:  *.System_QMenu", "Exit xTuple ERP..."));
-//    
-//    snooze(5);
-//    
-//    if(OS.name=="Linux")
-//        startApplication("xtuple.bin");
-//    
-//    else
-//        startApplication("xtuple");
-//    
-//    snooze(2);
-//    
-//    loginAppl("CONFIGURE"); 
-//    snooze(3);
-//    
-  
-  //---find Application Edition------ 
-  var appEdition = findApplicationEdition();
-  
+    //-----Editing of preferences----
+    try
+    {
+        if(OS.name == "Darwin")
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+            activateItem(":xTuple ERP: *_QMenuBar", "System");
+            waitForObjectItem(":xTuple ERP:  *.System_QMenu", "Preferences...");
+            activateItem(":xTuple ERP:  *.System_QMenu", "Preferences..."); 
+        }
+        snooze(0.5);
+        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
+        {
+            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        }
+        snooze(0.3);
+        if(object.exists(":Notice.Notice_QDialog"))
+        {
+            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+                clickButton(":Notice.Remind me about this again._QCheckBox");
+            snooze(0.2);
+            waitForObject(":Notice.OK_QPushButton");
+            clickButton(":Notice.OK_QPushButton");
+        }
+        
+        waitForObject(":Cash Receipt.Save_QPushButton_3");
+        clickButton(":Cash Receipt.Save_QPushButton_3");
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+        activateItem(":xTuple ERP: *_QMenuBar", "System");
+        waitForObjectItem(":xTuple ERP:  *.System_QMenu", "Rescan Privileges");
+        activateItem(":xTuple ERP:  *.System_QMenu", "Rescan Privileges");
+        snooze(3);
+    }
+    catch(e)
+    {
+        test.fail("Error in editing preferences"+ e);
+    }  
+    
+    //--------Exiting the application------
+    activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
+    activateItem(waitForObjectItem(":xTuple ERP:  *.System_QMenu", "Exit xTuple ERP..."));
+    
+    snooze(5);
+    
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
+    
+    else
+        startApplication("xtuple");
+    
+    snooze(2);
+    
+    loginAppl("CONFIGURE"); 
+    snooze(3);
+    
+
+//---find Application Edition------ 
+var appEdition = findApplicationEdition();
+
     //-----Setting Encryption Key----- 
     try
     {
@@ -109,9 +109,9 @@ function main()
     clickButton(waitForObject(":Cash Receipt.Save_QPushButton_3"));
     if(object.exists(":Sales Order.No_QPushButton_2"))
         clickButton(waitForObject(":Sales Order.No_QPushButton_2"));
-//    //--------------- Set the window to Tab view mode -------------
-//    
-//    tabView(); 
+  //--------------- Set the window to Tab view mode -------------
+  
+  tabView(); 
     //---------Creating a simple Journal entry-------
     var flag = 0;
     try{
@@ -715,8 +715,8 @@ function main()
         if(object.exists(":Select Order for Billing.Close_QPushButton"))
             clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
     }
-  
-  //-----------Creating Chart of Accounts--------
+
+    //-----------Creating Chart of Accounts--------
     if(flag)
     {
       try{
@@ -1498,8 +1498,8 @@ function main()
             
             if(appEdition == "PostBooks")
                 var qty ="50,000.00";
-//            else
-//                var qty ="100.00";
+            else
+                var qty ="100.00";
             
             var obj_TreeWidget = findObject(":_list_XTreeWidget_3");
             var obj = obj_TreeWidget.topLevelItemCount;
@@ -2098,5 +2098,5 @@ function main()
             if(object.exists(":Quotes.Close_QToolButton"))
                 clickButton(waitForObject(":Quotes.Close_QToolButton"));
         }
-      
+    
     }
