@@ -144,8 +144,7 @@ function main()
     snooze(1);
     //--------Configuring Service Option tab --------
     try{
-        // var pemloc= "C:/pemfile/1001157250.pem";
-        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
+         waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Service Options");
         waitForObject(":_ccWidgetStack._ccYPStoreNum_QLineEdit").clear();
         type(":_ccWidgetStack._ccYPStoreNum_QLineEdit","1001157250");
@@ -190,8 +189,8 @@ function main()
     }
     
     //    //--------------- Set the window to Tab view mode -------------
-    //    
-    //    tabView();
+       
+       tabView();
     
      
     //---- Extracting next Sales Order number ------
@@ -229,21 +228,9 @@ function main()
         openItemContextMenu(":_list_XTreeWidget_3", sonumber1 ,5, 5, Qt.LeftButton);
         waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit...");
         activateItem(":xTuple ERP:*._menu_QMenu", "Edit...");
-//        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
-//        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
-//        var soamt = findObject(":_lineItemsPage.XLineEdit_XLineEdit").text;
-//        test.log("Sales Order amount is "+soamt+"");
         waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Payment");
         waitForObject(":_creditCardPage._cc_XTreeWidget");
-//        if(object.exists("{column='1' container=':_creditCardPage._cc_XTreeWidget' text='Discover' type='QModelIndex'}"))
-//            test.pass("Credit Card list is available");
-//        else  
-//        {
-//            createCreditCard();
-//            
-//        }
-        
         waitForObject(":_creditCardPage._cc_XTreeWidget");
         clickItem(":_creditCardPage._cc_XTreeWidget","Discover",0, 0, 5, Qt.LeftButton);
         waitForObject(":_creditCardPage.Charge_QPushButton");
@@ -256,11 +243,8 @@ function main()
         clickButton(":Sales Order.OK_QPushButton_2");
         waitForObject(":Select Order for Billing.Save_QPushButton");
         clickButton(":Select Order for Billing.Save_QPushButton");
-
-        
-        
-        
-         waitForObject(":Quotes.Query_QToolButton");
+       
+        waitForObject(":Quotes.Query_QToolButton");
         clickButton(":Quotes.Query_QToolButton");
         waitForObject(":_list_XTreeWidget_3");
         openItemContextMenu(":_list_XTreeWidget_3", sonumber1 ,5, 5, Qt.LeftButton);
@@ -296,18 +280,14 @@ function main()
         activateItem(":xTuple ERP: *.Inventory_QMenu", "Shipping");
         waitForObjectItem(":xTuple ERP: *.Shipping_QMenu", "Issue to Shipping...");
         activateItem(":xTuple ERP: *.Shipping_QMenu", "Issue to Shipping...");
-        
-        waitForObject(":_stackedWidget.VirtualClusterLineEdit_OrderLineEdit");
+         waitForObject(":_stackedWidget.VirtualClusterLineEdit_OrderLineEdit");
         type(":_stackedWidget.VirtualClusterLineEdit_OrderLineEdit", sonumber1);
         snooze(0.5);
         nativeType("<Tab>");
-        
-        waitForObject(":_frame.Issue All_QPushButton");
+         waitForObject(":_frame.Issue All_QPushButton");
         clickButton(":_frame.Issue All_QPushButton");
         
-        
-        
-        
+              
         //-----Ship the Sales Order (with'Select for Billing' option checked)-----
         waitForObject(":Issue to Shipping.Ship_QPushButton");
         clickButton(":Issue to Shipping.Ship_QPushButton");
@@ -413,22 +393,8 @@ function main()
         openItemContextMenu(":_list_XTreeWidget_3", sonumber2 ,5, 5, Qt.LeftButton);
         waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit...");
         activateItem(":xTuple ERP:*._menu_QMenu", "Edit...");
-//        
-//        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
-//        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
-//        var soamt = findObject(":_lineItemsPage.XLineEdit_XLineEdit").text;
-//        test.log("Sales Order amount is "+soamt+"");
         waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Payment");
-//        waitForObject(":_creditCardPage._cc_XTreeWidget");
-//        if(object.exists("{column='1' container=':_creditCardPage._cc_XTreeWidget' text='Discover' type='QModelIndex'}"))
-//            test.pass("Credit Card list is available");
-//        else  
-//        {
-//            createCreditCard();
-//            
-//        }
-//        
         waitForObject(":_creditCardPage._cc_XTreeWidget");
         clickItem(":_creditCardPage._cc_XTreeWidget","Discover",0, 0, 5, Qt.LeftButton);
         waitForObject(":_creditCardPage.Charge_QPushButton");
@@ -534,21 +500,8 @@ function main()
         openItemContextMenu(":_list_XTreeWidget_3", sonumber3 ,5, 5, Qt.LeftButton);
         waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit...");
         activateItem(":xTuple ERP:*._menu_QMenu", "Edit...");
-//        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
-//        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
-//        var soamt = findObject(":_lineItemsPage.XLineEdit_XLineEdit").text;
-//        test.log("Sales Order amount is "+soamt+"");
         waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Payment");
-//        waitForObject(":_creditCardPage._cc_XTreeWidget");
-//        if(object.exists("{column='1' container=':_creditCardPage._cc_XTreeWidget' text='Discover' type='QModelIndex'}"))
-//            test.pass("Credit Card list is available");
-//        else  
-//        {
-//            createCreditCard();
-//            
-//        }
-//        
         waitForObject(":_creditCardPage._cc_XTreeWidget");
         clickItem(":_creditCardPage._cc_XTreeWidget","Discover",0, 0, 5, Qt.LeftButton);
         waitForObject(":_creditCardPage.Authorize_QPushButton");
@@ -562,9 +515,7 @@ function main()
         waitForObject(":Select Order for Billing.Save_QPushButton");
         clickButton(":Select Order for Billing.Save_QPushButton");
 
-        
-        
-        
+      
         waitForObject(":Quotes.Query_QToolButton");
         clickButton(":Quotes.Query_QToolButton");
         waitForObject(":_list_XTreeWidget_3");
@@ -592,7 +543,7 @@ function main()
         test.fail("Error in Charging a Sales Order"+e);
     }
     
-    //----- Voiding an Authorized Sales Order's CC transaction from A/R Workbench screen -----
+    //-- Voiding an Authorized Sales Order's CC transaction from A/R Workbench screen -----
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
         activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
@@ -678,7 +629,7 @@ function main()
     {
         test.fail("Error in verifying the status of the SO"+e);
     }
-    //--------------------- Charging an Authorized Sales Order from A/R Workbench screen -------
+    //----- Charging an Authorized Sales Order from A/R Workbench screen -------
     
     //----- Sales Orders Creation-----
     var soamnt4 = createandreturnSalesOrderamnt("YTRUCK1", "100");
@@ -700,22 +651,8 @@ function main()
         openItemContextMenu(":_list_XTreeWidget_3", sonumber4 ,5, 5, Qt.LeftButton);
         waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit...");
         activateItem(":xTuple ERP:*._menu_QMenu", "Edit...");
-//        
-//        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
-//        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
-//        var soamt = findObject(":_lineItemsPage.XLineEdit_XLineEdit").text;
-//        test.log("Sales Order amount is "+soamt+"");
         waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Payment");
-//        waitForObject(":_creditCardPage._cc_XTreeWidget");
-//        if(object.exists("{column='1' container=':_creditCardPage._cc_XTreeWidget' text='Discover' type='QModelIndex'}"))
-//            test.pass("Credit Card list is available");
-//        else  
-//        {
-//            createCreditCard();
-//            
-//        }
-//        
         waitForObject(":_creditCardPage._cc_XTreeWidget");
         clickItem(":_creditCardPage._cc_XTreeWidget","Discover",0, 0, 5, Qt.LeftButton);
         waitForObject(":_creditCardPage.Authorize_QPushButton");
@@ -799,7 +736,6 @@ function main()
     
     
     cmnum++;
-    cmnum++;
     //---- Refunding the Credit Memo created on charging the SO -----
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
@@ -856,6 +792,13 @@ function main()
         activateItem(":xTuple ERP: *.Billing_QMenu", "Invoice");
         waitForObjectItem(":xTuple ERP: *.Invoice_QMenu", "List Unposted Invoices...");
         activateItem(":xTuple ERP: *.Invoice_QMenu", "List Unposted Invoices...");
+         snooze(3);
+        if(OS.name == "Linux")
+        {
+             type(waitForObject(":xTuple ERP: *.Invoice_QMenu"), "<Left>");
+             type(waitForObject(":xTuple ERP: *.Billing_QMenu"), "<Left>");
+             type(waitForObject(":xTuple ERP: *.Sales_QMenu"), "<Esc>");
+        }
         waitForObject(":Quotes.New_QToolButton");
         clickButton(":Quotes.New_QToolButton");
         waitForObject(":Cash Receipt.VirtualClusterLineEdit_CLineEdit");
@@ -1079,22 +1022,8 @@ function main()
         openItemContextMenu(":_list_XTreeWidget_3", sonumber5 ,5, 5, Qt.LeftButton);
         waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit...");
         activateItem(":xTuple ERP:*._menu_QMenu", "Edit...");
-        
-//        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
-//        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
-//        var soamt = findObject(":_lineItemsPage.XLineEdit_XLineEdit").text;
-//        test.log("Sales Order amount is "+soamt+"");
-        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
+         waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Payment");
-//        waitForObject(":_creditCardPage._cc_XTreeWidget");
-//        if(object.exists("{column='1' container=':_creditCardPage._cc_XTreeWidget' text='Discover' type='QModelIndex'}"))
-//            test.pass("Credit Card list is available");
-//        else  
-//        {
-//            createCreditCard();
-//            
-//        }
-//        
         waitForObject(":_creditCardPage._cc_XTreeWidget");
         clickItem(":_creditCardPage._cc_XTreeWidget","Discover",0, 0, 5, Qt.LeftButton);
         waitForObject(":_creditCardPage.Charge_QPushButton");
@@ -1138,8 +1067,9 @@ function main()
     {
         test.fail("Error in Charging a Sales Order"+e);
     }
-    //    //----- Finding the Credit Memo number created on charging the SO ---- 
-    //    cmnum++;
+       //----- Finding the Credit Memo number created on charging the SO ---- 
+       cmnum++;
+       cmnum++;
     
     //-----Issue Stock to Shipping-----
     try
@@ -1159,9 +1089,7 @@ function main()
         waitForObject(":_frame.Issue All_QPushButton");
         clickButton(":_frame.Issue All_QPushButton");
         
-        
-        
-        
+       
         //-----Ship the Sales Order (with'Select for Billing' option checked)-----
         waitForObject(":Issue to Shipping.Ship_QPushButton");
         clickButton(":Issue to Shipping.Ship_QPushButton");
