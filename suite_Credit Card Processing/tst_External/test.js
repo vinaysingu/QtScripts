@@ -5,7 +5,7 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     
-    
+  
     //-----Editing of preferences----
     try
     {
@@ -258,8 +258,73 @@ function main()
     
    //--------------- Set the window to Tab view mode -------------
   
-    //  tabView();
-    ////-------------Charging and Processing a Sales Order ------------------
+    tabView();
+    
+     if(appEdition == "PostBooks")
+    {
+        //----Exchange Rate Creation -------
+        try{
+            
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
+            activateItem(waitForObjectItem(":xTuple ERP: *._System_QMenu", "Setup..."));
+            waitForObjectItem(":Setup._tree_XTreeWidget", "Master Information.Exchange Rates");
+            clickItem(":Setup._tree_XTreeWidget", "Master Information.Exchange Rates", 14, 4, 0, Qt.LeftButton);
+            clickButton(waitForObject(":_queryParameters.Selected:_QRadioButton"));
+            waitForObject(":_queryParameters._items_XComboBox");
+            clickItem(":_queryParameters._items_XComboBox","GBP - £", 0, 0, 5, Qt.LeftButton);
+            
+            waitForObject(":_dateGroup.XDateEdit_XDateEdit");
+            findObject(":_dateGroup.XDateEdit_XDateEdit").clear();
+            
+            type(":_dateGroup.XDateEdit_XDateEdit", "0");
+            nativeType("<Tab>");
+            
+            waitForObject(":Receivables Workbench.Query_QPushButton");
+            clickButton(":Receivables Workbench.Query_QPushButton");
+            waitForObject(":_frame._conversionRates_XTreeWidget");
+            if(object.exists("{column='0' container=':_frame._conversionRates_XTreeWidget' text='GBP - £' type='QModelIndex'}"))
+            { 
+                
+                waitForObject(":_frame._conversionRates_XTreeWidget");
+                clickItem(":_frame._conversionRates_XTreeWidget","GBP - £", 0, 0, 5, Qt.LeftButton);
+                waitForObject(":_frame.Delete_QPushButton");
+                clickButton(":_frame.Delete_QPushButton");
+            }
+            waitForObject(":List Prospects.New_QPushButton");
+            clickButton(":List Prospects.New_QPushButton");
+            waitForObject(":_stack._currency_XComboBox");
+            clickItem(":_stack._currency_XComboBox","GBP - £", 0, 0, 5, Qt.LeftButton);
+            waitForObject(":_stack._rate_XLineEdit");
+            findObject(":_stack._rate_XLineEdit").clear();
+            type(":_stack._rate_XLineEdit","1.56");
+            nativeType("<Tab>");
+            
+            rate = findObject(":_stack._rate_XLineEdit").text;
+            
+            waitForObject(":_stack.XDateEdit_XDateEdit");
+            findObject(":_stack.XDateEdit_XDateEdit").clear();
+            type(":_stack.XDateEdit_XDateEdit", "-15");
+            nativeType("<Tab>");
+            waitForObject(":_stack.XDateEdit_XDateEdit_2");
+            findObject(":_stack.XDateEdit_XDateEdit_2").clear();
+            type(":_stack.XDateEdit_XDateEdit_2", "+365");
+            nativeType("<Tab>");
+            waitForObject(":Cash Receipt.Save_QPushButton_3");
+            clickButton(":Cash Receipt.Save_QPushButton_3");
+            waitForObject(":Cash Receipt.Save_QPushButton_3");
+            clickButton(":Cash Receipt.Save_QPushButton_3");
+            
+            test.log("Exchange Rate is created sucessfully for GBP - £");
+        }
+        catch(e)
+        {
+            test.fail("failed to create exchange rates for GBP - £" + e);
+        }
+        
+        
+  }
+
+  //-------------Charging and Processing a Sales Order ------------------
     
     
     //---- Extracting next Sales Order number ------
@@ -282,6 +347,7 @@ function main()
     try
     {
         var pat = "Yes";
+        var ccType = "Discover";
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
         activateItem(":xTuple ERP: *_QMenuBar", "Sales");
         waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Customer");
@@ -297,7 +363,7 @@ function main()
         waitForObject(":_settingsTab.Credit Cards_QRadioButton");
         clickButton(":_settingsTab.Credit Cards_QRadioButton");
         waitForObject(":_settingsStack._cc_XTreeWidget");
-        if(object.exists("{column='1' container=':_creditCardPage._cc_XTreeWidget' text='Discover' type='QModelIndex'}" &&"{column='3' container=':_settingsStack._cc_XTreeWidget' text='"+pat+"' type='QModelIndex'}"))
+        if(object.exists("{column='1' container=':_creditCardPage._cc_XTreeWidget' text='"+ccType+"' type='QModelIndex'}" && "{column='3' container=':_settingsStack._cc_XTreeWidget' text='"+pat+"' type='QModelIndex'}"))
             test.pass("Active Credit Card is available");
         else  
         {
@@ -315,7 +381,7 @@ function main()
         clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Settings");
         clickButton(waitForObject(":_settingsTab.Credit Cards_QRadioButton"));
         waitForObject(":_settingsStack._cc_XTreeWidget");
-        if(object.exists("{column='1' container=':_creditCardPage._cc_XTreeWidget' text='Discover' type='QModelIndex'}" &&"{column='3' container=':_settingsStack._cc_XTreeWidget' text='"+pat+"' type='QModelIndex'}"))
+        if(object.exists("{column='1' container=':_creditCardPage._cc_XTreeWidget' text='"+ccType+"' type='QModelIndex'}" && "{column='3' container=':_settingsStack._cc_XTreeWidget' text='"+pat+"' type='QModelIndex'}"))
             test.pass("Active Credit Card is available");
         else  
         {
@@ -339,7 +405,7 @@ function main()
     var soamnt1 = createandreturnSalesOrderamnt("YTRUCK1", "100");
     test.log("soamnt1 is "+soamnt1+"");
             
-            //----- Finding the next Credit Memo number to be created on charging the SO ---- 
+      //----- Finding the next Credit Memo number to be created on charging the SO ---- 
             var cmnum = creditMemoNum();
     //------ Charging a Sales Order ---------
     try{
@@ -470,6 +536,7 @@ function main()
         activateItem(":xTuple ERP: *.Invoice_QMenu", "Create Invoices...");
         waitForObject(":Create Invoices.Create Invoices_QPushButton");
         clickButton(":Create Invoices.Create Invoices_QPushButton");
+        snooze(2);
         test.log("Invoice created successfully");
     }
     catch(e)
@@ -490,7 +557,7 @@ function main()
         type(":xTuple ERP: *.Billing_QMenu","<Right>");
         waitForObjectItem(":xTuple ERP: *.Invoice_QMenu", "List Unposted Invoices...");
         activateItem(":xTuple ERP: *.Invoice_QMenu", "List Unposted Invoices...");
-        
+        snooze(2);
         waitForObject(":_list_XTreeWidget_3");
         openItemContextMenu(":_list_XTreeWidget_3", sonumber1 ,5, 5, Qt.LeftButton);
         waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Post...");
@@ -517,14 +584,14 @@ function main()
     //----Verifying Credit Memo existance -------
     
     findCreditMemo(cmnum);
-    //--------------------------------- Authorizing  the Sales Order -----------------------
+    //---------------- Authorizing  the Sales Order -----------------------
     
     //------- Sales Order creation -------
     var sonumber2 = ++sonumber;
     var soamnt2 = createandreturnSalesOrderamnt("YTRUCK1", "100");
                   
-                  //-------------Authorizing a Sales Order --------------------
-                  try{
+       //-------------Authorizing a Sales Order --------------------
+        try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
         activateItem(":xTuple ERP: *_QMenuBar", "Sales");
         waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Sales Order");
@@ -537,22 +604,9 @@ function main()
         openItemContextMenu(":_list_XTreeWidget_3", sonumber2 ,5, 5, Qt.LeftButton);
         waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit...");
         activateItem(":xTuple ERP:*._menu_QMenu", "Edit...");
-        //        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
-        //        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
-        //        var soamt = findObject(":_lineItemsPage.XLineEdit_XLineEdit").text;
-        //        test.log("Sales Order amount is "+soamt+"");
         waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Payment");
-        //        waitForObject(":_creditCardPage._cc_XTreeWidget");
-        //        if(object.exists("{column='1' container=':_creditCardPage._cc_XTreeWidget' text='Discover' type='QModelIndex'}"))
-        //            test.pass("Credit Card list is available");
-        //        else  
-        //        {
-        //            createCreditCard();
-        //            
-        //        }
-        //        
-        waitForObject(":_creditCardPage._cc_XTreeWidget");
+         waitForObject(":_creditCardPage._cc_XTreeWidget");
         clickItem(":_creditCardPage._cc_XTreeWidget","Discover",0, 0, 5, Qt.LeftButton);
         waitForObject(":_creditCardPage.Authorize_QPushButton");
         clickButton(":_creditCardPage.Authorize_QPushButton");
@@ -653,7 +707,7 @@ function main()
     cmnum++
             
             //---- Refunding the Credit Memo created on charging the SO -----
-            try{
+        try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
         activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
         waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Receivable");
@@ -717,7 +771,12 @@ function main()
         waitForObjectItem(":xTuple ERP: *.Invoice_QMenu", "List Unposted Invoices...");
         activateItem(":xTuple ERP: *.Invoice_QMenu", "List Unposted Invoices...");
         snooze(3);
-        
+        if(OS.name == "Linux")
+        {
+             type(waitForObject(":xTuple ERP: *.Invoice_QMenu"), "<Left>");
+             type(waitForObject(":xTuple ERP: *.Billing_QMenu"), "<Left>");
+             type(waitForObject(":xTuple ERP: *.Sales_QMenu"), "<Esc>");
+        }
         waitForObject(":Quotes.New_QToolButton");
         clickButton(":Quotes.New_QToolButton");
         waitForObject(":Cash Receipt.VirtualClusterLineEdit_CLineEdit");
@@ -890,21 +949,9 @@ function main()
         waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit...");
         activateItem(":xTuple ERP:*._menu_QMenu", "Edit...");
         snooze(1);
-        //        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
-        //        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
-        //        var soamt = findObject(":_lineItemsPage.XLineEdit_XLineEdit").text;
-        //        test.log("Sales Order amount is "+soamt+"");
         waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Payment");
         waitForObject(":_creditCardPage._cc_XTreeWidget");
-        //        if(object.exists("{column='1' container=':_creditCardPage._cc_XTreeWidget' text='Discover' type='QModelIndex'}"))
-        //            test.pass("Credit Card list is available");
-        //        else  
-        //        {
-        //            createCreditCard();
-        //            
-        //        }
-        //        
         waitForObject(":_creditCardPage._cc_XTreeWidget");
         clickItem(":_creditCardPage._cc_XTreeWidget","Discover",0, 0, 5, Qt.LeftButton);
         waitForObject(":_creditCardPage.Charge_QPushButton");
@@ -1013,7 +1060,8 @@ function main()
     
     findCreditMemo(cmnum);    
     //---- Charging and processing a foreign customer's Sales Order -
-    
+    cmnum++
+    cmnum++
     //-------- Sales Order creation for Foreign Customer ----------
     try
     {
@@ -1098,22 +1146,9 @@ function main()
         openItemContextMenu(":_list_XTreeWidget_3", sonumber4 ,5, 5, Qt.LeftButton);
         waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit...");
         activateItem(":xTuple ERP:*._menu_QMenu", "Edit...");
-        //        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
-        //        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
-        //        var soamt = findObject(":_lineItemsPage.XLineEdit_XLineEdit").text;
-        //        test.log("Sales Order amount is "+soamt+"");
-        //        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Payment");
         waitForObject(":_creditCardPage._cc_XTreeWidget");
-        //        if(object.exists("{column='1' container=':_creditCardPage._cc_XTreeWidget' text='Discover' type='QModelIndex'}"))
-        //            test.pass("Credit Card list is available");
-        //        else  
-        //        {
-        //            createCreditCard();
-        //            
-        //        }
-        //        
-        waitForObject(":_creditCardPage._cc_XTreeWidget");
+         waitForObject(":_creditCardPage._cc_XTreeWidget");
         clickItem(":_creditCardPage._cc_XTreeWidget","Discover",0, 0, 5, Qt.LeftButton);
         waitForObject(":_creditCardPage.Charge_QPushButton");
         clickButton(":_creditCardPage.Charge_QPushButton");
@@ -1163,8 +1198,7 @@ function main()
         test.fail("Error in Charging a Sales Order"+e);
     }
     //    //----- Finding the Credit Memo number created on charging the SO ---- 
-    //    cmnum++;
-    
+      
     //-----Issue Stock to Shipping-----
     try
     {       
@@ -1243,7 +1277,7 @@ function main()
         type(":xTuple ERP: *.Billing_QMenu","<Right>");
         waitForObjectItem(":xTuple ERP: *.Invoice_QMenu", "List Unposted Invoices...");
         activateItem(":xTuple ERP: *.Invoice_QMenu", "List Unposted Invoices...");
-        
+       snooze(2);
         waitForObject(":_list_XTreeWidget_3");
         openItemContextMenu(":_list_XTreeWidget_3", sonumber4 ,5, 5, Qt.LeftButton);
         waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Post...");
