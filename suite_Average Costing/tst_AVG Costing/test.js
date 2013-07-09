@@ -7,65 +7,65 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     snooze(3);
-//    //-----Editing of preferences----
-//    try
-//    {
-//        if(OS.name == "Darwin")
-//        {
-//            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-//            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-//        }
-//        else
-//        {
-//            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//            activateItem(":xTuple ERP: *_QMenuBar", "System");
-//            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-//            activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-//        }
-//        snooze(0.5);
-//        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
-//        {
-//            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-//                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-//        }
-//        if(object.exists(":Notice.Notice_QDialog"))
-//        {
-//            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
-//                clickButton(":Notice.Remind me about this again._QCheckBox");
-//            snooze(0.5);
-//            waitForObject(":Notice.OK_QPushButton");
-//            clickButton(":Notice.OK_QPushButton");
-//        }
-//        waitForObject(":User Preferences.Save_QPushButton_2");
-//        clickButton(":User Preferences.Save_QPushButton_2");
-//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//        activateItem(":xTuple ERP: *_QMenuBar", "System");
-//        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-//        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-//    }
-//    catch(e)
-//    {
-//        test.fail("Error in editing preferences"+ e);
-//    }  
-//    
-//    //--------Exiting the application------
-//    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//    activateItem(":xTuple ERP: *_QMenuBar", "System");
-//    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-//    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-//    
-//    snooze(5);
-//    
-//    if(OS.name=="Linux")
-//        startApplication("xtuple.bin");
-//    
-//    else
-//        startApplication("xtuple");
-//    
-//    snooze(2);
-//    
-//    loginAppl("CONFIGURE"); 
+    //-----Editing of preferences----
+    try
+    {
+        if(OS.name == "Darwin")
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+            activateItem(":xTuple ERP: *_QMenuBar", "System");
+            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+            activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+        }
+        snooze(0.5);
+        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
+        {
+            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        }
+        if(object.exists(":Notice.Notice_QDialog"))
+        {
+            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+                clickButton(":Notice.Remind me about this again._QCheckBox");
+            snooze(0.5);
+            waitForObject(":Notice.OK_QPushButton");
+            clickButton(":Notice.OK_QPushButton");
+        }
+        waitForObject(":User Preferences.Save_QPushButton_2");
+        clickButton(":User Preferences.Save_QPushButton_2");
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+        activateItem(":xTuple ERP: *_QMenuBar", "System");
+        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+    }
+    catch(e)
+    {
+        test.fail("Error in editing preferences"+ e);
+    }  
     
+    //--------Exiting the application------
+    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+    activateItem(":xTuple ERP: *_QMenuBar", "System");
+    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    
+    snooze(5);
+    
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
+    
+    else
+        startApplication("xtuple");
+    
+    snooze(2);
+    
+    loginAppl("CONFIGURE"); 
+  
     
     // -------Inventory Setup -------
     try
@@ -150,8 +150,8 @@ function main()
     
   var appEdition = findApplicationEdition();
   snooze(0.5);
-//    //------Enabling Tab View --------
-//    tabView();
+    //------Enabling Tab View --------
+    tabView();
   //--------Copy YTRUCK1-----
     
     copyItem("YTRUCK1","AVGTRUCK 1");
@@ -1112,7 +1112,7 @@ try
     }
     
     
-    //------- QOH,Unit Cost and Inventory value verification after posting Adjustment -----
+       //------- QOH,Unit Cost and Inventory value verification after posting Adjustment -----
     
     
     try{
@@ -1130,7 +1130,7 @@ try
             test.pass("Unit Cost Updated correctly for the Materail Receipt posted Relatively");
         else
             test.fail("Unit Cost is not updated correctly for the Materail Receipt posted Relatively");
-        
+      
         //----- Value verification -----
         var avgtruckval14 = array[2];
         avgtruckval14 = replaceSubsting(avgtruckval14);
@@ -1151,6 +1151,7 @@ try
     }
     
     //----- To avoid Unexpected blocks ------
+    if(OS.name != "Windows")
     doNothing();
     
     //-------- Material Receipt by unchecking 'Adjust Value Check box--
@@ -1199,9 +1200,6 @@ try
     
     
     
-    //------- Unit Cost and Inventory value verification after posting Adjustment -----
-    
-    
     try{
         //---- QOH verification-----
         var array = inventoryVariables("AVGTRUCK 1","WH1",appEdition);
@@ -1214,7 +1212,8 @@ try
         //----- Value verification -----
         var avgtruckval16 = array[2];
         test.log(avgtruckval16);
-        avgtruckval16 = roundNumber(avgtruckval16,4);
+          avgtruckval16 = replaceSubsting(avgtruckval16);
+        avgtruckval16 = roundNumber(avgtruckval16,0);
         test.log("avgtruckval15 is "+avgtruckval15+"");
         test.log("avgtruckval16 is "+avgtruckval16+"");
         if(avgtruckval16 == avgtruckval15)
@@ -1224,9 +1223,10 @@ try
         
         //---- Unit Cost Verification -----    
         var avgtruckuc16 = array[1];
-        avgtruckval16 = replaceSubsting(avgtruckval16);
+        avgtruckuc16 = roundNumber(avgtruckuc16,3);
+        test.log("avgtruckuc16 "+avgtruckuc16+"");
         result = (avgtruckval16)/qtyavgtruck16;
-        result = roundNumber(result,4);
+        result = roundNumber(result,3);
         test.log(result);
         if(avgtruckuc16 == result)
             test.pass("Unit Cost Updated correctly for the Material Receipt posted");
@@ -1241,13 +1241,7 @@ try
         test.fail("Error in comparing values"+e);
     }
     
-    
-    
-    
-    
   
-    
-    
     //------- Sales Order processing for an AVG costing item ----
     
     
@@ -1304,6 +1298,10 @@ try
             test.fail("QOH is not updated correctly for the Stock issue to the Sales Order");
         //---- Unit Cost Verification -----    
         var avgtruckuc23 = array[1];
+        test.log("avgtruckuc23 "+avgtruckuc23+"");
+        avgtruckuc22 = roundNumber(avgtruckuc22,2);
+        avgtruckuc23 = roundNumber(avgtruckuc23,2);
+        test.log("avgtruckuc22 "+avgtruckuc22+"");
         if(avgtruckuc23 == avgtruckuc22)
             test.pass("Unit Cost Updated correctly for the Stock issue to the Sales Order");
         else
@@ -1314,9 +1312,10 @@ try
         avgtruckval23 = replaceSubsting(avgtruckval23);
         avgtruckval22 = replaceSubsting(avgtruckval22);
         test.log(avgtruckval22);
-        var result = avgtruckval22+(avgtruckuc22 * 100);
-        result = roundNumber(result,4);
+        var result = avgtruckval22-(avgtruckuc22 * 100);
+        result = roundNumber(result,0);
         test.log("result is "+result+"");
+        avgtruckval23 = roundNumber(avgtruckval23,0);
         test.log("avgtruckval23 "+avgtruckval23+"");
         if(avgtruckval23 == result)
             test.pass("Inventory value updated correctly for the Stock issue to the Sales Order");
@@ -1400,11 +1399,6 @@ try
     {
         test.fail("Error in comparing values"+e);
     } 
-    //----- To avoid unexpected Failures -----
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
     var sonumber1 = sonumber+"-1";
     
     //---------G/L verification for Returning the Stock ----------
