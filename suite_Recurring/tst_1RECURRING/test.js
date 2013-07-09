@@ -8,65 +8,66 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     snooze(3);
-//    //-----Editing of preferences----
-//    try
-//    {
-//        if(OS.name == "Darwin")
-//        {
-//            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-//            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-//        }
-//        else
-//        {
-//            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//            activateItem(":xTuple ERP: *_QMenuBar", "System");
-//            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-//            activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-//        }
-//        snooze(0.5);
-//        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
-//        {
-//            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-//                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-//        }
-//        if(object.exists(":Notice.Notice_QDialog"))
-//        {
-//            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
-//                clickButton(":Notice.Remind me about this again._QCheckBox");
-//            snooze(0.2);
-//            waitForObject(":Notice.OK_QPushButton");
-//            clickButton(":Notice.OK_QPushButton");
-//        }
-//        waitForObject(":User Preferences.Save_QPushButton_2");
-//        clickButton(":User Preferences.Save_QPushButton_2");
-//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//        activateItem(":xTuple ERP: *_QMenuBar", "System");
-//        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-//        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-//    }
-//    catch(e)
-//    {
-//        test.fail("Error in editing preferences"+ e);
-//    } 
-//    
-//    //--------Exiting the application------
-//    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//    activateItem(":xTuple ERP: *_QMenuBar", "System");
-//    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-//    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-//    snooze(5);
-//    if(OS.name=="Linux")
-//        startApplication("xtuple.bin");
-//    
-//    else
-//        startApplication("xtuple");
-//    
-//    snooze(2);
-//    
-//    loginAppl("CONFIGURE"); 
-//    snooze(1);
-//    
+    //-----Editing of preferences----
+    try
+    {
+        if(OS.name == "Darwin")
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+            activateItem(":xTuple ERP: *_QMenuBar", "System");
+            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+            activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+        }
+        snooze(0.5);
+       if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
+        {
+            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        }
+        if(object.exists(":Notice.Notice_QDialog"))
+        {
+            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+                clickButton(":Notice.Remind me about this again._QCheckBox");
+            snooze(0.2);
+            waitForObject(":Notice.OK_QPushButton");
+            clickButton(":Notice.OK_QPushButton");
+        }
+        waitForObject(":User Preferences.Save_QPushButton_2");
+        clickButton(":User Preferences.Save_QPushButton_2");
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+        activateItem(":xTuple ERP: *_QMenuBar", "System");
+        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+    }
+    catch(e)
+    {
+        test.fail("Error in editing preferences"+ e);
+    } 
+   
+    //--------Exiting the application------
+    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+    activateItem(":xTuple ERP: *_QMenuBar", "System");
+    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    snooze(5);
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
     
+   else
+        startApplication("xtuple");
+   
+    snooze(2);
+   
+   loginAppl("CONFIGURE"); 
+   snooze(1);
+    
+    
+	
     //----------Setting the Encryption Key----------
     try
     {
@@ -106,9 +107,12 @@ function main()
         test.fail("Error in extracting OS name" + e);
     }
     
-//    //--------------- Set the window to Tab view mode -------------
-//    
-//    tabView();
+   //--------------- Set the window to Tab view mode -------------
+   
+   tabView();
+   
+     var appEdition = findApplicationEdition();
+
   
     //-----Set Invoice Buffer to 30days-----
     try
@@ -816,6 +820,44 @@ function main()
                 }
                 
                 
+				
+				                
+		 if(appEdition != "PostBooks")
+		 {
+		   //---Editing the EDI profile related to the incident ------
+		try 
+		{
+		activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
+		activateItem(waitForObjectItem(":xTuple ERP: *._System_QMenu", "Setup..."));
+		waitForObjectItem(":Setup._tree_XTreeWidget", "Master Information.EDI Profiles");
+		clickItem(":Setup._tree_XTreeWidget", "Master Information.EDI Profiles", 81, 10, 0, Qt.LeftButton);
+		waitForObjectItem(":_stack._ediprofile_XTreeWidget", "xTupleIncidentEmail");
+		clickItem(":_stack._ediprofile_XTreeWidget", "xTupleIncidentEmail", 0, 0, 0, Qt.LeftButton);
+		clickButton(waitForObject(":xTuple ERP:*.Edit_QPushButton"));
+		
+			 if(object.exists(":_stack.Review Before Sending_QCheckBox"))
+				{
+					if(findObject(":_stack.Review Before Sending_QCheckBox").checked)
+					{
+						waitForObject(":_stack.Review Before Sending_QCheckBox");
+						clickButton(":_stack.Review Before Sending_QCheckBox");
+						
+					}
+					 clickButton(waitForObject(":_stack.Save_QPushButton"));
+				}
+		else
+		 {   
+		  clickButton(waitForObject(":_stack.Save_QPushButton"));
+		}
+		 clickButton(waitForObject(":Cash Receipt.Save_QPushButton_3"));
+		}
+		catch(e)
+		{
+			test.fail("Error in editing the incident related EDI Prodile"+e);
+		}
+				  
+		}
+     
               
                 
                 //---Incident Creation---------

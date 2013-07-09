@@ -542,6 +542,7 @@
 :Update Price?_QMessageBox	{type='QMessageBox' unnamed='1' visible='1' windowTitle='Update Price?'}
 :User Information.qt_tabwidget_stackedwidget_QStackedWidget	{name='qt_tabwidget_stackedwidget' type='QStackedWidget' visible='1' window=':User Information_user'}
 :User Information_user	{name='user' type='user' visible='1' windowTitle='User Information'}
+:User Preferences.Apply_QPushButton	{text='Apply' type='QPushButton' unnamed='1' visible='1' window=':User Preferences_userPreferences'}
 :User Preferences.Save_QPushButton	{name='_save' text='Save' type='QPushButton' visible='1' window=':User Preferences_userPreferences'}
 :User Preferences.Save_QPushButton_2	{text='Save' type='QPushButton' unnamed='1' visible='1' window=':User Preferences_userPreferences'}
 :User Preferences.qt_tabwidget_stackedwidget_QStackedWidget	{name='qt_tabwidget_stackedwidget' type='QStackedWidget' visible='1' window=':User Preferences_userPreferences'}
@@ -707,9 +708,11 @@
 :_frame.Post_QPushButton_2	{container=':xTuple ERP:*._frame_QFrame' name='_postCheck' text='Post' type='QPushButton' visible='1'}
 :_frame.Print_QPushButton	{container=':xTuple ERP:*._frame_QFrame' name='_print' text='Print' type='QPushButton' visible='1'}
 :_frame.Receive All_QPushButton	{container=':xTuple ERP:*._frame_QFrame' name='_all' text='Receive All' type='QPushButton' visible='1'}
+:_frame.Replace_QPushButton	{container=':xTuple ERP:*._frame_QFrame' name='_replace' text='Replace' type='QPushButton' visible='1'}
 :_frame.Transactions:_QLabel	{container=':General Ledger Transactions._frame_QFrame' name='_gltransLit' text='Transactions:' type='QLabel' visible='1'}
 :_frame.Username:_QLabel	{container=':Log In._frame_QFrame' name='_usernameLit' text='Username:' type='QLabel' visible='1'}
 :_frame.Void_QPushButton	{container=':_creditCardTab._frame_QFrame' name='_voidPreauth' text='Void' type='QPushButton' visible='1'}
+:_frame.Void_QPushButton_2	{container=':xTuple ERP:*._frame_QFrame' name='_void' text='Void' type='QPushButton' visible='1'}
 :_frame._check_XTreeWidget	{container=':xTuple ERP:*._frame_QFrame' name='_check' type='XTreeWidget' visible='1'}
 :_frame._custhist_XTreeWidget	{container=':Customer History._frame_QFrame' name='_custhist' type='XTreeWidget' visible='1'}
 :_frame._itemloc_XTreeWidget	{container=':Enter Miscellaneous Adjustment._frame_QFrame' name='_itemloc' type='XTreeWidget' visible='1'}
@@ -1476,6 +1479,7 @@
 :xTuple ERP:*.View_QPushButton	{name='_view' text='View' type='QPushButton' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
 :xTuple ERP:*.VirtualClusterLineEdit_OrderLineEdit	{name='VirtualClusterLineEdit' type='OrderLineEdit' visible='1'}
 :xTuple ERP:*.Voucher_QMenu	{title='Voucher' type='QMenu' visible='1'}
+:xTuple ERP:*.Window_QMenu	{name='menu.window' title='Window' type='QMenu' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
 :xTuple ERP:*.Write Check To:_QGroupBox	{name='_recipGroup' title='Write Check To:' type='QGroupBox' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
 :xTuple ERP:*.XDateEdit_XDateEdit	{name='XDateEdit' type='XDateEdit' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
 :xTuple ERP:*.XLineEdit_XLineEdit	{name='XLineEdit' type='XLineEdit' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
