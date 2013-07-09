@@ -627,12 +627,14 @@
 :_filterGroup.xcomboBox2_XComboBox	{container=':Quantities on Hand._filterGroup_QFrame' name='xcomboBox2' type='XComboBox' visible='1'}
 :_filterGroup.xcomboBox2_XComboBox_2	{container=':xTuple ERP:*._filterGroup_QFrame' name='xcomboBox2' type='XComboBox' visible='1'}
 :_filterGroup.xcomboBox3_XComboBox	{container=':xTuple ERP:*._filterGroup_QFrame' name='xcomboBox3' type='XComboBox' visible='1'}
+:_frame.Delete_QPushButton	{container=':_stack._frame_QFrame' name='_delete' text='Delete' type='QPushButton' visible='1'}
 :_frame.Issue All_QPushButton	{container=':Issue to Shipping._frame_QFrame' name='_issueAll' text='Issue All' type='QPushButton' visible='1'}
 :_frame.Password:_QLabel	{container=':Log In._frame_QFrame' name='_passwordLit' text='Password:' type='QLabel' visible='1'}
 :_frame.Post_QPushButton	{container=':_creditCardTab._frame_QFrame' name='_postPreauth' text='Post' type='QPushButton' visible='1'}
 :_frame.Transactions:_QLabel	{container=':General Ledger Transactions._frame_QFrame' name='_gltransLit' text='Transactions:' type='QLabel' visible='1'}
 :_frame.Username:_QLabel	{container=':Log In._frame_QFrame' name='_usernameLit' text='Username:' type='QLabel' visible='1'}
 :_frame.Void_QPushButton	{container=':_creditCardTab._frame_QFrame' name='_voidPreauth' text='Void' type='QPushButton' visible='1'}
+:_frame._conversionRates_XTreeWidget	{container=':_stack._frame_QFrame' name='_conversionRates' type='XTreeWidget' visible='1'}
 :_frame._custhist_XTreeWidget	{container=':Customer History._frame_QFrame' name='_custhist' type='XTreeWidget' visible='1'}
 :_frame._itemloc_XTreeWidget	{container=':Enter Miscellaneous Adjustment._frame_QFrame' name='_itemloc' type='XTreeWidget' visible='1'}
 :_frame._itemloc_XTreeWidget_2	{container=':Issue to Shipping._frame_QFrame' name='_itemloc' type='XTreeWidget' visible='1'}
@@ -970,6 +972,9 @@
 :_qty_XLineEdit	{buddy=':_qtyGroup.Adjustment Qty.:_QLabel' name='_qty' type='XLineEdit' visible='1'}
 :_qty_XLineEdit_2	{buddy=':Quantities.To Post:_QLabel' name='_qty' type='XLineEdit' visible='1'}
 :_qty_XLineEdit_3	{buddy=':Quantites.To Correct:_QLabel' name='_qty' type='XLineEdit' visible='1'}
+:_queryParameters.Selected:_QRadioButton	{container=':_stack._queryParameters_ParameterGroup' name='_selected' text='Selected:' type='QRadioButton' visible='1'}
+:_queryParameters._items_XComboBox	{container=':_stack._queryParameters_ParameterGroup' name='_items' type='XComboBox' visible='1'}
+:_queryParameters_QComboBoxListView	{container=':_stack._queryParameters_ParameterGroup' type='QComboBoxListView' unnamed='1' visible='1'}
 :_quote.40013_QModelIndex	{column='0' container=':_quote_XTreeWidget' text='40015' type='QModelIndex'}
 :_quote.40015_QModelIndex	{column='0' container=':_quote_XTreeWidget' text='40015' type='QModelIndex'}
 :_quote.40019_QModelIndex	{column='0' container=':_quote_XTreeWidget' text='40019' type='QModelIndex'}
@@ -1031,10 +1036,16 @@
 :_stack.Use toolbars on displays when available_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_useToolbars' text='Use toolbars on displays when available' type='QCheckBox' visible='1'}
 :_stack.Wednesday_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_wednesday' text='Wednesday' type='QCheckBox' visible='1'}
 :_stack.Work in Test Mode_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_ccTest' text='Work in Test Mode' type='QCheckBox' visible='1'}
+:_stack.XDateEdit_XDateEdit	{container=':Setup._stack_QStackedWidget' name='XDateEdit' occurrence='3' type='XDateEdit' visible='1'}
+:_stack.XDateEdit_XDateEdit_2	{container=':Setup._stack_QStackedWidget' name='XDateEdit' occurrence='4' type='XDateEdit' visible='1'}
 :_stack._ccCompany_XComboBox	{container=':Setup._stack_QStackedWidget' name='_ccCompany' type='XComboBox' visible='1'}
+:_stack._currency_XComboBox	{container=':Setup._stack_QStackedWidget' name='_currency' type='XComboBox' visible='1'}
+:_stack._frame_QFrame	{container=':Setup._stack_QStackedWidget' name='_frame' type='QFrame' visible='1'}
 :_stack._nextCmNumber_XLineEdit	{container=':Setup._stack_QStackedWidget' name='_nextCmNumber' type='XLineEdit' visible='1'}
 :_stack._nextSoNumber_XLineEdit	{container=':Setup._stack_QStackedWidget' name='_nextSoNumber' type='XLineEdit' visible='1'}
 :_stack._orderNumGeneration_NumberGenComboBox	{container=':Setup._stack_QStackedWidget' name='_orderNumGeneration' type='NumberGenComboBox' visible='1'}
+:_stack._queryParameters_ParameterGroup	{container=':Setup._stack_QStackedWidget' name='_queryParameters' type='ParameterGroup' visible='1'}
+:_stack._rate_XLineEdit	{container=':Setup._stack_QStackedWidget' name='_rate' type='XLineEdit' visible='1'}
 :_stack.qt_tabwidget_stackedwidget_QStackedWidget	{container=':Setup._stack_QStackedWidget' name='qt_tabwidget_stackedwidget' type='QStackedWidget' visible='1'}
 :_stack_FileLineEdit	{container=':Setup._stack_QStackedWidget' type='FileLineEdit' unnamed='1' visible='1'}
 :_stack_FileLineEdit_2	{container=':Setup._stack_QStackedWidget' occurrence='2' type='FileLineEdit' unnamed='1' visible='1'}
