@@ -2146,6 +2146,7 @@ try
         
         waitForObject(":Open Sales Orders.Query_QToolButton");
         clickButton(":Open Sales Orders.Query_QToolButton");
+        
         waitForObject(":Open Sales Orders.New_QToolButton");
         clickButton(":Open Sales Orders.New_QToolButton");
         waitForObject(":Bill-To.VirtualClusterLineEdit_CLineEdit_2");
@@ -2162,6 +2163,8 @@ try
         
         waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
+        snooze(0.5);
+        nativeType("<Tab>");
         waitForObject(":_lineItemsPage.New_QPushButton_2");
         clickButton(":_lineItemsPage.New_QPushButton_2");
         waitForObject(":_itemGroup.ItemLineEdit_ItemLineEdit");
@@ -2781,7 +2784,7 @@ function createRIS1(item, site)
     clickTab(waitForObject(":Sales Order Item.qt_tabwidget_tabbar_QTabBar"), "Detail");
     snooze(0.5);
     // Verification Point 'VP1'
-    var custprce = findObject(":In USD - $:.XLineEdit_XLineEdit").text;
+    var custprce = findObject(":In USD - $:.XLineEdit_XLineEdit_3").text;
         clickButton(waitForObject(":Sales Order.Save_QPushButton_3"));
     clickButton(waitForObject(":Sales Order Item.Close_QPushButton"));
     clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2"));

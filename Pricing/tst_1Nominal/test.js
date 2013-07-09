@@ -5,75 +5,79 @@ function main()
     
     //-----login Application-----
     loginAppl("CONFIGURE"); 
-    snooze(6);
-//    //-----Editing of preferences----
-//    try
-//    {
-//        if(OS.name == "Darwin")
-//        {
-//            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-//            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-//        }
-//        else
-//        {
-//            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//            activateItem(":xTuple ERP: *_QMenuBar", "System");
-//            waitForObjectItem(":xTuple ERP:*.System_QMenu", "Preferences...");
-//            activateItem(":xTuple ERP:*.System_QMenu", "Preferences..."); 
-//        }
-//        snooze(0.5);
-//        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
-//        {
-//            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-//                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-//        }
-//        snooze(0.3);
-//        if(object.exists(":Notice.Notice_QDialog"))
-//        {
-//            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
-//                clickButton(":Notice.Remind me about this again._QCheckBox");
-//            snooze(0.2);
-//            waitForObject(":Notice.OK_QPushButton");
-//            clickButton(":Notice.OK_QPushButton");
-//        }
-//        
-//        waitForObject(":View Check Run.Save_QPushButton");
-//        clickButton(":View Check Run.Save_QPushButton");
-//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//        activateItem(":xTuple ERP: *_QMenuBar", "System");
-//        waitForObjectItem(":xTuple ERP:*.System_QMenu", "Rescan Privileges");
-//        activateItem(":xTuple ERP:*.System_QMenu", "Rescan Privileges");
-//        snooze(3);
-//    }
-//    catch(e)
-//    {
-//        test.fail("Error in editing preferences"+ e);
-//    }  
-//    
-//    //--------Exiting the application------
-//    activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
-//    activateItem(waitForObjectItem(":xTuple ERP:*.System_QMenu", "Exit xTuple ERP..."));
-//    
-//    snooze(5);
-//    
-//    if(OS.name=="Linux")
-//        startApplication("xtuple.bin");
-//    
-//    else
-//        startApplication("xtuple");
-//    
-//    snooze(2);
-//    
-//    loginAppl("CONFIGURE"); 
-//    snooze(3);
-//    
-//    //--------------- Set the window to Tab view mode -------------
-//    
-//    tabView();
+  snooze(6);
+    //-----Editing of preferences----
+    try
+    {
+        if(OS.name == "Darwin")
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+            activateItem(":xTuple ERP: *_QMenuBar", "System");
+            waitForObjectItem(":xTuple ERP:*.System_QMenu", "Preferences...");
+            activateItem(":xTuple ERP:*.System_QMenu", "Preferences..."); 
+        }
+        snooze(0.5);
+        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
+        {
+            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        }
+        snooze(0.3);
+        if(object.exists(":Notice.Notice_QDialog"))
+        {
+            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+                clickButton(":Notice.Remind me about this again._QCheckBox");
+            snooze(0.2);
+            waitForObject(":Notice.OK_QPushButton");
+            clickButton(":Notice.OK_QPushButton");
+        }
+        
+        waitForObject(":View Check Run.Save_QPushButton");
+        clickButton(":View Check Run.Save_QPushButton");
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+        activateItem(":xTuple ERP: *_QMenuBar", "System");
+        waitForObjectItem(":xTuple ERP:*.System_QMenu", "Rescan Privileges");
+        activateItem(":xTuple ERP:*.System_QMenu", "Rescan Privileges");
+        snooze(3);
+    }
+    catch(e)
+    {
+        test.fail("Error in editing preferences"+ e);
+    }  
+    
+    //--------Exiting the application------
+    activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
+    activateItem(waitForObjectItem(":xTuple ERP:*.System_QMenu", "Exit xTuple ERP..."));
+    
+    snooze(5);
+    
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
+    
+    else
+        startApplication("xtuple");
+    
+    snooze(2);
+    
+    loginAppl("CONFIGURE"); 
+    snooze(3);
+    
+    //--------------- Set the window to Tab view mode -------------
+    
+    tabView();
     //------- Variable declaration -----
     var targetitem = "PRCITEM";
-    //---Create Pricing Schedule----
     var prcname = "PRICING SCHEDULE1";
+    var custname5 = "CUSTOMER5";
+    var custType = "NORMAL"+"-"+"Normal Domestic Customers";
+    
+  //---Create Pricing Schedule----
+  
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
@@ -226,11 +230,7 @@ function main()
             clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
         }
     }//End of catch for External Flows
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+    
     //--Create New item----
     
     copyItem("YTRUCK1",targetitem);
@@ -395,21 +395,11 @@ function main()
     {
         test.fail("Error in creating item in the Pricing Schedule:"+e);
     }//end of catch to add item
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+   
     
-    //---Create New Customer-------
-    var custname5 = "CUSTOMER5";
-    var custType = "NORMAL"+"-"+"Normal Domestic Customers";
-    createCustomer(custType,custname5,"STORE1");
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+   //---Create New Customer-------
+     createCustomer(custType,custname5,"STORE1");
+   
     //---Pricing Schedule Assignment for a Customer----
     var prcAssg = prcname +" - " +"Pricing Schedule edited sucessfully"; 
     prcasscust(custname5,prcAssg,prcname);
@@ -454,8 +444,15 @@ function main()
         }
     }
     
-    //---Creaste New Customer Type----
+     
+    //---variable declaration for customer type---
+    
     var custType = "CUSTOMER TYPE1";
+    var custname1 = "CUSTOMER1";
+    custType1 = custType+'-'+custType;
+    
+    //---Create New Customer Type----
+                
     try
     {
         
@@ -488,14 +485,8 @@ function main()
     }
     
     //---Creating New Customer with customer type assigned----
-    var custname1 = "CUSTOMER1";
-    custType1 = custType+'-'+custType;
     createCustomer(custType1,custname1,"STORE1");
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+   
     //---Assigning pricing Schedule for the Customer Type-----
     prcAssgCustType(custname1,custType1,custType,prcAssg);
     
@@ -539,16 +530,20 @@ function main()
             clickButton(":Quotes.Close_QToolButton");
         }
     }
+    
+    
+    
+    
+    
+    
+    
     //---Create New Customer with Ship-to Address---
     var custname2 = "CUSTOMER2";
     var shipnum = "STORE2";
     var custType = "NORMAL"+"-"+"Normal Domestic Customers";
+    
     createCustomer(custType,custname2,shipnum);
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+    
     //---Pricing Schedule Assignment to customer Ship-to--------
     prcassgship(custname2 ,shipnum,prcAssg);
     //---Create SO----
@@ -591,8 +586,13 @@ function main()
             clickButton(":Quotes.Close_QToolButton");
         }
     }
-    //---Creaste New Customer Type----
+    
+    //--Varaible declaration for customer type---
     var custType = "CUSTOMER TYPE2";
+    var custname3 = "CUSTOMER3";
+    var custType1 = custType+'-'+custType;
+    //---Creaste New Customer Type----
+ 
     try
     {
         
@@ -625,14 +625,9 @@ function main()
     }
     
     //---Creating New Customer----
-    var custname3 = "CUSTOMER3";
-    custType1 = custType+'-'+custType;
+    
     createCustomer(custType1,custname3,"STORE1");
-    //    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+    
     //---Assigning pricing Schedule for the Customer Type-----
     prcAssgCustType(custname3,custType1,custType,prcAssg);
     //---Create SO----
@@ -679,6 +674,12 @@ function main()
     //---Create Pricing Schedule and add kit type item---------
     //---Create Pricing Schedule----
     var prcname = "PRICING SCHEDULE2";
+    var Kititem = "KCAR1";
+    var custType = "CUSTOMER TYPE3";
+    var custname4 = "CUSTOMER4";
+    var custType1 = custType+'-'+custType;
+
+
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
@@ -713,7 +714,7 @@ function main()
     }
     
     //----Add an KitItem to Pricing Schedule with qty break as 0--------
-    var Kititem = "KCAR1";
+   
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
@@ -757,11 +758,6 @@ function main()
         test.fail("Error in adding the kit type item with qty break 0:"+e);
     }
     
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
     //----Add an KitItem to Pricing Schedule with qty break as 100--------
     try
     {
@@ -811,7 +807,7 @@ function main()
     
     
     //---Creaste New Customer Type----
-    var custType = "CUSTOMER TYPE3";
+   
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
@@ -843,14 +839,9 @@ function main()
     }
     
     //---Creating New Customer----
-    var custname4 = "CUSTOMER4";
-    custType1 = custType+'-'+custType;
+   
     createCustomer(custType1,custname4,"STORE1");
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+    
     var prcAssg = prcname+" - "+prcname;
     //---Assigning pricing Schedule for the Customer Type-----
     prcAssgCustType(custname4,custType1,custType,prcAssg);

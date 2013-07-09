@@ -6,10 +6,11 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     
-    snooze(6);
-   
+    snooze(2);
+    //--------------- Set the window to Tab view mode -------------
+    
+    tabView();
     //---Discount by Product catageory using Percentage-------
-   
     //---Create Product Catageory----
     var  prdctry = "PRODUCTCAT";
     try
@@ -35,9 +36,7 @@ function main()
     //----Item Creation-----
     var dispitem1 = "DISCITEM3";
     copyItem("YTRUCK1",dispitem1);
-    
     //---Edit the Item to obtain List Price----
-    var listprice;
     var prdctry1 = prdctry +" - " +prdctry;
     try
     {
@@ -70,16 +69,12 @@ function main()
     //---Craete New Customer----
     var prdcname1 = "PRDCUST1";
     var custType = "NORMAL"+"-"+"Normal Domestic Customers";
+    
     createCustomer(custType,prdcname1,"STORE1");
-    //---- To avoid unexpected blocks ----
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+    
     //---Discount by Product Catageory using Percentage----
-   
     //---Discount type pricing schedule Creation for an Item-----
-    var Prdprcname1 ="PRDCTRY PRICING SCHEDULE1 ";
+    var Prdprcname1 ="PRDCTRY PRICING SCHEDULE9 ";
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
@@ -172,14 +167,18 @@ function main()
         }
     }//End of Main catch
     
+  
     //---Pricing Schedule Assignment for a Customer----
     var prcAssg = Prdprcname1 +" - " +Prdprcname1; 
     prcasscust(prdcname1,prcAssg,Prdprcname1);
     //---Create SO----
     var prdsonum1 = createSalesOrder1(dispitem1, 100,prdcname1);
+    
     //---Edit the Sales Order and verify the discount amount applied----
     var uprc = salesunitprice(prdsonum1);
     //---Verifying the UnitPrice----
+    test.log(uprc);
+    test.log(listprice*(1-0.05));
     if(uprc == listprice*(1-0.05))
     {
         test.pass("Discount percentage by product-catageory applied sucessfully on unit price of SalesOrder");
@@ -195,18 +194,17 @@ function main()
     var prdcname2 = "PRDCUST2";
     var shipnum = "STORE2";
     createCustomer(custType,prdcname2,shipnum);
-    //---- To avoid unexpected blocks ----
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+   
     //---Pricing Schedule Assignment to customer Ship-to--------
     prcassgship(prdcname2 ,shipnum,prcAssg);
     //---Create SO----
     var prdsonum2 = createSalesOrder1(dispitem1, 100,prdcname2);
+   
     //---Edit the Sales Order to verify the Discount Applied----
     var uprc = salesunitprice(prdsonum2);
     //---Verifying the UnitPrice----
+    test.log(uprc);
+    test.log(listprice*(1-0.05));
     if(uprc == listprice*(1-0.05))
     {
         test.pass("Discount percentage by product-catageory applied sucessfully on unit price");
@@ -215,8 +213,7 @@ function main()
         test.fail("Error in applying the discount Percentage");
     
     //---Assigning Pricing Scheudle by selected Customer Type----
-   
-        //---Creaste New Customer Type----
+    //---Creaste New Customer Type----
     var custType = "CUSTOMER TYPE4";
     
     try
@@ -252,10 +249,16 @@ function main()
     var prdcname3 = "PRDCUST3";
     var custType1 = custType+'-'+custType;
     createCustomer(custType1,prdcname3,shipnum);
+    
     //---Assigning pricing Schedule for the Customer Type-----
     prcAssgCustType(prdcname3,custType1,custType,prcAssg);
     //---Create SO----
     var prdsonum3 = createSalesOrder1(dispitem1, 100,prdcname3);
+    //---- To avoid unexpected blocks ---------
+    if(OS.name != "Windows")
+    {
+        doNothing();
+    }
     //---Edit the Sales Order to verify the Discount Applied----
     var uprc = salesunitprice(prdsonum3);
     //---Verifying the UnitPrice----
@@ -267,8 +270,9 @@ function main()
         test.fail("Error in applying the discount Percentage by product-catageory on Sales ORder unit price");
     
     snooze(0.5);
+    
+       
     //---Discount by Product catageory using Fixed Amount-------
-   
     //---Create Product Catageory----
     var prdctry = "PRODUCTCAT1";
     try
@@ -328,14 +332,7 @@ function main()
     var custType = "NORMAL"+"-"+"Normal Domestic Customers";
     createCustomer(custType,prdcname4,shipnum);
     
-    //---- To avoid unexpected blocks ----
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
-    
     //---Discount by Product Catageory using Fixed Amount----
-  
     //---Discount type pricing schedule Creation for an ProductCatageory-----
     var Prdprcname2 ="PRDCTRY PRICING SCHEDULE2 ";
     try
@@ -426,8 +423,7 @@ function main()
         }
     }//End of Main catch
     
-    
-    
+   
     //---Pricing Schedule Assignment for a Customer----
     var prcAssg = Prdprcname2 +" - " +Prdprcname2; 
     prcasscust(prdcname4,prcAssg,Prdprcname2);
@@ -452,10 +448,12 @@ function main()
     var prdcname5 = "PRDCUST5";
     var shipnum = "STORE2";
     createCustomer(custType,prdcname5,shipnum);
+      
     //---Pricing Schedule Assignment to customer Ship-to--------
     prcassgship(prdcname5,shipnum,prcAssg);
     //---Create SO----
     var prdsonum5 = createSalesOrder1(dispitem2, 100 , prdcname5);
+  
     //---Edit the Sales Order to verify the Discount Applied----
     var custprc =  salesCustprice(prdsonum5,dispitem2);
     //--Verifying the CustomerPrice----
@@ -465,6 +463,7 @@ function main()
     }
     else
         test.fail("Error in calculating the discount Amount by product-catageory  against SalesOrder");
+    
     //---Assigning Pricing Scheudle by selected Customer Type----
     //---Creaste New Customer Type----
     var custType = "CUSTOMER TYPE5";
@@ -502,11 +501,14 @@ function main()
     var prdcname6 = "PRDCUST6";
     custType1 = custType+'-'+custType;
     createCustomer(custType1,prdcname6,shipnum);
+   
     //---Assigning pricing Schedule for the Customer Type-----
     prcAssgCustType(prdcname6,custType1,custType,prcAssg);
     //---Create SO----
     var prdsonum6 = createSalesOrder1(dispitem2, 100 ,prdcname6);
+   
     //---Edit the Sales Order to verify the Customer Price Calculated ---
+    
     var cusprc =  salesCustprice(prdsonum6,dispitem2);
     //--Verifying the CustomerPrice----
     if(cusprc == (listprice-5))

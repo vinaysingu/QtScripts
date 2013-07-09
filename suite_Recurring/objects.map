@@ -335,8 +335,11 @@
 :Log In.Options..._QPushButton_2	{text='Options...' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
 :Log In.Recent_QPushButton	{name='_recent' text='Recent' type='QPushButton' visible='1' window=':Log In_login2'}
 :Log In.Recent_QPushButton_2	{text='Recent' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
+:Log In._database_QComboBox	{name='_database' type='QComboBox' visible='1' window=':Log In_login2'}
 :Log In._frame_QFrame	{name='_frame' type='QFrame' visible='1' window=':Log In_login2'}
 :Log In._logo_QLabel	{name='_logo' type='QLabel' visible='1' window=':Log In_login2'}
+:Log In._port_QLineEdit	{name='_port' type='QLineEdit' visible='1' window=':Log In_login2'}
+:Log In._server_QLineEdit	{name='_server' type='QLineEdit' visible='1' window=':Log In_login2'}
 :Log In_login2	{name='login2' type='login2' visible='1' windowTitle='Log In'}
 :Login Options.Database:_QLabel	{name='_databaseLit' text='Database:' type='QLabel' visible='1' window=':Login Options_login2Options'}
 :Login Options.Port:_QLabel	{name='_portLit' text='Port:' type='QLabel' visible='1' window=':Login Options_login2Options'}
@@ -534,6 +537,7 @@
 :To-Do List Item_todoItem	{name='todoItem' type='todoItem' visible='1' windowTitle='To-Do List Item'}
 :To-Do List.Show_QGroupBox	{container=':xTuple ERP:*.To-Do List_QFrame' name='_showGroup' title='Show' type='QGroupBox' visible='1'}
 :Update Price?_QMessageBox	{type='QMessageBox' unnamed='1' visible='1' windowTitle='Update Price?'}
+:User Preferences.Apply_QPushButton	{text='Apply' type='QPushButton' unnamed='1' visible='1' window=':User Preferences_userPreferences'}
 :User Preferences.Save_QPushButton	{name='_save' text='Save' type='QPushButton' visible='1' window=':User Preferences_userPreferences'}
 :User Preferences.Save_QPushButton_2	{text='Save' type='QPushButton' unnamed='1' visible='1' window=':User Preferences_userPreferences'}
 :User Preferences.qt_tabwidget_stackedwidget_QStackedWidget	{name='qt_tabwidget_stackedwidget' type='QStackedWidget' visible='1' window=':User Preferences_userPreferences'}
@@ -640,6 +644,7 @@
 :_cust.ZCUSTOMER_QModelIndex	{column='1' container=':List Customers._cust_XTreeWidget' text='ZCUSTOMER' type='QModelIndex'}
 :_custhist.60091_QModelIndex	{column='2' container=':_frame._custhist_XTreeWidget' text='60091' type='QModelIndex'}
 :_database_QLineEdit	{buddy=':Login Options.Database:_QLabel' name='_database' type='QLineEdit' visible='1'}
+:_database_QLineEdit_2	{parentWidget=':Log In._database_QComboBox' type='QLineEdit' unnamed='1' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit	{container=':General Ledger Transactions._dateGroup_QGroupBox' name='XDateEdit' type='XDateEdit' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit_2	{container=':General Ledger Transactions._dateGroup_QGroupBox' name='XDateEdit' occurrence='2' type='XDateEdit' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit_3	{container=':_statusTab._dateGroup_QGroupBox' name='XDateEdit' type='XDateEdit' visible='1'}
@@ -1005,7 +1010,7 @@
 :_orderMultiple_XLineEdit	{buddy=':Enforce Order Parameters.Order Multiple:_QLabel' name='_orderMultiple' type='XLineEdit' visible='1'}
 :_orderUpToQty_XLineEdit	{buddy=':Enforce Order Parameters.Order Up To:_QLabel' name='_orderUpToQty' type='XLineEdit' visible='1'}
 :_ordered_XLineEdit	{buddy=':_qtyGroup.Qty. Ordered:_QLabel' name='_ordered' type='XLineEdit' visible='1'}
-:_password_QLineEdit	{name='_password' type='QLineEdit' visible='1'}
+:_password_QLineEdit	{name='_password' type='QLineEdit' visible='1' window=':Log In_login2'}
 :_period.Days_QModelIndex	{container=':Recurring._period_XComboBox' text='Days' type='QModelIndex'}
 :_period.Days_QModelIndex_2	{container=':Recurring._period_XComboBox_2' text='Days' type='QModelIndex'}
 :_period.Days_QModelIndex_3	{container=':Recurring._period_XComboBox_3' text='Days' type='QModelIndex'}
@@ -1100,7 +1105,9 @@
 :_stack.Friday_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_friday' text='Friday' type='QCheckBox' visible='1'}
 :_stack.Key File Name:_QLabel	{container=':Setup._stack_QStackedWidget' name='_ccEncKeyNameLit' text='Key File Name:' type='QLabel' visible='1'}
 :_stack.Monday_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_monday' text='Monday' type='QCheckBox' visible='1'}
+:_stack.Review Before Sending_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_emailReview' text='Review Before Sending' type='QCheckBox' visible='1'}
 :_stack.Saturday_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_saturday' text='Saturday' type='QCheckBox' visible='1'}
+:_stack.Save_QPushButton	{container=':Setup._stack_QStackedWidget' name='_accept' text='Save' type='QPushButton' visible='1'}
 :_stack.Sunday_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_sunday' text='Sunday' type='QCheckBox' visible='1'}
 :_stack.Thursday_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_thursday' text='Thursday' type='QCheckBox' visible='1'}
 :_stack.Tuesday_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_tuesday' text='Tuesday' type='QCheckBox' visible='1'}
@@ -1108,6 +1115,7 @@
 :_stack.Wednesday_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_wednesday' text='Wednesday' type='QCheckBox' visible='1'}
 :_stack.Work in Test Mode_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_ccTest' text='Work in Test Mode' type='QCheckBox' visible='1'}
 :_stack._ccCompany_XComboBox	{container=':Setup._stack_QStackedWidget' name='_ccCompany' type='XComboBox' visible='1'}
+:_stack._ediprofile_XTreeWidget	{container=':Setup._stack_QStackedWidget' name='_ediprofile' type='XTreeWidget' visible='1'}
 :_stack.qt_tabwidget_stackedwidget_QStackedWidget	{container=':Setup._stack_QStackedWidget' name='qt_tabwidget_stackedwidget' type='QStackedWidget' visible='1'}
 :_stack_FileLineEdit	{container=':Setup._stack_QStackedWidget' occurrence='2' type='FileLineEdit' unnamed='1' visible='1'}
 :_stack_FileLineEdit_2	{container=':Setup._stack_QStackedWidget' type='FileLineEdit' unnamed='1' visible='1'}
@@ -1127,7 +1135,7 @@
 :_terms_XComboBox	{buddy=':_headerPage.Terms_QLabel' name='_terms' type='XComboBox' visible='1'}
 :_tree.Configure_QModelIndex	{column='0' container=':Setup._tree_XTreeWidget' text='Configure' type='QModelIndex'}
 :_tree.Master Information_QModelIndex	{column='0' container=':Setup._tree_XTreeWidget' text='Master Information' type='QModelIndex'}
-:_username_QLineEdit	{name='_username' type='QLineEdit' visible='1'}
+:_username_QLineEdit	{name='_username' type='QLineEdit' visible='1' window=':Log In_login2'}
 :_visaBank.EBANK-eBank Checking Account_QModelIndex	{container=':_visaBank_XComboBox' text='EBANK-eBank Checking Account' type='QModelIndex'}
 :_visaBank_XComboBox	{buddy=':Default Bank Accounts:.Visa:_XLabel' name='_visaBank' type='XComboBox' visible='1'}
 :_vohead.2012-07-10_QModelIndex	{column='6' container=':xTuple ERP:*._vohead_XTreeWidget' text='2012-07-10' type='QModelIndex'}
