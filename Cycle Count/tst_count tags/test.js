@@ -6,92 +6,92 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     snooze(6);
-//    
-//    //-----Editing of preferences----
-//           try
-//        {
-//            if(OS.name == "Darwin")
-//            {
-//                activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-//                activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-//            }
-//            else
-//            {
-//            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//            activateItem(":xTuple ERP: *_QMenuBar", "System");
-//            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-//            activateItem(":xTuple ERP: *._System_QMenu", "Preferences..."); 
-//            activateItem(":xTuple ERP: OpenMFG Edition.System_QMenu", "Preferences...");
-//            }
-//            snooze(0.5);
-//            if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
-//           {
-//                if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-//                    clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-//            }
-//          snooze(0.3);
-//
-//        
-//        if(object.exists(":Notice.Notice_QDialog"))
-//        {
-//            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
-//                clickButton(":Notice.Remind me about this again._QCheckBox");
-//            snooze(0.2);
-//            waitForObject(":Notice.OK_QPushButton");
-//            clickButton(":Notice.OK_QPushButton");
-//        }
-//        
-//        waitForObject(":User Preferences.Save_QPushButton_2");
-//        clickButton(":User Preferences.Save_QPushButton_2");
-//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//        activateItem(":xTuple ERP: *_QMenuBar", "System");
-//        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-//        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-//    }
-//    catch(e)
-//    {
-//        test.fail("Error in editing preferences"+ e);
-//    }  
-//    
-//    //--------Exiting the application------
-//    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//    activateItem(":xTuple ERP: *_QMenuBar", "System");
-//    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-//    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-//    
-//    snooze(5);
-//    
-//    if(OS.name=="Linux")
-//        startApplication("xtuple.bin");
-//    
-//    else
-//        startApplication("xtuple");
-//    
-//    snooze(2);
-//    
-//    loginAppl("CONFIGURE"); 
-//  
+    
+    //-----Editing of preferences----
+    try
+    {
+        if(OS.name == "Darwin")
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+            activateItem(":xTuple ERP: *_QMenuBar", "System");
+            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+            activateItem(":xTuple ERP: *._System_QMenu", "Preferences..."); 
+           
+        }
+        snooze(0.5);
+        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
+        {
+            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        }
+        snooze(0.3);
+        
+        
+        if(object.exists(":Notice.Notice_QDialog"))
+        {
+            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+                clickButton(":Notice.Remind me about this again._QCheckBox");
+            snooze(0.2);
+            waitForObject(":Notice.OK_QPushButton");
+            clickButton(":Notice.OK_QPushButton");
+        }
+        
+        waitForObject(":User Preferences.Save_QPushButton_2");
+        clickButton(":User Preferences.Save_QPushButton_2");
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+        activateItem(":xTuple ERP: *_QMenuBar", "System");
+        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+    }
+    catch(e)
+    {
+        test.fail("Error in editing preferences"+ e);
+    }  
+    
+    //--------Exiting the application------
+    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+    activateItem(":xTuple ERP: *_QMenuBar", "System");
+    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    
+    snooze(5);
+    
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
+    
+    else
+        startApplication("xtuple");
+    
+    snooze(2);
+    
+    loginAppl("CONFIGURE"); 
+    
     snooze(1);
     
     var appE = findApplicationEdition();
- 
+    
     //------------Variable declaration-----
     
     var item1 = "PITEM2",item2 = "CLASSITEM1", regQty = "100", cntslipNum = "1245";
     var itemReg = "YTRUCK1", itemMlc = "WTRUCK1",itemLot = "YPAINT1";
-  
-  
+    
+    
     ////----Set 'Allow Duplications' in the Inventory setup-----
     
     activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Inventory"));
     activateItem(waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Setup..."));
     clickButton(waitForObject(":Count Slip # Auditing.Allow Duplications_QRadioButton"));
     clickButton(waitForObject(":Cash Receipt.Save_QPushButton_3"));
-//     //--------------- Set the window to Tab view mode -------------
-//
-//  tabView();
+    //--------------- Set the window to Tab view mode -------------
+    
+    tabView();
     //---------- Creating a new Planner Code---------------
-  var flag = 0;
+    var flag = 0;
     try{
         
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Inventory");
@@ -133,8 +133,8 @@ function main()
             clickButton(waitForObject(":Cash Receipt.Save_QPushButton_3"));
         
     }
-  
-//-----------copying Item---------------- 
+    
+    //-----------copying Item---------------- 
     if(flag)
     {
         copyItem("YTRUCK1",item1);
@@ -183,7 +183,7 @@ function main()
             clickButton(waitForObject(":Quotes.Close_QToolButton"));
         
     }
-  
+    
     //---------------- Creating Count tags by Planner code-----------
     if(flag)
     {
@@ -301,7 +301,7 @@ function main()
         else
             test.fail("failed to update QOH: "+item1+" ");
         
-  }
+    }
     //-----------------Creating Count Tags by Class Code Process------------- 
     //-------- Creating a new Class Code-------
     flag=0;
@@ -333,11 +333,11 @@ function main()
         if(object.exists(":Sales Order.Cancel_QPushButton"))
             clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
     }
-
-//-----------copying Item----------------
+    
+    //-----------copying Item----------------
     if(flag)
     {
-      
+        
         copyItem("YTRUCK1",item2);
         
         //---------------Editing the created item-------------
@@ -378,13 +378,13 @@ function main()
         //----------Creating Item Site------------
         createRIS(item2);
     }
-  //------ To avoid unexpected blocks ----
-  if(OS.name != "Windows")
-  {
-      
-      doNothing();
-  }
-  //----------Creating count tags by class code--------------
+    //------ To avoid unexpected blocks ----
+    if(OS.name != "Windows")
+    {
+        
+        doNothing();
+    }
+    //----------Creating count tags by class code--------------
     if(flag)
     {
         try{
@@ -417,11 +417,11 @@ function main()
                 clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
         }
         
-      //-----------Verifying Count tag---------------
+        //-----------Verifying Count tag---------------
         
         verifyCntTag(item2);
     }
-  //----------Entering Count Slip-------------
+    //----------Entering Count Slip-------------
     if(flag)
     {
         try{
@@ -517,9 +517,9 @@ function main()
             test.fail("error in posting count tags"+e);
             if(object.exists(":Sales Order.Cancel_QPushButton"))
                 clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
-      }
+        }
     }
-  //-----------Verifying updated QOH----------
+    //-----------Verifying updated QOH----------
     if(flag)
     {
         var result = queryQoh(item2,"WH1",appE);
@@ -533,14 +533,14 @@ function main()
     //-----------Creating Count tags by Item---------
     flag = 0;
     createCTItem(itemReg,"WH1",appE);
-  //-----------Verifying in Count tag edit list-----
+    //-----------Verifying in Count tag edit list-----
     
     verifyCntTag(itemReg);
     //---- To avoid unexpected blocks ------
-        if(OS.name != "Windows")
-        {
-            doNothing();
-        }
+    if(OS.name != "Windows")
+    {
+        doNothing();
+    }
     //---------Processing count tag-------------------
     try{
         
@@ -633,10 +633,10 @@ function main()
     //-----------Creating Count Tag for MLC type Item------------
     flag = 0;
     createCTItem(itemMlc,"WH1",appE);
-  //-----------Verifying in Count tag edit list-----
+    //-----------Verifying in Count tag edit list-----
     
     verifyCntTag(itemMlc);
-//    
+    //    
     //---------Processing MLC item Count Tag-------------------
     //-------Entering Count Slip------  
     try{
@@ -790,121 +790,121 @@ function main()
     //-----------Creating Count Tag for LOT type Item------------
     flag = 0;
     createCTItem(itemLot,"WH1",appE);
-  
-  //-----------Verifying in Count tag edit list-----
-  
+    
+    //-----------Verifying in Count tag edit list-----
+    
     verifyCntTag(itemLot);
     if(appE!= "Postbooks")
     {
-    //---------Processing LOT item Count Tag-------------------
-    //  //-------Entering Count Slip------  
-    try{
-        activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Inventory"));
-        activateItem(waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Physical Inventory"));
-        activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Enter Count Slip..."));
-        clickButton(waitForObject(":..._QPushButton"));
-        snooze(2);
-        waitForObject(":_frame._cnttag_XTreeWidget");
-        clickItem(":_frame._cnttag_XTreeWidget",itemLot, 0, 0, 5, Qt.LeftButton);
-        clickButton(waitForObject(":Count Tag List.Select_QPushButton"));
-        
-        type(waitForObject(":Count Slip._number_XLineEdit"),cntslipNum);
-        nativeType("<Tab>");
-        type(waitForObject(":_qty_XLineEdit_2"),regQty);
-        nativeType("<Tab>");
-        clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
-        clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
-        flag =1;
-    }
-    catch(e)
-    {
-        test.fail("Error in entering Count Slip of a LOT type item" + e);
-        if(object.exists(":Sales Order.Cancel_QPushButton"))
-            clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
-    }
-    
-    if(flag)
-    {
+        //---------Processing LOT item Count Tag-------------------
+        //  //-------Entering Count Slip------  
         try{
-            //------------Posting Count slips---------    
             activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Inventory"));
             activateItem(waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Physical Inventory"));
-            activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Post Count Slips..."));
-              snooze(2);
-            if(appE!="PostBooks")
-            {
-                clickButton(waitForObject(":_warehouse.Selected:_QRadioButton_2"));
-                waitForObject(":_warehouse._warehouses_WComboBox_2");
-                clickItem(":_warehouse._warehouses_WComboBox_2","WH1", 0, 0, 5, Qt.LeftButton);
-            }
-          
-            clickButton(waitForObject(":List Unposted Invoices.Post_QPushButton"));
-            //----- To avoid unexpected blocks -------
-            if(OS.name != "Windows")
-            {
-                doNothing();
-            }
-            //----------Posting Count tag----------
-            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Inventory"));
-            activateItem(waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Physical Inventory"));
-            activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Post Count Tags..."));
-            snooze(1);
-            if(!findObject(":Post Count Tags.Thaw Frozen Inventory_QCheckBox").checked)
-                clickButton(":Post Count Tags.Thaw Frozen Inventory_QCheckBox");
+            activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Enter Count Slip..."));
+            clickButton(waitForObject(":..._QPushButton"));
             snooze(2);
-            clickButton(waitForObject(":List Unposted Invoices.Post_QPushButton"));
+            waitForObject(":_frame._cnttag_XTreeWidget");
+            clickItem(":_frame._cnttag_XTreeWidget",itemLot, 0, 0, 5, Qt.LeftButton);
+            clickButton(waitForObject(":Count Tag List.Select_QPushButton"));
+            
+            type(waitForObject(":Count Slip._number_XLineEdit"),cntslipNum);
+            nativeType("<Tab>");
+            type(waitForObject(":_qty_XLineEdit_2"),regQty);
+            nativeType("<Tab>");
+            clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
+            clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
+            flag =1;
+        }
+        catch(e)
+        {
+            test.fail("Error in entering Count Slip of a LOT type item" + e);
+            if(object.exists(":Sales Order.Cancel_QPushButton"))
+                clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
+        }
+        
+        if(flag)
+        {
+            try{
+                //------------Posting Count slips---------    
+                activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Inventory"));
+                activateItem(waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Physical Inventory"));
+                activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Post Count Slips..."));
+                snooze(2);
+                if(appE!="PostBooks")
+                {
+                    clickButton(waitForObject(":_warehouse.Selected:_QRadioButton_2"));
+                    waitForObject(":_warehouse._warehouses_WComboBox_2");
+                    clickItem(":_warehouse._warehouses_WComboBox_2","WH1", 0, 0, 5, Qt.LeftButton);
+                }
+                
+                clickButton(waitForObject(":List Unposted Invoices.Post_QPushButton"));
+                //----- To avoid unexpected blocks -------
+                if(OS.name != "Windows")
+                {
+                    doNothing();
+                }
+                //----------Posting Count tag----------
+                activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Inventory"));
+                activateItem(waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Physical Inventory"));
+                activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Post Count Tags..."));
+                snooze(1);
+                if(!findObject(":Post Count Tags.Thaw Frozen Inventory_QCheckBox").checked)
+                    clickButton(":Post Count Tags.Thaw Frozen Inventory_QCheckBox");
+                snooze(2);
+                clickButton(waitForObject(":List Unposted Invoices.Post_QPushButton"));
+            }
+            catch(e)
+            {
+                test.fail("error in posting count tags " +e);
+                if(object.exists(":Sales Order.Cancel_QPushButton"))
+                    clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
+            }
+        }
+        //----------Verifying in Count tag edit list after posting count tag--------
+        try{
+            
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Inventory"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Physical Inventory"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Reports"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Reports_QMenu", "Count Tag Edit List..."));
+            clickButton(waitForObject(":Receivables Workbench.Query_QPushButton"));
+            snooze(1);
+            waitForObject(":_frame._cnttag_XTreeWidget");
+            var taglist = findObject(":_frame._cnttag_XTreeWidget");
+            var count = taglist.topLevelItemCount;
+            if(count>0)
+                test.fail("Some unposted count tags exist");
+            else
+                test.pass("All count tags are posted successfully");
+            clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
         }
         catch(e)
         {
             test.fail("error in posting count tags " +e);
-            if(object.exists(":Sales Order.Cancel_QPushButton"))
-                clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
+            if(object.exists(":Select Order for Billing.Close_QPushButton"))
+                clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
+        }
+        
+        //-----------Verifying updated QOH----------
+        if(flag)
+        {
+            var result = queryQoh(itemLot,"WH1",appE);
+            test.log(result);
+            if(result == parseInt(regQty))
+                test.pass(" "+itemLot+" QOH updated sucessfully:");
+            else
+                test.fail("failed to update QOH: "+itemLot+" "); 
         }
     }
-    //----------Verifying in Count tag edit list after posting count tag--------
-    try{
-        
-        activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Inventory"));
-        activateItem(waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Physical Inventory"));
-        activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Reports"));
-        activateItem(waitForObjectItem(":xTuple ERP: *.Reports_QMenu", "Count Tag Edit List..."));
-        clickButton(waitForObject(":Receivables Workbench.Query_QPushButton"));
-        snooze(1);
-        waitForObject(":_frame._cnttag_XTreeWidget");
-        var taglist = findObject(":_frame._cnttag_XTreeWidget");
-        var count = taglist.topLevelItemCount;
-        if(count>0)
-            test.fail("Some unposted count tags exist");
-        else
-            test.pass("All count tags are posted successfully");
-        clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
-    }
-    catch(e)
-    {
-        test.fail("error in posting count tags " +e);
-        if(object.exists(":Select Order for Billing.Close_QPushButton"))
-            clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
-    }
-    
-    //-----------Verifying updated QOH----------
-    if(flag)
-    {
-        var result = queryQoh(itemLot,"WH1",appE);
-        test.log(result);
-        if(result == parseInt(regQty))
-            test.pass(" "+itemLot+" QOH updated sucessfully:");
-        else
-            test.fail("failed to update QOH: "+itemLot+" "); 
-    }
-}
     if(appE!="PostBooks")
     {
         //-----------Creating Count Tag for Serial type Item------------
         var itemSer = "STRUCK1",serNo = "111", serQty = "3";
         flag = 0;
         createCTItem(itemSer,"WH1",appE);
-      //-----------Verifying in Count tag edit list-----
-      
+        //-----------Verifying in Count tag edit list-----
+        
         verifyCntTag(itemSer);
         test.log("verified in count tag list successfully");    
         
@@ -1006,8 +1006,8 @@ function main()
     //-----------Creating Count tags by Item for performing exceptional flows---------
     
     createCTItem(itemReg,"WH1",appE);
-  //-----------Verifying in Count tag edit list-----
-  
+    //-----------Verifying in Count tag edit list-----
+    
     verifyCntTag(itemReg);
     
     //---------Performing some exceptional flows in count tag edit list-------------------
@@ -1141,10 +1141,10 @@ function main()
         if(object.exists(":Quotes.Close_QToolButton"))
             clickButton(waitForObject(":Quotes.Close_QToolButton"));
     }
-  
-  //---------Verifying in count tags by Class Code-------------------
-  
-  var classcode = "NEW CLASS-class New";
+    
+    //---------Verifying in count tags by Class Code-------------------
+    
+    var classcode = "NEW CLASS-class New";
     try{
         
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Inventory"));
@@ -1356,7 +1356,7 @@ function main()
     test.log(cntslipNum);
     //-----------Creating Count tags by Item---------
     createCTItem(itemReg,"WH1",appE);
-  //-----------Verifying in Count tag edit list-----
+    //-----------Verifying in Count tag edit list-----
     
     verifyCntTag(itemReg);
     
@@ -1474,11 +1474,11 @@ function main()
                 clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
             
         }
-         //----- To avoid unexpected blocks -------
-            if(OS.name != "Windows")
-            {
-                doNothing();
-            }
+        //----- To avoid unexpected blocks -------
+        if(OS.name != "Windows")
+        {
+            doNothing();
+        }
         // ----------entering same slip in different site----
         try{
             activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Inventory"));
@@ -1522,11 +1522,11 @@ function main()
     snooze(1);
     clickButton(waitForObject(":Count Slip # Auditing.No Unposted Slip # Duplications_QRadioButton"));	 snooze(1);
     clickButton(waitForObject(":Cash Receipt.Save_QPushButton_3"));
-     //----- To avoid unexpected blocks -------
-            if(OS.name != "Windows")
-            {
-                doNothing();
-            }
+    //----- To avoid unexpected blocks -------
+    if(OS.name != "Windows")
+    {
+        doNothing();
+    }
     // //-----Create Slip with same slip# in same site---
     try{
         
@@ -1591,7 +1591,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Physical Inventory"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Enter Count Slip..."));
         clickButton(waitForObject(":..._QPushButton"));
-         snooze(2);
+        snooze(2);
         if(appE!="PostBooks")
         {
             clickButton(waitForObject(":_warehouse.Selected:_QRadioButton_4"));
@@ -1643,7 +1643,7 @@ function main()
             activateItem(waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Physical Inventory"));
             activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Enter Count Slip..."));
             clickButton(waitForObject(":..._QPushButton"));
-             snooze(2);
+            snooze(2);
             clickButton(waitForObject(":_warehouse.Selected:_QRadioButton_4"));
             waitForObject(":_warehouse._warehouses_WComboBox_5");
             clickItem(":_warehouse._warehouses_WComboBox_5", "WH1", 0, 0, 5, Qt.LeftButton);
@@ -1677,7 +1677,7 @@ function main()
             activateItem(waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Physical Inventory"));
             activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Enter Count Slip..."));
             clickButton(waitForObject(":..._QPushButton"));
-             snooze(2);
+            snooze(2);
             clickButton(waitForObject(":_warehouse.Selected:_QRadioButton_4"));
             waitForObject(":_warehouse._warehouses_WComboBox_5");
             clickItem(":_warehouse._warehouses_WComboBox_5", "WH2", 0, 0, 5, Qt.LeftButton);
@@ -1690,7 +1690,7 @@ function main()
             nativeType("<Tab>");
             snooze(1);
             clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
-        snooze(1);
+            snooze(1);
             if(object.exists(":Sales Order.OK_QPushButton_2"))
             {
                 clickButton(waitForObject(":Sales Order.OK_QPushButton_2"));
@@ -1710,8 +1710,8 @@ function main()
     //-------Creating an Item-------
     var cycleItem = "CYCLETRUCK1";
     flag = 0;
-  
-  copyItem("YTRUCK1",cycleItem);
+    
+    copyItem("YTRUCK1",cycleItem);
     
     createRIS1(cycleItem,"WH1");
     
@@ -1823,7 +1823,7 @@ function main()
             snooze(0.1);
             activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Inventory"));
             activateItem(waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Physical Inventory"));
-             snooze(0.5);
+            snooze(0.5);
             activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Reports"));
             activateItem(waitForObjectItem(":xTuple ERP: *.Reports_QMenu", "Count Tag Edit List..."));
             clickButton(waitForObject(":Receivables Workbench.Query_QPushButton"));
@@ -1838,7 +1838,7 @@ function main()
                     var docNo = row.text(1);
                     test.log(docNo);
                     test.pass("count Tag is created for the item"+cycleItem+"")
-                 }
+                        }
             }
             clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
             flag = 1;
@@ -1962,7 +1962,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP:*.Physical Inventory_QMenu", "Reports"));
         activateItem(waitForObjectItem(":xTuple ERP: *.Reports_QMenu", "Count Tag Edit List..."));
         clickButton(waitForObject(":Receivables Workbench.Query_QPushButton"));
-         snooze(0.5);
+        snooze(0.5);
         if(!object.exists("{column='3' container=':_frame._cnttag_XTreeWidget' text='"+cycleItem+"' type='QModelIndex'}"))
             test.pass("count tag posted successful");
         else 
