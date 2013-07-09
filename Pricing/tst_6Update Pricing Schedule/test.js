@@ -6,7 +6,9 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE");
     snooze(6);
+    //--------------- Set the window to Tab view mode -------------
     
+    tabView();
     //---Updating pricing schedule by item using fixed amount-----------
     //---Verifying the price of Pricing Schedule before updation-----
     var prcname = "PRICING SCHEDULE1";
@@ -39,11 +41,7 @@ function main()
             clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
         }
     }
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+    
     //---Pricing Schedule Updation by Item------
     
     var itemname = "PRCITEM";
@@ -109,6 +107,8 @@ function main()
         }
     }
     
+    test.log("aprc1 "+aprc1+"");
+    test.log("aprc2 "+aprc2+"");
     
     //--verifying updated prices----
     
@@ -118,11 +118,10 @@ function main()
     }
     else
         test.fail("Error in updating the Price in Pricing Schedule according to the fixed amount assigned to item");
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+    
+    
+    
+    
     //----Updating Pricing schedule by item using percent--------
     
     //---Verifying the price of Pricing Schedule before updation-----
@@ -156,15 +155,12 @@ function main()
             clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
         }
     }
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+   
+    
     //---Pricing Schedule Updation by Item using percentage------
     
     var itemname = "PRCITEM";
-    var uperc = 2;
+    var uperc = 10;
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
@@ -226,28 +222,23 @@ function main()
     
     //--verifying updated prices----
     prc1 = (bprc1*uperc/100)+bprc1;
+  
     prc2 = (bprc2*uperc/100)+bprc2;
+  
     var pc1 = roundNumber( prc1, 0);
     var pc2 = roundNumber( prc2, 0);
     var aprc3 = roundNumber( aprc1, 0);
     var aprc4 = roundNumber( aprc2, 0);
-    test.log(pc1); 
-     test.log(pc2); 
-      test.log(aprc3);
-       test.log(aprc4); 
+   
     if(aprc3 ==parseInt(pc1) && aprc4 == parseInt(pc2))
     {
         test.pass("Prices in Pricing Schedule updated correctly according to the percentage assigned to item");
     }
     else
         test.fail("Error in updating the Price in Pricing Schedule according to the percentage assigned to item");
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+   
+    
     //---Updating pricing schedule by Product Catageory using fixed amount----------- 
-
     //---Verifying the price of Pricing Schedule before updation----- 
     var prcname = "PRICING SCHEDULE1"; 
     try 
@@ -328,11 +319,7 @@ function main()
             clickButton(waitForObject(":Sales Order.Cancel_QPushButton_3")); 
         } 
     } 
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+    
     //---Verifying the price of Pricing Schedule after updation----- 
     try 
     { 
@@ -369,11 +356,7 @@ function main()
     } 
     else 
         test.fail("Error in updating the Price in Pricing Schedule according to the fixed amount assigned to Product Catageory"); 
-    //---- To avoid unexpected blocks ---------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+   
     //----Updating Pricing schedule by Product Catageory using percent-------- 
     
     //---Verifying the price of Pricing Schedule before updation----- 
@@ -414,7 +397,7 @@ function main()
     //---Pricing Schedule Updation by Product Catageory using percentage------ 
     
     var itemname = "PRCITEM"; 
-    var uperc = 2; 
+    var uperc = 5; 
     try 
     { 
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales")); 
@@ -469,9 +452,9 @@ function main()
         clickButton(waitForObject(":xTuple ERP: *.Edit_QPushButton")); 
         snooze(1);
         if(object.exists("{column='4' container=':Pricing Schedule._ipsitem_XTreeWidget' text='0.00' type='QModelIndex'}")) 
-            var aprc1 =parseInt(findObject("{column='6' container=':Pricing Schedule._ipsitem_XTreeWidget' type='QModelIndex'}").text); 
+            var aprc1 = findObject("{column='6' container=':Pricing Schedule._ipsitem_XTreeWidget' type='QModelIndex'}").text; 
         
-        var aprc2 =parseInt(findObject("{column='6' container=':Pricing Schedule._ipsitem_XTreeWidget' type='QModelIndex'}").text); 
+        var aprc2 = findObject("{column='6' container=':Pricing Schedule._ipsitem_XTreeWidget' type='QModelIndex'}").text; 
         
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2")); 
         clickButton(waitForObject(":Select Order for Billing.Close_QPushButton")); 
@@ -486,14 +469,21 @@ function main()
         } 
     } 
     
-    
+    test.log("aprc1 "+aprc1+"");
+    test.log("aprc2 "+aprc2+"");
     //--verifying updated prices---- 
     prc1 = (bprc1*uperc/100)+bprc1; 
+    test.log("prc1 "+prc1+"");
     prc2 = (bprc2*uperc/100)+bprc2; 
+    test.log("prc2 "+prc2+"");
     var pc1 = roundNumber( prc1, 0); 
+    test.log("pc1 "+pc1+"");
     var pc2 = roundNumber( prc2, 0); 
+    test.log("pc2 "+pc2+"");
     var aprc3 = roundNumber( aprc1, 0); 
+    test.log("aprc3 "+aprc3+"");
     var aprc4 = roundNumber( aprc2, 0); 
+    test.log("aprc4 "+aprc4+"");
     if(aprc3 ==parseInt( pc1) && aprc4 == parseInt(pc2)) 
     { 
         test.pass("Prices in Pricing Schedule updated correctly according to the percentage assigned to Product Catageory"); 
