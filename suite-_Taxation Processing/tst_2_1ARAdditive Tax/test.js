@@ -48,8 +48,8 @@ function main()
         
     }
 //    //--------------- Set the window to Tab view mode -------------
-//    tabView();
-//    
+     tabView();
+    
     //-------New  Chart of Account for Tax Liablities -------
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
@@ -191,10 +191,21 @@ function main()
         snooze(0.5);
         nativeType("<Tab>");
         waitForObject(":_defaultGroup._salesrep_XComboBox");
-        if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "1000-Sam Masters")
-            clickItem(":_defaultGroup._salesrep_XComboBox","1000-Sam Masters",0,0,1,Qt.LeftButton);
-//        if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "SMASTERS-Sam Masters")
-//            clickItem(":_defaultGroup._salesrep_XComboBox","SMASTERS-Sam Masters",0,0,1,Qt.LeftButton);
+        if(appEdition == "PostBooks")
+      {
+      if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "1000-Sam Masters")
+          clickItem(":_defaultGroup._salesrep_XComboBox","1000-Sam Masters",0,0,5,Qt.LeftButton);
+      nativeType("<Tab>");
+           snooze(0.5);
+  }
+      if(appEdition != "PostBooks")
+      {
+          if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "SMASTERS-Sam Masters")
+              clickItem(":_defaultGroup._salesrep_XComboBox","SMASTERS-Sam Masters",0,0,5,Qt.LeftButton);
+          nativeType("<Tab>");
+               snooze(0.5);
+  }
+      
         waitForObject(":_settingsTab.Tax_QRadioButton");
         clickButton(":_settingsTab.Tax_QRadioButton");
         nativeType("<Tab>");
@@ -298,6 +309,12 @@ function main()
     {
         test.fail("Error in creating Expense Categories"+e);
     }
+    
+    
+  
+  
+  
+    
     //--------- Sales Order Creation -------
     
     var sonumber2 = createSalesOrder1("TAXTRUCK 2", "100","CUSTOMER 2");
