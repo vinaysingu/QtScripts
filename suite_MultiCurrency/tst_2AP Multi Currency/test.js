@@ -65,9 +65,9 @@ function main()
         test.fail("failed to create exchange rates for the currency EUR - € "+ e);
     }
     snooze(3);
-//     //--------------- Set the window to Tab view mode -------------
-//
-//    tabView();
+     //--------------- Set the window to Tab view mode -------------
+
+    tabView();
     //-----Creating a Purchase Order-----
     try
     {

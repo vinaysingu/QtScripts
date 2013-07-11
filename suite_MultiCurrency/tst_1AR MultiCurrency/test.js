@@ -8,61 +8,66 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     
-//  
-//    //-----Editing of preferences----
-//    try
-//    {
-//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//        activateItem(":xTuple ERP: *_QMenuBar", "System");
-//        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-//        activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-//         waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
-//            snooze(1);
-//            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-//                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-//                snooze(0.3);
-//        
-//        if(object.exists(":Notice.Notice_QDialog"))
-//        {
-//            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
-//                clickButton(":Notice.Remind me about this again._QCheckBox");
-//            snooze(0.2);
-//            waitForObject(":Notice.OK_QPushButton");
-//            clickButton(":Notice.OK_QPushButton");
-//        }
-//        
-//        waitForObject(":User Preferences.Save_QPushButton_2");
-//        clickButton(":User Preferences.Save_QPushButton_2");
-//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//        activateItem(":xTuple ERP: *_QMenuBar", "System");
-//        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-//        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-//    }
-//    catch(e)
-//    {
-//        test.fail("Error in editing preferences"+ e);
-//    }  
-//    
-//    //--------Exiting the application------
-//    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//    activateItem(":xTuple ERP: *_QMenuBar", "System");
-//    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-//    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-//    
-//    snooze(5);
-//    
-//    if(OS.name=="Linux")
-//        startApplication("xtuple.bin");
-//    
-//    else
-//        startApplication("xtuple");
-//    
-//    snooze(2);
-//    
-//    loginAppl("CONFIGURE"); 
-//   
+  
+    //-----Editing of preferences----
+    try
+    {
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+        activateItem(":xTuple ERP: *_QMenuBar", "System");
+        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+        activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+         waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
+            snooze(1);
+            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+                snooze(0.3);
+        
+        if(object.exists(":Notice.Notice_QDialog"))
+        {
+            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+                clickButton(":Notice.Remind me about this again._QCheckBox");
+            snooze(0.2);
+            waitForObject(":Notice.OK_QPushButton");
+            clickButton(":Notice.OK_QPushButton");
+        }
+        
+        waitForObject(":User Preferences.Save_QPushButton_2");
+        clickButton(":User Preferences.Save_QPushButton_2");
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+        activateItem(":xTuple ERP: *_QMenuBar", "System");
+        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+    }
+    catch(e)
+    {
+        test.fail("Error in editing preferences"+ e);
+    }  
+    
+    //--------Exiting the application------
+    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+    activateItem(":xTuple ERP: *_QMenuBar", "System");
+    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    
+    snooze(5);
+    
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
+    
+    else
+        startApplication("xtuple");
+    
+    snooze(2);
+    
+    loginAppl("CONFIGURE"); 
+   
    var appE = findApplicationEdition();
     
+ 
+   //----- Enabling Tab View -----
+   
+   tabView();
+ 
     //-------------- Creating Exchange Rates-----------------------
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
@@ -1098,12 +1103,12 @@ function main()
         snooze(0.5);
         if(appE == "Manufacturing")
         {
-//            waitForObject(":Work Order Costing.Show Set Up_XCheckBox");
-//            if(!findObject(":Work Order Costing.Show Set Up_XCheckBox").checked)
-//                clickButton(":Work Order Costing.Show Set Up_XCheckBox");
-//            waitForObject(":Work Order Costing.Show Run Time_XCheckBox");
-//            if(!findObject(":Work Order Costing.Show Run Time_XCheckBox").checked)
-//                clickButton(":Work Order Costing.Show Run Time_XCheckBox");
+            waitForObject(":Work Order Costing.Show Set Up_XCheckBox");
+            if(!findObject(":Work Order Costing.Show Set Up_XCheckBox").checked)
+                clickButton(":Work Order Costing.Show Set Up_XCheckBox");
+            waitForObject(":Work Order Costing.Show Run Time_XCheckBox");
+            if(!findObject(":Work Order Costing.Show Run Time_XCheckBox").checked)
+                clickButton(":Work Order Costing.Show Run Time_XCheckBox");
             waitForObject(":Work Order Costing.Show Materials_XCheckBox");
             if(!findObject(":Work Order Costing.Show Materials_XCheckBox").checked)
                 clickButton(":Work Order Costing.Show Materials_XCheckBox");
@@ -1113,33 +1118,33 @@ function main()
         clickButton(":Quotes.Query_QToolButton");
         snooze(1);
         
-//        if(appE == "Manufacturing")
-//        {
-//            waitForObject(":_list_XTreeWidget_3");
-//            if(object.exists("{column='2' container=':_list_XTreeWidget_3' text='Inspect' type='QModelIndex'}"))
-//                test.pass("Work Order's Inspect operation has setup time costing entry");
-//            else  
-//                test.fail("Work Order's Inspect operation has no setup time costing entry");
-//            snooze(0.1);
-//            waitForObject(":_list_XTreeWidget_3");
-//            if(object.exists("{column='2' container=':_list_XTreeWidget_3' text='Inspect' type='QModelIndex'}"))
-//                test.pass("Work Order's Inspect operation has Run Time costing entry");
-//            else  
-//                test.fail("Work Order's Inspect operation has no Run Time costing entry");
-//            snooze(0.1);
-//            waitForObject(":_list_XTreeWidget_3");
-//            if(object.exists("{column='2' container=':_list_XTreeWidget_3' text='Repair Truck' type='QModelIndex'}"))
-//                test.pass("Work Order's Repair Truck operation has setup time costing entry");
-//            else  
-//                 test.fail("Work Order's Repair Truck operation has no setup time costing entry");
-//            snooze(0.1);
-//            waitForObject(":_list_XTreeWidget_3");
-//            if(object.exists("{column='2' container=':_list_XTreeWidget_3' text='Repair Truck' type='QModelIndex'}"))
-//                test.pass("Work Order's Repair Truck operation has Run Time costing entry");
-//            else  
-//                test.fail("Work Order's Repair Truck operation has no Run Time costing entry"); 
-//            snooze(0.1);
-//        }
+        if(appE == "Manufacturing")
+        {
+            waitForObject(":_list_XTreeWidget_3");
+            if(object.exists("{column='2' container=':_list_XTreeWidget_3' text='Inspect' type='QModelIndex'}"))
+                test.pass("Work Order's Inspect operation has setup time costing entry");
+            else  
+                test.fail("Work Order's Inspect operation has no setup time costing entry");
+            snooze(0.1);
+            waitForObject(":_list_XTreeWidget_3");
+            if(object.exists("{column='2' container=':_list_XTreeWidget_3' text='Inspect' type='QModelIndex'}"))
+                test.pass("Work Order's Inspect operation has Run Time costing entry");
+            else  
+                test.fail("Work Order's Inspect operation has no Run Time costing entry");
+            snooze(0.1);
+            waitForObject(":_list_XTreeWidget_3");
+            if(object.exists("{column='2' container=':_list_XTreeWidget_3' text='Repair Truck' type='QModelIndex'}"))
+                test.pass("Work Order's Repair Truck operation has setup time costing entry");
+            else  
+                 test.fail("Work Order's Repair Truck operation has no setup time costing entry");
+            snooze(0.1);
+            waitForObject(":_list_XTreeWidget_3");
+            if(object.exists("{column='2' container=':_list_XTreeWidget_3' text='Repair Truck' type='QModelIndex'}"))
+                test.pass("Work Order's Repair Truck operation has Run Time costing entry");
+            else  
+                test.fail("Work Order's Repair Truck operation has no Run Time costing entry"); 
+            snooze(0.1);
+        }
         waitForObject(":_list_XTreeWidget_3");
         if(object.exists("{column='2' container=':_list_XTreeWidget_3' text='Truck Wheel Type 1' type='QModelIndex'}"))
             test.pass("Work Order's Material issue (TWHEEL1)transaction has a costing entry");
