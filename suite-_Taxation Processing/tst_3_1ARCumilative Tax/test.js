@@ -48,8 +48,8 @@ function main()
         test.fail("Error in identifying the application edition" + e);       
         
     }
-//  //--------------- Set the window to Tab view mode -------------
-//    tabView();
+  //--------------- Set the window to Tab view mode -------------
+     tabView();
     
     //-------New  Chart of Account for Tax Liablities -------
     try{
@@ -181,11 +181,21 @@ function main()
         waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Settings");
         waitForObject(":_defaultGroup._salesrep_XComboBox");
-        if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "1000-Sam Masters")
-            clickItem(":_defaultGroup._salesrep_XComboBox","1000-Sam Masters",0,0,1,Qt.LeftButton);
-//        if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "1000-Sam Masters")
-//            clickItem(":_defaultGroup._salesrep_XComboBox","SMASTERS-Sam Masters",0,0,1,Qt.LeftButton);
-        
+        if(appEdition == "PostBooks")
+      {
+      if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "1000-Sam Masters")
+          clickItem(":_defaultGroup._salesrep_XComboBox","1000-Sam Masters",0,0,5,Qt.LeftButton);
+      nativeType("<Tab>");
+           snooze(0.5);
+  }
+      if(appEdition != "PostBooks")
+      {
+          if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "SMASTERS-Sam Masters")
+              clickItem(":_defaultGroup._salesrep_XComboBox","SMASTERS-Sam Masters",0,0,5,Qt.LeftButton);
+          nativeType("<Tab>");
+               snooze(0.5);
+  }
+      
         waitForObject(":_settingsTab.Tax_QRadioButton");
         clickButton(":_settingsTab.Tax_QRadioButton");
         waitForObject(":_settingsStack._taxzone_XComboBox");

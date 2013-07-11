@@ -1,3 +1,2 @@
 "ROLE"	"HOST"	"PORT"	"DB"	"USERNAME"	"REALNAME"	"PASSWORD"
-"CONFIGURE"	"192.168.0.104"	"5434"	"PopE-Win-410B2-mfg-8.4"	"admin"	"xTuple Administrator"	"zenx2plE"
-"RUNREGISTER"	"192.168.0.104"	"5434"	"PopE-Win-410B2-mfg-8.4"	"usge"	"User"	"usge"
+"CONFIGURE"	""	""	""	"admin"	"xTuple ERP Administrator"	""
