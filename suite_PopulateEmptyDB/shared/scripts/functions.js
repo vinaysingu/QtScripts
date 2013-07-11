@@ -27,26 +27,23 @@ function loginAppl(userrole)
         test.fatal("Please enter user details in login.tsv for the role: "+userrole);
         exit(1);
     }
-    
-    waitForObject(":Log In.Options..._QPushButton_2");
-    clickButton(":Log In.Options..._QPushButton_2");
-    waitForObject(":_server_QLineEdit");
-    if(findObject(":_server_QLineEdit").text!= url)
-    {findObject(":_server_QLineEdit").text=url;
+  
+    waitForObject(":Log In._server_QLineEdit");
+    if(findObject(":Log In._server_QLineEdit").text!= url)
+    {findObject(":Log In._server_QLineEdit").text=url;
         test.log("URL Changed to: "+url);
     }
-    if(findObject(":_database_QLineEdit").text!=db)
+    if(findObject(":_database_QLineEdit_2").text!=db)
     {
-        findObject(":_database_QLineEdit").text=db;
+        findObject(":_database_QLineEdit_2").text=db;
         test.log("Database Changed to: "+db);
     }
-    if(findObject(":_port_QLineEdit").text!=port)
+    if(findObject(":Log In._port_QLineEdit").text!=port)
     {
-        findObject(":_port_QLineEdit").text=port;
+        findObject(":Log In._port_QLineEdit").text=port;
         test.log("Port Changed to:" + port);
     }
-    waitForObject(":List Employees.Save_QPushButton_2");
-    clickButton(":List Employees.Save_QPushButton_2");
+   
     waitForObject(":Log In._username_QLineEdit");    
     type(":Log In._username_QLineEdit", username);
     waitForObject(":Log In._username_QLineEdit");

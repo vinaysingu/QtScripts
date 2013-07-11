@@ -16,6 +16,7 @@ function main()
     
     snooze(10);
   // ------ Base Currency setting ------ 
+    try{
     waitForObjectItem(":List Currencies._curr_XTreeWidget", "USD");
     clickItem(":List Currencies._curr_XTreeWidget", "USD", 16, 6, 0, Qt.LeftButton);
     clickButton(waitForObject(":List Items.Edit_QPushButton_2"));
@@ -25,6 +26,12 @@ function main()
     clickButton(waitForObject(":List Departments.Save_QPushButton"));
     clickButton(waitForObject(":Registration Key.Yes_QPushButton"));
     clickButton(waitForObject(":Tax Assignment.Close_QPushButton"));
+        test.log("Base Currency set is successful");
+    }
+    catch(e)
+    {
+        test.fail("Error in Base Currency setting"+e);
+    }
     //-----Editing the preferences----
     
     if(OS.name=="Darwin")
@@ -173,7 +180,7 @@ function main()
     loginAppl("CONFIGURE"); 
  
 
-    var appEdition = findApplicationEdition(); 
+  var appEdition = findApplicationEdition(); 
 
 
     //-----create Entities-------
@@ -207,14 +214,28 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: OpenMFG Edition_QMenuBar", "Products"));
     activateItem(waitForObjectItem(":xTuple ERP: OpenMFG Edition.Products_QMenu", "Item"));
     activateItem(waitForObjectItem(":xTuple ERP: OpenMFG Edition.Item_QMenu", "List..."));
-    activateItem(waitForObjectItem(":xTuple ERP: OpenMFG Edition_QMenuBar", "Window"));
-    activateItem(waitForObjectItem(":xTuple ERP: *.Window_QMenu", "Tab View"));
-    clickButton(waitForObject(":Tax Authorities.Close_QToolButton"));
+    
+    snooze(.5);
+    if(object.exists(":Tax Authorities.Close_QToolButton"))
+    {
+        test.log("item screen opened");
+     activateItem(waitForObjectItem(":xTuple ERP: OpenMFG Edition_QMenuBar", "Window"));
+     snooze(.5);
+        if(waitForObjectItem(":xTuple ERP: *.Window_QMenu", "Tab View"))
+        {
+         activateItem(waitForObjectItem(":xTuple ERP: *.Window_QMenu", "Tab View"));
+        }
+        clickButton(waitForObject(":Tax Authorities.Close_QToolButton"));
+    }
     }
     catch(e)
     {
+        test.fail("exception in changing to Tab view mode" + e);
+         if(object.exists(":Tax Authorities.Close_QToolButton"))
+            clickButton(waitForObject(":Tax Authorities.Close_QToolButton"));
     }
-    
+
+      
   createLocale("MYLOCALE","My Locale For Class");
   createRole("SUPER","Super User Group");
 

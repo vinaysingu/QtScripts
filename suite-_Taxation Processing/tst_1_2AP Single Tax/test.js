@@ -49,8 +49,8 @@ function main()
         test.fail("Error in identifying the application edition" + e);       
         
     }
-//    //--------------- Set the window to Tab view mode -------------
-//    tabView();
+   //--------------- Set the window to Tab view mode -------------
+    tabView();
     
     //    //------ Creating Vendor ------
     try{
@@ -226,17 +226,17 @@ function main()
         clickButton(":Select Order for Billing.Save_QPushButton");
         waitForObject(":Sales Order.Cancel_QPushButton");
         clickButton(":Sales Order.Cancel_QPushButton");
-        snooze(.5);
+        snooze(2);
    
         if(!findObject(":List Open Purchase Orders.Unreleased_XCheckBox").checked)
-            clickButton(":List Open Purchase Orders.Unreleased_XCheckBox");
+            clickButton(":List Open Purchase Orders.Unreleased_XCheckBox");       waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
         snooze(1);
         waitForObject(":_list_XTreeWidget_3");
         if(object.exists("{column='0' container=':_list_XTreeWidget_3' text= '"+ponumber1+"' type='QModelIndex'}"))
             test.pass("Purchase order created successfully");
         else 
             test.fail("Purchase order couldn't be created");
-            snooze(1);
         waitForObject(":Quotes.Close_QToolButton");
         clickButton(":Quotes.Close_QToolButton");
         
