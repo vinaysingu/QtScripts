@@ -68,10 +68,10 @@ function main()
     loginAppl("CONFIGURE"); 
     snooze(3);
     
-
-//---find Application Edition------ 
-var appEdition = findApplicationEdition();
-
+    
+    //---find Application Edition------ 
+    var appEdition = findApplicationEdition();
+    
     //-----Setting Encryption Key----- 
     try
     {
@@ -99,7 +99,7 @@ var appEdition = findApplicationEdition();
     {
         test.fail("Error in setting the encryption configuration" + e);
     }
-  
+    
     //------Accounting Setup-------
     activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting"));
     activateItem(waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Setup..."));
@@ -109,9 +109,9 @@ var appEdition = findApplicationEdition();
     clickButton(waitForObject(":Cash Receipt.Save_QPushButton_3"));
     if(object.exists(":Sales Order.No_QPushButton_2"))
         clickButton(waitForObject(":Sales Order.No_QPushButton_2"));
-  //--------------- Set the window to Tab view mode -------------
-  
-  tabView(); 
+    //--------------- Set the window to Tab view mode -------------
+    
+    tabView(); 
     //---------Creating a simple Journal entry-------
     var flag = 0;
     try{
@@ -610,9 +610,9 @@ var appEdition = findApplicationEdition();
         waitForObject(":_glseries_XTreeWidget");
         clickItem(":_glseries_XTreeWidget", docNum1,  0, 0, 5, Qt.LeftButton);
         clickButton(waitForObject(":xTuple ERP:*.Delete_QPushButton"));
-       snooze(0.5);
+        snooze(0.5);
         clickButton(waitForObject(":Sales Order.Yes_QPushButton"));
-         nativeType("<Tab>");
+        nativeType("<Tab>");
         snooze(1);
         nativeType("<Tab>");
         if(!object.exists("{column='3' container=':_glseries_XTreeWidget' text='"+docNum1+"' type='QModelIndex'}"))
@@ -668,7 +668,7 @@ var appEdition = findApplicationEdition();
         else
             test.fail("No GL entry is made for the  simple Journal entry "+docNum);
     }
-  
+    
     //--------Creating a new Company-----------
     flag = 0;
     try{
@@ -715,12 +715,12 @@ var appEdition = findApplicationEdition();
         if(object.exists(":Select Order for Billing.Close_QPushButton"))
             clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
     }
-
+    
     //-----------Creating Chart of Accounts--------
     if(flag)
     {
-      try{
-          waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
+        try{
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
             activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
             waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Account");
             activateItem(":xTuple ERP: *.Accounting_QMenu", "Account");
@@ -744,7 +744,7 @@ var appEdition = findApplicationEdition();
             if(object.exists(":Select Order for Billing.Close_QPushButton"))
                 clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
             
-      }
+        }
         //-----------Creating a Simple Journal Entry-------
         try{
             waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
@@ -1724,379 +1724,379 @@ var appEdition = findApplicationEdition();
                 clickButton(waitForObject(":Quotes.Close_QToolButton"));
         }
     }
-        
-        //-----------Cancelling Posting Standard Journal Group---------
-        try{
-            waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
-            activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
-            waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
-            activateItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
-            waitForObjectItem(":xTuple ERP: *.General Ledger_QMenu", "Standard Journals");
-            activateItem(":xTuple ERP: *.General Ledger_QMenu", "Standard Journals");
-            waitForObjectItem(":xTuple ERP:*.Standard Journals_QMenu", "Post Group...");
-            activateItem(":xTuple ERP:*.Standard Journals_QMenu", "Post Group...");
-            snooze(0.5);
-            waitForObject(":_stdjrnlgrp_XComboBox");
-            clickItem(":_stdjrnlgrp_XComboBox","PERIOD-START" ,0, 0, 5, Qt.LeftButton);
-            snooze(0.5);
-            waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
-            type(":xTuple ERP:*.XDateEdit_XDateEdit", "<0>");
-            nativeType("<Tab>");
-            snooze(0.5);
-            waitForObject(":Sales Order.Cancel_QPushButton");
-            clickButton(":Sales Order.Cancel_QPushButton");
-            test.log("Cancellation of posting Standard Journal group successful");
-        }
-        catch(e)
-        {
-            test.fail("Error in cancelling post Standard journal Group"+e);
-        }   
-        //-------------------Reports--------------------
-        //---------Retrieving today's date----
-        
-        var d = new Date();
-        var mm =d.getMonth()+1;
-        var dd =d.getDate();
-        var year=d.getYear();
-        var ystring = year.toString();
-        var year2 = ystring.substring(1,3);
-        
-        if(dd<10){dd='0'+dd}
-        if(mm<10){mm='0'+mm} 
-        var date = "20" + year2 + "-" + mm + "-" + dd;
-        test.log(date);
-        //--------Summarized Transcations-----------
-        
-        try{
-            
-            waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
-            activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
-            waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
-            activateItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
-            waitForObjectItem(":xTuple ERP: *.General Ledger_QMenu", "Reports");
-            activateItem(":xTuple ERP: *.General Ledger_QMenu", "Reports");
-            waitForObjectItem(":xTuple ERP: *.Reports_QMenu", "Summarized Transactions...");
-            activateItem(":xTuple ERP: *.Reports_QMenu", "Summarized Transactions...");
-            snooze(1);
-            
-            waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
-            type(":xTuple ERP:*.XDateEdit_XDateEdit", "0");
-            nativeType("<Tab>");
-            waitForObject(":_dateGroup.XDateEdit_XDateEdit_3");
-            type(":_dateGroup.XDateEdit_XDateEdit_3", "0");
-            nativeType("<Tab>");
-            
-            waitForObject(":_sourceGroup.All Sources_QRadioButton");
-            clickButton(":_sourceGroup.All Sources_QRadioButton");
-            waitForObject(":Transactions.All_QRadioButton");
-            clickButton(":Transactions.All_QRadioButton");
-            waitForObject(":Quotes.Query_QToolButton");
-            clickButton(":Quotes.Query_QToolButton");
-            snooze(2);
-            if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='01-01-1000-01' type='QModelIndex'}"))
-                test.pass("Account 01-01-1000-01 has a entry in Summarized G/L Transactions");
-            else
-                test.fail("Account 01-01-1000-01 doesn't has entry in Summarized G/L Transactions");
-            if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='01-01-1010-01' type='QModelIndex'}"))
-                test.pass("Account 01-01-1010-01 has a entry in Summarized G/L Transactions");
-            else
-                test.fail("Account 01-01-1010-01 doesn't has entry in Summarized G/L Transactions");
-        }
-        catch(e)
-        {
-            test.fail("Error in viewing Summarized Transcations"+e);
-        }
-        
-        //----------Verifying for Posted Transcations-----------------
-        try{
-            waitForObject(":Transactions.Posted_QRadioButton");
-            clickButton(":Transactions.Posted_QRadioButton");
-            waitForObject(":Quotes.Query_QToolButton");
-            clickButton(":Quotes.Query_QToolButton");
-            snooze(2);
-            if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='01-01-1000-01' type='QModelIndex'}"))
-                test.pass("Account 01-01-1000-01 has a entry in Summarized G/L Transactions as posted Transactions");
-            else
-                test.fail("Account 01-01-1000-01 doesn't has entry in Summarized G/L Transactions as posted Transactions");
-            if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='01-01-1010-01' type='QModelIndex'}"))
-                test.pass("Account 01-01-1010-01 has a entry in Summarized G/L Transactions as posted Transactions");
-            else
-                test.fail("Account 01-01-1010-01 doesn't has entry in Summarized G/L Transactions as posted Transactions");
-            //---Verifying for a Selected Source  Transcations---------------
-            waitForObject(":_sourceGroup.Selected Source:_QRadioButton_2");
-            clickButton(":_sourceGroup.Selected Source:_QRadioButton_2");
-            waitForObject(":_sourceGroup._source_XComboBox_2");
-            clickItem(":_sourceGroup._source_XComboBox_2", "G/L", 0, 0, 5, Qt.LeftButton);
-            
-            waitForObject(":Transactions.All_QRadioButton");
-            clickButton(":Transactions.All_QRadioButton");
-            waitForObject(":Quotes.Query_QToolButton");
-            clickButton(":Quotes.Query_QToolButton");
-            snooze(2);
-            if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='01-01-1000-01' type='QModelIndex'}"))
-                test.pass("Account 01-01-1000-01 has a entry in Summarized G/L Transactions");
-            else
-                test.fail("Account 01-01-1000-01 doesn't has entry in Summarized G/L Transactions");
-            if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='01-01-1010-01' type='QModelIndex'}"))
-                test.pass("Account 01-01-1010-01 has a entry in Summarized G/L Transactions");
-            else
-                test.fail("Account 01-01-1010-01 doesn't has entry in Summarized G/L Transactions");
-            
-            
-            waitForObject(":Quotes.Close_QToolButton");
-            clickButton(":Quotes.Close_QToolButton");
-        }
-        catch(e)
-        {
-            test.fail("Error in viewing Summarized Transcations"+e);
-            if(object.exists(":Quotes.Close_QToolButton"))
-                clickButton(waitForObject(":Quotes.Close_QToolButton"));
-        }
-        //---------Journal Series-----------
-        try{
-            
-            waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
-            activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
-            waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
-            activateItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
-            waitForObjectItem(":xTuple ERP: *.General Ledger_QMenu", "Reports");
-            activateItem(":xTuple ERP: *.General Ledger_QMenu", "Reports");
-            waitForObjectItem(":xTuple ERP: *.Reports_QMenu", "Series...");
-            activateItem(":xTuple ERP: *.Reports_QMenu", "Series...");
-            waitForObject(":_sourceGroup.All Sources_QRadioButton_2");
-            clickButton(":_sourceGroup.All Sources_QRadioButton_2");
-            waitForObject(":Quotes.Query_QToolButton");
-            clickButton(":Quotes.Query_QToolButton");
-            snooze(1);
-            if(object.exists(":Sales Order.OK_QPushButton_2"))
-            {
-                waitForObject(":Sales Order.OK_QPushButton_2");
-                clickButton(":Sales Order.OK_QPushButton_2");
-                test.pass("Date fields are Empty: Unable to query the screen");
-            }
-            else
-                test.fail("It is possible to query the screen without date range");
-            //------Entering Date range----------
-            waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
-            type(":xTuple ERP:*.XDateEdit_XDateEdit", "0");
-            nativeType("<Tab>");
-            waitForObject(":_dateGroup.XDateEdit_XDateEdit_3");
-            type(":_dateGroup.XDateEdit_XDateEdit_3", "0");
-            nativeType("<Tab>");
-            waitForObject(":Quotes.Query_QToolButton");
-            clickButton(":Quotes.Query_QToolButton");
-            snooze(0.5);
-            waitForObject(":_list_XTreeWidget_3");
-            var obj_TreeWidget = findObject(":_list_XTreeWidget_3");
-            var obj = obj_TreeWidget.topLevelItemCount;
-            
-            for(var i=0;i<obj;i++)
-            {
-                var row = obj_TreeWidget.topLevelItem(i);
-                var bool;
-                if(date == row.text(0))
-                    bool = 1;
-                else
-                    bool = 0;
-                if(bool)
-                {    
-                    break;
-                }
-                
-            }
-            if(bool)
-                test.pass("All Journal transactions under the specified date range are displayed");
-            else
-                test.fail("failed to view Journal Transactions under specified date range");
-        }
-        catch(e)
-        {
-            test.fail("Error in viewing Journal Transactions series"+ e);	
-        }
-        //-------Some External Flow cases in Journal Series-----------
-        try{
-            //---Editing the posted date in Journal Entry--
-            waitForObject(":_list_XTreeWidget_3");
-            openItemContextMenu(":_list_XTreeWidget_3","Series GL entry", 5, 5, Qt.LeftButton);
-            waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit Journal...");
-            activateItem(":xTuple ERP:*._menu_QMenu", "Edit Journal...");
-            snooze(0.5);
-            waitForObject(":Series G/L Journal Entry.XDateEdit_XDateEdit");
-            findObject(":Series G/L Journal Entry.XDateEdit_XDateEdit").clear();
-            waitForObject(":Series G/L Journal Entry.XDateEdit_XDateEdit");
-            type(":Series G/L Journal Entry.XDateEdit_XDateEdit", "+1");
-            nativeType("<Tab>");
-            waitForObject(":Series G/L Journal Entry.Post_QPushButton");
-            clickButton(":Series G/L Journal Entry.Post_QPushButton");
-            
-            //-------Verifying for edited Journal entry------------
-            waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
-            findObject(":xTuple ERP:*.XDateEdit_XDateEdit").clear();
-            type(":xTuple ERP:*.XDateEdit_XDateEdit", "+1");
-            nativeType("<Tab>");
-            waitForObject(":_dateGroup.XDateEdit_XDateEdit_3");
-            type(":_dateGroup.XDateEdit_XDateEdit_3", "+1");
-            nativeType("<Tab>");
-            waitForObject(":Quotes.Query_QToolButton");
-            clickButton(":Quotes.Query_QToolButton");
-            snooze(1);
-            if(object.exists("{column='3' container=':_list_XTreeWidget_3' text='JE' type='QModelIndex'}"))
-                test.pass("Journal Entry edited succesful and posted to tomorrow's date");
-            else
-                test.fail("Error in editing Journal Entry");
-            
-            waitForObject(":_list_XTreeWidget_3");
-            var widget = findObject(":_list_XTreeWidget_3");
-            var count = widget.topLevelItemCount;
-            test.log(count);
-            
-            //--------Reversing a Journal Entry-----------
-            waitForObject(":_list_XTreeWidget_3");
-            openItemContextMenu(":_list_XTreeWidget_3","JE", 5, 5, Qt.LeftButton);
-            waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Reverse Journal...");
-            activateItem(":xTuple ERP:*._menu_QMenu", "Reverse Journal...");
-            waitForObject(":List Unposted Invoices.Post_QPushButton");
-            clickButton(":List Unposted Invoices.Post_QPushButton");
-            snooze(0.5);
-            waitForObject(":Sales Order.OK_QPushButton_2");
-            clickButton(":Sales Order.OK_QPushButton_2");
-            
-            waitForObject(":_list_XTreeWidget_3");
-            var widget = findObject(":_list_XTreeWidget_3");
-            var count1 = widget.topLevelItemCount;
-            test.log(count1);
-            
-            if(++count == count1)
-                test.pass("Reversing Journal entry sucessful");
-            else
-                test.fail("Error occured in reversing journal entries");
-            
-            //---------Cancelling 'Reverse Journal Entry'-------------   
-            waitForObject(":_list_XTreeWidget_3");
-            openItemContextMenu(":_list_XTreeWidget_3","JE", 5, 5, Qt.LeftButton);
-            waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Reverse Journal...");
-            activateItem(":xTuple ERP:*._menu_QMenu", "Reverse Journal...");
-            snooze(0.5);
-            waitForObject(":Reverse Journal.Cancel_QPushButton");
-            clickButton(":Reverse Journal.Cancel_QPushButton");
-            waitForObject(":_list_XTreeWidget_3");
-            openItemContextMenu(":_list_XTreeWidget_3","JE", 5, 5, Qt.LeftButton);
-            waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Delete Journal...");
-            activateItem(":xTuple ERP:*._menu_QMenu", "Delete Journal...");
-            nativeType("<Tab>");
-            snooze(0.5);
-            
-            waitForObject(":Quotes.Query_QToolButton");
-            clickButton(":Quotes.Query_QToolButton");
-            
-            waitForObject(":Quotes.Close_QToolButton");
-            clickButton(":Quotes.Close_QToolButton");
-        }
-        catch(e)
-        {
-            test.fail("Error in performing external flow cases in Journal Series screen"+e);
-            if(object.exists(":Quotes.Close_QToolButton"))
-                clickButton(waitForObject(":Quotes.Close_QToolButton"));
-            
-        }
-        //--------Standard Journal History-------------
-        try{
-            
-            waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
-            activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
-            waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
-            activateItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
-            waitForObjectItem(":xTuple ERP: *.General Ledger_QMenu", "Reports");
-            activateItem(":xTuple ERP: *.General Ledger_QMenu", "Reports");
-            waitForObjectItem(":xTuple ERP: *.Reports_QMenu", "Standard Journal History...");
-            activateItem(":xTuple ERP: *.Reports_QMenu", "Standard Journal History...");
-            waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
-            type(":xTuple ERP:*.XDateEdit_XDateEdit", "-1");
-            nativeType("<Tab>");
-            waitForObject(":Standard Journal History.XDateEdit_XDateEdit");
-            type(":Standard Journal History.XDateEdit_XDateEdit", "0");
-            nativeType("<Tab>");
-            waitForObject(":Quotes.Query_QToolButton");
-            clickButton(":Quotes.Query_QToolButton");
-            snooze(0.5);
-            waitForObject(":_list_XTreeWidget_3");
-            var obj_TreeWidget = findObject(":_list_XTreeWidget_3");
-            var obj = obj_TreeWidget.topLevelItemCount;
-            
-            for(var i=0;i<obj;i++)
-            {
-                var row = obj_TreeWidget.topLevelItem(i);
-                var bool;
-                
-                if(date == row.text(0))
-                    bool = 1;
-                else
-                    bool = 0;
-                if(bool)
-                {    
-                    break;
-                }
-                
-            }
-            if(bool)
-                test.pass("All Standard Journals under the specified date range are available");
-            else
-                test.fail("Error in viewing Standard Journals");
-            
-        }
-        catch(e)
-        {
-            test.fail("Error in viewing Standard Journal History screen");
-        }
-        
-        //-----Deleting a Standard Journal from Standard Journal History screen-----
-        try{
-            
-            waitForObject(":_list_XTreeWidget_3");
-            openItemContextMenu(":_list_XTreeWidget_3", date, 5, 5, Qt.LeftButton);
-            waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Delete Journal...");
-            activateItem(":xTuple ERP:*._menu_QMenu", "Delete Journal...");
-            nativeType("<Tab>");
-            snooze(0.5);
-            waitForObject(":_list_XTreeWidget_3");
-            var obj_TreeWidget = findObject(":_list_XTreeWidget_3");
-            var obj1 = obj_TreeWidget.topLevelItemCount;
-            if(--obj == obj1)
-                test.pass("Standard Journal deletion successful");
-            else
-                test.fail("Error in Standard Journal deletion");
-            
-            //-----Reversing a Standard Journal from Standard Journal History screen-----
-            
-            waitForObject(":_list_XTreeWidget_3");
-            openItemContextMenu(":_list_XTreeWidget_3", date, 5, 5, Qt.LeftButton);
-            waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Reverse Journal...");
-            activateItem(":xTuple ERP:*._menu_QMenu", "Reverse Journal...");
-            snooze(0.5);
-            waitForObject(":List Unposted Invoices.Post_QPushButton");
-            clickButton(":List Unposted Invoices.Post_QPushButton");
-            snooze(0.5);
-            waitForObject(":Sales Order.OK_QPushButton_2");
-            clickButton(":Sales Order.OK_QPushButton_2");
-            waitForObject(":Quotes.Query_QToolButton");
-            clickButton(":Quotes.Query_QToolButton");
-            snooze(0.5);
-            waitForObject(":_list_XTreeWidget_3");
-            var obj_TreeWidget = findObject(":_list_XTreeWidget_3");
-            var obj2 = obj_TreeWidget.topLevelItemCount;
-            if(++obj == obj2)
-                test.pass("Reverse Standard Journal successful");
-            else
-                test.fail("Error in reversing Standard Journal entry");
-            snooze(1);
-            waitForObject(":Quotes.Close_QToolButton");
-            clickButton(":Quotes.Close_QToolButton");
-        }
-        catch(e)
-        {
-            test.fail("Error in processing Standard Journal History screen");
-            if(object.exists(":Quotes.Close_QToolButton"))
-                clickButton(waitForObject(":Quotes.Close_QToolButton"));
-        }
     
+    //-----------Cancelling Posting Standard Journal Group---------
+    try{
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
+        activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
+        waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
+        activateItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
+        waitForObjectItem(":xTuple ERP: *.General Ledger_QMenu", "Standard Journals");
+        activateItem(":xTuple ERP: *.General Ledger_QMenu", "Standard Journals");
+        waitForObjectItem(":xTuple ERP:*.Standard Journals_QMenu", "Post Group...");
+        activateItem(":xTuple ERP:*.Standard Journals_QMenu", "Post Group...");
+        snooze(0.5);
+        waitForObject(":_stdjrnlgrp_XComboBox");
+        clickItem(":_stdjrnlgrp_XComboBox","PERIOD-START" ,0, 0, 5, Qt.LeftButton);
+        snooze(0.5);
+        waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
+        type(":xTuple ERP:*.XDateEdit_XDateEdit", "<0>");
+        nativeType("<Tab>");
+        snooze(0.5);
+        waitForObject(":Sales Order.Cancel_QPushButton");
+        clickButton(":Sales Order.Cancel_QPushButton");
+        test.log("Cancellation of posting Standard Journal group successful");
     }
+    catch(e)
+    {
+        test.fail("Error in cancelling post Standard journal Group"+e);
+    }   
+    //-------------------Reports--------------------
+    //---------Retrieving today's date----
+    
+    var d = new Date();
+    var mm =d.getMonth()+1;
+    var dd =d.getDate();
+    var year=d.getYear();
+    var ystring = year.toString();
+    var year2 = ystring.substring(1,3);
+    
+    if(dd<10){dd='0'+dd}
+    if(mm<10){mm='0'+mm} 
+    var date = "20" + year2 + "-" + mm + "-" + dd;
+    test.log(date);
+    //--------Summarized Transcations-----------
+    
+    try{
+        
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
+        activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
+        waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
+        activateItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
+        waitForObjectItem(":xTuple ERP: *.General Ledger_QMenu", "Reports");
+        activateItem(":xTuple ERP: *.General Ledger_QMenu", "Reports");
+        waitForObjectItem(":xTuple ERP: *.Reports_QMenu", "Summarized Transactions...");
+        activateItem(":xTuple ERP: *.Reports_QMenu", "Summarized Transactions...");
+        snooze(1);
+        
+        waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
+        type(":xTuple ERP:*.XDateEdit_XDateEdit", "0");
+        nativeType("<Tab>");
+        waitForObject(":_dateGroup.XDateEdit_XDateEdit_3");
+        type(":_dateGroup.XDateEdit_XDateEdit_3", "0");
+        nativeType("<Tab>");
+        
+        waitForObject(":_sourceGroup.All Sources_QRadioButton");
+        clickButton(":_sourceGroup.All Sources_QRadioButton");
+        waitForObject(":Transactions.All_QRadioButton");
+        clickButton(":Transactions.All_QRadioButton");
+        waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
+        snooze(2);
+        if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='01-01-1000-01' type='QModelIndex'}"))
+            test.pass("Account 01-01-1000-01 has a entry in Summarized G/L Transactions");
+        else
+            test.fail("Account 01-01-1000-01 doesn't has entry in Summarized G/L Transactions");
+        if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='01-01-1010-01' type='QModelIndex'}"))
+            test.pass("Account 01-01-1010-01 has a entry in Summarized G/L Transactions");
+        else
+            test.fail("Account 01-01-1010-01 doesn't has entry in Summarized G/L Transactions");
+    }
+    catch(e)
+    {
+        test.fail("Error in viewing Summarized Transcations"+e);
+    }
+    
+    //----------Verifying for Posted Transcations-----------------
+    try{
+        waitForObject(":Transactions.Posted_QRadioButton");
+        clickButton(":Transactions.Posted_QRadioButton");
+        waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
+        snooze(2);
+        if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='01-01-1000-01' type='QModelIndex'}"))
+            test.pass("Account 01-01-1000-01 has a entry in Summarized G/L Transactions as posted Transactions");
+        else
+            test.fail("Account 01-01-1000-01 doesn't has entry in Summarized G/L Transactions as posted Transactions");
+        if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='01-01-1010-01' type='QModelIndex'}"))
+            test.pass("Account 01-01-1010-01 has a entry in Summarized G/L Transactions as posted Transactions");
+        else
+            test.fail("Account 01-01-1010-01 doesn't has entry in Summarized G/L Transactions as posted Transactions");
+        //---Verifying for a Selected Source  Transcations---------------
+        waitForObject(":_sourceGroup.Selected Source:_QRadioButton_2");
+        clickButton(":_sourceGroup.Selected Source:_QRadioButton_2");
+        waitForObject(":_sourceGroup._source_XComboBox_2");
+        clickItem(":_sourceGroup._source_XComboBox_2", "G/L", 0, 0, 5, Qt.LeftButton);
+        
+        waitForObject(":Transactions.All_QRadioButton");
+        clickButton(":Transactions.All_QRadioButton");
+        waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
+        snooze(2);
+        if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='01-01-1000-01' type='QModelIndex'}"))
+            test.pass("Account 01-01-1000-01 has a entry in Summarized G/L Transactions");
+        else
+            test.fail("Account 01-01-1000-01 doesn't has entry in Summarized G/L Transactions");
+        if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='01-01-1010-01' type='QModelIndex'}"))
+            test.pass("Account 01-01-1010-01 has a entry in Summarized G/L Transactions");
+        else
+            test.fail("Account 01-01-1010-01 doesn't has entry in Summarized G/L Transactions");
+        
+        
+        waitForObject(":Quotes.Close_QToolButton");
+        clickButton(":Quotes.Close_QToolButton");
+    }
+    catch(e)
+    {
+        test.fail("Error in viewing Summarized Transcations"+e);
+        if(object.exists(":Quotes.Close_QToolButton"))
+            clickButton(waitForObject(":Quotes.Close_QToolButton"));
+    }
+    //---------Journal Series-----------
+    try{
+        
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
+        activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
+        waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
+        activateItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
+        waitForObjectItem(":xTuple ERP: *.General Ledger_QMenu", "Reports");
+        activateItem(":xTuple ERP: *.General Ledger_QMenu", "Reports");
+        waitForObjectItem(":xTuple ERP: *.Reports_QMenu", "Series...");
+        activateItem(":xTuple ERP: *.Reports_QMenu", "Series...");
+        waitForObject(":_sourceGroup.All Sources_QRadioButton_2");
+        clickButton(":_sourceGroup.All Sources_QRadioButton_2");
+        waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
+        snooze(1);
+        if(object.exists(":Sales Order.OK_QPushButton_2"))
+        {
+            waitForObject(":Sales Order.OK_QPushButton_2");
+            clickButton(":Sales Order.OK_QPushButton_2");
+            test.pass("Date fields are Empty: Unable to query the screen");
+        }
+        else
+            test.fail("It is possible to query the screen without date range");
+        //------Entering Date range----------
+        waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
+        type(":xTuple ERP:*.XDateEdit_XDateEdit", "0");
+        nativeType("<Tab>");
+        waitForObject(":_dateGroup.XDateEdit_XDateEdit_3");
+        type(":_dateGroup.XDateEdit_XDateEdit_3", "0");
+        nativeType("<Tab>");
+        waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
+        snooze(0.5);
+        waitForObject(":_list_XTreeWidget_3");
+        var obj_TreeWidget = findObject(":_list_XTreeWidget_3");
+        var obj = obj_TreeWidget.topLevelItemCount;
+        
+        for(var i=0;i<obj;i++)
+        {
+            var row = obj_TreeWidget.topLevelItem(i);
+            var bool;
+            if(date == row.text(0))
+                bool = 1;
+            else
+                bool = 0;
+            if(bool)
+            {    
+                break;
+            }
+            
+        }
+        if(bool)
+            test.pass("All Journal transactions under the specified date range are displayed");
+        else
+            test.fail("failed to view Journal Transactions under specified date range");
+    }
+    catch(e)
+    {
+        test.fail("Error in viewing Journal Transactions series"+ e);	
+    }
+    //-------Some External Flow cases in Journal Series-----------
+    try{
+        //---Editing the posted date in Journal Entry--
+        waitForObject(":_list_XTreeWidget_3");
+        openItemContextMenu(":_list_XTreeWidget_3","Series GL entry", 5, 5, Qt.LeftButton);
+        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit Journal...");
+        activateItem(":xTuple ERP:*._menu_QMenu", "Edit Journal...");
+        snooze(0.5);
+        waitForObject(":Series G/L Journal Entry.XDateEdit_XDateEdit");
+        findObject(":Series G/L Journal Entry.XDateEdit_XDateEdit").clear();
+        waitForObject(":Series G/L Journal Entry.XDateEdit_XDateEdit");
+        type(":Series G/L Journal Entry.XDateEdit_XDateEdit", "+1");
+        nativeType("<Tab>");
+        waitForObject(":Series G/L Journal Entry.Post_QPushButton");
+        clickButton(":Series G/L Journal Entry.Post_QPushButton");
+        
+        //-------Verifying for edited Journal entry------------
+        waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
+        findObject(":xTuple ERP:*.XDateEdit_XDateEdit").clear();
+        type(":xTuple ERP:*.XDateEdit_XDateEdit", "+1");
+        nativeType("<Tab>");
+        waitForObject(":_dateGroup.XDateEdit_XDateEdit_3");
+        type(":_dateGroup.XDateEdit_XDateEdit_3", "+1");
+        nativeType("<Tab>");
+        waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
+        snooze(1);
+        if(object.exists("{column='3' container=':_list_XTreeWidget_3' text='JE' type='QModelIndex'}"))
+            test.pass("Journal Entry edited succesful and posted to tomorrow's date");
+        else
+            test.fail("Error in editing Journal Entry");
+        
+        waitForObject(":_list_XTreeWidget_3");
+        var widget = findObject(":_list_XTreeWidget_3");
+        var count = widget.topLevelItemCount;
+        test.log(count);
+        
+        //--------Reversing a Journal Entry-----------
+        waitForObject(":_list_XTreeWidget_3");
+        openItemContextMenu(":_list_XTreeWidget_3","JE", 5, 5, Qt.LeftButton);
+        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Reverse Journal...");
+        activateItem(":xTuple ERP:*._menu_QMenu", "Reverse Journal...");
+        waitForObject(":List Unposted Invoices.Post_QPushButton");
+        clickButton(":List Unposted Invoices.Post_QPushButton");
+        snooze(0.5);
+        waitForObject(":Sales Order.OK_QPushButton_2");
+        clickButton(":Sales Order.OK_QPushButton_2");
+        
+        waitForObject(":_list_XTreeWidget_3");
+        var widget = findObject(":_list_XTreeWidget_3");
+        var count1 = widget.topLevelItemCount;
+        test.log(count1);
+        
+        if(++count == count1)
+            test.pass("Reversing Journal entry sucessful");
+        else
+            test.fail("Error occured in reversing journal entries");
+        
+        //---------Cancelling 'Reverse Journal Entry'-------------   
+        waitForObject(":_list_XTreeWidget_3");
+        openItemContextMenu(":_list_XTreeWidget_3","JE", 5, 5, Qt.LeftButton);
+        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Reverse Journal...");
+        activateItem(":xTuple ERP:*._menu_QMenu", "Reverse Journal...");
+        snooze(0.5);
+        waitForObject(":Reverse Journal.Cancel_QPushButton");
+        clickButton(":Reverse Journal.Cancel_QPushButton");
+        waitForObject(":_list_XTreeWidget_3");
+        openItemContextMenu(":_list_XTreeWidget_3","JE", 5, 5, Qt.LeftButton);
+        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Delete Journal...");
+        activateItem(":xTuple ERP:*._menu_QMenu", "Delete Journal...");
+        nativeType("<Tab>");
+        snooze(0.5);
+        
+        waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
+        
+        waitForObject(":Quotes.Close_QToolButton");
+        clickButton(":Quotes.Close_QToolButton");
+    }
+    catch(e)
+    {
+        test.fail("Error in performing external flow cases in Journal Series screen"+e);
+        if(object.exists(":Quotes.Close_QToolButton"))
+            clickButton(waitForObject(":Quotes.Close_QToolButton"));
+        
+    }
+    //--------Standard Journal History-------------
+    try{
+        
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
+        activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
+        waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
+        activateItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger");
+        waitForObjectItem(":xTuple ERP: *.General Ledger_QMenu", "Reports");
+        activateItem(":xTuple ERP: *.General Ledger_QMenu", "Reports");
+        waitForObjectItem(":xTuple ERP: *.Reports_QMenu", "Standard Journal History...");
+        activateItem(":xTuple ERP: *.Reports_QMenu", "Standard Journal History...");
+        waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
+        type(":xTuple ERP:*.XDateEdit_XDateEdit", "-1");
+        nativeType("<Tab>");
+        waitForObject(":Standard Journal History.XDateEdit_XDateEdit");
+        type(":Standard Journal History.XDateEdit_XDateEdit", "0");
+        nativeType("<Tab>");
+        waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
+        snooze(0.5);
+        waitForObject(":_list_XTreeWidget_3");
+        var obj_TreeWidget = findObject(":_list_XTreeWidget_3");
+        var obj = obj_TreeWidget.topLevelItemCount;
+        
+        for(var i=0;i<obj;i++)
+        {
+            var row = obj_TreeWidget.topLevelItem(i);
+            var bool;
+            
+            if(date == row.text(0))
+                bool = 1;
+            else
+                bool = 0;
+            if(bool)
+            {    
+                break;
+            }
+            
+        }
+        if(bool)
+            test.pass("All Standard Journals under the specified date range are available");
+        else
+            test.fail("Error in viewing Standard Journals");
+        
+    }
+    catch(e)
+    {
+        test.fail("Error in viewing Standard Journal History screen");
+    }
+    
+    //-----Deleting a Standard Journal from Standard Journal History screen-----
+    try{
+        
+        waitForObject(":_list_XTreeWidget_3");
+        openItemContextMenu(":_list_XTreeWidget_3", date, 5, 5, Qt.LeftButton);
+        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Delete Journal...");
+        activateItem(":xTuple ERP:*._menu_QMenu", "Delete Journal...");
+        nativeType("<Tab>");
+        snooze(0.5);
+        waitForObject(":_list_XTreeWidget_3");
+        var obj_TreeWidget = findObject(":_list_XTreeWidget_3");
+        var obj1 = obj_TreeWidget.topLevelItemCount;
+        if(--obj == obj1)
+            test.pass("Standard Journal deletion successful");
+        else
+            test.fail("Error in Standard Journal deletion");
+        
+        //-----Reversing a Standard Journal from Standard Journal History screen-----
+        
+        waitForObject(":_list_XTreeWidget_3");
+        openItemContextMenu(":_list_XTreeWidget_3", date, 5, 5, Qt.LeftButton);
+        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Reverse Journal...");
+        activateItem(":xTuple ERP:*._menu_QMenu", "Reverse Journal...");
+        snooze(0.5);
+        waitForObject(":List Unposted Invoices.Post_QPushButton");
+        clickButton(":List Unposted Invoices.Post_QPushButton");
+        snooze(0.5);
+        waitForObject(":Sales Order.OK_QPushButton_2");
+        clickButton(":Sales Order.OK_QPushButton_2");
+        waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
+        snooze(0.5);
+        waitForObject(":_list_XTreeWidget_3");
+        var obj_TreeWidget = findObject(":_list_XTreeWidget_3");
+        var obj2 = obj_TreeWidget.topLevelItemCount;
+        if(++obj == obj2)
+            test.pass("Reverse Standard Journal successful");
+        else
+            test.fail("Error in reversing Standard Journal entry");
+        snooze(1);
+        waitForObject(":Quotes.Close_QToolButton");
+        clickButton(":Quotes.Close_QToolButton");
+    }
+    catch(e)
+    {
+        test.fail("Error in processing Standard Journal History screen");
+        if(object.exists(":Quotes.Close_QToolButton"))
+            clickButton(waitForObject(":Quotes.Close_QToolButton"));
+    }
+    
+}

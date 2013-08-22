@@ -21,7 +21,7 @@ function main()
             activateItem(":xTuple ERP: *_QMenuBar", "System");
             waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
             activateItem(":xTuple ERP: *._System_QMenu", "Preferences..."); 
-           
+            
         }
         snooze(0.5);
         if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
