@@ -6,7 +6,7 @@ function main()
     
     //-----login Application-----
     loginAppl("CONFIGURE"); 
-    snooze(3);
+    snooze(2);
     //-----Editing of preferences----
     try
     {
@@ -69,78 +69,52 @@ function main()
     loginAppl("CONFIGURE"); 
     
     
-    //---find Application Edition------
-    try
-    {
-        
-        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-        activateItem(":xTuple ERP: *_QMenuBar", "System");
-        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Setup...");
-        activateItem(":xTuple ERP: *._System_QMenu", "Setup...");
-        waitForObject(":Configure.Database_QModelIndex");
-        mouseClick(":Configure.Database_QModelIndex", 0, 0, 0, Qt.LeftButton);
-        
-        if(findObject(":Setup._tree_XTreeWidget").itemsExpandable==true)
-        {
-            waitForObject(":Configure.Database_QModelIndex");
-            mouseClick(":Configure.Database_QModelIndex", 0, 0, 0, Qt.LeftButton);
-        }
-        else
-        {
-            waitForObject(":_tree.Configure_QModelIndex");
-            mouseClick(":_tree.Configure_QModelIndex",0, 0, 0, Qt.LeftButton);
-            waitForObject(":Configure.Database_QModelIndex");
-            mouseClick(":Configure.Database_QModelIndex", 0, 0, 0, Qt.LeftButton); 
-        }
-        
-        waitForObject(":Database Information.*_QLabel");
-        var appEdition = findObject(":Database Information.*_QLabel").text;
-        
-        if(object.exists(":_stack.Use toolbars on displays when available_QCheckBox"))
-        {
-            waitForObject(":_stack.Use toolbars on displays when available_QCheckBox");
-            if(!findObject(":_stack.Use toolbars on displays when available_QCheckBox").checked)
-                clickButton(":_stack.Use toolbars on displays when available_QCheckBox");
-        }
-        waitForObject(":Setup.Save_QPushButton");
-        clickButton(":Setup.Save_QPushButton");
-    }
-    catch(e)
-    {
-        test.fail("Error in identifying the application edition" + e);       
-        
-    }
-    //--------------- Set the window to Tab view mode -------------
-    tabView();
-    
-    //---Disable Commission Package if exists ----//
-    try
-    {
-        activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
-        activateItem(waitForObjectItem(":xTuple ERP: *._System_QMenu", "Design"));
-        activateItem(waitForObjectItem(":xTuple ERP:*.Design_QMenu", "Packages..."));
-        
-        if(object.exists("{column='3' container=':xTuple ERP:*._package_XTreeWidget' text='Yes' type='QModelIndex'}")&& object.exists("{column='0' container=':xTuple ERP:*._package_XTreeWidget' text='xtcommission' type='QModelIndex'}"))
-        {
-            waitForObject(":xTuple ERP:*._package_XTreeWidget");
-            clickItem(":xTuple ERP:*._package_XTreeWidget","xtcommission", 0, 0, 5, Qt.LeftButton);
-            openItemContextMenu(":xTuple ERP:*._package_XTreeWidget","xtcommission", 5, 5, Qt.LeftButton);
-            waitForObjectItem(":xTuple ERP:*._menu_QMenu","Disable");
-            activateItem(":xTuple ERP:*._menu_QMenu","Disable");
-            clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));  
-        }
-        else
-        {
-            test.log("No Commissions package exists ");
-            clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
-        }
-    }
-    catch(e)
-    {
-        test.fail("Error in disabling Commission package"+e);
-    }
-    
-    
+  //---find Application Edition------
+  try
+  {
+      
+      waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+      activateItem(":xTuple ERP: *_QMenuBar", "System");
+      waitForObjectItem(":xTuple ERP: *._System_QMenu", "Setup...");
+      activateItem(":xTuple ERP: *._System_QMenu", "Setup...");
+      waitForObject(":Configure.Database_QModelIndex");
+      mouseClick(":Configure.Database_QModelIndex", 0, 0, 0, Qt.LeftButton);
+      
+      if(findObject(":Setup._tree_XTreeWidget").itemsExpandable==true)
+      {
+          waitForObject(":Configure.Database_QModelIndex");
+          mouseClick(":Configure.Database_QModelIndex", 0, 0, 0, Qt.LeftButton);
+      }
+      else
+      {
+          waitForObject(":_tree.Configure_QModelIndex");
+          mouseClick(":_tree.Configure_QModelIndex",0, 0, 0, Qt.LeftButton);
+          waitForObject(":Configure.Database_QModelIndex");
+          mouseClick(":Configure.Database_QModelIndex", 0, 0, 0, Qt.LeftButton); 
+      }
+      
+      waitForObject(":Database Information.*_QLabel");
+      var appEdition = findObject(":Database Information.*_QLabel").text;
+      
+      if(object.exists(":_stack.Use toolbars on displays when available_QCheckBox"))
+      {
+          waitForObject(":_stack.Use toolbars on displays when available_QCheckBox");
+          if(!findObject(":_stack.Use toolbars on displays when available_QCheckBox").checked)
+              clickButton(":_stack.Use toolbars on displays when available_QCheckBox");
+      }
+      waitForObject(":Setup.Save_QPushButton");
+      clickButton(":Setup.Save_QPushButton");
+  }
+  catch(e)
+  {
+      test.fail("Error in identifying the application edition" + e);       
+      
+  }
+  //--------------- Set the window to Tab view mode -------------
+  tabView();
+  
+  
+
     //-------New  Chart of Account for Tax Liablities -------
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
@@ -268,19 +242,7 @@ function main()
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Settings");
         nativeType("<Tab>");
         snooze(0.5);
-        
-        waitForObject(":_defaultGroup._salesrep_XComboBox");
-        if(appEdition == "PostBooks")
-        {
-            if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "1000-Sam Masters")
-                clickItem(":_defaultGroup._salesrep_XComboBox","1000-Sam Masters",0,0,1,Qt.LeftButton);
-        }
-        if(appEdition != "PostBooks")
-        {
-            if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "1000-Sam Masters")
-                clickItem(":_defaultGroup._salesrep_XComboBox","SMASTERS-Sam Masters",0,0,1,Qt.LeftButton);
-        }
-        
+       
         waitForObject(":_settingsTab.Tax_QRadioButton");
         clickButton(":_settingsTab.Tax_QRadioButton");
         nativeType("<Tab>");
@@ -386,10 +348,6 @@ function main()
     {
         test.fail("Error in creating Expense Categories"+e);
     }
-    
-    
-    //  
-    
     //--------- Sales Order Creation -------
     
     var sonumber1 = createSalesOrder1("TAXTRUCK 1", "100","CUSTOMER 1");
@@ -559,7 +517,7 @@ function main()
     }
     else
         test.fail("No Tax History is available for the "+ invnum1+" invoice tax amount");
-    
+
     //--------- Creating A/R Misc.Credit Memo ----------
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
@@ -579,10 +537,7 @@ function main()
         waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
         type(":xTuple ERP:*.XDateEdit_XDateEdit", "<0>");
         nativeType("<Tab>");
-        waitForObject( ":_dateGroup.XDateEdit_XDateEdit_3");
-        type(":_dateGroup.XDateEdit_XDateEdit_3", "<0>");
         nativeType("<Tab>");
-        
         waitForObject(":_amountGroup.XLineEdit_XLineEdit");
         type(":_amountGroup.XLineEdit_XLineEdit", "1400");
         nativeType("<Tab>");
@@ -591,7 +546,6 @@ function main()
         snooze(1);
         waitForObject(":_amountGroup.Tax:_XURLLabel");
         mouseClick(":_amountGroup.Tax:_XURLLabel", 65, 16, 0, Qt.LeftButton);
-        
         waitForObject(":_frame.New_QPushButton_3");
         clickButton(":_frame.New_QPushButton_3");
         snooze(0.5);
@@ -626,7 +580,7 @@ function main()
         test.fail("No GL entry is made for misc.credit memo" + arcmnum1+"");
     //-----Tax History Verification for A/R Misc.Credit Memo -----------
     
-    bool = cmTaxHistory("Code 1");
+    bool = cmTaxHistory(arcmnum1,"Code 1-Tax Code 1");
     if(bool == 1)
     {
         test.pass("misc.credit memo" + arcmnum1 + " has a Tax History entry for its tax amount");

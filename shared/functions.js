@@ -184,6 +184,7 @@ function tabView()
     catch(e)
     {
         test.fail("exception in changing to Tab view mode" + e);
+	clickButton(waitForObject(":Quotes.Close_QToolButton"));
     }
 }
 //-----------------To verify the QOH by item-------------
@@ -639,7 +640,7 @@ function verifyGL(reference)
         for(var y=0;y<totalcount;y++)
         {
             var obj_TreeTopLevelItem = obj_GlTree.topLevelItem(y);
-            var sNameOfRootItem = obj_TreeTopLevelItem.text(4);
+            var sNameOfRootItem = obj_TreeTopLevelItem.text(5);
             var bool = reference.test(sNameOfRootItem);
             if(bool)
             {    
@@ -2294,7 +2295,7 @@ function taxHistory(docnum)
     }
 }
 //-------- Tax History Verification for A/R Misc.Credit Memo ----------
-function cmTaxHistory(Code)
+function cmTaxHistory(arcmnum, code)
 {
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
@@ -2320,14 +2321,26 @@ function cmTaxHistory(Code)
         waitForObject(":_dateGroup.XDateEdit_XDateEdit_3");
         type(":_dateGroup.XDateEdit_XDateEdit_3", "0");
         nativeType("<Tab>");
+        
+        waitForObject(":xTuple ERP:*.Show only tax_QGroupBox");
+        if(!findObject(":xTuple ERP:*.Show only tax_QGroupBox").checked)
+            mouseClick(waitForObject(":xTuple ERP:*.Show only tax_QGroupBox"), 58, 2, 0, Qt.LeftButton);
+        
+        waitForObject(":Show only tax._filterOn_XComboBox");
+        clickItem(":Show only tax._filterOn_XComboBox", "Code", 0, 0, 1, Qt.LeftButton);
+        waitForObject(":Show only tax._selection_XComboBox");
+        clickItem(":Show only tax._selection_XComboBox", code, 0, 0,5, Qt.LeftButton);
+    
+    
         waitForObject(":Receivables Workbench.Query_QPushButton");
         clickButton(":Receivables Workbench.Query_QPushButton");
         snooze(0.5);
         waitForObject(":_frame._taxdet_XTreeWidget");
-        if(object.exists("{column='14' container=':_frame._taxdet_XTreeWidget' occurrence='4' text='A/R Misc Credit Memo' type='QModelIndex'}"&&"{column='8' container=':_frame._taxdet_XTreeWidget' occurrence='3' text='"+Code+"' type='QModelIndex'}"))
-            flag = "1";
+        if(object.exists("{column='0' container=':_frame._taxdet_XTreeWidget' text='"+arcmnum+"' type='QModelIndex'}"))
+              flag = "1";
         else 
-            flag = "0";
+           flag = "0";
+        
         waitForObject(":Select Order for Billing.Close_QPushButton");
         clickButton(":Select Order for Billing.Close_QPushButton");
         return flag;
@@ -2335,7 +2348,7 @@ function cmTaxHistory(Code)
     
     catch(e)
     {
-        test.fail("Error in finding the tax history of "+Code+" Misc.Credit Memo"+e);
+        test.fail("Error in finding the tax history of "+code+" Misc.Credit Memo"+e);
     }
 }
 
@@ -2584,7 +2597,7 @@ try
         for(var i=0;i<obj;i++)
         {
             var obj_TreeTopLevelItem = obj_TreeWidget.topLevelItem(i);
-            var sNameOfRootItem = obj_TreeTopLevelItem.text(6);
+            var sNameOfRootItem = obj_TreeTopLevelItem.text(7);
             var bool = pat.test(sNameOfRootItem);
             if(bool)
             {    

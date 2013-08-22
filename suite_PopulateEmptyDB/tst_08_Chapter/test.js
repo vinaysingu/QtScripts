@@ -8,7 +8,7 @@ function main()
     loginAppl("RUNREGISTER");       
     
    
-    var appEdition = findApplicationEdition();
+  var appEdition = findApplicationEdition();
   
   
     //----------Create Customer Type------------
@@ -762,7 +762,7 @@ function main()
         
     }
     catch(e){test.fail("Exception in creating Sales Rep.:"+e);}
-    
+  
     //----------------Create new Customer---------------
     try{
         
@@ -954,14 +954,14 @@ function main()
         clickButton(":Setup.Save_QPushButton");
     }catch(e){test.fail("Exception in defining Reason Codes");} 
     
-    //---------------Define Pricing Schedule---------------
-    try{
-        waitForObject(":xTuple ERP: OpenMFG Edition_QMenuBar");
-        activateItem(":xTuple ERP: OpenMFG Edition_QMenuBar", "Sales");
-        waitForObjectItem(":xTuple ERP: OpenMFG Edition.Sales_QMenu", "Pricing");
-        activateItem(":xTuple ERP: OpenMFG Edition.Sales_QMenu", "Pricing");
-        waitForObjectItem(":xTuple ERP: OpenMFG Edition.Pricing_QMenu", "Pricing Schedules...");
-        activateItem(":xTuple ERP: OpenMFG Edition.Pricing_QMenu", "Pricing Schedules...");
+  //---------------Define Pricing Schedule---------------
+  try{
+      waitForObject(":xTuple ERP: OpenMFG Edition_QMenuBar");
+      activateItem(":xTuple ERP: OpenMFG Edition_QMenuBar", "Sales");
+      waitForObjectItem(":xTuple ERP: OpenMFG Edition.Sales_QMenu", "Pricing");
+      activateItem(":xTuple ERP: OpenMFG Edition.Sales_QMenu", "Pricing");
+      waitForObjectItem(":xTuple ERP: OpenMFG Edition.Pricing_QMenu", "Pricing Schedules...");
+      activateItem(":xTuple ERP: OpenMFG Edition.Pricing_QMenu", "Pricing Schedules...");
         
         waitForObject(":List Pricing Schedules.New_QPushButton");
         clickButton(":List Pricing Schedules.New_QPushButton");
@@ -1087,7 +1087,7 @@ function main()
         clickButton(":List Pricing Schedules.Close_QPushButton");
     }catch(e){test.fail("Exception in defining Pricing Schedule");}
     
-    
+  
     //-----------Assign Pricing Schedule---------------   
     try{
         waitForObject(":xTuple ERP: OpenMFG Edition_QMenuBar");

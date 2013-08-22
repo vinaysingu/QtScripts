@@ -2344,6 +2344,7 @@
 :User Costing Element_userCostingElement	{name='userCostingElement' type='userCostingElement' visible='1' windowTitle='User Costing Element'}
 :User Information.qt_tabwidget_stackedwidget_QStackedWidget	{name='qt_tabwidget_stackedwidget' type='QStackedWidget' visible='1' window=':User Information_user'}
 :User Information_user	{name='user' type='user' visible='1' windowTitle='User Information'}
+:User Preferences.Apply_QPushButton	{text='Apply' type='QPushButton' unnamed='1' visible='1' window=':User Preferences_userPreferences'}
 :User Preferences.Save_QPushButton	{name='_save' text='Save' type='QPushButton' visible='1' window=':User Preferences_userPreferences'}
 :User Preferences.User_QGroupBox	{name='_userGroup' title='User' type='QGroupBox' visible='1' window=':User Preferences_userPreferences'}
 :User Preferences._userGroup_QGroupBox	{name='_userGroup' type='QGroupBox' visible='1' window=':User Preferences_userPreferences'}
@@ -4336,7 +4337,7 @@
 :xTuple ERP: OpenMFG Edition.Pricing_QMenu	{name='menu.sales.pricing' title='Pricing' type='QMenu' visible='1' window=':xTuple ERP: OpenMFG Edition_GUIClient_2'}
 :xTuple ERP: OpenMFG Edition.Production Plan_QMenu	{name='menu.sched.planning' title='Production Plan' type='QMenu' visible='1' window=':xTuple ERP: OpenMFG Edition_GUIClient_2'}
 :xTuple ERP: OpenMFG Edition.Products Tools_QToolBar	{name='Products Tools' type='QToolBar' visible='1' window=':xTuple ERP: OpenMFG Edition_GUIClient_2' windowTitle='Products Tools'}
-:xTuple ERP: OpenMFG Edition.Products_QMenu	{name='menu.prod' title='Products' type='QMenu' visible='1' window=':xTuple ERP: OpenMFG Edition_GUIClient_2'}
+:xTuple ERP: OpenMFG Edition.Products_QMenu	{title='Products' type='QMenu' visible='1'}
 :xTuple ERP: OpenMFG Edition.Prospect_QMenu	{name='menu.sales.prospect' title='Prospect' type='QMenu' visible='1' window=':xTuple ERP: OpenMFG Edition_GUIClient_2'}
 :xTuple ERP: OpenMFG Edition.Purchase_QMenu	{name='menu.purch' title='Purchase' type='QMenu' visible='1' window=':xTuple ERP: OpenMFG Edition_GUIClient_2'}
 :xTuple ERP: OpenMFG Edition.Reports_QMenu	{name='menu.prod.costingreports' title='Reports' type='QMenu' visible='1' window=':xTuple ERP: OpenMFG Edition_GUIClient_2'}

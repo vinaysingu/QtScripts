@@ -5,128 +5,132 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     snooze(2);
-        //-----Editing of preferences----
-        try
-       {
-            if(OS.name == "Darwin")
-            {
-               activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-                activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-           }
-            else
-            {
+    //-----Editing of preferences----
+    try
+    {
+        if(OS.name == "Darwin")
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
             waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
             activateItem(":xTuple ERP: *_QMenuBar", "System");
             waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
             activateItem(":xTuple ERP: *._System_QMenu", "Preferences..."); 
-            }
-   
-            waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
-            snooze(1);
-            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-               clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-                snooze(0.3);
-            
-            if(object.exists(":Notice.Notice_QDialog"))
-            {
-                if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
-                   clickButton(":Notice.Remind me about this again._QCheckBox");
-              snooze(0.2);
-                waitForObject(":Notice.OK_QPushButton");
-                clickButton(":Notice.OK_QPushButton");
-            }
-            
-            waitForObject(":User Preferences.Save_QPushButton_2");
-            clickButton(":User Preferences.Save_QPushButton_2");
-            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-            activateItem(":xTuple ERP: *_QMenuBar", "System");
-            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-            activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-       }
-        catch(e)
-        {
-            test.fail("Error in editing preferences"+ e);
-        }  
+        }
         
-        //--------Exiting the application------
+        waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
+        snooze(1);
+        if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+            clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        snooze(0.3);
+        
+        if(object.exists(":Notice.Notice_QDialog"))
+        {
+            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+                clickButton(":Notice.Remind me about this again._QCheckBox");
+            snooze(0.2);
+            waitForObject(":Notice.OK_QPushButton");
+            clickButton(":Notice.OK_QPushButton");
+        }
+        
+        waitForObject(":User Preferences.Save_QPushButton_2");
+        clickButton(":User Preferences.Save_QPushButton_2");
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
         activateItem(":xTuple ERP: *_QMenuBar", "System");
-       waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-        activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-        
+        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+    }
+    catch(e)
+    {
+        test.fail("Error in editing preferences"+ e);
+    }  
     
-        
-        if(OS.name=="Linux")
-            startApplication("xtuple.bin");
-        
-        else
-           startApplication("xtuple");
-        
-        snooze(2);
-        
-        loginAppl("CONFIGURE"); 
-     
+    //--------Exiting the application------
+    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+    activateItem(":xTuple ERP: *_QMenuBar", "System");
+    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    
+    
+    
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
+    
+    else
+        startApplication("xtuple");
+    
+    snooze(2);
+    
+    loginAppl("CONFIGURE"); 
+    
     var flag,memoNum,RANUM,credit1,credit2,credit3;
-   
+    
     var appEdition = findApplicationEdition();
- //--------------- Set the window to Tab view mode -------------
-
-   tabView();
-    //------------Configure Sales setup-----------------
-    try
-    {
-        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
-        activateItem(":xTuple ERP: *_QMenuBar", "Sales");
-        waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup...");
-        activateItem(":xTuple ERP: *.Sales_QMenu", "Setup...");
-        
-        waitForObject(":_stack._returnAuthorizationNumGeneration_NumberGenComboBox");
-        clickItem(":_stack._returnAuthorizationNumGeneration_NumberGenComboBox", "Automatic, Use R/A #'s", 0, 0, 5, Qt.LeftButton);
-        waitForObject(":_stack._nextRaNumber_XLineEdit");
-        RANUM = findObject(":_stack._nextRaNumber_XLineEdit").text;
-        
-        
-        waitForObject(":Setup.Apply_QPushButton");
-        clickButton(":Setup.Apply_QPushButton");
-        waitForObject(":Cash Receipt.Save_QPushButton_3");
-        clickButton(":Cash Receipt.Save_QPushButton_3");
-    }
-    catch(e)
-    {
-        test.fail("Exception in configuring sales setup" + e);
-    }
     
-    //-----Setting Encryption Key----- 
     
-    try
-    {	
-        activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
-        activateItem(waitForObjectItem(":xTuple ERP: *._System_QMenu", "Setup..."));
-        waitForObjectItem(":Setup._tree_XTreeWidget", "Configure.Encryption");
-        clickItem(":Setup._tree_XTreeWidget", "Configure.Encryption", 7, 3, 0, Qt.LeftButton);
-        snooze(1);
-        if(object.exists(":Sales Order.OK_QPushButton_2"))
-        {
-            clickButton(":Sales Order.OK_QPushButton_2");
-        }
-        snooze(1);
-        waitForObject(":_ccEncKeyName_QLineEdit").clear();
-        type(":_ccEncKeyName_QLineEdit", "xTuple.key");
-        waitForObject(":_stack_FileLineEdit").clear();
-        type(":_stack_FileLineEdit", "c:/crypto");
-        waitForObject(":_stack_FileLineEdit_2").clear();
-        type(":_stack_FileLineEdit_2", "/home/administrator/crypto");
-        waitForObject(":_stack_FileLineEdit_3").clear();
-        type(":_stack_FileLineEdit_3", "/users/crypto");
-        
-        waitForObject(":Cash Receipt.Save_QPushButton_3");
-        clickButton(":Cash Receipt.Save_QPushButton_3");
-    }
-    catch(e)
-    {
-        test.fail("Error in setting the encryption configuration" + e);
-    }
     
+  
+  //--------------- Set the window to Tab view mode -------------
+  
+  tabView();
+  //------------Configure Sales setup-----------------
+  try
+  {
+      waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
+      activateItem(":xTuple ERP: *_QMenuBar", "Sales");
+      waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup...");
+      activateItem(":xTuple ERP: *.Sales_QMenu", "Setup...");
+      
+      waitForObject(":_stack._returnAuthorizationNumGeneration_NumberGenComboBox");
+      clickItem(":_stack._returnAuthorizationNumGeneration_NumberGenComboBox", "Automatic, Use R/A #'s", 0, 0, 5, Qt.LeftButton);
+      waitForObject(":_stack._nextRaNumber_XLineEdit");
+      RANUM = findObject(":_stack._nextRaNumber_XLineEdit").text;
+      
+      
+      waitForObject(":Setup.Apply_QPushButton");
+      clickButton(":Setup.Apply_QPushButton");
+      waitForObject(":Cash Receipt.Save_QPushButton_3");
+      clickButton(":Cash Receipt.Save_QPushButton_3");
+  }
+  catch(e)
+  {
+      test.fail("Exception in configuring sales setup" + e);
+  }
+  
+  //-----Setting Encryption Key----- 
+  
+  try
+  {	
+      activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
+      activateItem(waitForObjectItem(":xTuple ERP: *._System_QMenu", "Setup..."));
+      waitForObjectItem(":Setup._tree_XTreeWidget", "Configure.Encryption");
+      clickItem(":Setup._tree_XTreeWidget", "Configure.Encryption", 7, 3, 0, Qt.LeftButton);
+      snooze(1);
+      if(object.exists(":Sales Order.OK_QPushButton_2"))
+      {
+          clickButton(":Sales Order.OK_QPushButton_2");
+      }
+      snooze(1);
+      waitForObject(":_ccEncKeyName_QLineEdit").clear();
+      type(":_ccEncKeyName_QLineEdit", "xTuple.key");
+      waitForObject(":_stack_FileLineEdit").clear();
+      type(":_stack_FileLineEdit", "c:/crypto");
+      waitForObject(":_stack_FileLineEdit_2").clear();
+      type(":_stack_FileLineEdit_2", "/home/administrator/crypto");
+      waitForObject(":_stack_FileLineEdit_3").clear();
+      type(":_stack_FileLineEdit_3", "/users/crypto");
+      
+      waitForObject(":Cash Receipt.Save_QPushButton_3");
+      clickButton(":Cash Receipt.Save_QPushButton_3");
+  }
+  catch(e)
+  {
+      test.fail("Error in setting the encryption configuration" + e);
+  }
+  
     //-------------- Enable Credit Cards setup------------
     try
     {
@@ -156,7 +160,7 @@ function main()
     {
         test.fail("Exception in enabling credit card:"+e);
     }
-  var pat = "Yes";
+    var pat = "Yes";
     //--------Verify Credit card ------
     try
     {
@@ -175,14 +179,14 @@ function main()
         waitForObject(":_settingsTab.Credit Cards_QRadioButton");
         clickButton(":_settingsTab.Credit Cards_QRadioButton");
         waitForObject(":_settingsStack._cc_XTreeWidget");
-           if(object.exists("{column='3' container=':_settingsStack._cc_XTreeWidget' text='"+pat+"' type='QModelIndex'}"))
-               test.pass("Active Credit Card is available");
-           else  
-           {
-               test.log("Active Credit Card is not available"); 
+        if(object.exists("{column='3' container=':_settingsStack._cc_XTreeWidget' text='"+pat+"' type='QModelIndex'}"))
+            test.pass("Active Credit Card is available");
+        else  
+        {
+            test.log("Active Credit Card is not available"); 
             createCreditCard();
             test.log("New Credit Card is created")
-            }
+                }
         
         waitForObject(":Select Order for Billing.Save_QPushButton");
         clickButton(":Select Order for Billing.Save_QPushButton");
@@ -333,7 +337,7 @@ function main()
     
     //------------Process payment----------
     
-        RANUM++;
+    RANUM++;
     memoNum = processPayment(RANUM);
     
     test.log("Payment processed successfully");
@@ -548,8 +552,15 @@ function main()
     
     
     
-  
-  
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //--------------- Create RA with Disposition - Return, Credit/Ship - Immediately, Credit By - Check-----
     
     Return3 = ["Return","Immediately","Check","YTRUCK1","100","9.5"];
@@ -642,6 +653,14 @@ function main()
         test.pass("RA is closed successfully");
     else
         test.fail("RA is not closed");
+    
+    
+    
+    
+    
+    
+    
+    
     
     //--------------- Create RA with Disposition - Return, Credit/Ship - Immediately, Credit By - Credit Card-----
     
@@ -1161,8 +1180,8 @@ function main()
     {
         test.log(" RA created with Disposition - Replace, Credit/Ship - Upon Receipt, Credit By - None"); 
     }
-     RANUM++;
-     SONUM++;
+    RANUM++;
+    SONUM++;
     
     //---------Verify Sales order generation---------------
     
@@ -1212,7 +1231,7 @@ function main()
             activateItem(":xTuple ERP: *_QMenuBar", "Sales");
             waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup...");
             activateItem(":xTuple ERP: *.Sales_QMenu", "Setup...");
-                               
+            
             waitForObject(":Setup.Apply_QPushButton");
             clickButton(":Setup.Apply_QPushButton");
             waitForObject(":Cash Receipt.Save_QPushButton_3");
@@ -1415,11 +1434,11 @@ function main()
     
     createRIS("YTRUCK2");
     test.log("Item site created for 'YTRUCK2' at WH1");
-    
+  
     //---------Adjust QOH----------------
     adjustQoh("YTRUCK2","300","WH1","")
             
-            RANUM++;
+    RANUM++;
     SONUM++;
     
     //-----------Create Sales order--------
@@ -2300,5 +2319,5 @@ function main()
     else
         test.fail("RA is not closed");
     
-
+    
 }

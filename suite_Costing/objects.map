@@ -944,6 +944,7 @@
 :xTuple ERP:*.Transfer Order_QMenu	{title='Transfer Order' type='QMenu' visible='1'}
 :xTuple ERP:*.Update Actual Costs_QMenu	{name='menu.prod.costingupdact' title='Update Actual Costs' type='QMenu' visible='1'}
 :xTuple ERP:*.VirtualClusterLineEdit_OrderLineEdit	{name='VirtualClusterLineEdit' type='OrderLineEdit' visible='1'}
+:xTuple ERP:*.Window_QMenu	{name='menu.window' title='Window' type='QMenu' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
 :xTuple ERP:*.XDateEdit_XDateEdit	{name='XDateEdit' type='XDateEdit' visible='1'}
 :xTuple ERP:*._clusterGroup_QGroupBox	{name='_clusterGroup' type='QGroupBox' visible='1'}
 :xTuple ERP:*._filterGroup_QFrame	{name='_filterGroup' type='QFrame' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}

@@ -7,28 +7,29 @@ function main()
     loginAppl("CONFIGURE"); 
     
     snooze(1);
+   
     //-----Editing of preferences----
-        try
+    try
+    {
+        if(OS.name == "Darwin")
         {
-            if(OS.name == "Darwin")
-            {
-                activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-                activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-            }
-            else
-            {
-
-        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-        activateItem(":xTuple ERP: *_QMenuBar", "System");
-        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-        activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-    }
-             snooze(0.5);
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
+            
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+            activateItem(":xTuple ERP: *_QMenuBar", "System");
+            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+            activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+        }
+        snooze(0.5);
         waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
-           
-            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-                snooze(0.3);
+        
+        if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+            clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        snooze(0.3);
         
         if(object.exists(":Notice.Notice_QDialog"))
         {
@@ -65,29 +66,29 @@ function main()
     snooze(2);
     
     loginAppl("CONFIGURE");
-  
+    
     snooze(3);
     
-   //--------------- Set the window to Tab view mode -------------
+    //--------------- Set the window to Tab view mode -------------
     tabView();
     
-  //--- Variable Declaration --------
-  var qty = "100"; 
-  var opname1 = "20 - Standard Paint Operation - ";
-  var opname2 = "30 - Standard Operation - Assembly - Assembly";
-  var opname3 = "40 - SHIPPING - ";
-  
-  var appEdition = findApplicationEdition();
-  if(appEdition != "Manufacturing")
-  {
-      test.fail("Only Manufacturing edition supports ShopFloorWorkbench");
-      waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-      activateItem(":xTuple ERP: *_QMenuBar", "System");
-      waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-      activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-      
-  }
-  
+    //--- Variable Declaration --------
+    var qty = "100"; 
+    var opname1 = "20 - Standard Paint Operation - ";
+    var opname2 = "30 - Standard Operation - Assembly - Assembly";
+    var opname3 = "40 - SHIPPING - ";
+    
+    var appEdition = findApplicationEdition();
+    if(appEdition != "Manufacturing")
+    {
+        test.fail("Only Manufacturing edition supports ShopFloorWorkbench");
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+        activateItem(":xTuple ERP: *_QMenuBar", "System");
+        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+        activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+        
+    }
+    
     //--------- Shop Floor Workbench Setup -------
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Manufacture");
@@ -137,109 +138,109 @@ function main()
     
     if(OS.name != "Windows")
     {
-   //---- Do Nothing ------
-    try
-    {
-         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
-    activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
-   
-    clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        //---- Do Nothing ------
+        try
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
+            
+            clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        }
+        catch(e)
+        {
+        }
+        try
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
+            
+            clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        }
+        catch(e)
+        {
+        }
     }
-    catch(e)
-    {
-    }
-       try
-    {
-         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
-    activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
-   
-    clickButton(waitForObject(":Setup.Cancel_QPushButton"));
-    }
-    catch(e)
-    {
-    }
-}
     clockIn(wonum1,opname2);
     if(OS.name != "Windows")
     {
-    //---- Do Nothing ------
-    try
-    {
-         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
-    activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
-   
-    clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        //---- Do Nothing ------
+        try
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
+            
+            clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        }
+        catch(e)
+        {
+        }
+        //---- Do Nothing ------
+        try
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
+            
+            clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        }
+        catch(e)
+        {
+        }
     }
-    catch(e)
-    {
-    }
-    //---- Do Nothing ------
-    try
-    {
-         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
-    activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
-   
-    clickButton(waitForObject(":Setup.Cancel_QPushButton"));
-    }
-    catch(e)
-    {
-    }
-}
     clockIn(wonum1,opname3);
     if(OS.name != "Windows")
     {
-    //---- Do Nothing ------
-    try
-    {
-         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
-    activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
-   
-    clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        //---- Do Nothing ------
+        try
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
+            
+            clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        }
+        catch(e)
+        {
+        }
+        //---- Do Nothing ------
+        try
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
+            
+            clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        }
+        catch(e)
+        {
+        }
     }
-    catch(e)
-    {
-    }
-    //---- Do Nothing ------
-    try
-    {
-         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
-    activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
-   
-    clickButton(waitForObject(":Setup.Cancel_QPushButton"));
-    }
-    catch(e)
-    {
-    }
-}
     //-------- Clock-Out  operations-----------
     
     clockOut(wonum1,opname1);
     clockOut(wonum1,opname2);
     if(OS.name != "Windows")
     {
-     //---- Do Nothing ------
-    try
-    {
-         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
-    activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
-   
-    clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        //---- Do Nothing ------
+        try
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
+            
+            clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        }
+        catch(e)
+        {
+        }
+        //---- Do Nothing ------
+        try
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
+            
+            clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        }
+        catch(e)
+        {
+        }
     }
-    catch(e)
-    {
-    }
-    //---- Do Nothing ------
-    try
-    {
-         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
-    activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
-   
-    clickButton(waitForObject(":Setup.Cancel_QPushButton"));
-    }
-    catch(e)
-    {
-    }
-}
     clockOut(wonum1,opname3);
     
     //----- G/L transaction verification after clock-out of operations-----
@@ -298,53 +299,58 @@ function main()
     //---------- Releasing the created WO--------
     releaseWorkOrders()
             
-    //---------Clock-In operation---------
-     clockIn(wonumDel,opname1);
+            //---------Clock-In operation---------
+            clockIn(wonumDel,opname1);
     if(OS.name != "Windows")
     {
-      //---- Do Nothing ------
-    try
-    {
-         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
-    activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
-   
-    clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        //---- Do Nothing ------
+        try
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
+            
+            clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        }
+        catch(e)
+        {
+        }
+        //---- Do Nothing ------
+        try
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
+            
+            clickButton(waitForObject(":Setup.Cancel_QPushButton"));
+        }
+        catch(e)
+        {
+        }
     }
-    catch(e)
-    {
-    }
-    //---- Do Nothing ------
-    try
-    {
-         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
-    activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Setup..."));
-   
-    clickButton(waitForObject(":Setup.Cancel_QPushButton"));
-    }
-    catch(e)
-    {
-    }
-}
-    //--------------Verifying Production time  by user-----------
-    
-    try{
-        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Manufacture");
-        activateItem(":xTuple ERP: *_QMenuBar", "Manufacture");
-        waitForObjectItem(":xTuple ERP:*.Manufacture_QMenu", "Reports");
-        activateItem(":xTuple ERP:*.Manufacture_QMenu", "Reports");
-        waitForObjectItem(":xTuple ERP:*.Reports_QMenu", "Production Time Clock");
-        activateItem(":xTuple ERP:*.Reports_QMenu", "Production Time Clock");
-        waitForObjectItem(":_QMenu", "by User...");
-        activateItem(":_QMenu", "by User...");
-        waitForObject(":xTuple ERP:*.VirtualClusterLineEdit_UsernameLineEdit");
-        type(":xTuple ERP:*.VirtualClusterLineEdit_UsernameLineEdit", "admin");
-        nativeType("<Tab>");
-        findObject(":_dateGroup.XDateEdit_XDateEdit_3").clear();
-        type(":_dateGroup.XDateEdit_XDateEdit_3", "-10");
-        nativeType("<Tab>");
-        findObject(":_dateGroup.XDateEdit_XDateEdit_4").clear();
-        type(":_dateGroup.XDateEdit_XDateEdit_4", "0");
-        nativeType("<Tab>");
+//    //--------------Verifying Production time  by user-----------
+//    
+//    try{
+//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Manufacture");
+//        activateItem(":xTuple ERP: *_QMenuBar", "Manufacture");
+//        waitForObjectItem(":xTuple ERP:*.Manufacture_QMenu", "Reports");
+//        activateItem(":xTuple ERP:*.Manufacture_QMenu", "Reports");
+//        waitForObjectItem(":xTuple ERP:*.Reports_QMenu", "Production Time Clock");
+//        activateItem(":xTuple ERP:*.Reports_QMenu", "Production Time Clock");
+//        waitForObjectItem(":_QMenu", "by User...");
+//        activateItem(":_QMenu", "by User...");
+//        waitForObject(":xTuple ERP:*.VirtualClusterLineEdit_UsernameLineEdit");
+//        type(":xTuple ERP:*.VirtualClusterLineEdit_UsernameLineEdit", "admin");
+//        nativeType("<Tab>");
+//        findObject(":_dateGroup.XDateEdit_XDateEdit_3").clear();
+//        type(":_dateGroup.XDateEdit_XDateEdit_3", "-10");
+//        nativeType("<Tab>");
+//        findObject(":_dateGroup.XDateEdit_XDateEdit_4").clear();
+//        type(":_dateGroup.XDateEdit_XDateEdit_4", "0");
+//        nativeType("<Tab>");
+//        
+//        
+//        
+//        
+//        //-----------------------------------------
 //        waitForObject(":Quotes.Query_QToolButton");
 //        clickButton(":Quotes.Query_QToolButton");
 //        
@@ -379,65 +385,66 @@ function main()
 //        nativeType("<Tab>");
 //        waitForObject(":Select Order for Billing.Save_QPushButton");
 //        clickButton(":Select Order for Billing.Save_QPushButton");
-        waitForObject(":Quotes.Query_QToolButton");
-        clickButton(":Quotes.Query_QToolButton");
-        
-        waitForObject(":_list_XTreeWidget_3");
-        
-        var Widget1 = ":_list_XTreeWidget_3";
-        
-        waitForObject(Widget1);
-        var obj_Widget1 = findObject(Widget1);
-        var object1 = obj_Widget1.topLevelItemCount;
-        if(++objUser == object1)
-            test.pass("New Adjustment of WO Time Clock Entry has created");
-        else
-            test.fail("Failed to create new adjustment");
-        --object1;
-        
-        
-        //---------Deleting WO time clock Entry----------------------
-        waitForObject(":Quotes.Query_QToolButton");
-        clickButton(":Quotes.Query_QToolButton");
-        snooze(0.5);
-        waitForObject(":_list_XTreeWidget_3");
-        openItemContextMenu(":_list_XTreeWidget_3",wonumDel, 5, 5, Qt.LeftButton);
-        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Delete");
-        activateItem(":xTuple ERP:*._menu_QMenu", "Delete");
-        snooze(1);
-        waitForObject(":Sales Order.Yes_QPushButton");
-        clickButton(":Sales Order.Yes_QPushButton");
-        waitForObject(":Quotes.Query_QToolButton");
-        clickButton(":Quotes.Query_QToolButton");
-        snooze(0.5);
-        waitForObject(":_list_XTreeWidget_3");
-        var Widget2 = ":_list_XTreeWidget_3";
-        waitForObject(Widget2);
-        var obj_Widget2 = findObject(Widget2);
-        var object2 = obj_Widget2.topLevelItemCount;
-        
-        if(--object1 == object2)
-            test.pass("WO Time Clock Entry is deleted successfully");
-        else
-            test.fail("Failed to delete WO Time Clock Entry");
-        waitForObject(":Quotes.Close_QToolButton");
-        clickButton(":Quotes.Close_QToolButton");
-        
-    }
-    catch(e)
-    {
-        test.fail("Error Occured:" + e);
-       if(object.exists(":Quotes.Close_QToolButton"))
-       {
-        clickButton(":Quotes.Close_QToolButton");
-       }
-       if(object.exists(":Quotes.Query_QToolButton"))
-           {
-           clickButton(":Quotes.Query_QToolButton");
-    }
-    }
-  
-   //--------- Setting Shop Floor Workbench Post to 'Production' -------
+//        
+//        waitForObject(":Quotes.Query_QToolButton");
+//        clickButton(":Quotes.Query_QToolButton");
+//        
+//        waitForObject(":_list_XTreeWidget_3");
+//        
+//        var Widget1 = ":_list_XTreeWidget_3";
+//        
+//        waitForObject(Widget1);
+//        var obj_Widget1 = findObject(Widget1);
+//        var object1 = obj_Widget1.topLevelItemCount;
+//        if(++objUser == object1)
+//            test.pass("New Adjustment of WO Time Clock Entry has created");
+//        else
+//            test.fail("Failed to create new adjustment");
+//        --object1;
+//        
+//        
+//        //---------Deleting WO time clock Entry----------------------
+//        waitForObject(":Quotes.Query_QToolButton");
+//        clickButton(":Quotes.Query_QToolButton");
+//        snooze(0.5);
+//        waitForObject(":_list_XTreeWidget_3");
+//        openItemContextMenu(":_list_XTreeWidget_3",wonumDel, 5, 5, Qt.LeftButton);
+//        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Delete");
+//        activateItem(":xTuple ERP:*._menu_QMenu", "Delete");
+//        snooze(1);
+//        waitForObject(":Sales Order.Yes_QPushButton");
+//        clickButton(":Sales Order.Yes_QPushButton");
+//        waitForObject(":Quotes.Query_QToolButton");
+//        clickButton(":Quotes.Query_QToolButton");
+//        snooze(0.5);
+//        waitForObject(":_list_XTreeWidget_3");
+//        var Widget2 = ":_list_XTreeWidget_3";
+//        waitForObject(Widget2);
+//        var obj_Widget2 = findObject(Widget2);
+//        var object2 = obj_Widget2.topLevelItemCount;
+//        
+//        if(--object1 == object2)
+//            test.pass("WO Time Clock Entry is deleted successfully");
+//        else
+//            test.fail("Failed to delete WO Time Clock Entry");
+//        waitForObject(":Quotes.Close_QToolButton");
+//        clickButton(":Quotes.Close_QToolButton");
+//        
+//    }
+//    catch(e)
+//    {
+//        test.fail("Error Occured:" + e);
+//        if(object.exists(":Quotes.Close_QToolButton"))
+//        {
+//            clickButton(":Quotes.Close_QToolButton");
+//        }
+//        if(object.exists(":Quotes.Query_QToolButton"))
+//        {
+//            clickButton(":Quotes.Query_QToolButton");
+//        }
+//    }
+    
+    //--------- Setting Shop Floor Workbench Post to 'Production' -------
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Manufacture");
         activateItem(":xTuple ERP: *_QMenuBar", "Manufacture");
@@ -521,7 +528,7 @@ function main()
         clickItem(":xTuple ERP:*._wooperList_XTreeWidget",wonum2, 0, 0, 5, Qt.LeftButton);
         waitForObject(":xTuple ERP:*.Clock Out_QPushButton");
         clickButton(":xTuple ERP:*.Clock Out_QPushButton");
-        
+        snooze(1);
         waitForObject(":_qty_XLineEdit_4");
         type(":_qty_XLineEdit_4", "100");
         nativeType("<Tab>");
@@ -530,8 +537,8 @@ function main()
         waitForObject(":Select Order for Billing.Close_QPushButton");
         clickButton(":Select Order for Billing.Close_QPushButton");
         test.pass("Verified Cancel Clock-out operation")
-        
-    }
+                
+            }
     catch(e)
     {
         test.fail("error occured in cancelling clock-out:" + e);
@@ -541,7 +548,7 @@ function main()
     
     //--------Verifying and Perform the Production Clock-Out -----------
     try{
-       waitForObjectItem(":xTuple ERP: *_QMenuBar", "Manufacture");
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Manufacture");
         activateItem(":xTuple ERP: *_QMenuBar", "Manufacture");
         waitForObjectItem(":xTuple ERP:*.Manufacture_QMenu", "Transactions");
         activateItem(":xTuple ERP:*.Manufacture_QMenu", "Transactions");
@@ -586,7 +593,7 @@ function main()
     {
         test.fail("error in clock out operation"+ e);
         if(object.exists(":Select Order for Billing.Close_QPushButton"))
-        clickButton(":Select Order for Billing.Close_QPushButton");
+            clickButton(":Select Order for Billing.Close_QPushButton");
     }
     snooze(0.1);
     //-----Verification of updated QOH by Item (after post production)-----   
@@ -662,6 +669,7 @@ function main()
                     clickButton(":Work Order Costing.Show Materials_XCheckBox")
                     waitForObject(":Quotes.Query_QToolButton");
         clickButton(":Quotes.Query_QToolButton");
+        snooze(1);
         waitForObject(":_list_XTreeWidget_3");
         if(object.exists("{column='1' container=':_list_XTreeWidget_3' text='PAINT1' type='QModelIndex'}"))
             test.pass("" +wonum2+ "Work Order's Paint operation has setup time costing entry");
@@ -682,12 +690,12 @@ function main()
         else  
             test.fail("" +wonum2+ "Work Order's assembly operation has no Run Time costing entry");
         waitForObject(":_list_XTreeWidget_3");
-        if(object.exists("{column='1' container=':_list_XTreeWidget_3' occurrence='2' text='SHIPPING' type='QModelIndex'}"))		
+        if(object.exists("{column='2' container=':_list_XTreeWidget_3' occurrence='2' text='SHIPPING' type='QModelIndex'}"))		
             test.pass("" +wonum2+ "Work Order's Shipping operation has setup time costing entry");
         else  
             test.fail("" +wonum2+ "Work Order's Shipping operation has no setup time costing entry");
         waitForObject(":_list_XTreeWidget_3");
-        if(object.exists("{column='1' container=':_list_XTreeWidget_3' occurrence='2' text='SHIPPING' type='QModelIndex'}"))     
+        if(object.exists("{column='2' container=':_list_XTreeWidget_3' occurrence='2' text='SHIPPING' type='QModelIndex'}"))     
             test.pass("" +wonum2+ "Work Order's Shipping operation has Run Time costing entry");
         else  
             test.fail("" +wonum2+ "Work Order's Shipping operation has no Run Time costing entry");
@@ -803,8 +811,8 @@ function main()
     catch(e)
     {
         test.fail("failed to create New adjustment for for WO"+woNew+ "");
-         if(object.exists(":Quotes.Close_QToolButton"))
-        clickButton(":Quotes.Close_QToolButton"); 
+        if(object.exists(":Quotes.Close_QToolButton"))
+            clickButton(":Quotes.Close_QToolButton"); 
     }
     
     //----------------- Deleting WO Time Entry---------------------
@@ -837,8 +845,8 @@ function main()
     catch(e)
     {
         test.fail("Failed to delete WO time clock entry for WO"+woDel+ "");
-         if(object.exists(":Quotes.Close_QToolButton"))
-        clickButton(":Quotes.Close_QToolButton"); 
+        if(object.exists(":Quotes.Close_QToolButton"))
+            clickButton(":Quotes.Close_QToolButton"); 
     }
     
     
@@ -852,7 +860,7 @@ function main()
     test.log(""+wonum3+" WO for REPAIRT1 created successfully linked to sales order")
             
             //------------ Releasing Work Orders----------------------------
-    try{
+            try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Manufacture");
         activateItem(":xTuple ERP: *_QMenuBar", "Manufacture");
         waitForObjectItem(":xTuple ERP:*.Manufacture_QMenu", "Reports");
@@ -871,8 +879,8 @@ function main()
     catch(e)
     {
         test.fail(" error in releasing WO" +e); 
-         if(object.exists(":Quotes.Close_QToolButton"))
-             clickButton(":Quotes.Close_QToolButton");
+        if(object.exists(":Quotes.Close_QToolButton"))
+            clickButton(":Quotes.Close_QToolButton");
     }
     //-------------clock-in from Shop-Floor Work Bench-----------
     clockIn(wonum3,"");
@@ -902,8 +910,8 @@ function main()
     catch(e)
     {
         test.fail("error in clock out operation"+e);
-                 if(object.exists(":Select Order for Billing.Close_QPushButton"))
-             clickButton(":Select Order for Billing.Close_QPushButton");
+        if(object.exists(":Select Order for Billing.Close_QPushButton"))
+            clickButton(":Select Order for Billing.Close_QPushButton");
     }
     snooze(0.1);
     
@@ -990,7 +998,7 @@ function main()
     {
         test.fail("error occured in closing WO" +e);
         if(object.exists(":Quotes.Close_QToolButton"))
-        clickButton(":Quotes.Close_QToolButton");
+            clickButton(":Quotes.Close_QToolButton");
         
     }
     //------- Work Order creation (for the use of clock-in operation from w/o operation screen)---------

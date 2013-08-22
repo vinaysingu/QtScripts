@@ -6,27 +6,27 @@ function main()
     
     //-----login Application-----
     loginAppl("CONFIGURE"); 
-  
-  //-----Editing of preferences----
-        try
+    
+    //-----Editing of preferences----
+    try
+    {
+        if(OS.name == "Darwin")
         {
-            if(OS.name == "Darwin")
-            {
-                activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-                activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-            }
-            else
-            {
-
-        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-        activateItem(":xTuple ERP: *_QMenuBar", "System");
-        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-        activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-    }
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
+            
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+            activateItem(":xTuple ERP: *_QMenuBar", "System");
+            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+            activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+        }
         waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
-            snooze(1);
-            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        snooze(1);
+        if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+            clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
         
         if(object.exists(":Notice.Notice_QDialog"))
         {
@@ -66,7 +66,7 @@ function main()
     snooze(2);
     
     loginAppl("CONFIGURE"); 
-  
+    
     //-----Variable Declaration-----
     var regqty = "100", mlcqty = "100", serqty = "2", lotqty = "10", toolqty = "10";
     var crtqty = "50";
@@ -115,11 +115,12 @@ function main()
     {
         test.fail("Error in identifying the application edition" + e);       
         
-  }
+    }
     //--------------- Set the window to Tab view mode -------------
-     tabView();
     
-
+    tabView();
+    
+    
     //------Creating a Tooling item------
     try
     {
@@ -270,9 +271,9 @@ function main()
     {
         test.fail("Error in adjusting QOH of TSUB1"+ e );
     }
-
-  //-------- Work Order creation for different items-----
-  
+    
+    //-------- Work Order creation for different items-----
+    
     
     var wonumreg = createWorkOrder("YTRUCK1", regqty);     //---- WO for Regular Item       
     var wonummlc = createWorkOrder("WTRUCK1", mlcqty);     //---- WO for Regular MLC item
@@ -280,52 +281,52 @@ function main()
     
     var wonumtool = createWorkOrder("TTOOL", toolqty);    //---- WO for Tooling Item
     var wonumregular = createWorkOrder("YTRUCK1", regqty); //---- WO for Regular Item    
-//    snooze(1);
-  
+    //    snooze(1);
+    
     if(appEdition != "PostBook")
     {
         var wonumlot = createWorkOrder("YPAINT1", lotqty);  //--- WO for Lot Controlled Item
     }
-  //-------- Work Order creation for CTRUCK1(Job Cost Item)-----
-  try{
-      
-      waitForObjectItem(":xTuple ERP: *_QMenuBar", "Manufacture");
-      activateItem(":xTuple ERP: *_QMenuBar", "Manufacture");
-      waitForObjectItem(":xTuple ERP:*.Manufacture_QMenu", "Reports");
-      activateItem(":xTuple ERP:*.Manufacture_QMenu", "Reports");
-      waitForObjectItem(":xTuple ERP:*.Reports_QMenu", "Work Order Schedule");
-      activateItem(":xTuple ERP:*.Reports_QMenu", "Work Order Schedule");
-      waitForObject(":Quotes.New_QToolButton");
-      clickButton(":Quotes.New_QToolButton");
-      waitForObject(":_itemGroup.ItemLineEdit_ItemLineEdit");
-      type(":_itemGroup.ItemLineEdit_ItemLineEdit", "CTRUCK1");
-      nativeType("<Tab>");
-      waitForObject(":_qtyGroup._qty_XLineEdit");
-      mouseClick(":_qtyGroup._qty_XLineEdit", 64, 8, 0, Qt.LeftButton);
-      waitForObject(":_qtyGroup._qty_XLineEdit");
-      type(":_qtyGroup._qty_XLineEdit", "100");
-      nativeType("<Tab>");
-      nativeType("<Tab>");
-      waitForObject(":_schedGroup.XDateEdit_XDateEdit");
-      type(":_schedGroup.XDateEdit_XDateEdit", "+0");     
-      nativeType("<Tab>");
-      // Verification Point 'VP1'
-      test.xverify(findObject(":Invalid Item_QMessageBox").text, "Item CTRUCK1 is set to Job Costing on Item Site WH1.  Work Orders for Job Cost Item Sites may only be created by Sales Orders.");
-      snooze(2);
-      waitForObject(":Sales Order.OK_QPushButton_2");
-      clickButton(":Sales Order.OK_QPushButton_2");
-      waitForObject(":Sales Order.Cancel_QPushButton");
-      clickButton(":Sales Order.Cancel_QPushButton");
-      snooze(1);   
-      waitForObject(":Quotes.Close_QToolButton");
-      clickButton(":Quotes.Close_QToolButton");
-  }
-  catch(e)
-  {
-      test.fail("Error occured while creating a Work Order for CTRUCK1" +e);
-  }
-   snooze(1);
-
+    //-------- Work Order creation for CTRUCK1(Job Cost Item)-----
+    try{
+        
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Manufacture");
+        activateItem(":xTuple ERP: *_QMenuBar", "Manufacture");
+        waitForObjectItem(":xTuple ERP:*.Manufacture_QMenu", "Reports");
+        activateItem(":xTuple ERP:*.Manufacture_QMenu", "Reports");
+        waitForObjectItem(":xTuple ERP:*.Reports_QMenu", "Work Order Schedule");
+        activateItem(":xTuple ERP:*.Reports_QMenu", "Work Order Schedule");
+        waitForObject(":Quotes.New_QToolButton");
+        clickButton(":Quotes.New_QToolButton");
+        waitForObject(":_itemGroup.ItemLineEdit_ItemLineEdit");
+        type(":_itemGroup.ItemLineEdit_ItemLineEdit", "CTRUCK1");
+        nativeType("<Tab>");
+        waitForObject(":_qtyGroup._qty_XLineEdit");
+        mouseClick(":_qtyGroup._qty_XLineEdit", 64, 8, 0, Qt.LeftButton);
+        waitForObject(":_qtyGroup._qty_XLineEdit");
+        type(":_qtyGroup._qty_XLineEdit", "100");
+        nativeType("<Tab>");
+        nativeType("<Tab>");
+        waitForObject(":_schedGroup.XDateEdit_XDateEdit");
+        type(":_schedGroup.XDateEdit_XDateEdit", "+0");     
+        nativeType("<Tab>");
+        // Verification Point 'VP1'
+        test.xverify(findObject(":Invalid Item_QMessageBox").text, "Item CTRUCK1 is set to Job Costing on Item Site WH1.  Work Orders for Job Cost Item Sites may only be created by Sales Orders.");
+        snooze(2);
+        waitForObject(":Sales Order.OK_QPushButton_2");
+        clickButton(":Sales Order.OK_QPushButton_2");
+        waitForObject(":Sales Order.Cancel_QPushButton");
+        clickButton(":Sales Order.Cancel_QPushButton");
+        snooze(1);   
+        waitForObject(":Quotes.Close_QToolButton");
+        clickButton(":Quotes.Close_QToolButton");
+    }
+    catch(e)
+    {
+        test.fail("Error occured while creating a Work Order for CTRUCK1" +e);
+    }
+    snooze(1);
+    
     
     // ----- Some External Flow cases----
     try{
@@ -423,7 +424,7 @@ function main()
         else  
             test.pass("Work Order is deleted successfully");
         snooze(1);        
-//        
+        
         // ------Verifying the Bill of Materials of a WO -------
         
         waitForObject(":_list_XTreeWidget_3");
@@ -497,8 +498,8 @@ function main()
     {
         test.fail(" Error in performing External Flow use cases " + e);
     }
-  snooze(1);
-  
+    snooze(1);
+    
     //-----Verification of QOH by Item (Before issue Materials to Work Order)-----.
     try{
         snooze(3);
@@ -532,8 +533,8 @@ function main()
     
     //-----Verification of updated QOH by Item (After issuing the materials to the WO)-----   
     test.log(result);
-        var a = qtywheel-parseInt(4*regqty);
-        test.log(a);
+    var a = qtywheel-parseInt(4*regqty);
+    test.log(a);
     try{
         var result=queryQoh("TWHEEL1","WH1",appEdition);
         if((qtywheel-parseInt(4*regqty)==result))
@@ -544,8 +545,8 @@ function main()
         else
         {
             test.fail("Quantity of TWHEEL1 is not updated correctly");
-        snooze(0.5);
-    }
+            snooze(0.5);
+        }
         result=queryQoh("TBODY1","WH1",appEdition);
         if((qtybody-parseInt(regqty)==result))
             test.pass("Quantity of TBODY1 is updated correctly");
@@ -579,7 +580,7 @@ function main()
     }
     else
         test.fail("No GL entry is made for the  Material Issue Transactions of work order " + wonumreg);
-//    
+    //    
     //----- QOH Verification by Item (Before Post Opearation of the Work Order)-----.
     try{
         
@@ -834,15 +835,16 @@ function main()
         test.fail("Error in verifying the QOH after Post Production performed for the "+wonummlc+" Work Order");
     
     //-----Verification of G/L transaction for Post Production of Work Order -----
-    
-    bool = glTransactions(/Receive Inventory/, wonummlc);
-    if(bool == 1)
+    if(appEdition != "PostBooks")
     {
-        test.pass("WO " + wonummlc + " has a GL entry for its Post Production");
+        bool = glTransactions(/Receive Inventory/, wonummlc);
+        if(bool == 1)
+        {
+            test.pass("WO " + wonummlc + " has a GL entry for its Post Production");
+        }
+        else
+            test.fail("No GL entry is made for the post production of work order " + wonummlc);
     }
-    else
-        test.fail("No GL entry is made for the post production of work order " + wonummlc);
-    
     //-----Verification of QOH by Item (Before Correcting the Post Production of a Work Order)-----.
     try{
         
@@ -906,13 +908,16 @@ function main()
     else
         test.fail("Quantity of WTRUCK1 is not updated correctly");
     //----- G/L transaction verification offor Correcting the Post Production of Work Order -----
-    bool = glTransactions(/Correct Receive Inventory/, wonummlc);
-    if(bool == 1)
+    if(appEdition != "PostBooks")
     {
-        test.pass("WO " + wonummlc + " has a GL entry for its Post Production correction");
+        bool = glTransactions(/Correct Receive Inventory/, wonummlc);
+        if(bool == 1)
+        {
+            test.pass("WO " + wonummlc + " has a GL entry for its Post Production correction");
+        }
+        else
+            test.fail("No GL entry is made for the correcting the post production of work order " + wonummlc);
     }
-    else
-        test.fail("No GL entry is made for the correcting the post production of work order " + wonummlc);
     
     //------- Post Production for Tooling item -----
     try{
@@ -1024,8 +1029,8 @@ function main()
         test.fail("YTRUCK1 QOH is not updated   correctly after 3rd Post Production");
     
     
-  //-----------Disassembly Work Order Processing------
-  
+    //-----------Disassembly Work Order Processing------
+    
     //------ Creating a new Disassembly Work Order-----
     try{
         
@@ -1205,7 +1210,7 @@ function main()
         test.fail("Quantity of YTRUCK1 is not updated  correctly after Correcting the Post Production");
     
     
-  
+    
     
     //--------- Indented Work Order Processing-----
     
@@ -1224,7 +1229,7 @@ function main()
         waitForObjectItem(":frame_2._bomitem_XTreeWidget", "TSUB1");
         clickItem(":frame_2._bomitem_XTreeWidget", "TSUB1", 27, 4, 0, Qt.LeftButton);
         clickButton(waitForObject(":frame_2.Edit_QPushButton"));
-
+        
         if(!findObject(":Bill of Materials Item.Create Child W/O at Parent W/O Explosion_QGroupBox").checked)
         {  
             
@@ -1233,7 +1238,7 @@ function main()
             if(findObject(":Create Child W/O at Parent W/O Explosion.Issue Child W/O to Parent W/O at Receipt_QCheckBox").checked)
             {
                 mouseClick(":Create Child W/O at Parent W/O Explosion.Issue Child W/O to Parent W/O at Receipt_QCheckBox", 29, 5, 0, Qt.LeftButton);
-                // clickButton(":Create Child W/O at Parent W/O Explosion.Issue Child W/O to Parent W/O at Receipt_QCheckBox");    
+                
             }
         }
         waitForObject(":Cash Receipt.Save_QPushButton_3");
@@ -1442,28 +1447,28 @@ function main()
         test.fail("Error in deleting intended Work Order"+e);
     }
     //----- Verifying the WO's Material Requiremet after deleting the child work order---
-     if(appEdition != "PostBooks")
+    if(appEdition != "PostBooks")
     {
-    try{
-        waitForObject(":_list_XTreeWidget_3");
-        openItemContextMenu(":_list_XTreeWidget_3", wonumindent2 , 5, 5, Qt.LeftButton);
-        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "View Material Requirements...");
-        activateItem(":xTuple ERP:*._menu_QMenu", "View Material Requirements...");
-        waitForObject(":_list_XTreeWidget_9");
-        if(object.exists("{column='0' container=':_list_XTreeWidget_9' text='TSUB1' type='QModelIndex'}" && "{column='7' container=':_list_XTreeWidget_9' occurrence='2' text='100.00' type='QModelIndex'}"))
-            test.pass("TSUB1 - Item available and it is displaying correct  required Qty even after deleting the Child Work Order created for TSUB1");
-        else 
-            test.fail("TSUB1 - Item is not available or Qty per value is incorrect");
-        waitForObject(":xTuple ERP:*.Close_QToolButton");
-        clickButton(":xTuple ERP:*.Close_QToolButton");
-        waitForObject(":Quotes.Close_QToolButton");
-        clickButton(":Quotes.Close_QToolButton");
-    }
-    catch(e)
-    {
-        test.fail("Error in vewing the WO material requirement after deleting the Child Work Order"+e);
-    }
-} 
+        try{
+            waitForObject(":_list_XTreeWidget_3");
+            openItemContextMenu(":_list_XTreeWidget_3", wonumindent2 , 5, 5, Qt.LeftButton);
+            waitForObjectItem(":xTuple ERP:*._menu_QMenu", "View Material Requirements...");
+            activateItem(":xTuple ERP:*._menu_QMenu", "View Material Requirements...");
+            waitForObject(":_list_XTreeWidget_9");
+            if(object.exists("{column='0' container=':_list_XTreeWidget_9' text='TSUB1' type='QModelIndex'}" && "{column='7' container=':_list_XTreeWidget_9' occurrence='2' text='100.00' type='QModelIndex'}"))
+                test.pass("TSUB1 - Item available and it is displaying correct  required Qty even after deleting the Child Work Order created for TSUB1");
+            else 
+                test.fail("TSUB1 - Item is not available or Qty per value is incorrect");
+            waitForObject(":xTuple ERP:*.Close_QToolButton");
+            clickButton(":xTuple ERP:*.Close_QToolButton");
+            waitForObject(":Quotes.Close_QToolButton");
+            clickButton(":Quotes.Close_QToolButton");
+        }
+        catch(e)
+        {
+            test.fail("Error in vewing the WO material requirement after deleting the Child Work Order"+e);
+        }
+    } 
     
     
 }

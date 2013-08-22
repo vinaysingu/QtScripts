@@ -5,11 +5,30 @@ function main()
     source(findFile("scripts","functions.js"));
     
     loginAppl("CONFIGURE");
-  
-    waitForObject(":Registration Key.Yes_QPushButton");
-    clickButton(":Registration Key.Yes_QPushButton");
+
     
-    
+     //--------------- Set the window to Tab view mode -------------
+    try
+    {
+    activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Products"));
+    activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item"));
+    activateItem(waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List..."));
+    if(object.exists(":Work Order Schedule.Close_QToolButton"))
+    {
+        test.log("item screen opened");
+        activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Window"));
+        if(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"))
+        {
+        activateItem(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"));
+        }
+        clickButton(waitForObject(":Work Order Schedule.Close_QToolButton"));
+    }
+    }
+    catch(e)
+    {
+        test.fail("exception in changing to Tab view mode" + e);
+        clickButton(waitForObject(":Work Order Schedule.Close_QToolButton"));
+    }
     
     //MRP DEMAND SIDE NETTING - SALES ORDER
     test.log("MRP DEMAND SIDE NETTING - SALES ORDER");
@@ -1123,7 +1142,7 @@ function main()
     QOHZero("TBOX1");
     DelAllWO();
     DelAllSO();
-    
+  
     
     //-----Copy TSUB1 into 3 items-------
     try
@@ -1309,7 +1328,7 @@ function main()
         test.fail("Error in copying BOM of TSUB1" + e);
     }
     
-    
+  
     //---------Create BOM for the newly created 3 items--------
     try
     {

@@ -21,7 +21,7 @@ function main()
     }
   
     var appEdition = findApplicationEdition();
-    
+  
   
   //-----------Chart Of Accounts------------------------
     try{
@@ -214,7 +214,7 @@ function main()
         clickButton(":Setup.Save_QPushButton");
     }catch(e){test.fail("Exception in creating new Cost category:"+e);}
     
-   
+ 
   
     //----------Inventory-Cost Categories: copy and create for INTRAN------
     try{
@@ -272,7 +272,7 @@ function main()
         clickItem(":Setup._modules_QComboBox","Inventory", 74, 11, 0, Qt.LeftButton);
         waitForObject(":Accounting Mappings.Cost Categories_QModelIndex");
         mouseClick(":Accounting Mappings.Cost Categories_QModelIndex", 58, 7, 0, Qt.LeftButton);
-        
+        snooze(2);
         waitForObject(":List Cost Categories._costcat_XTreeWidget_2");
         clickItem(":List Cost Categories._costcat_XTreeWidget_2", "CCWH1",0,0,1,Qt.LeftButton);
         waitForObject(":List Cost Categories.Copy_QPushButton_2");
@@ -290,9 +290,10 @@ function main()
         sendEvent("QMouseEvent", ":_stack_QLabel", QEvent.MouseButtonPress, 0, 0, Qt.LeftButton, 0);
         waitForObjectItem(":_QMenu", "List...");
         activateItem(":_QMenu", "List...");
+        snooze(1);
         waitForObject(":_listTab_XTreeWidget_10");
         doubleClickItem(":_listTab_XTreeWidget_10","1254",10,10,0,Qt.LeftButton);
-        
+        snooze(1);
         waitForObject(":Setup.Save_QPushButton");
         clickButton(":Setup.Save_QPushButton");
         waitForObject(":List Cost Categories._costcat_XTreeWidget_2");

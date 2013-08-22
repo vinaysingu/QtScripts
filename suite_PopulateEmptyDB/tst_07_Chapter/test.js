@@ -117,8 +117,7 @@ function main()
         activateItem(":xTuple ERP: OpenMFG Edition.System_QMenu", "Setup...");
         waitForObject(":Setup._modules_QComboBox");
         clickItem(":Setup._modules_QComboBox","Accounting", 75, 11, 0, Qt.LeftButton);
-//        waitForObject(":Configure.Accounting_QModelIndex");
-//        mouseClick(":Configure.Accounting_QModelIndex", 53, 7, 0, Qt.LeftButton);
+
         waitForObject(":Accounting Configuration.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Accounting Configuration.qt_tabwidget_tabbar_QTabBar", "Accounts Payable");
         waitForObject(":_nextAPMemoNumber_XLineEdit");
