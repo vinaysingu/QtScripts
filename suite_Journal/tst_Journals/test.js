@@ -20,7 +20,7 @@ function main()
             activateItem(":xTuple ERP: *_QMenuBar", "System");
             waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
             activateItem(":xTuple ERP: *._System_QMenu", "Preferences..."); 
-             clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Application");
+            clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Application");
         }
         snooze(0.5);
         if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
@@ -80,7 +80,7 @@ function main()
         type(":Encryption Configuration_FileLineEdit_2", "/home/administrator/crypto");
         waitForObject(":Encryption Configuration_FileLineEdit_3").clear();
         type(":Encryption Configuration_FileLineEdit_3", "/users/crypto")
-         waitForObject(":Encryption Configuration_FileLineEdit_2");
+                waitForObject(":Encryption Configuration_FileLineEdit_2");
         var linuxPath = findObject(":Encryption Configuration_FileLineEdit_2").text;
         
         waitForObject(":Encryption Configuration_FileLineEdit");
@@ -89,10 +89,10 @@ function main()
         clickButton(":Cash Receipt.Save_QPushButton_3");
     }
     catch(e)
-  {
-      test.fail("Error in extracting OS name:" + e);
-  }	
-
+    {
+        test.fail("Error in extracting OS name:" + e);
+    }	
+    
     //----------Configure Accounting SetUp---------
     try
     {
@@ -110,37 +110,37 @@ function main()
     {
         test.fail("Error in Configuring the Accounting SetUp:" +e);
     }
-  //--------Exiting the application------
-  try
-  {
-      waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-      activateItem(":xTuple ERP: *_QMenuBar", "System");
-      waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-      activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-  }
-  catch(e)
-  {
-      test.fail("Error in Exiting the Application:"+e);
-  }
-  snooze(5);
-  
-  if(OS.name=="Linux")
-      startApplication("xtuple.bin");
-  
-  else
-      startApplication("xtuple");
-  
-  //-----login Application-----
-  loginAppl("CONFIGURE");
- 
+    //--------Exiting the application------
+    try
+    {
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+        activateItem(":xTuple ERP: *_QMenuBar", "System");
+        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+        activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    }
+    catch(e)
+    {
+        test.fail("Error in Exiting the Application:"+e);
+    }
+    snooze(5);
+    
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
+    
+    else
+        startApplication("xtuple");
+    
+    //-----login Application-----
+    loginAppl("CONFIGURE");
+    
   //-----Application Edition-----
   var appE = findApplicationEdition();
-
-  //--------------- Set the window to Tab view mode -------------
-         
-     tabView();
-     //-----Transactions-------
-  //--SO Processing---
+  
+    //--------------- Set the window to Tab view mode -------------
+    
+    tabView();
+    //-----Transactions-------
+    //--SO Processing---
     
     var Jnum = [];
     var sonum = createSalesOrder("YTRUCK1", "100");
@@ -429,7 +429,7 @@ function main()
             {
                 flag = 0;
                 test.fail("Error in posting cash receipts:" + e);
-               if(object.exists(":Receivables Workbench.Close_QPushButton"))
+                if(object.exists(":Receivables Workbench.Close_QPushButton"))
                 {
                     waitForObject(":Receivables Workbench.Close_QPushButton");
                     clickButton(":Receivables Workbench.Close_QPushButton");
@@ -496,15 +496,15 @@ function main()
         test.fail("Fail to Process the SalesOrder");
     }
     
-
-  
-  
-  
     
-  var flag = 1;
-  snooze(0.5);
-  var Jnum = []; 
-  
+    
+    
+    
+    
+    var flag = 1;
+    snooze(0.5);
+    var Jnum = []; 
+    
     //-------Purchase Orer Processing---------
     var ponumber =  createPO("TPARTS","TBOX1","100");
     test.log(ponumber);
@@ -576,43 +576,121 @@ function main()
             }
         }
         
+  
+    //---------Create and post a PO receipt--------
+    createPoReceipt(ponumber);
+    
+    //---------Journal Entry Verification-----
+    var JPOnum = ""+ponumber+"-1";
+    var bool = journalVerification(/Receive Inventory from / ,JPOnum);
+    if(bool == 1)
+    {
+        test.pass("Purchase Order Receipt " + JPOnum + " has a entry in journal");
+    }
+    else
+        test.fail("No entry is made for the Purchase Order Receipt in Journal" +JPOnum);
+    
+    //---Verifying the Posted Status for POReceipt in Journal------------
+    
+    Jnumbr =journalStatus(JPOnum,"No","before");
+    Jnum[0] = ++Jnumbr;
+    var j1 = Jnum[0];
+    test.log(j1);
+    //----Post Journal to Ledger------
+    
+    var bool = postJournal2Ledger("S/R");
+    if(bool ==1)
+        test.pass("PO Receipt entries are posted succesfully from Journal to Ledger");
+    else
+        test.fail("PO Receipt entries are not  posted from Journal to Ledger");
+    
+    //------- To avoid unexpected blocks -------------
+    if (OS.name != "Windows")
+    {
+        doNothing();
+    }
+    
+    //---Create and Post Voucher---
+    //---Voucher Creation---------
+    try{
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
+        activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
+        waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
+        activateItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
+        waitForObjectItem(":xTuple ERP:*.Accounts Payable_QMenu", "Voucher");
+        activateItem(":xTuple ERP:*.Accounts Payable_QMenu", "Voucher");
+        waitForObjectItem(":xTuple ERP:*.Voucher_QMenu", "List Unposted...");
+        activateItem(":xTuple ERP:*.Voucher_QMenu", "List Unposted...");
+        waitForObject(":xTuple ERP:*.New_QPushButton");
+        clickButton(":xTuple ERP:*.New_QPushButton");
+        waitForObject(":xTuple ERP:*.VirtualClusterLineEdit_OrderLineEdit");
+        type(":xTuple ERP:*.VirtualClusterLineEdit_OrderLineEdit",ponumber);
+        nativeType("<Tab>");
+        snooze(2);
+        vocnumber = findObject(":_voucherNumber_XLineEdit").text;
+        waitForObject(":_poitems._poitem_XTreeWidget");
+        clickItem(":_poitems._poitem_XTreeWidget","EA",0, 0, 5, Qt.LeftButton);
+        clickButton(waitForObject(":_poitems.Distributions..._QPushButton"));
+        waitForObjectItem(":Uninvoiced Recepts and Returns._uninvoiced_XTreeWidget", "No");
+        doubleClickItem(":Uninvoiced Recepts and Returns._uninvoiced_XTreeWidget", "No", 11, 3, 0, Qt.LeftButton);
+        clickButton(waitForObject(":_distTab.New_QPushButton"));
+        snooze(0.5);
+        var vamnt=findObject(":Cash Receipt.XLineEdit_XLineEdit_2").text;
+        clickButton(waitForObject(":Voucher Item Distribution.Save_QPushButton"));
+        clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2"));
+        waitForObject(":_amount.XLineEdit_XLineEdit");
+        type(":_amount.XLineEdit_XLineEdit",vamnt);
+        type(waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit"), "0");
+        type(waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit"), "<Tab>");
+        clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
+        snooze(0.5);
+        clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
         
-        //---------Create and post a PO receipt--------
-        createPoReceipt(ponumber);
-        
-        //---------Journal Entry Verification-----
-        var JPOnum = ""+ponumber+"-1";
-        var bool = journalVerification(/Receive Inventory from / ,JPOnum);
-        if(bool == 1)
+    }
+    catch(e)
+    {
+        test.fail("Failed to create Voucher:"+e);
+    }
+    
+    //------------Posting Voucher--------
+    try
+    {	
+        waitForObject(":xTuple ERP:*._vohead_XTreeWidget");
+        if(object.exists("{column='0' container=':xTuple ERP:*._vohead_XTreeWidget' text='"+vocnumber+"' type='QModelIndex'}"))
         {
-            test.pass("Purchase Order Receipt " + JPOnum + " has a entry in journal");
+            var flag = 1;
+            test.pass("Voucher Created Sucessfully:");
         }
         else
-            test.fail("No entry is made for the Purchase Order Receipt in Journal" +JPOnum);
-        
-        //---Verifying the Posted Status for POReceipt in Journal------------
-        
-        Jnumbr =journalStatus(JPOnum,"No","before");
-        Jnum[0] = ++Jnumbr;
-        var j1 = Jnum[0];
-        test.log(j1);
-        //----Post Journal to Ledger------
-        
-        var bool = postJournal2Ledger("S/R");
-        if(bool ==1)
-            test.pass("PO Receipt entries are posted succesfully from Journal to Ledger");
-        else
-            test.fail("PO Receipt entries are not  posted from Journal to Ledger");
-      
-        //------- To avoid unexpected blocks -------------
-        if (OS.name != "Windows")
         {
-            doNothing();
+            flag = 0;
+            test.fail("Fail to Create Voucher"); 
+        }           
+        
+        waitForObject(":Select Order for Billing.Close_QPushButton");
+        clickButton(":Select Order for Billing.Close_QPushButton");
+    }
+    catch(e)
+    {
+        test.fail("Failed to  create  voucher:" + e);
+        if(object.exists(":Select Order for Billing.Close_QPushButton"))
+        {
+            waitForObject(":Select Order for Billing.Close_QPushButton");
+            clickButton(":Select Order for Billing.Close_QPushButton");
         }
         
-        //---Create and Post Voucher---
-        //---Voucher Creation---------
-        try{
+    }
+    
+    //------To avoid unexpected blocks -----
+    if(OS.name != "Windows")
+    {
+        doNothing();
+    }
+    if(flag == 1)
+    {
+        
+        try
+        {
             waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
             activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
             waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
@@ -621,367 +699,289 @@ function main()
             activateItem(":xTuple ERP:*.Accounts Payable_QMenu", "Voucher");
             waitForObjectItem(":xTuple ERP:*.Voucher_QMenu", "List Unposted...");
             activateItem(":xTuple ERP:*.Voucher_QMenu", "List Unposted...");
-            waitForObject(":xTuple ERP:*.New_QPushButton");
-            clickButton(":xTuple ERP:*.New_QPushButton");
-            waitForObject(":xTuple ERP:*.VirtualClusterLineEdit_OrderLineEdit");
-            type(":xTuple ERP:*.VirtualClusterLineEdit_OrderLineEdit",ponumber);
-            nativeType("<Tab>");
-            snooze(2);
-            vocnumber = findObject(":_voucherNumber_XLineEdit").text;
-            waitForObject(":_poitems._poitem_XTreeWidget");
-            clickItem(":_poitems._poitem_XTreeWidget","EA",0, 0, 5, Qt.LeftButton);
-            clickButton(waitForObject(":_poitems.Distributions..._QPushButton"));
-            waitForObjectItem(":Uninvoiced Recepts and Returns._uninvoiced_XTreeWidget", "No");
-            doubleClickItem(":Uninvoiced Recepts and Returns._uninvoiced_XTreeWidget", "No", 11, 3, 0, Qt.LeftButton);
-            clickButton(waitForObject(":_distTab.New_QPushButton"));
+            waitForObject(":xTuple ERP:*._vohead_XTreeWidget")
+                    openItemContextMenu(":xTuple ERP:*._vohead_XTreeWidget",vocnumber, 5, 5, Qt.LeftButton);      
+            snooze(1);
+            activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Post Voucher..."));
             snooze(0.5);
-            var vamnt=findObject(":Cash Receipt.XLineEdit_XLineEdit_2").text;
-            clickButton(waitForObject(":Voucher Item Distribution.Save_QPushButton"));
-            clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2"));
-            waitForObject(":_amount.XLineEdit_XLineEdit");
-            type(":_amount.XLineEdit_XLineEdit",vamnt);
-            type(waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit"), "0");
-            type(waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit"), "<Tab>");
-            clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
-            snooze(0.5);
-            clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
-            
-        }
-        catch(e)
-        {
-            test.fail("Failed to create Voucher:"+e);
-        }
-        
-        //------------Posting Voucher--------
-        try
-        {	
-            waitForObject(":xTuple ERP:*._vohead_XTreeWidget");
-            if(object.exists("{column='0' container=':xTuple ERP:*._vohead_XTreeWidget' text='"+vocnumber+"' type='QModelIndex'}"))
-            {
-                var flag = 1;
-                test.pass("Voucher Created Sucessfully:");
-            }
-            else
-            {
-                flag = 0;
-                test.fail("Fail to Create Voucher"); 
-            }           
-            
+            waitForObject(":List Unposted Invoices.Continue_QPushButton");
+            clickButton(":List Unposted Invoices.Continue_QPushButton");
             waitForObject(":Select Order for Billing.Close_QPushButton");
             clickButton(":Select Order for Billing.Close_QPushButton");
+            test.log("Voucher Posted sucessfully");
         }
         catch(e)
         {
-            test.fail("Failed to  create  voucher:" + e);
+            test.fail("Failed to  Post voucher:" + e);
             if(object.exists(":Select Order for Billing.Close_QPushButton"))
             {
                 waitForObject(":Select Order for Billing.Close_QPushButton");
                 clickButton(":Select Order for Billing.Close_QPushButton");
             }
-            
         }
         
-        //------To avoid unexpected blocks -----
+        //---------Journal Entry Verification-----
+        
+        var bool = journalVerification(/TPARTS-Toy Parts Inc./ ,vocnumber);
+        if(bool == 1)
+        {
+            test.pass("Voucher " + vocnumber + " has a Journal entry");
+        }
+        else
+            test.fail("No Journal entry is made for the Posting voucher: " +vocnumber);
+        
+        //---Verifying the Posted Status for Voucher in Journal------------
+        Jnum[1] =journalStatus(vocnumber,"No","before");
+        var j2 = Jnum[1];
+        test.log(j2);
+        //----Post Journal to Ledger------
+        
+        var bool = postJournal2Ledger("A/P");
+        if(bool ==1)
+            test.pass("Entries made for Voucher sucessfully verified");
+        else
+            test.fail("Error in Verifying entries made by Voucher");
+        
+        
+        //-----------Selecting Voucher for payment-------
+        try
+        {
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
+            activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
+            waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
+            activateItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
+            waitForObjectItem(":xTuple ERP:*.Accounts Payable_QMenu", "Payments");
+            activateItem(":xTuple ERP:*.Accounts Payable_QMenu", "Payments");
+            waitForObjectItem(":xTuple ERP:*.Payments_QMenu", "Select...");
+            activateItem(":xTuple ERP:*.Payments_QMenu", "Select...");
+            waitForObject(":frame._apopen_XTreeWidget");
+            clickItem(":frame._apopen_XTreeWidget",vocnumber,0, 0, 5, Qt.LeftButton);
+            waitForObject(":frame.Select..._QPushButton");
+            clickButton(":frame.Select..._QPushButton");
+            snooze(0.5);
+            waitForObject(":_bankaccnt_XComboBox");
+            clickItem(":_bankaccnt_XComboBox", "EBANK-eBank Checking Account",0, 0, 5, Qt.LeftButton);
+            snooze(0.5);
+            waitForObject(":Select Order for Billing.Save_QPushButton");
+            clickButton(":Select Order for Billing.Save_QPushButton");
+            waitForObject(":Select Order for Billing.Close_QPushButton");
+            clickButton(":Select Order for Billing.Close_QPushButton");
+        }
+        catch(e)
+        {
+            test.fail("Selecting Voucher for payment failed:"+ e);
+            if(object.exists(":Select Order for Billing.Close_QPushButton"))
+            {
+                waitForObject(":Select Order for Billing.Close_QPushButton");
+                clickButton(":Select Order for Billing.Close_QPushButton");
+            }
+        }
+        //--Enable EFT check Printing-----
+        try
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Setup..."));
+            clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Accounts Payable");
+            waitForObject(":tab.Enable EFT Check Printing_QGroupBox"); 
+            if(!findObject(":tab.Enable EFT Check Printing_QGroupBox").checked)
+            {
+                mouseClick(":tab.Enable EFT Check Printing_QGroupBox", 8, 12, 0, Qt.LeftButton);
+            }
+            test.log("Sucessfully Enabled EFT check printing:");
+            clickButton(waitForObject(":View Check Run.Save_QPushButton"));
+        }
+        catch(e)
+        {
+            test.fail("Error in Enabling EFT check Printing option:"+e);
+            if(object.exists(":View Check Run.Save_QPushButton"))
+                clickButton(waitForObject(":View Check Run.Save_QPushButton"));
+        }
+        //---------Preparing Check Run, Printing Check and Posting Check----
+        //---Prepare Check Run
+        try
+        {
+            
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
+            activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
+            waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
+            activateItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
+            waitForObjectItem(":xTuple ERP:*.Accounts Payable_QMenu", "Payments");
+            activateItem(":xTuple ERP:*.Accounts Payable_QMenu", "Payments");
+            waitForObjectItem(":xTuple ERP:*.Payments_QMenu", "Prepare Check Run...");
+            activateItem(":xTuple ERP:*.Payments_QMenu", "Prepare Check Run...");
+            snooze(0.5);
+            waitForObject(":Prepare Check Run._bankaccnt_XComboBox");
+            clickItem(":Prepare Check Run._bankaccnt_XComboBox","EBANK-eBank Checking Account",0,0,5,Qt.LeftButton);
+            snooze(0.5);
+            waitForObject(":Prepare Check Run.Prepare_QPushButton");
+            snooze(1);
+            clickButton(":Prepare Check Run.Prepare_QPushButton");
+        }
+        catch(e)
+        {
+            test.fail("Failed to prepare CheckRun:"+e);
+        }
+        
+        
+        //--------View Check run-----------
+        try
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting"));
+            activateItem(waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Accounts Payable_QMenu", "Payments"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Payments_QMenu", "View Check Run..."));
+            waitForObjectItem(":_frame._check_XTreeWidget", "TPARTS-Toy Parts Inc\\._1");
+            clickItem(":_frame._check_XTreeWidget", "TPARTS-Toy Parts Inc\\._1", 232, 12, 0, Qt.LeftButton);
+            
+            sendEvent("QMouseEvent", waitForObject(":_frame.Print_QPushButton"), QEvent.MouseButtonPress, 46, 11, Qt.LeftButton, 0);    
+            
+            snooze(2);
+            if(OS.name != "Windows")
+            {
+                activateItem(waitForObjectItem(":_QMenu", "Check Run..."));
+                clickButton(waitForObject(":Print Checks.Print_QPushButton"));
+                clickButton(waitForObject(":View Check Run.Yes_QPushButton_2"));
+                snooze(0.5);
+                findObject(":filename_QLineEdit").clear();
+                type(waitForObject(":filename_QLineEdit"), "2");
+                nativeType("<Tab>");
+                snooze(1);
+                clickButton(waitForObject(":Print.Print_QPushButton"));
+                snooze(0.5);
+                clickButton(waitForObject(":View Check Run.Yes_QPushButton_2"));
+                snooze(1);
+                clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
+            }
+            else
+            {
+                snooze(0.1);
+                activateItem(waitForObjectItem(":_QMenu", "Check Run..."));
+                waitForObject(":Print Check.Create EFT File_QPushButton");
+                clickButton(":Print Check.Create EFT File_QPushButton");
+                snooze(0.5);
+                waitForObject(":View Check Run.Save_QPushButton");
+                clickButton(":View Check Run.Save_QPushButton");
+                snooze(0.5);
+                if(object.exists(":View Check Run.Yes_QPushButton_2"))    
+                    clickButton(":View Check Run.Yes_QPushButton_2");
+                
+                clickButton(waitForObject(":ACH File OK?.Yes_QPushButton"));
+                clickButton(waitForObject(":Sales Order.Cancel_QPushButton_2"));
+            }
+        }
+        catch(e)
+        {
+            test.fail("Error in printing the check: " + e);
+        }
+        
+        //-----Post Check run-----
+        try
+        {
+            waitForObject(":_frame._check_XTreeWidget");
+            if(OS.name != "Windows")
+            {
+                var widget = findObject(":_frame._check_XTreeWidget");
+                var obj_TreeTopLevelItem =widget.topLevelItem(0);
+                var checkNum = obj_TreeTopLevelItem.text(3);
+            }
+            clickItem(":_frame._check_XTreeWidget", "No", 5, 5, 1, Qt.LeftButton);
+            snooze(0.5);
+            
+            
+            
+            waitForObject(":_frame.Post_QPushButton");
+            sendEvent("QMouseEvent", ":_frame.Post_QPushButton", QEvent.MouseButtonPress, 51, 9, Qt.LeftButton, 0);
+            snooze(0.5);
+            waitForObjectItem(":_QMenu", "Selected Check...");
+            activateItem(":_QMenu", "Selected Check...");
+            snooze(0.5);
+            clickButton(waitForObject(":List Unposted Invoices.Post_QPushButton"));
+            clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
+            test.log("Check has been posted");
+        }
+        catch(e)
+        {
+            test.fail("Error in posting check run:" + e);
+            if(object.exists(":Select Order for Billing.Close_QPushButton"))
+            {
+                clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
+            }
+        }
+        
+        
+        
+        //---------Journal Entry Verification for Check Post-----
         if(OS.name != "Windows")
         {
-            doNothing();
-        }
-        if(flag == 1)
-        {
-        
-            try
-            {
-                waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
-                activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
-                waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
-                activateItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
-                waitForObjectItem(":xTuple ERP:*.Accounts Payable_QMenu", "Voucher");
-                activateItem(":xTuple ERP:*.Accounts Payable_QMenu", "Voucher");
-                waitForObjectItem(":xTuple ERP:*.Voucher_QMenu", "List Unposted...");
-                activateItem(":xTuple ERP:*.Voucher_QMenu", "List Unposted...");
-                waitForObject(":xTuple ERP:*._vohead_XTreeWidget")
-                        openItemContextMenu(":xTuple ERP:*._vohead_XTreeWidget",vocnumber, 5, 5, Qt.LeftButton);      
-                snooze(1);
-                activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Post Voucher..."));
-                snooze(0.5);
-                waitForObject(":List Unposted Invoices.Continue_QPushButton");
-                clickButton(":List Unposted Invoices.Continue_QPushButton");
-                waitForObject(":Select Order for Billing.Close_QPushButton");
-                clickButton(":Select Order for Billing.Close_QPushButton");
-                test.log("Voucher Posted sucessfully");
-            }
-            catch(e)
-            {
-                test.fail("Failed to  Post voucher:" + e);
-                if(object.exists(":Select Order for Billing.Close_QPushButton"))
-                {
-                    waitForObject(":Select Order for Billing.Close_QPushButton");
-                    clickButton(":Select Order for Billing.Close_QPushButton");
-                }
-            }
-            
-            //---------Journal Entry Verification-----
-            
-            var bool = journalVerification(/TPARTS-Toy Parts Inc./ ,vocnumber);
+            var bool = journalVerification(/TPARTS-Toy Parts Inc./ ,checkNum);
             if(bool == 1)
             {
-                test.pass("Voucher " + vocnumber + " has a Journal entry");
+                test.pass("Check posted has a Journal entry ");
             }
             else
-                test.fail("No Journal entry is made for the Posting voucher: " +vocnumber);
-            
-            //---Verifying the Posted Status for Voucher in Journal------------
-            Jnum[1] =journalStatus(vocnumber,"No","before");
-            var j2 = Jnum[1];
-            test.log(j2);
-            //----Post Journal to Ledger------
-            
-            var bool = postJournal2Ledger("A/P");
-            if(bool ==1)
-                test.pass("Entries made for Voucher sucessfully verified");
-            else
-                test.fail("Error in Verifying entries made by Voucher");
-            
-            
-            //-----------Selecting Voucher for payment-------
-            try
+                test.fail("No Journal entry is made for the Posting Check ");
+        }  
+        else
+        {
+            var bool = journalVerification(/TPARTS-Toy Parts Inc./ ,-1);
+            if(bool == 1)
             {
-                waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
-                activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
-                waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
-                activateItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
-                waitForObjectItem(":xTuple ERP:*.Accounts Payable_QMenu", "Payments");
-                activateItem(":xTuple ERP:*.Accounts Payable_QMenu", "Payments");
-                waitForObjectItem(":xTuple ERP:*.Payments_QMenu", "Select...");
-                activateItem(":xTuple ERP:*.Payments_QMenu", "Select...");
-                waitForObject(":frame._apopen_XTreeWidget");
-                clickItem(":frame._apopen_XTreeWidget",vocnumber,0, 0, 5, Qt.LeftButton);
-                waitForObject(":frame.Select..._QPushButton");
-                clickButton(":frame.Select..._QPushButton");
-                snooze(0.5);
-                waitForObject(":_bankaccnt_XComboBox");
-                clickItem(":_bankaccnt_XComboBox", "EBANK-eBank Checking Account",0, 0, 5, Qt.LeftButton);
-                snooze(0.5);
-                waitForObject(":Select Order for Billing.Save_QPushButton");
-                clickButton(":Select Order for Billing.Save_QPushButton");
-                waitForObject(":Select Order for Billing.Close_QPushButton");
-                clickButton(":Select Order for Billing.Close_QPushButton");
-            }
-            catch(e)
-            {
-                test.fail("Selecting Voucher for payment failed:"+ e);
-                if(object.exists(":Select Order for Billing.Close_QPushButton"))
-                {
-                    waitForObject(":Select Order for Billing.Close_QPushButton");
-                    clickButton(":Select Order for Billing.Close_QPushButton");
-                }
-            }
-            //--Enable EFT check Printing-----
-            try
-            {
-                activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting"));
-                activateItem(waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Setup..."));
-                clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Accounts Payable");
-                waitForObject(":tab.Enable EFT Check Printing_QGroupBox"); 
-                if(!findObject(":tab.Enable EFT Check Printing_QGroupBox").checked)
-                {
-                    mouseClick(":tab.Enable EFT Check Printing_QGroupBox", 8, 12, 0, Qt.LeftButton);
-                }
-                test.log("Sucessfully Enabled EFT check printing:");
-                clickButton(waitForObject(":View Check Run.Save_QPushButton"));
-            }
-            catch(e)
-            {
-                test.fail("Error in Enabling EFT check Printing option:"+e);
-                if(object.exists(":View Check Run.Save_QPushButton"))
-                    clickButton(waitForObject(":View Check Run.Save_QPushButton"));
-            }
-            //---------Preparing Check Run, Printing Check and Posting Check----
-            //---Prepare Check Run
-            try
-            {
-                
-                waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
-                activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
-                waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
-                activateItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable");
-                waitForObjectItem(":xTuple ERP:*.Accounts Payable_QMenu", "Payments");
-                activateItem(":xTuple ERP:*.Accounts Payable_QMenu", "Payments");
-                waitForObjectItem(":xTuple ERP:*.Payments_QMenu", "Prepare Check Run...");
-                activateItem(":xTuple ERP:*.Payments_QMenu", "Prepare Check Run...");
-                snooze(0.5);
-                waitForObject(":Prepare Check Run._bankaccnt_XComboBox");
-                clickItem(":Prepare Check Run._bankaccnt_XComboBox","EBANK-eBank Checking Account",0,0,5,Qt.LeftButton);
-                snooze(0.5);
-                waitForObject(":Prepare Check Run.Prepare_QPushButton");
-                snooze(1);
-                clickButton(":Prepare Check Run.Prepare_QPushButton");
-            }
-            catch(e)
-            {
-                test.fail("Failed to prepare CheckRun:"+e);
-            }
-            
-            
-            //--------View Check run-----------
-            try
-            {
-                activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting"));
-                activateItem(waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Payable"));
-                activateItem(waitForObjectItem(":xTuple ERP:*.Accounts Payable_QMenu", "Payments"));
-                activateItem(waitForObjectItem(":xTuple ERP:*.Payments_QMenu", "View Check Run..."));
-                waitForObjectItem(":_frame._check_XTreeWidget", "TPARTS-Toy Parts Inc\\._1");
-                clickItem(":_frame._check_XTreeWidget", "TPARTS-Toy Parts Inc\\._1", 232, 12, 0, Qt.LeftButton);
-                
-                sendEvent("QMouseEvent", waitForObject(":_frame.Print_QPushButton"), QEvent.MouseButtonPress, 46, 11, Qt.LeftButton, 0);    
-                
-                snooze(2);
-                if(OS.name != "Windows")
-                {
-                    activateItem(waitForObjectItem(":_QMenu", "Check Run..."));
-                    clickButton(waitForObject(":Print Checks.Print_QPushButton"));
-                    clickButton(waitForObject(":View Check Run.Yes_QPushButton_2"));
-                    snooze(0.5);
-                    findObject(":filename_QLineEdit").clear();
-                    type(waitForObject(":filename_QLineEdit"), "2");
-                    nativeType("<Tab>");
-                    snooze(1);
-                    clickButton(waitForObject(":Print.Print_QPushButton"));
-                    snooze(0.5);
-                    clickButton(waitForObject(":View Check Run.Yes_QPushButton_2"));
-                    snooze(1);
-                    clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
-                }
-                else
-                {
-                    snooze(0.1);
-                    activateItem(waitForObjectItem(":_QMenu", "Check Run..."));
-                    waitForObject(":Print Check.Create EFT File_QPushButton");
-                    clickButton(":Print Check.Create EFT File_QPushButton");
-                    snooze(0.5);
-                    waitForObject(":View Check Run.Save_QPushButton");
-                    clickButton(":View Check Run.Save_QPushButton");
-                    snooze(0.5);
-                    if(object.exists(":View Check Run.Yes_QPushButton_2"))    
-                        clickButton(":View Check Run.Yes_QPushButton_2");
-                    
-                    clickButton(waitForObject(":ACH File OK?.Yes_QPushButton"));
-                      clickButton(waitForObject(":Sales Order.Cancel_QPushButton_2"));
-                }
-            }
-            catch(e)
-            {
-                test.fail("Error in printing the check: " + e);
-            }
-            
-            //-----Post Check run-----
-            try
-            {
-                waitForObject(":_frame._check_XTreeWidget");
-                if(OS.name != "Windows")
-                {
-                    var widget = findObject(":_frame._check_XTreeWidget");
-                    var obj_TreeTopLevelItem =widget.topLevelItem(0);
-                    var checkNum = obj_TreeTopLevelItem.text(3);
-                }
-                clickItem(":_frame._check_XTreeWidget", "No", 5, 5, 1, Qt.LeftButton);
-                snooze(0.5);
-                
-                
-                
-                waitForObject(":_frame.Post_QPushButton");
-                sendEvent("QMouseEvent", ":_frame.Post_QPushButton", QEvent.MouseButtonPress, 51, 9, Qt.LeftButton, 0);
-                snooze(0.5);
-                waitForObjectItem(":_QMenu", "Selected Check...");
-                activateItem(":_QMenu", "Selected Check...");
-                snooze(0.5);
-                clickButton(waitForObject(":List Unposted Invoices.Post_QPushButton"));
-                clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
-                test.log("Check has been posted");
-            }
-            catch(e)
-            {
-                test.fail("Error in posting check run:" + e);
-                if(object.exists(":Select Order for Billing.Close_QPushButton"))
-                {
-                    clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
-                }
-            }
-            
-            
-            
-            //---------Journal Entry Verification for Check Post-----
-            if(OS.name != "Windows")
-            {
-                var bool = journalVerification(/TPARTS-Toy Parts Inc./ ,checkNum);
-                if(bool == 1)
-                {
-                    test.pass("Check posted has a Journal entry ");
-                }
-                else
-                    test.fail("No Journal entry is made for the Posting Check ");
-            }  
-            else
-            {
-                var bool = journalVerification(/TPARTS-Toy Parts Inc./ ,-1);
-                if(bool == 1)
-                {
-                    test.pass("Check posted has a Journal entry ");
-                }
-                else
-                    test.fail("No Journal entry is made for the Posting Check ");
-            }
-            //---Verifying the Posted Status for Check in Journal------------
-            if(OS.name != "Windows")
-            {
-                Jnum[2] = journalStatus(checkNum,"No","before");
-                var j3 = Jnum[3];
-                test.log(j3);
+                test.pass("Check posted has a Journal entry ");
             }
             else
-                Jnum[2] =journalStatus(-1,"No","before");
-            
-            //----Post Journal to Ledger------
-            
-            var bool =  postJournal2Ledger("A/P");
-            if(bool ==1)
-                test.pass("Check entries are posted successfully from Journals to Ledger");
-            else
-                test.fail("Error in posting Check entries from Journals to Ledger");
-            
-            //----Gl Verification----------
-            var source1 = ["S/R", "A/P", "A/P"];
-            snooze(0.5);
-            var bool = glTransactions1(Jnum,"Journal Posting", source1);
-            if(bool ==1)
-            {
-                test.pass( "Purchase Order Processing made entries in General Ledger Transactions");
-            }
-            else
-                test.fail("No entries made  for  Purchase Order Processing in   General Ledger Transactions");
+                test.fail("No Journal entry is made for the Posting Check ");
+        }
+        //---Verifying the Posted Status for Check in Journal------------
+        if(OS.name != "Windows")
+        {
+            Jnum[2] = journalStatus(checkNum,"No","before");
+            var j3 = Jnum[3];
+            test.log(j3);
+        }
+        else
+            Jnum[2] =journalStatus(-1,"No","before");
         
-      }//Related to Voucher Creation
-      else //Related to Voucher Creation
-      {
-          test.fail("Error in Creating Voucher");
-      }
-  
-    }//Related to PO  release
-    else //Related to PO  release
+        //----Post Journal to Ledger------
+        
+        var bool =  postJournal2Ledger("A/P");
+        if(bool ==1)
+            test.pass("Check entries are posted successfully from Journals to Ledger");
+        else
+            test.fail("Error in posting Check entries from Journals to Ledger");
+        
+        //----Gl Verification----------
+        var source1 = ["S/R", "A/P", "A/P"];
+        snooze(0.5);
+        var bool = glTransactions1(Jnum,"Journal Posting", source1);
+        if(bool ==1)
+        {
+            test.pass( "Purchase Order Processing made entries in General Ledger Transactions");
+        }
+        else
+            test.fail("No entries made  for  Purchase Order Processing in   General Ledger Transactions");
+        
+    }//Related to Voucher Creation
+    else //Related to Voucher Creation
     {
-        test.fail("Error in Creating Purchase Order");
+        test.fail("Error in Creating Voucher");
     }
-
-
-  
-  
-  
+    
+    //    }//Related to PO  release
+    //    else //Related to PO  release
+    //    {
+    //        test.fail("Error in Creating Purchase Order");
+    //    }
+    //
+    //
+    
+    
+    
     //---To avoid unexpected blocks -----
     if(OS.name != "Windows")
     {
-      doNothing();
+        doNothing();
     }
-  snooze(0.5);
+    snooze(0.5);
     var Jnum = [];
     //--Create Return Authorization Disposition as ‘Return’, Credit/Ship as ‘Immediately’ and Credit by as ‘None’ ----
     if(appE!="PostBooks")
@@ -1010,8 +1010,8 @@ function main()
         }
         
         
-      
-      
+        
+        
         
         //---To avoid unexpected blocks -----
         if(OS.name != "Windows")
@@ -1182,7 +1182,7 @@ function main()
         
         if(appE =="Manufacturing")
         {
-         //-- Post Operations of a Work Order (after issuing the materials)of regular type Item------
+            //-- Post Operations of a Work Order (after issuing the materials)of regular type Item------
             
             postOperations(wonumreg, regqty); 
             
@@ -1195,7 +1195,7 @@ function main()
             }
             else
                 test.fail("No Journal entry is made for the  Postoperation of work order " + wonumreg);
-           
+            
             //----Post Journal to Ledger------
             
             var bool = postJournal2Ledger("W/O");
@@ -1824,7 +1824,7 @@ function main()
             test.pass("Misc. Voucher" +MisVnum +"Created Sucessfully:");
         }
         else
-           test.fail("Fail to Create Misc. Voucher:"); 
+            test.fail("Fail to Create Misc. Voucher:"); 
         openItemContextMenu(":xTuple ERP:*._vohead_XTreeWidget",MisVnum, 5, 5, Qt.LeftButton);       
         snooze(1);
         activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Post Voucher..."));
@@ -1914,7 +1914,7 @@ function main()
         clickButton(waitForObject(":Sales Order.Cancel_QPushButton"));
         
     }
-  
+    
     //---------Journal Entry Verification-----
     
     var bool = journalVerification(/Miscellaneous Adjustment/,Adjnum);
@@ -2012,9 +2012,9 @@ function main()
     
     snooze(0.5);  
     //---Create Series G/L Journal Entry------------
-  var SrsDocnum = "Series";
-  var srsamnt ="110";
-  var Jnum = [];
+    var SrsDocnum = "Series";
+    var srsamnt ="110";
+    var Jnum = [];
     
     try
     {
@@ -2059,9 +2059,9 @@ function main()
         }
     }
     
-  
+    
     //---Post Series G/L journal Created------
-  try
+    try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting"));
         activateItem(waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "General Ledger"));
@@ -2179,7 +2179,7 @@ function main()
     
     
     
-  
+    
     
     //------Create Standard Journals -----
     var Stdgrpamnt = "1200";
@@ -2724,17 +2724,17 @@ function main()
         }
     }
     
- 
- 
- 
- 
- 
- 
+    
+    
+    
+    
+    
+    
     //-----------Create and Post two/more entries from Journal to Ledger at same time---------------
     //---Simple G/L Journal Entry1-----
-  var Jnum = [];
-   var SmpleDocnum1 = "SimpleEntry4";
-  var smpleamnt = "100";
+    var Jnum = [];
+    var SmpleDocnum1 = "SimpleEntry4";
+    var smpleamnt = "100";
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting"));
@@ -2765,7 +2765,7 @@ function main()
             clickButton(waitForObject(":Simple G/L Journal Entry.Cancel_QPushButton"));
         }
     }
-     
+    
     //-----------Inventory Adjustment and post to Journal-------
     var Adjnum = "Invadj4";
     var Adjamnt = "600";
@@ -2843,7 +2843,7 @@ function main()
     //--For Entry2------
     var Jnum2 =journalStatus(Adjnum,"Yes","before");
     Jnum[1] = ++Jnum2;
-     test.log(Jnum2);
+    test.log(Jnum2);
     //----Gl Verification----------
     //----For Entry1----
     //----Gl Verification----------

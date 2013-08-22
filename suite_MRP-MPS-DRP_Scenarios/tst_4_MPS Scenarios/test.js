@@ -8,8 +8,28 @@ function main()
     //-----Log into Applicaiton--- 
     loginAppl("CONFIGURE");
   
-    waitForObject(":Registration Key.Yes_QPushButton");
-    clickButton(":Registration Key.Yes_QPushButton");  
+       //--------------- Set the window to Tab view mode -------------
+    try
+    {
+    activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Products"));
+    activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item"));
+    activateItem(waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List..."));
+    if(object.exists(":Work Order Schedule.Close_QToolButton"))
+    {
+        test.log("item screen opened");
+        activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Window"));
+        if(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"))
+        {
+        activateItem(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"));
+        }
+        clickButton(waitForObject(":Work Order Schedule.Close_QToolButton"));
+    }
+    }
+    catch(e)
+    {
+        test.fail("exception in changing to Tab view mode" + e);
+        clickButton(waitForObject(":Work Order Schedule.Close_QToolButton"));
+    }
     
     //MPS – PLAN STATUS “R” - ORDER PARAMETERS OFF & SAFETY STOCK SET TEST
     test.log("MPS – PLAN STATUS “R” - ORDER PARAMETERS OFF & SAFETY STOCK SET TEST");

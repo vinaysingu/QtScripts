@@ -5,7 +5,7 @@ function main()
     
     //-----login Application-----
     loginAppl("CONFIGURE"); 
-  snooze(6);
+    snooze(6);
     //-----Editing of preferences----
     try
     {
@@ -76,8 +76,8 @@ function main()
     var custname5 = "CUSTOMER5";
     var custType = "NORMAL"+"-"+"Normal Domestic Customers";
     
-  //---Create Pricing Schedule----
-  
+    //---Create Pricing Schedule----
+    
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
@@ -395,11 +395,11 @@ function main()
     {
         test.fail("Error in creating item in the Pricing Schedule:"+e);
     }//end of catch to add item
-   
     
-   //---Create New Customer-------
-     createCustomer(custType,custname5,"STORE1");
-   
+    
+    //---Create New Customer-------
+    createCustomer(custType,custname5,"STORE1");
+    
     //---Pricing Schedule Assignment for a Customer----
     var prcAssg = prcname +" - " +"Pricing Schedule edited sucessfully"; 
     prcasscust(custname5,prcAssg,prcname);
@@ -424,6 +424,7 @@ function main()
         snooze(0.5);
         var uc =findObject("{column='15' container=':_lineItemsPage.XLineEdit_XLineEdit' type='QModelIndex'}").text;
         var UC=parseInt(replaceSubstring(uc,",",""));
+        test.log("Unit Cost "+UC+"");
         if(UC == "50")
             test.pass("Unit Price of an Item populated correctly according to the pricing schedule assignied to customer");
         else
@@ -444,7 +445,7 @@ function main()
         }
     }
     
-     
+    
     //---variable declaration for customer type---
     
     var custType = "CUSTOMER TYPE1";
@@ -452,7 +453,7 @@ function main()
     custType1 = custType+'-'+custType;
     
     //---Create New Customer Type----
-                
+    
     try
     {
         
@@ -486,7 +487,7 @@ function main()
     
     //---Creating New Customer with customer type assigned----
     createCustomer(custType1,custname1,"STORE1");
-   
+    
     //---Assigning pricing Schedule for the Customer Type-----
     prcAssgCustType(custname1,custType1,custType,prcAssg);
     
@@ -568,6 +569,7 @@ function main()
         snooze(0.5);
         var uc =findObject("{column='15' container=':_lineItemsPage.XLineEdit_XLineEdit' type='QModelIndex'}").text;
         var UC=parseInt(replaceSubstring(uc,",",""));
+         test.log("Unit Cost "+UC+"");
         if(UC == "50")
             test.pass("Unit Price of an Item populated correctly according to the pricing schedule assignied for Customer Type");
         else
@@ -592,7 +594,7 @@ function main()
     var custname3 = "CUSTOMER3";
     var custType1 = custType+'-'+custType;
     //---Creaste New Customer Type----
- 
+    
     try
     {
         
@@ -652,6 +654,7 @@ function main()
         snooze(0.5);
         var uc =findObject("{column='15' container=':_lineItemsPage.XLineEdit_XLineEdit' type='QModelIndex'}").text;
         var UC=parseInt(replaceSubstring(uc,",",""));
+         test.log("Unit Cost "+UC+"");
         if(UC == "50")
             test.pass("Unit Price of an Item populated correctly according to the pricing schedule assignied for Customer Type");
         else
@@ -678,8 +681,8 @@ function main()
     var custType = "CUSTOMER TYPE3";
     var custname4 = "CUSTOMER4";
     var custType1 = custType+'-'+custType;
-
-
+    
+    
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
@@ -714,7 +717,7 @@ function main()
     }
     
     //----Add an KitItem to Pricing Schedule with qty break as 0--------
-   
+    
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
@@ -807,7 +810,7 @@ function main()
     
     
     //---Creaste New Customer Type----
-   
+    
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
@@ -839,7 +842,7 @@ function main()
     }
     
     //---Creating New Customer----
-   
+    
     createCustomer(custType1,custname4,"STORE1");
     
     var prcAssg = prcname+" - "+prcname;
@@ -867,6 +870,7 @@ function main()
         snooze(0.5);
         var uc =findObject("{column='15' container=':_lineItemsPage.XLineEdit_XLineEdit' type='QModelIndex'}").text;
         var UC=parseInt(replaceSubstring(uc,",",""));
+         test.log("Unit Cost "+UC+"");
         if(UC == "50")
             test.pass("Unit Price of an KitItem populated correctly according to the pricing schedule assignied for Customer Type");
         else

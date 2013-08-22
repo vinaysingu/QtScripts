@@ -10,27 +10,27 @@ function main()
     loginAppl("CONFIGURE"); 
     
     //-----Editing of preferences----
-        try
+    try
+    {
+        if(OS.name == "Darwin")
         {
-            if(OS.name == "Darwin")
-            {
-              activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-              activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-            }
-            else
-            {
-
-        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-        activateItem(":xTuple ERP: *_QMenuBar", "System");
-        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-        activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-   }
-              snooze(0.5);
-         waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
-          
-            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-               snooze(0.3);
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
+            
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+            activateItem(":xTuple ERP: *_QMenuBar", "System");
+            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+            activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+        }
+        snooze(0.5);
+        waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
+        
+        if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+            clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        snooze(0.3);
         
         if(object.exists(":Notice.Notice_QDialog"))
         {
@@ -40,7 +40,7 @@ function main()
             waitForObject(":Notice.OK_QPushButton");
             clickButton(":Notice.OK_QPushButton");
         }
-       
+        
         waitForObject(":User Preferences.Save_QPushButton_2");
         clickButton(":User Preferences.Save_QPushButton_2");
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
@@ -59,10 +59,10 @@ function main()
     waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
     activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
     
-   snooze(5);
+    snooze(5);
     
-   if(OS.name=="Linux")
-       startApplication("xtuple.bin");
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
     
     else
         startApplication("xtuple");
@@ -70,7 +70,7 @@ function main()
     
     loginAppl("CONFIGURE"); 
     
-   
+    
     //-----Variable Declaration-----
     var sonumber, soitem, soqty, soamount,wonumber;
     
@@ -79,8 +79,8 @@ function main()
     
     var appEdition = findApplicationEdition();
     //--------------- Set the window to Tab view mode -------------
-
-   tabView();
+    
+    tabView();
     
     //---- creating a sales order for REPAIRT1----
     
@@ -377,7 +377,7 @@ function main()
         waitForObject(":Close Work Order.Close W/O_QPushButton");
         clickButton(":Close Work Order.Close W/O_QPushButton");
         snooze(1);
-                
+        
         if(object.exists(":Sales Order.OK_QPushButton_2"))
         {
             test.pass("Unable to close work order");

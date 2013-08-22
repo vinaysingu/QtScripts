@@ -65,7 +65,7 @@ function main()
     snooze(2);
     
     loginAppl("CONFIGURE"); 
-  
+    
     
     // -------Inventory Setup -------
     try
@@ -147,12 +147,12 @@ function main()
     
     loginAppl("CONFIGURE");
     
-    
-  var appEdition = findApplicationEdition();
-  snooze(0.5);
+  
+    var appEdition = findApplicationEdition();
+    snooze(0.5);
     //------Enabling Tab View --------
     tabView();
-  //--------Copy YTRUCK1-----
+    //--------Copy YTRUCK1-----
     
     copyItem("YTRUCK1","AVGTRUCK 1");
     createRIS("AVGTRUCK 1");
@@ -186,7 +186,7 @@ function main()
     }
     
     
-    
+  
     //----- Inventory Adjustment Relatively by using 'Manual' radio button --------------
     
     //----- QOH,Unit Cost and Inventory value verification before posting Adjustment -----
@@ -318,8 +318,8 @@ function main()
             clickItem(":tabCost.Adjust Value_QGroupBox"," ",0, 0, 5, Qt.LeftButton);
         waitForObject(":Adjust Value.Calculated_QRadioButton");
         clickButton(":Adjust Value.Calculated_QRadioButton");
-////        waitForObject(":Adjust Value._cost_XLineEdit");
-////        type(":Adjust Value._cost_XLineEdit", "200");
+        ////        waitForObject(":Adjust Value._cost_XLineEdit");
+        ////        type(":Adjust Value._cost_XLineEdit", "200");
         nativeType("<Tab>");
         waitForObject(":_adjustmentTypeGroup.Relative_QRadioButton");
         clickButton(":_adjustmentTypeGroup.Relative_QRadioButton");
@@ -608,108 +608,108 @@ function main()
         test.fail("Error in Posting the Adjustment Relatively by unchcecking the 'Adjust Value'check box"+e);
     }
     
-  
-  
-  //------- Unit Cost and Inventory value verification after posting Adjustment -----
-  
-  
-  try{
-      //---- QOH verification-----
-      var array = inventoryVariables("AVGTRUCK 1","WH1",appEdition);
-      var qtyavgtruck10 = array[0];
-      if(qtyavgtruck10 == qtyavgtruck9 + 100)
-          test.pass("QOH Updated correctly for the Adjustment posted Relatively");
-      else
-          test.fail("QOH is not updated correctly for the Adjustment Posted Relatively");
-      
-      //----- Value verification -----
-      var avgtruckval10 = array[2];
-      if(avgtruckval10 == avgtruckval9)
-          test.pass("Inventory value updated correctly for the Adjustment posted Relatively");
-      else
-          test.fail("Inventory value is not updated correctly for the Adjustment Posted Relatively");
-      
-      //---- Unit Cost Verification -----    
-      var avgtruckuc10 = array[1];
-      avgtruckval10 = replaceSubsting(avgtruckval10);
-      result = (avgtruckval10)/qtyavgtruck10;
-      result = roundNumber(result,4);
-      test.log(result);
-      if(avgtruckuc10 == result)
-          test.pass("Unit Cost Updated correctly for the Adjustment posted Relatively");
-      else
-          test.fail("Unit Cost is not updated correctly for the Adjustment Posted Relatively");
-      
-      
-      
-  }
-  catch(e)
-  {
-      test.fail("Error in comparing values"+e);
-  }
-  //--------Purchase Order Processing for an Average Costing Item --------
-  var sourceitem = "TBOX1";
-  var targetitem = "AVGBOX 1";
+    
+    
+    //------- Unit Cost and Inventory value verification after posting Adjustment -----
+    
+    
+    try{
+        //---- QOH verification-----
+        var array = inventoryVariables("AVGTRUCK 1","WH1",appEdition);
+        var qtyavgtruck10 = array[0];
+        if(qtyavgtruck10 == qtyavgtruck9 + 100)
+            test.pass("QOH Updated correctly for the Adjustment posted Relatively");
+        else
+            test.fail("QOH is not updated correctly for the Adjustment Posted Relatively");
+        
+        //----- Value verification -----
+        var avgtruckval10 = array[2];
+        if(avgtruckval10 == avgtruckval9)
+            test.pass("Inventory value updated correctly for the Adjustment posted Relatively");
+        else
+            test.fail("Inventory value is not updated correctly for the Adjustment Posted Relatively");
+        
+        //---- Unit Cost Verification -----    
+        var avgtruckuc10 = array[1];
+        avgtruckval10 = replaceSubsting(avgtruckval10);
+        result = (avgtruckval10)/qtyavgtruck10;
+        result = roundNumber(result,4);
+        test.log(result);
+        if(avgtruckuc10 == result)
+            test.pass("Unit Cost Updated correctly for the Adjustment posted Relatively");
+        else
+            test.fail("Unit Cost is not updated correctly for the Adjustment Posted Relatively");
+        
+        
+        
+    }
+    catch(e)
+    {
+        test.fail("Error in comparing values"+e);
+    }
+    //--------Purchase Order Processing for an Average Costing Item --------
+    var sourceitem = "TBOX1";
+    var targetitem = "AVGBOX 1";
     //--------Copy TBOX1-----
-try
-  {
-       waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products");
-       activateItem(":xTuple ERP: *_QMenuBar", "Products");
-       waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item");
-       activateItem(":xTuple ERP:*.Products_QMenu", "Item");
-       waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List...");
-       activateItem(":xTuple ERP:*.Item_QMenu", "List...");
-       waitForObject(":Quotes.Query_QToolButton");
-       clickButton(":Quotes.Query_QToolButton");
-       
-       waitForObject(":_list_XTreeWidget_3");
-       clickItem(":_list_XTreeWidget_3", sourceitem, 0, 0, 5, Qt.LeftButton);
-       openItemContextMenu(":_list_XTreeWidget_3", sourceitem, 5, 5, Qt.LeftButton);
-       waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Copy...");
-       activateItem(":xTuple ERP:*._menu_QMenu", "Copy...");
-       
-       waitForObject(":_targetItemNumber_XLineEdit_2");
-       type(":_targetItemNumber_XLineEdit_2", targetitem);
-       
-       if(!findObject(":Copy Item.Copy Item Costs_QCheckBox").checked)
-       {
-           clickButton(":Copy Item.Copy Item Costs_QCheckBox");
-       }
-       if(!findObject(":Copy Item.Copy Bill of Materials_QCheckBox").checked)
-       {
-           clickButton(":Copy Item.Copy Bill of Materials_QCheckBox");
-       }
-       if(object.exists(":Copy Item.Copy Bill of Operations_XCheckBox"))
-       {
-           if(!findObject(":Copy Item.Copy Bill of Operations_XCheckBox").checked)
-           {
-               clickButton(":Copy Item.Copy Bill of Operations_XCheckBox");
-           }
-           if(!findObject(":Copy Item.Copy Used At Operation_XCheckBox").checked)
-           {
-               clickButton(":Copy Item.Copy Used At Operation_XCheckBox");
-           }
-       }
-       waitForObject(":Items.Copy_QPushButton");
-       clickButton(":Items.Copy_QPushButton");
-       
-       waitForObject(":Sales Order.No_QPushButton");
-       clickButton(":Sales Order.No_QPushButton");
-       snooze(1);
-       if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='"+targetitem+"' type='QModelIndex'}"))
-           test.pass("Item " + targetitem +" created");
-       else
-           test.fail("Item creation failed");
-       
-       waitForObject(":Quotes.Close_QToolButton");
-       clickButton(":Quotes.Close_QToolButton");
-   }
-   catch(e)
-   {
-       test.fail("Exception in creating Item " + e);
-       if(object.exists(":Quotes.Close_QToolButton"))
-           clickButton(":Quotes.Close_QToolButton");
-   }
+    try
+    {
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products");
+        activateItem(":xTuple ERP: *_QMenuBar", "Products");
+        waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item");
+        activateItem(":xTuple ERP:*.Products_QMenu", "Item");
+        waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List...");
+        activateItem(":xTuple ERP:*.Item_QMenu", "List...");
+        waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
+        
+        waitForObject(":_list_XTreeWidget_3");
+        clickItem(":_list_XTreeWidget_3", sourceitem, 0, 0, 5, Qt.LeftButton);
+        openItemContextMenu(":_list_XTreeWidget_3", sourceitem, 5, 5, Qt.LeftButton);
+        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Copy...");
+        activateItem(":xTuple ERP:*._menu_QMenu", "Copy...");
+        
+        waitForObject(":_targetItemNumber_XLineEdit_2");
+        type(":_targetItemNumber_XLineEdit_2", targetitem);
+        
+        if(!findObject(":Copy Item.Copy Item Costs_QCheckBox").checked)
+        {
+            clickButton(":Copy Item.Copy Item Costs_QCheckBox");
+        }
+        if(!findObject(":Copy Item.Copy Bill of Materials_QCheckBox").checked)
+        {
+            clickButton(":Copy Item.Copy Bill of Materials_QCheckBox");
+        }
+        if(object.exists(":Copy Item.Copy Bill of Operations_XCheckBox"))
+        {
+            if(!findObject(":Copy Item.Copy Bill of Operations_XCheckBox").checked)
+            {
+                clickButton(":Copy Item.Copy Bill of Operations_XCheckBox");
+            }
+            if(!findObject(":Copy Item.Copy Used At Operation_XCheckBox").checked)
+            {
+                clickButton(":Copy Item.Copy Used At Operation_XCheckBox");
+            }
+        }
+        waitForObject(":Items.Copy_QPushButton");
+        clickButton(":Items.Copy_QPushButton");
+        
+        waitForObject(":Sales Order.No_QPushButton");
+        clickButton(":Sales Order.No_QPushButton");
+        snooze(1);
+        if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='"+targetitem+"' type='QModelIndex'}"))
+            test.pass("Item " + targetitem +" created");
+        else
+            test.fail("Item creation failed");
+        
+        waitForObject(":Quotes.Close_QToolButton");
+        clickButton(":Quotes.Close_QToolButton");
+    }
+    catch(e)
+    {
+        test.fail("Exception in creating Item " + e);
+        if(object.exists(":Quotes.Close_QToolButton"))
+            clickButton(":Quotes.Close_QToolButton");
+    }
     createRIS("AVGBOX 1");
     //------ Changing the costing method to Average -----
     try{
@@ -737,9 +737,9 @@ try
     catch(e)
     {
         test.fail("Error in setting costing method to Average"+e);
-    }
-//----- QOH,Unit Cost and Inventory value verification before posting Adjustment -----
-  snooze(3);
+//    }
+    //----- QOH,Unit Cost and Inventory value verification before posting Adjustment -----
+    snooze(3);
     var array = inventoryVariables("AVGBOX 1","WH1",appEdition);
     var qtyavgbox1 = array[0];
     var avgboxuc1 = array[1];
@@ -1112,7 +1112,7 @@ try
     }
     
     
-       //------- QOH,Unit Cost and Inventory value verification after posting Adjustment -----
+    //------- QOH,Unit Cost and Inventory value verification after posting Adjustment -----
     
     
     try{
@@ -1130,7 +1130,7 @@ try
             test.pass("Unit Cost Updated correctly for the Materail Receipt posted Relatively");
         else
             test.fail("Unit Cost is not updated correctly for the Materail Receipt posted Relatively");
-      
+        
         //----- Value verification -----
         var avgtruckval14 = array[2];
         avgtruckval14 = replaceSubsting(avgtruckval14);
@@ -1152,7 +1152,7 @@ try
     
     //----- To avoid Unexpected blocks ------
     if(OS.name != "Windows")
-    doNothing();
+        doNothing();
     
     //-------- Material Receipt by unchecking 'Adjust Value Check box--
     
@@ -1212,7 +1212,7 @@ try
         //----- Value verification -----
         var avgtruckval16 = array[2];
         test.log(avgtruckval16);
-          avgtruckval16 = replaceSubsting(avgtruckval16);
+        avgtruckval16 = replaceSubsting(avgtruckval16);
         avgtruckval16 = roundNumber(avgtruckval16,0);
         test.log("avgtruckval15 is "+avgtruckval15+"");
         test.log("avgtruckval16 is "+avgtruckval16+"");
@@ -1241,7 +1241,7 @@ try
         test.fail("Error in comparing values"+e);
     }
     
-  
+    
     //------- Sales Order processing for an AVG costing item ----
     
     
@@ -1376,6 +1376,9 @@ try
         //---- Unit Cost Verification -----    
         
         var avgtruckuc24 = array[1];
+        test.log("avgtruckuc23 "+avgtruckuc23+"");
+              avgtruckuc24 = roundNumber(avgtruckuc24,2);
+         test.log("avgtruckuc24 "+avgtruckuc24+"");
         if(avgtruckuc24 == avgtruckuc23)
             test.pass("Unit Cost Updated correctly for the Stock Returned");
         else
@@ -1416,7 +1419,7 @@ try
     snooze(3);
     var qtyavgtruck19 = qtyavgtruck24;
     var avgtruckval19 = avgtruckval24;
-    
+  
     //-----Creating a Work Order-----
     var wonumber = createWorkOrder("AVGTRUCK 1", 100);
     //--------To avoid unexpected blocks ---------
@@ -1739,7 +1742,7 @@ try
             test.fail("No GL entry is made for the variance of cost for the site transformation " + strfmnum);
         
     }
-  
-  
+    
+    
     
 }

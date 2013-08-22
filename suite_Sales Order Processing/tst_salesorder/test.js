@@ -8,66 +8,66 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     
-        //-----Editing of preferences----
-            try
-            {
-                if(OS.name == "Darwin")
-                {
-                  activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-        activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-                }
-                else
-                {
-    
+    //-----Editing of preferences----
+    try
+    {
+        if(OS.name == "Darwin")
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
+            
             waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
             activateItem(":xTuple ERP: *_QMenuBar", "System");
             waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
             activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
         }
-                snooze(0.5);
-                waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
-               
-                if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-                    clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-            
-            if(object.exists(":Notice.Notice_QDialog"))
-            {
-                if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
-                    clickButton(":Notice.Remind me about this again._QCheckBox");
-                snooze(0.2);
-                waitForObject(":Notice.OK_QPushButton");
-                clickButton(":Notice.OK_QPushButton");
-            }
-            
-            waitForObject(":User Preferences.Save_QPushButton_2");
-            clickButton(":User Preferences.Save_QPushButton_2");
-            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-            activateItem(":xTuple ERP: *_QMenuBar", "System");
-            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-            activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-        }
-        catch(e)
-        {
-            test.fail("Error in editing preferences"+ e);
-        }  
+        snooze(0.5);
+        waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
         
-        //--------Exiting the application------
+        if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+            clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        
+        if(object.exists(":Notice.Notice_QDialog"))
+        {
+            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+                clickButton(":Notice.Remind me about this again._QCheckBox");
+            snooze(0.2);
+            waitForObject(":Notice.OK_QPushButton");
+            clickButton(":Notice.OK_QPushButton");
+        }
+        
+        waitForObject(":User Preferences.Save_QPushButton_2");
+        clickButton(":User Preferences.Save_QPushButton_2");
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
         activateItem(":xTuple ERP: *_QMenuBar", "System");
-        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-        activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-        
-        snooze(5);
-        
-        if(OS.name=="Linux")
-            startApplication("xtuple.bin");
-        
-        else
-            startApplication("xtuple");
-        
-        snooze(2);
-        
-        loginAppl("CONFIGURE"); 
+        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+    }
+    catch(e)
+    {
+        test.fail("Error in editing preferences"+ e);
+    }  
+    
+    //--------Exiting the application------
+    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+    activateItem(":xTuple ERP: *_QMenuBar", "System");
+    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    
+    snooze(5);
+    
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
+    
+    else
+        startApplication("xtuple");
+    
+    snooze(2);
+    
+    loginAppl("CONFIGURE"); 
     
     
     //-----Variable Declaration-----
@@ -115,13 +115,13 @@ function main()
         test.fail("Error in identifying the application edition" + e);       
         
     }
-      //--------------- Set the window to Tab view mode -------------
+    //--------------- Set the window to Tab view mode -------------
     
-        tabView();
-  
+    tabView();
+    
     if(appEdition !="PostBooks" )
     {
-      
+        
         //------Creating a Lot controlled item------
         try
         {
@@ -328,7 +328,7 @@ function main()
             test.fail("Error in adjusting QOH of STRUCK1" + e);
         }
     }
-  //-----Create a Quote-----
+    //-----Create a Quote-----
     try
     {
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
@@ -466,59 +466,6 @@ function main()
     //-----Create a Prospect-----
     if (appEdition !="PostBooks")
     {
-    try
-    {
-        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
-        activateItem(":xTuple ERP: *_QMenuBar", "Sales");
-        waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Prospect");
-        activateItem(":xTuple ERP: *.Sales_QMenu", "Prospect");
-        waitForObjectItem(":xTuple ERP: *.Prospect_QMenu", "List...");
-        activateItem(":xTuple ERP: *.Prospect_QMenu", "List...");
-        
-        waitForObject(":Prospects.Query_QToolButton");
-        clickButton(":Prospects.Query_QToolButton");
-        waitForObject(":Prospects.New_QToolButton");
-        clickButton(":Prospects.New_QToolButton");
-        waitForObject(":_number_XLineEdit");
-        type(":_number_XLineEdit", "zenprospect1");
-        waitForObject(":_name_QLineEdit");
-        type(":_name_QLineEdit", "Zen Prospect");
-        snooze(1);
-                    waitForObject(":_salesrep_XComboBox");
-        clickItem(":_salesrep_XComboBox", "SMASTERS-Sam Masters", 5, 5, 1, Qt.LeftButton);
-          
-        waitForObject(":_contactTab.VirtualClusterLineEdit_ContactClusterLineEdit");
-        waitForObject(":_contactTab_QLabel");
-        sendEvent("QMouseEvent", ":_contactTab_QLabel", QEvent.MouseButtonPress, 0, 0, Qt.LeftButton, 0);
-        waitForObjectItem(":_QMenu", "List...");
-        activateItem(":_QMenu", "List...");    
-        
-        
-        waitForObject(":_listTab.Admin_QModelIndex");
-        mouseClick(":_listTab.Admin_QModelIndex", 23, 7, 0, Qt.LeftButton);;
-        
-        
-        waitForObject(":_contactTab.OK_QPushButton");
-        clickButton(":_contactTab.OK_QPushButton");
-        waitForObject(":Prospect.Save_QPushButton");
-        clickButton(":Prospect.Save_QPushButton");
-        
-        waitForObject(":_list_XTreeWidget_7");
-        if(object.exists("{column='0' container=':_list_XTreeWidget_7' text='ZENPROSPECT1' type='QModelIndex'}"))   
-            test.pass("ZENPROSPECT1 created");
-        else 
-            test.fail("Prospect creation failed");
-        
-        waitForObject(":Prospects.Close_QToolButton");
-        clickButton(":Prospects.Close_QToolButton");
-    }
-    catch(e)
-    {
-        test.fail("Error in creating a prospect" + e);
-    }
-    }
-    else
-    {
         try
         {
             waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
@@ -537,10 +484,9 @@ function main()
             waitForObject(":_name_QLineEdit");
             type(":_name_QLineEdit", "Zen Prospect");
             snooze(1);
-         
-                waitForObject(":_salesrep_XComboBox");
-            clickItem(":_salesrep_XComboBox", "1000-Sam Masters", 5, 5, 1, Qt.LeftButton);
-                  
+            waitForObject(":_salesrep_XComboBox");
+            clickItem(":_salesrep_XComboBox", "SMASTERS-Sam Masters", 5, 5, 1, Qt.LeftButton);
+            
             waitForObject(":_contactTab.VirtualClusterLineEdit_ContactClusterLineEdit");
             waitForObject(":_contactTab_QLabel");
             sendEvent("QMouseEvent", ":_contactTab_QLabel", QEvent.MouseButtonPress, 0, 0, Qt.LeftButton, 0);
@@ -570,7 +516,61 @@ function main()
         {
             test.fail("Error in creating a prospect" + e);
         }
+    }
+    else
+    {
+        try
+        {
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
+            activateItem(":xTuple ERP: *_QMenuBar", "Sales");
+            waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Prospect");
+            activateItem(":xTuple ERP: *.Sales_QMenu", "Prospect");
+            waitForObjectItem(":xTuple ERP: *.Prospect_QMenu", "List...");
+            activateItem(":xTuple ERP: *.Prospect_QMenu", "List...");
+            
+            waitForObject(":Prospects.Query_QToolButton");
+            clickButton(":Prospects.Query_QToolButton");
+            waitForObject(":Prospects.New_QToolButton");
+            clickButton(":Prospects.New_QToolButton");
+            waitForObject(":_number_XLineEdit");
+            type(":_number_XLineEdit", "zenprospect1");
+            waitForObject(":_name_QLineEdit");
+            type(":_name_QLineEdit", "Zen Prospect");
+            snooze(1);
+            
+            waitForObject(":_salesrep_XComboBox");
+            clickItem(":_salesrep_XComboBox", "1000-Sam Masters", 5, 5, 1, Qt.LeftButton);
+            
+            waitForObject(":_contactTab.VirtualClusterLineEdit_ContactClusterLineEdit");
+            waitForObject(":_contactTab_QLabel");
+            sendEvent("QMouseEvent", ":_contactTab_QLabel", QEvent.MouseButtonPress, 0, 0, Qt.LeftButton, 0);
+            waitForObjectItem(":_QMenu", "List...");
+            activateItem(":_QMenu", "List...");    
+            
+            
+            waitForObject(":_listTab.Admin_QModelIndex");
+            mouseClick(":_listTab.Admin_QModelIndex", 23, 7, 0, Qt.LeftButton);;
+            
+            
+            waitForObject(":_contactTab.OK_QPushButton");
+            clickButton(":_contactTab.OK_QPushButton");
+            waitForObject(":Prospect.Save_QPushButton");
+            clickButton(":Prospect.Save_QPushButton");
+            
+            waitForObject(":_list_XTreeWidget_7");
+            if(object.exists("{column='0' container=':_list_XTreeWidget_7' text='ZENPROSPECT1' type='QModelIndex'}"))   
+                test.pass("ZENPROSPECT1 created");
+            else 
+                test.fail("Prospect creation failed");
+            
+            waitForObject(":Prospects.Close_QToolButton");
+            clickButton(":Prospects.Close_QToolButton");
         }
+        catch(e)
+        {
+            test.fail("Error in creating a prospect" + e);
+        }
+    }
     //-----Create a Quote using Prospect-----
     try
     {
@@ -783,16 +783,16 @@ function main()
         var quotequantity = findObject(":_qtyOrdered_XLineEdit").text;
         nativeType("<Tab>");
         snooze(1);
-                   waitForObject(":Sales Order.Yes_QPushButton");
-            clickButton(":Sales Order.Yes_QPushButton");
-               waitForObject(":Quote.Save_QPushButton");
+        waitForObject(":Sales Order.Yes_QPushButton");
+        clickButton(":Sales Order.Yes_QPushButton");
+        waitForObject(":Quote.Save_QPushButton");
         clickButton(":Quote.Save_QPushButton");
         waitForObject(":Quote.Close_QPushButton_2");
         clickButton(":Quote.Close_QPushButton_2");
         waitForObject(":Quote.Save_QPushButton_2");
         clickButton(":Quote.Save_QPushButton_2")
                 
-         waitForObject(":_list_XTreeWidget_4");
+                waitForObject(":_list_XTreeWidget_4");
         doubleClickItem(":_list_XTreeWidget_4", quotenumber, 5, 5, 0, Qt.LeftButton);
         waitForObject(":Quote.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Quote.qt_tabwidget_tabbar_QTabBar", "Line Items");
@@ -1291,7 +1291,7 @@ function main()
     {
         test.fail("Error in copying a sales order" + e);
     }
-  
+    
     
     //-----Edit a Sales Order-----
     try

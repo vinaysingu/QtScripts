@@ -6,9 +6,8 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     
-    waitForObject(":*.Yes_QPushButton");
-    clickButton(":*.Yes_QPushButton");
-  
+    
+    
     //---------------Enabling the database options--------- 
     try
     {
@@ -128,22 +127,22 @@ function main()
         test.fail("Error in capturing planned order numbers" + e);
     }
     
-     //--------------- Set the window to Tab view mode -------------
+    //--------------- Set the window to Tab view mode -------------
     try
     {
-    activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Products"));
-    activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item"));
-    activateItem(waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List..."));
-    if(object.exists(":Work Order Schedule.Close_QToolButton"))
-    {
-        test.log("item screen opened");
-        activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Window"));
-        if(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"))
+        activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Products"));
+        activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item"));
+        activateItem(waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List..."));
+        if(object.exists(":Work Order Schedule.Close_QToolButton"))
         {
-        activateItem(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"));
+            test.log("item screen opened");
+            activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Window"));
+            if(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"))
+            {
+                activateItem(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"));
+            }
+            clickButton(waitForObject(":Work Order Schedule.Close_QToolButton"));
         }
-        clickButton(waitForObject(":Work Order Schedule.Close_QToolButton"));
-    }
     }
     catch(e)
     {
@@ -451,7 +450,7 @@ function main()
         waitForObject(":_list_XTreeWidget_15");
         mouseClick(":_list_XTreeWidget_15", 122, 144, 0, Qt.LeftButton);
         test.compare(findObject(":_list.MULTIPLE_QModelIndex").text, "MULTIPLE");
-            test.pass("Consolidated Invoice is created");
+        test.pass("Consolidated Invoice is created");
         waitForObject(":Work Order Schedule.Close_QToolButton");
         clickButton(":Work Order Schedule.Close_QToolButton");
     }
@@ -530,9 +529,9 @@ function main()
     {
         test.fail("Error in shipping the order" + e);
     }
-  
-  
- 
+    
+    
+    
     
     //----Issue stock to Shipping and Ship Order----   
     try
@@ -681,7 +680,7 @@ function main()
     //------List Unposted Purchase Order------
     try
     {
-        PONUM=PONUM-5;
+      PONUM=PONUM-5;
         waitForObjectItem(":xTuple ERP:*_QMenuBar_2", "Purchase");
         activateItem(":xTuple ERP:*_QMenuBar_2", "Purchase");
         waitForObjectItem(":xTuple ERP:*.Purchase_QMenu", "Purchase Order");
@@ -814,7 +813,7 @@ function main()
         clickButton(":*.Return_QPushButton");
         waitForObject(":List Unposted Invoices.Post_QPushButton");
         clickButton(":List Unposted Invoices.Post_QPushButton");
-              
+        
         waitForObject(":Enter Purchase Order Returns.VirtualClusterLineEdit_OrderLineEdit");
         type(":Enter Purchase Order Returns.VirtualClusterLineEdit_OrderLineEdit",PONUM);
         nativeType("<Tab>");
@@ -1109,8 +1108,7 @@ function main()
         if(object.exists(":View Check Run.Yes_QPushButton_2"))    
             clickButton(":View Check Run.Yes_QPushButton_2");     
         
-//        waitForObject(":*.Yes_QPushButton");
-//        clickButton(":*.Yes_QPushButton");     
+       
         waitForObject(":ACH File OK?.Yes_QPushButton");
         clickButton(":ACH File OK?.Yes_QPushButton");    
         
@@ -1160,7 +1158,7 @@ function main()
     //----implode work Order----
     try
     {  
-        WONUM=WONUM-9;
+        WONUM=WONUM-10;
         waitForObjectItem(":xTuple ERP:*_QMenuBar_2", "Manufacture");
         activateItem(":xTuple ERP:*_QMenuBar_2", "Manufacture");
         waitForObjectItem(":xTuple ERP:*.Manufacture_QMenu", "Reports");

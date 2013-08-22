@@ -297,8 +297,11 @@
 :Log In.Options..._QPushButton_2	{text='Options...' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
 :Log In.Recent_QPushButton	{name='_recent' text='Recent' type='QPushButton' visible='1' window=':Log In_login2'}
 :Log In.Recent_QPushButton_2	{text='Recent' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
+:Log In._database_QComboBox	{name='_database' type='QComboBox' visible='1' window=':Log In_login2'}
 :Log In._frame_QFrame	{name='_frame' type='QFrame' visible='1' window=':Log In_login2'}
 :Log In._logo_QLabel	{name='_logo' type='QLabel' visible='1' window=':Log In_login2'}
+:Log In._port_QLineEdit	{name='_port' type='QLineEdit' visible='1' window=':Log In_login2'}
+:Log In._server_QLineEdit	{name='_server' type='QLineEdit' visible='1' window=':Log In_login2'}
 :Log In_login2	{name='login2' type='login2' visible='1' windowTitle='Log In'}
 :Login Options.Database:_QLabel	{name='_databaseLit' text='Database:' type='QLabel' visible='1' window=':Login Options_login2Options'}
 :Login Options.Port:_QLabel	{name='_portLit' text='Port:' type='QLabel' visible='1' window=':Login Options_login2Options'}
@@ -573,6 +576,7 @@
 :_custFrame._cust_CustCluster	{name='_cust' type='CustCluster' visible='1'}
 :_custhist.60091_QModelIndex	{column='2' container=':_frame._custhist_XTreeWidget' text='60091' type='QModelIndex'}
 :_database_QLineEdit	{name='_database' type='QLineEdit' visible='1'}
+:_database_QLineEdit_2	{parentWidget=':Log In._database_QComboBox' type='QLineEdit' unnamed='1' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit	{name='XDateEdit' type='XDateEdit' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit_2	{name='XDateEdit' occurrence='2' type='XDateEdit' visible='1'}
 :_description_XLineEdit	{buddy=':Site Zone.Description:_QLabel' name='_description' type='XLineEdit' visible='1'}

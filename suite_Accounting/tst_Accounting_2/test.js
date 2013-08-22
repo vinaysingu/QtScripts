@@ -8,9 +8,7 @@ function main()
     loginAppl("CONFIGURE"); 
    
    snooze(3);
-   //-------- Enabling Tab View -------
-   
-   tabView();
+  
    
     //--------Retrieve invoice number-----
     try

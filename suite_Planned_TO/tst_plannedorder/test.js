@@ -6,30 +6,30 @@ function main()
     
     //-----login Application-----
     loginAppl("CONFIGURE");
-  
     
-   //-----Editing of preferences----
-        try
+    
+    //-----Editing of preferences----
+    try
+    {
+        if(OS.name == "Darwin")
         {
-            if(OS.name == "Darwin")
-            {
-               activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Products"));
-               activateItem(waitForObjectItem(":*.Products_QMenu", "Preferences..."));
-            }
-            else
-            {
-
-        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-        activateItem(":xTuple ERP: *_QMenuBar", "System");
-        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-        activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-    }
-            snooze(0.5);
-        waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
+            activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
             
-            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-                snooze(0.3);
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+            activateItem(":xTuple ERP: *_QMenuBar", "System");
+            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+            activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+        }
+        snooze(0.5);
+        waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
+        
+        if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+            clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        snooze(0.3);
         
         if(object.exists(":Notice.Notice_QDialog"))
         {
@@ -69,10 +69,10 @@ function main()
     snooze(2);
     
     loginAppl("CONFIGURE"); 
-  
+    
     var appEdition = findApplicationEdition();
-  //--------------- Set the window to Tab view mode -------------
-
+    //--------------- Set the window to Tab view mode -------------
+    
     tabView();
     //---------------Create new Site - WH3----------
     try
@@ -262,8 +262,8 @@ function main()
             clickButton(":Sales Order.Cancel_QPushButton");
         }
     }
-
-  var qohWh1 = queryQoh("YTRUCK1","WH1",appEdition);
+    
+    var qohWh1 = queryQoh("YTRUCK1","WH1",appEdition);
     var qohWh2 = "0";
     
     if(qohWh1 < "100")

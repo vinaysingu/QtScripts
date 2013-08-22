@@ -630,7 +630,8 @@ function main()
         test.fail("Error in verifying the status of the SO"+e);
     }
     //----- Charging an Authorized Sales Order from A/R Workbench screen -------
-    
+    //----- Finding the Credit Memo number created on charging the SO ---- 
+    var cmnum = creditMemoNum();
     //----- Sales Orders Creation-----
     var soamnt4 = createandreturnSalesOrderamnt("YTRUCK1", "100");
     test.log("soamnt4 is "+soamnt4+"");
@@ -734,8 +735,7 @@ function main()
         test.fail("Error in Charging an authorized sales order"+e);
     }
     
-    
-    cmnum++;
+
     //---- Refunding the Credit Memo created on charging the SO -----
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
@@ -1069,8 +1069,7 @@ function main()
     }
        //----- Finding the Credit Memo number created on charging the SO ---- 
        cmnum++;
-       cmnum++;
-    
+
     //-----Issue Stock to Shipping-----
     try
     {       

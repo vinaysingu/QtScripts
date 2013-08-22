@@ -113,7 +113,7 @@ function main()
   
 
 
-    
+  
     //---------------Define: Bank Accounts------------------
     
     try{
@@ -249,7 +249,7 @@ function main()
 
     }catch(e){test.fail("Exception in defining Adjustment types:"+e);}
     
-    
+  
   
     //------------Define: Fiscal Year----------------
     try{

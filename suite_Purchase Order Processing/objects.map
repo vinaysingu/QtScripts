@@ -161,7 +161,7 @@
 :List Vendors.List Vendors_QWorkspaceTitleBar	{container=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin.List Vendors_QWorkspaceChild' type='QWorkspaceTitleBar' unnamed='1' visible='1' windowTitle='List Vendors'}
 :List Vendors._vendor_XTreeWidget	{container=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin.List Vendors_QWorkspaceChild' name='_vendor' type='XTreeWidget' visible='1'}
 :Log In.Cancel_QPushButton	{text='Cancel' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
-:Log In.Login_QPushButton	{text='Login' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
+:Log In.Login_QPushButton_2	{text='Login' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
 :Log In.Options..._QPushButton	{name='_options' text='Options...' type='QPushButton' visible='1' window=':Log In_login2'}
 :Log In.Options..._QPushButton_2	{text='Options...' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
 :Log In.Recent_QPushButton	{name='_recent' text='Recent' type='QPushButton' visible='1' window=':Log In_login2'}

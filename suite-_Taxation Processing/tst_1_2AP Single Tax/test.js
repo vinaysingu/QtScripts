@@ -8,7 +8,7 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     
-   //---find Application Edition------
+    //---find Application Edition------
     try
     {
         
@@ -49,10 +49,10 @@ function main()
         test.fail("Error in identifying the application edition" + e);       
         
     }
-   //--------------- Set the window to Tab view mode -------------
+    //--------------- Set the window to Tab view mode -------------
     tabView();
     
-    //    //------ Creating Vendor ------
+    //------ Creating Vendor ------
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Purchase");
         activateItem(":xTuple ERP: *_QMenuBar", "Purchase");
@@ -103,70 +103,70 @@ function main()
         test.fail("Error in creating Vendor"+e);
     }
     snooze(3);
-      var sourceitem = "TBOX1";
+    var sourceitem = "TBOX1";
     var targetitem = "TAXBOX 1";
     //----- Purchase Type Item Creation -----
     
-   try
-  {
-       waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products");
-       activateItem(":xTuple ERP: *_QMenuBar", "Products");
-       waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item");
-       activateItem(":xTuple ERP:*.Products_QMenu", "Item");
-       waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List...");
-       activateItem(":xTuple ERP:*.Item_QMenu", "List...");
-       waitForObject(":Quotes.Query_QToolButton");
-       clickButton(":Quotes.Query_QToolButton");
-       
-       waitForObject(":_list_XTreeWidget_3");
-       clickItem(":_list_XTreeWidget_3", sourceitem, 0, 0, 5, Qt.LeftButton);
-       openItemContextMenu(":_list_XTreeWidget_3", sourceitem, 5, 5, Qt.LeftButton);
-       waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Copy...");
-       activateItem(":xTuple ERP:*._menu_QMenu", "Copy...");
-       
-       waitForObject(":_targetItemNumber_XLineEdit_2");
-       type(":_targetItemNumber_XLineEdit_2", targetitem);
-       
-       if(!findObject(":Copy Item.Copy Item Costs_QCheckBox").checked)
-       {
-           clickButton(":Copy Item.Copy Item Costs_QCheckBox");
-       }
-       if(!findObject(":Copy Item.Copy Bill of Materials_QCheckBox").checked)
-       {
-           clickButton(":Copy Item.Copy Bill of Materials_QCheckBox");
-       }
-       if(object.exists(":Copy Item.Copy Bill of Operations_XCheckBox"))
-       {
-           if(!findObject(":Copy Item.Copy Bill of Operations_XCheckBox").checked)
-           {
-               clickButton(":Copy Item.Copy Bill of Operations_XCheckBox");
-           }
-           if(!findObject(":Copy Item.Copy Used At Operation_XCheckBox").checked)
-           {
-               clickButton(":Copy Item.Copy Used At Operation_XCheckBox");
-           }
-       }
-       waitForObject(":Items.Copy_QPushButton");
-       clickButton(":Items.Copy_QPushButton");
-       
-       waitForObject(":Sales Order.No_QPushButton");
-       clickButton(":Sales Order.No_QPushButton");
-       snooze(1);
-       if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='"+targetitem+"' type='QModelIndex'}"))
-           test.pass("Item " + targetitem +" created");
-       else
-           test.fail("Item creation failed");
-       
-       waitForObject(":Quotes.Close_QToolButton");
-       clickButton(":Quotes.Close_QToolButton");
-   }
-   catch(e)
-   {
-       test.fail("Exception in creating Item " + e);
-       if(object.exists(":Quotes.Close_QToolButton"))
-           clickButton(":Quotes.Close_QToolButton");
-   }
-  createRIS("TAXBOX 1");
+    try
+    {
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products");
+        activateItem(":xTuple ERP: *_QMenuBar", "Products");
+        waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item");
+        activateItem(":xTuple ERP:*.Products_QMenu", "Item");
+        waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List...");
+        activateItem(":xTuple ERP:*.Item_QMenu", "List...");
+        waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
+        
+        waitForObject(":_list_XTreeWidget_3");
+        clickItem(":_list_XTreeWidget_3", sourceitem, 0, 0, 5, Qt.LeftButton);
+        openItemContextMenu(":_list_XTreeWidget_3", sourceitem, 5, 5, Qt.LeftButton);
+        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Copy...");
+        activateItem(":xTuple ERP:*._menu_QMenu", "Copy...");
+        
+        waitForObject(":_targetItemNumber_XLineEdit_2");
+        type(":_targetItemNumber_XLineEdit_2", targetitem);
+        
+        if(!findObject(":Copy Item.Copy Item Costs_QCheckBox").checked)
+        {
+            clickButton(":Copy Item.Copy Item Costs_QCheckBox");
+        }
+        if(!findObject(":Copy Item.Copy Bill of Materials_QCheckBox").checked)
+        {
+            clickButton(":Copy Item.Copy Bill of Materials_QCheckBox");
+        }
+        if(object.exists(":Copy Item.Copy Bill of Operations_XCheckBox"))
+        {
+            if(!findObject(":Copy Item.Copy Bill of Operations_XCheckBox").checked)
+            {
+                clickButton(":Copy Item.Copy Bill of Operations_XCheckBox");
+            }
+            if(!findObject(":Copy Item.Copy Used At Operation_XCheckBox").checked)
+            {
+                clickButton(":Copy Item.Copy Used At Operation_XCheckBox");
+            }
+        }
+        waitForObject(":Items.Copy_QPushButton");
+        clickButton(":Items.Copy_QPushButton");
+        
+        waitForObject(":Sales Order.No_QPushButton");
+        clickButton(":Sales Order.No_QPushButton");
+        snooze(1);
+        if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='"+targetitem+"' type='QModelIndex'}"))
+            test.pass("Item " + targetitem +" created");
+        else
+            test.fail("Item creation failed");
+        
+        waitForObject(":Quotes.Close_QToolButton");
+        clickButton(":Quotes.Close_QToolButton");
+    }
+    catch(e)
+    {
+        test.fail("Exception in creating Item " + e);
+        if(object.exists(":Quotes.Close_QToolButton"))
+            clickButton(":Quotes.Close_QToolButton");
+    }
+    createRIS("TAXBOX 1");
     
     //------ Assiging Item to the TAX TYPE -----
     assignTaxType("TAXBOX 1",1);
@@ -226,17 +226,17 @@ function main()
         clickButton(":Select Order for Billing.Save_QPushButton");
         waitForObject(":Sales Order.Cancel_QPushButton");
         clickButton(":Sales Order.Cancel_QPushButton");
-        snooze(2);
-   
+        snooze(.5);
+        
         if(!findObject(":List Open Purchase Orders.Unreleased_XCheckBox").checked)
-            clickButton(":List Open Purchase Orders.Unreleased_XCheckBox");       waitForObject(":Quotes.Query_QToolButton");
-        clickButton(":Quotes.Query_QToolButton");
-        snooze(1);
+            clickButton(":List Open Purchase Orders.Unreleased_XCheckBox");
+        snooze(2);
         waitForObject(":_list_XTreeWidget_3");
         if(object.exists("{column='0' container=':_list_XTreeWidget_3' text= '"+ponumber1+"' type='QModelIndex'}"))
             test.pass("Purchase order created successfully");
         else 
-            test.fail("Purchase order couldn't be created");
+            test.fail("Purchase order is not created");
+        snooze(1);
         waitForObject(":Quotes.Close_QToolButton");
         clickButton(":Quotes.Close_QToolButton");
         
@@ -245,6 +245,7 @@ function main()
     {
         test.fail("Error in creating purchase order" + e);
     }
+    
     
     //-----Releasing Purchase Orders-----
     try
@@ -275,7 +276,7 @@ function main()
     {
         test.fail("Error in Releasing purchase orders" + e);
     }
-  
+    
     //-----Receiving Purchase Goods-----
     try
     {
@@ -406,8 +407,8 @@ function main()
     }
     else
         test.fail("No Tax History is available for the "+vounumber1+" voucher tax amount");
-  //---------- Misc. Voucher Creation ---------
- 
+    //---------- Misc. Voucher Creation ---------
+    
     try{
         
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
@@ -495,7 +496,7 @@ function main()
     else
         test.fail("No Tax History is available for the "+miscvou1+" misc.voucher");
     
-      //------- A/P Misc.Debit Memo Creation ------
+    //------- A/P Misc.Debit Memo Creation ------
     try{ 
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
         activateItem(":xTuple ERP: *_QMenuBar", "Accounting");

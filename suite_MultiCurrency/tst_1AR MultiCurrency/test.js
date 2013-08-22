@@ -61,12 +61,12 @@ function main()
     
     loginAppl("CONFIGURE"); 
    
-   var appE = findApplicationEdition();
-    
+ var appE = findApplicationEdition();
+  
  
-   //----- Enabling Tab View -----
-   
-   tabView();
+ //----- Enabling Tab View -----
+ 
+ tabView();
  
     //-------------- Creating Exchange Rates-----------------------
     try{
@@ -382,6 +382,7 @@ function main()
         result = replaceSubsting(result);
         test.log(result);
         var result1 = roundNumber((soamount*rate),2);
+        test.log("result "+result1+"")
             if(result == result1)
             test.pass("foreign currency is converted into base currency and has a GL entry for cash receipt");
         else
@@ -725,8 +726,8 @@ function main()
         test.fail("error in verifying GL entry for Cash Receipt"+e);
         
     }
-    
   
+
     //------------------- Service Order Processing-----------------
     
     var sojob = createSalesOrder1("REPAIRT1", "100","XTRM");
@@ -734,7 +735,6 @@ function main()
     test.log(soamt);
     
     var wonum = sojob+"-1";
-    test.log(""+wonum+" WO for REPAIRT1 created successfully linked to sales order")
             
             //------------ Releasing Work Orders----------------------------
             try{

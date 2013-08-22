@@ -167,7 +167,7 @@ function main()
         }
     }//End of Main catch
     
-  
+    
     //---Pricing Schedule Assignment for a Customer----
     var prcAssg = Prdprcname1 +" - " +Prdprcname1; 
     prcasscust(prdcname1,prcAssg,Prdprcname1);
@@ -194,12 +194,12 @@ function main()
     var prdcname2 = "PRDCUST2";
     var shipnum = "STORE2";
     createCustomer(custType,prdcname2,shipnum);
-   
+    
     //---Pricing Schedule Assignment to customer Ship-to--------
     prcassgship(prdcname2 ,shipnum,prcAssg);
     //---Create SO----
     var prdsonum2 = createSalesOrder1(dispitem1, 100,prdcname2);
-   
+    
     //---Edit the Sales Order to verify the Discount Applied----
     var uprc = salesunitprice(prdsonum2);
     //---Verifying the UnitPrice----
@@ -271,7 +271,7 @@ function main()
     
     snooze(0.5);
     
-       
+    
     //---Discount by Product catageory using Fixed Amount-------
     //---Create Product Catageory----
     var prdctry = "PRODUCTCAT1";
@@ -423,7 +423,7 @@ function main()
         }
     }//End of Main catch
     
-   
+    
     //---Pricing Schedule Assignment for a Customer----
     var prcAssg = Prdprcname2 +" - " +Prdprcname2; 
     prcasscust(prdcname4,prcAssg,Prdprcname2);
@@ -448,12 +448,12 @@ function main()
     var prdcname5 = "PRDCUST5";
     var shipnum = "STORE2";
     createCustomer(custType,prdcname5,shipnum);
-      
+    
     //---Pricing Schedule Assignment to customer Ship-to--------
     prcassgship(prdcname5,shipnum,prcAssg);
     //---Create SO----
     var prdsonum5 = createSalesOrder1(dispitem2, 100 , prdcname5);
-  
+    
     //---Edit the Sales Order to verify the Discount Applied----
     var custprc =  salesCustprice(prdsonum5,dispitem2);
     //--Verifying the CustomerPrice----
@@ -501,12 +501,12 @@ function main()
     var prdcname6 = "PRDCUST6";
     custType1 = custType+'-'+custType;
     createCustomer(custType1,prdcname6,shipnum);
-   
+    
     //---Assigning pricing Schedule for the Customer Type-----
     prcAssgCustType(prdcname6,custType1,custType,prcAssg);
     //---Create SO----
     var prdsonum6 = createSalesOrder1(dispitem2, 100 ,prdcname6);
-   
+    
     //---Edit the Sales Order to verify the Customer Price Calculated ---
     
     var cusprc =  salesCustprice(prdsonum6,dispitem2);
