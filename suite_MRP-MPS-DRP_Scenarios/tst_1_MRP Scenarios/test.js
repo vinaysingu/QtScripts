@@ -15,90 +15,107 @@ function main()
         test.log("Registration key dialog not available");
     }
     
-//   //-----Editing of preferences----
-//        try
-//        {
-//            if(OS.name == "Darwin")
-//            {
-//               activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Products"));
-//               activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-//            }
-//            else
-//            {
-//
-//        waitForObjectItem(":xTuple ERP:*_QMenuBar", "System");
-//        activateItem(":xTuple ERP:*_QMenuBar", "System");
-//        waitForObjectItem(":xTuple ERP:*.System_QMenu", "Preferences...");
-//        activateItem(":xTuple ERP:*.System_QMenu", "Preferences...");
-//    }
-//            snooze(0.5);
-//        waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
-//            snooze(1);
-//            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-//                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-//                snooze(0.3);
-//            waitForObject(":Notice.OK_QPushButton");
-//            clickButton(":Notice.OK_QPushButton");
-//    
-//        waitForObject(":_idleTimeout_QSpinBox");
-//        findObject(":_idleTimeout_QSpinBox").clear();
-//        type(":_idleTimeout_QSpinBox", "0");
-//        waitForObject(":User Preferences.Save_QPushButton_2");
-//        clickButton(":User Preferences.Save_QPushButton_2");
-//        
-//    }
-//    catch(e)
-//    {
-//        test.fail("Error in assigning user preferences" + e);
-//    }
-//      
-//    //-------Uncheck Enforce site calendar--------
-//    try
-//    {
-//    waitForObjectItem(":xTuple ERP:*_QMenuBar", "Schedule");
-//    activateItem(":xTuple ERP:*_QMenuBar", "Schedule");
-//    waitForObjectItem(":xTuple ERP:*.Schedule_QMenu", "Setup...");
-//    activateItem(":xTuple ERP:*.Schedule_QMenu", "Setup...");
-//     if((findObject(":_stack.Enforce Site Calendar for Planning and Orders_QCheckBox").checked))
-//        {
-//         clickButton(":_stack.Enforce Site Calendar for Planning and Orders_QCheckBox");
-//     }
-//    
-//    waitForObject(":Bill of Materials.Save_QPushButton_3");
-//    clickButton(":Bill of Materials.Save_QPushButton_3");
-//    }
-//    catch(e)
-//    {
-//        test.fail("Error in uncheck Enforce site calendar" + e);
-//    }
+    //-----Editing of preferences----
+    try
+    {
+        if(OS.name == "Darwin")
+        {
+            activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
+            
+            waitForObjectItem(":xTuple ERP:*_QMenuBar", "System");
+            activateItem(":xTuple ERP:*_QMenuBar", "System");
+            waitForObjectItem(":xTuple ERP:*.System_QMenu", "Preferences...");
+            activateItem(":xTuple ERP:*.System_QMenu", "Preferences...");
+        }
+        snooze(0.5);
+        waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
+        snooze(1);
+        if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+            clickButton(":Interface Options.Show windows inside workspace_QRadioButton");            
+        snooze(0.5);
+        if(object.exists(":Notice.Remind me about this again._QCheckBox"))
+        {
+            waitForObject(":Notice.Remind me about this again._QCheckBox");
+            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+                clickButton(":Notice.Remind me about this again._QCheckBox");
+            snooze(0.1);
+            waitForObject(":Notice.OK_QPushButton");
+            clickButton(":Notice.OK_QPushButton");
+        }
+        
+        waitForObject(":_idleTimeout_QSpinBox");
+        findObject(":_idleTimeout_QSpinBox").clear();
+        type(":_idleTimeout_QSpinBox", "0");
+        waitForObject(":User Preferences.Save_QPushButton_2");
+        clickButton(":User Preferences.Save_QPushButton_2");
+        
+    }
+    catch(e)
+    {
+        test.fail("Error in assigning user preferences" + e);
+    }
     
-//    //--------Exiting the application------
-//    waitForObjectItem(":xTuple ERP:*_QMenuBar", "System");
-//    activateItem(":xTuple ERP:*_QMenuBar", "System");
-//    waitForObjectItem(":xTuple ERP:*.System_QMenu", "Exit xTuple ERP...");
-//    activateItem(":xTuple ERP:*.System_QMenu", "Exit xTuple ERP...");
-//    
-//    snooze(5);
-//    
-//    if(OS.name=="Linux")
-//        startApplication("xtuple.bin");
-//    
-//    else
-//        startApplication("xtuple");
-//    
-//    snooze(2);
-//    
-//    loginAppl("CONFIGURE"); 
-//    try
-//    {
-//        waitForObject(":Registration Key.Yes_QPushButton");
-//        clickButton(":Registration Key.Yes_QPushButton");
-//    }
-//    catch(e)
-//    {
-//        test.log("Registration key dialog not available");
-//    }
-  //-------Assign all Privileges------
+    //-------Uncheck Enforce site calendar--------
+    try
+    {
+        waitForObjectItem(":xTuple ERP:*_QMenuBar", "Schedule");
+        activateItem(":xTuple ERP:*_QMenuBar", "Schedule");
+        waitForObjectItem(":xTuple ERP:*.Schedule_QMenu", "Setup...");
+        activateItem(":xTuple ERP:*.Schedule_QMenu", "Setup...");
+        if((findObject(":_stack.Enforce Site Calendar for Planning and Orders_QCheckBox").checked))
+        {
+            clickButton(":_stack.Enforce Site Calendar for Planning and Orders_QCheckBox");
+        }
+        
+        waitForObject(":Bill of Materials.Save_QPushButton_3");
+        clickButton(":Bill of Materials.Save_QPushButton_3");
+    }
+    catch(e)
+    {
+        test.fail("Error in uncheck Enforce site calendar" + e);
+    }
+    
+    //--------Exiting the application------
+    waitForObjectItem(":xTuple ERP:*_QMenuBar", "System");
+    activateItem(":xTuple ERP:*_QMenuBar", "System");
+    waitForObjectItem(":xTuple ERP:*.System_QMenu", "Exit xTuple ERP...");
+    activateItem(":xTuple ERP:*.System_QMenu", "Exit xTuple ERP...");
+    
+    snooze(5);
+    
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
+    
+    else
+        startApplication("xtuple");
+    
+    snooze(2);
+    
+    loginAppl("CONFIGURE"); 
+    try
+    {
+        waitForObject(":Registration Key.Yes_QPushButton");
+        clickButton(":Registration Key.Yes_QPushButton");
+    }
+    catch(e)
+    {
+        test.log("Registration key dialog not available");
+    }
+    snooze(0.5);
+    if(object.exists(":Notice.Remind me about this again._QCheckBox"))
+    {
+        waitForObject(":Notice.Remind me about this again._QCheckBox");
+        if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+            clickButton(":Notice.Remind me about this again._QCheckBox");
+        snooze(0.1);
+        waitForObject(":Notice.OK_QPushButton");
+        clickButton(":Notice.OK_QPushButton");
+    }
+    //-------Assign all Privileges------
     try
     {
         waitForObjectItem(":xTuple ERP:*_QMenuBar", "System");
@@ -128,8 +145,8 @@ function main()
     {
         test.fail("Error in assigning privileges" + e);
     }
-
-
+    
+    
     //-----System Rescan Privileges-    
     try
     {
@@ -143,29 +160,30 @@ function main()
         test.fail("Error in rescanning privileges" + e);
     }
     
-//    //--------------- Set the window to Tab view mode -------------
-//    try
-//    {
-//    activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Products"));
-//    activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item"));
-//    activateItem(waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List..."));
-//    if(object.exists(":Work Order Schedule.Close_QToolButton"))
-//    {
-//        test.log("item screen opened");
-//        activateItem(waitForObjectItem("::xTuple ERP:*_QMenuBar", "Window"));
-//        if(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"))
-//        {
-//        activateItem(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"));
-//        }
-//        clickButton(waitForObject(":Work Order Schedule.Close_QToolButton"));
-//    }
-//    }
-//    catch(e)
-//    {
-//        test.fail("exception in changing to Tab view mode" + e);
-//    }
-  
-//    MRP("+999");
+    //--------------- Set the window to Tab view mode -------------
+    try
+    {
+        activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Products"));
+        activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item"));
+        activateItem(waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List..."));
+        if(object.exists(":Work Order Schedule.Close_QToolButton"))
+        {
+            test.log("item screen opened");
+            activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Window"));
+            if(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"))
+            {
+                activateItem(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"));
+            }
+            clickButton(waitForObject(":Work Order Schedule.Close_QToolButton"));
+        }
+    }
+    catch(e)
+    {
+        test.fail("exception in changing to Tab view mode" + e);
+        clickButton(waitForObject(":Work Order Schedule.Close_QToolButton"));
+    }
+    
+    //    MRP("+999");
     MRPbyItem("TBOX1","WH1","+99");
     MPS("+999");
     
@@ -196,8 +214,8 @@ function main()
     {
         test.fail("Error in viewing planned orders" + e);
         if(object.exists(":Planned Orders.Close_QToolButton"))
-        clickButton(":Planned Orders.Close_QToolButton");
-
+            clickButton(":Planned Orders.Close_QToolButton");
+        
     }
     
     
@@ -217,8 +235,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -263,12 +281,12 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up  Item Site of TBOX1" + e);
-          if(object.exists(":Item Sites.Close_QToolButton"))
-        clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
         
     } 
     
-//    MRP("+99");
+    //    MRP("+99");
     MRPbyItem("TBOX1","WH1","+99");
     
     
@@ -293,8 +311,8 @@ function main()
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-          if(object.exists(":Planned Orders.Close_QToolButton"))
-        clickButton(":Planned Orders.Close_QToolButton");
+        if(object.exists(":Planned Orders.Close_QToolButton"))
+            clickButton(":Planned Orders.Close_QToolButton");
     }
     
     //MRP REORDER POINT TEST   
@@ -314,10 +332,10 @@ function main()
         waitForObjectItem(":_QMenu", "List...");
         activateItem(":_QMenu", "List...");
         
-       if(!object.exists(":_filterGroup.Manage_QPushButton"))
+        if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -363,11 +381,11 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up Item Site of TBOX1" + e);
-          if(object.exists(":Item Sites.Close_QToolButton"))
-        clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
     } 
     
-//    MRP("+99");
+    //    MRP("+99");
     MRPbyItem("TBOX1","WH1","+99");
     
     //--------Verify generated Planned Orders-----
@@ -414,8 +432,8 @@ function main()
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-          if(object.exists(":Planned Orders.Close_QToolButton"))
-        clickButton(":Planned Orders.Close_QToolButton");
+        if(object.exists(":Planned Orders.Close_QToolButton"))
+            clickButton(":Planned Orders.Close_QToolButton");
     }
     
     
@@ -438,8 +456,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -484,12 +502,12 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up Item Site of TBOX1" + e);
-          if(object.exists(":Item Sites.Close_QToolButton"))
-        clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
     }
     
-     MRPbyItem("TBOX1","WH1","+99");
-     //MRP("+99");
+    MRPbyItem("TBOX1","WH1","+99");
+    
     
     //--------Verify generated Planned Orders-----
     try
@@ -534,8 +552,8 @@ function main()
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-          if(object.exists(":Planned Orders.Close_QToolButton"))
-        clickButton(":Planned Orders.Close_QToolButton");
+        if(object.exists(":Planned Orders.Close_QToolButton"))
+            clickButton(":Planned Orders.Close_QToolButton");
     }
     
     
@@ -555,10 +573,10 @@ function main()
         activateItem(":xTuple ERP:*.Inventory_QMenu", "Item Site");
         waitForObjectItem(":_QMenu", "List...");
         activateItem(":_QMenu", "List...");
-       if(!object.exists(":_filterGroup.Manage_QPushButton"))
+        if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -603,11 +621,11 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up Item Site of TBOX1" + e);
-          if(object.exists(":Item Sites.Close_QToolButton"))
-        clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
     }
     
-//    MRP("+99");
+    //    MRP("+99");
     MRPbyItem("TBOX1","WH1","+99");
     
     //--------Verify generated Planned Orders-----
@@ -651,8 +669,8 @@ function main()
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-          if(object.exists(":Planned Orders.Close_QToolButton"))
-        clickButton(":Planned Orders.Close_QToolButton");
+        if(object.exists(":Planned Orders.Close_QToolButton"))
+            clickButton(":Planned Orders.Close_QToolButton");
     }
     
     
@@ -673,8 +691,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -721,7 +739,7 @@ function main()
         test.fail("Error in setting up Item Site of TBOX1" + e);
     }
     
-//    MRP("+99");
+    
     MRPbyItem("TBOX1","WH1","+99");
     
     //--------Verify generated Planned Orders-----
@@ -797,8 +815,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -845,7 +863,7 @@ function main()
         test.fail("Error in setting up Item Site of TBOX1" + e);
     }
     
-//    MRP("+99");
+    
     MRPbyItem("TBOX1","WH1","+99");
     
     
@@ -910,10 +928,10 @@ function main()
         activateItem(":xTuple ERP:*.Inventory_QMenu", "Item Site");
         waitForObjectItem(":_QMenu", "List...");
         activateItem(":_QMenu", "List...");
-       if(!object.exists(":_filterGroup.Manage_QPushButton"))
+        if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -960,7 +978,7 @@ function main()
         test.fail("Error in setting up Item Site of TBOX1" + e);
     }
     
-//    MRP("+99");
+    
     MRPbyItem("TBOX1","WH1","+99");
     
     //--------Verify generated Planned Orders-----
@@ -1024,10 +1042,10 @@ function main()
         activateItem(":xTuple ERP:*.Inventory_QMenu", "Item Site");
         waitForObjectItem(":_QMenu", "List...");
         activateItem(":_QMenu", "List...");
-      if(!object.exists(":_filterGroup.Manage_QPushButton"))
+        if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -1074,7 +1092,7 @@ function main()
         test.fail("Error in setting up Item Site of TBOX1" + e);
     }
     
-//    MRP("+99");
+    
     MRPbyItem("TBOX1","WH1","+99");
     
     //--------Verify generated Planned Orders-----
@@ -1137,10 +1155,10 @@ function main()
         activateItem(":xTuple ERP:*.Inventory_QMenu", "Item Site");
         waitForObjectItem(":_QMenu", "List...");
         activateItem(":_QMenu", "List...");
-       if(!object.exists(":_filterGroup.Manage_QPushButton"))
+        if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -1182,8 +1200,7 @@ function main()
         test.fail("Error in setting up Item Site of TBOX1" + e);
     }
     
-//    MRP("+99");
-    MRPbyItem("TBOX1","WH1","+99");
+       MRPbyItem("TBOX1","WH1","+99");
     
     //--------Verify generated Planned Orders-----
     try
@@ -1233,10 +1250,10 @@ function main()
         activateItem(":xTuple ERP:*.Inventory_QMenu", "Item Site");
         waitForObjectItem(":_QMenu", "List...");
         activateItem(":_QMenu", "List...");
-         if(!object.exists(":_filterGroup.Manage_QPushButton"))
+        if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -1276,7 +1293,6 @@ function main()
         test.fail("Error in setting  up Item Site of TBOX1 " + e);
     }
     
-//    MRP("+99");
     MRPbyItem("TBOX1","WH1","+99");
     
     
@@ -1328,10 +1344,10 @@ function main()
         activateItem(":xTuple ERP:*.Inventory_QMenu", "Item Site");
         waitForObjectItem(":_QMenu", "List...");
         activateItem(":_QMenu", "List...");
-         if(!object.exists(":_filterGroup.Manage_QPushButton"))
+        if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -1367,7 +1383,6 @@ function main()
         test.fail("Error in setting  up Item Site of TBOX1 " + e);
     }
     
-//    MRP("+99");
     MRPbyItem("TBOX1","WH1","+99");
     
     
@@ -1436,10 +1451,10 @@ function main()
         activateItem(":xTuple ERP:*.Inventory_QMenu", "Item Site");
         waitForObjectItem(":_QMenu", "List...");
         activateItem(":_QMenu", "List...");
-          if(!object.exists(":_filterGroup.Manage_QPushButton"))
+        if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -1490,7 +1505,6 @@ function main()
         test.fail("Error in setting  up Item Site of TBOX1 " + e);
     }
     
-//    MRP("+99");
     MRPbyItem("TBOX1","WH1","+99");
     
     //--------View Planned Orders----        

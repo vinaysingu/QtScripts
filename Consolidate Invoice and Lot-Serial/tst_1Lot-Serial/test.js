@@ -1,3 +1,4 @@
+
 function main()
 {
     
@@ -170,8 +171,7 @@ function main()
         type(waitForObject(":Lot/Serial.VirtualClusterLineEdit_LotserialLineEdit"),lot);
         nativeType("<Tab>");
         clickButton(waitForObject(":_char.New_QPushButton"));
-//        waitForObject(":Lot Serial Characteristic._char_QComboBox");
-//        clickItem(":Lot Serial Characteristic._char_QComboBox","QA-RESULTS",0, 0, 5, Qt.LeftButton);
+
         waitForObject(":_value_XLineEdit");
         type(waitForObject(":_value_XLineEdit"), "121");
         snooze(0.5);

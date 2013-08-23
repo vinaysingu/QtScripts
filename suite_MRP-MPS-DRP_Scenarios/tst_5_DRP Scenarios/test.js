@@ -5,9 +5,28 @@ function main()
     
     loginAppl("CONFIGURE");
     
-    waitForObject(":Registration Key.Yes_QPushButton");
-    clickButton(":Registration Key.Yes_QPushButton");
-  
+   
+     //--------------- Set the window to Tab view mode -------------
+    try
+    {
+    activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Products"));
+    activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item"));
+    activateItem(waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List..."));
+    if(object.exists(":Work Order Schedule.Close_QToolButton"))
+    {
+        test.log("item screen opened");
+        activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Window"));
+        if(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"))
+        {
+        activateItem(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"));
+        }
+        clickButton(waitForObject(":Work Order Schedule.Close_QToolButton"));
+    }
+    }
+    catch(e)
+    {
+        test.fail("exception in changing to Tab view mode" + e);
+    }
     DelAllWO();
     DelAllSO();
     DelAllPO();
@@ -1225,9 +1244,8 @@ function main()
         clickButton(":Planned Orders.Query_QToolButton"); 
         waitForObject(":Order #_HeaderViewItem");
         mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
-        if(findObject(":_planord.Col1_QModelIndex").text> findObject(":_planord.Col2_QModelIndex").text)
-            mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
-        
+        snooze(0.5);
+
         waitForObject(":_list_XTreeWidget_10");
         var sWidgetTreeControl = ":_list_XTreeWidget_10";
         var obj_TreeWidget = findObject(sWidgetTreeControl);

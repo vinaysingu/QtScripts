@@ -50,7 +50,9 @@
 :Cash Receipt_XLineEdit	{occurrence='6' type='XLineEdit' unnamed='1' visible='1'}
 :Cash Receipt_XLineEdit_2	{occurrence='8' type='XLineEdit' unnamed='1' visible='1'}
 :Change W/O Quantity?_QMessageBox	{type='QMessageBox' unnamed='1' visible='1' windowTitle='Change W/O Quantity?'}
+:Charge To:.Expense Categories_QLabel	{container=':Miscellaneous Check.Charge To:_QGroupBox' name='_titleLit' text='Expense Categories' type='QLabel' visible='1'}
 :Charge To:.VirtualClusterLineEdit_ExpenseLineEdit	{container=':xTuple ERP:*.Charge To:_QGroupBox' name='VirtualClusterLineEdit' type='ExpenseLineEdit' visible='1'}
+:Charge To:_QLabel	{container=':Miscellaneous Check.Charge To:_QGroupBox' type='QLabel' unnamed='1' visible='1'}
 :Configure.Database_QModelIndex	{column='0' container=':_tree.Configure_QModelIndex' text='Database' type='QModelIndex'}
 :Contacts_ContactList	{name='ContactList' type='ContactList' visible='1' windowTitle='Contacts'}
 :Control.Cost Category:_QLabel	{container=':List Items.Control_QGroupBox' name='_costcatLit' text='Cost Category:' type='QLabel' visible='1'}
@@ -223,6 +225,8 @@
 :Maintain Shipping.Close_QPushButton	{name='_close' text='Close' type='QPushButton' visible='1'}
 :Maintain Shipping.Query_QPushButton	{name='_query' text='Query' type='QPushButton' visible='1'}
 :Maintain Shipping.frame_QFrame	{name='frame' type='QFrame' visible='1'}
+:Miscellaneous Check.Charge To:_QGroupBox	{name='_chargeToGroup' title='Charge To:' type='QGroupBox' visible='1' window=':Miscellaneous Check_miscCheck'}
+:Miscellaneous Check_miscCheck	{name='miscCheck' type='miscCheck' visible='1' windowTitle='Miscellaneous Check'}
 :Miscellaneous Voucher Distribution.Discountable_XCheckBox	{name='_discountable' text='Discountable' type='XCheckBox' visible='1' window=':Miscellaneous Voucher Distribution_voucherMiscDistrib'}
 :Miscellaneous Voucher Distribution.XLineEdit_XLineEdit	{name='XLineEdit' type='XLineEdit' visible='1' window=':Miscellaneous Voucher Distribution_voucherMiscDistrib'}
 :Miscellaneous Voucher Distribution._groupButton_QGroupBox	{name='_groupButton' type='QGroupBox' visible='1' window=':Miscellaneous Voucher Distribution_voucherMiscDistrib'}
@@ -674,6 +678,7 @@
 :_listTab_XTreeWidget_10	{buddy=':Prospect.Contacts_QLabel' name='_listTab' type='XTreeWidget' visible='1'}
 :_listTab_XTreeWidget_11	{buddy=':_itemGroup.Items_QLabel_4' name='_listTab' type='XTreeWidget' visible='1'}
 :_listTab_XTreeWidget_12	{buddy=':_expenseGroup.Expense Categories_QLabel' name='_listTab' type='XTreeWidget' visible='1'}
+:_listTab_XTreeWidget_13	{buddy=':Charge To:.Expense Categories_QLabel' name='_listTab' type='XTreeWidget' visible='1'}
 :_listTab_XTreeWidget_2	{buddy=':Prospect._titleLit_QLabel' name='_listTab' type='XTreeWidget' visible='1'}
 :_listTab_XTreeWidget_3	{buddy=':_headerPage._titleLit_QLabel_2' name='_listTab' type='XTreeWidget' visible='1'}
 :_listTab_XTreeWidget_4	{buddy=':Issue to Shipping.Orders_QLabel' name='_listTab' type='XTreeWidget' visible='1'}

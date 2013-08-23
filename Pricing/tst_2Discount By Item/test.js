@@ -12,7 +12,7 @@ function main()
     tabView();
     //----Item Creation-----
     var discitem1 = "DISCITEM1";
-   
+    
     copyItem("YTRUCK1",discitem1);
     //---Create Item Site for Item---
     createRIS(discitem1);
@@ -37,17 +37,17 @@ function main()
     {
         test.fail("Error in obtaining List Price:"+e);
     }
-  
+    
     //---Craete New Customer----
     var dcustname1 = "DISCUST1";
     var custType = "NORMAL"+"-"+"Normal Domestic Customers";
-      var prcnamed1 ="DISC PRICING SCHEDULE1";
+    var prcnamed1 ="DISC PRICING SCHEDULE1";
     var prcAssg = prcnamed1 +" - " +prcnamed1; 
-  createCustomer(custType,dcustname1,"STORE1");
- 
-  //---Discount by Item using Percentage----
-  //---Discount type pricing schedule Creation for an Item-----
-
+    createCustomer(custType,dcustname1,"STORE1");
+    
+    //---Discount by Item using Percentage----
+    //---Discount type pricing schedule Creation for an Item-----
+    
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));
@@ -129,12 +129,12 @@ function main()
             clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
         }
     }//End of Main catch
-  
-     //---Pricing Schedule Assignment for a Customer----
-  
+    
+    //---Pricing Schedule Assignment for a Customer----
+    
     prcasscust(dcustname1,prcAssg,prcnamed1);
-  //---Create SO----
-  
+    //---Create SO----
+    
     var dsonum1 = createSalesOrder1(discitem1,100,dcustname1);
     var uprc = salesunitprice(dsonum1);
     var result = listprice*(1-0.05);
@@ -147,15 +147,15 @@ function main()
     }
     else
         test.fail("Error in applying the discount Percentage on unit price of Sales Order");
-  //----Process of Pricing Schedule Assignment By Customer Ship -To----
-  
-  //---Create New Customer with Ship-to address defined-----
-  
-  //---Craete New Customer----
+    //----Process of Pricing Schedule Assignment By Customer Ship -To----
+    
+    //---Create New Customer with Ship-to address defined-----
+    
+    //---Craete New Customer----
     var dcustname2 = "DISCUST2";
     var shipnum = "STORE1";
-  createCustomer(custType,dcustname2,shipnum);
- 
+    createCustomer(custType,dcustname2,shipnum);
+    
     //---Pricing Schedule Assignment to customer Ship-to--------
     prcassgship(dcustname2,shipnum,prcAssg);
     //---Create SO----
@@ -215,8 +215,8 @@ function main()
     }
     
     //---Assigning pricing Schedule for the Customer Type-----
-        prcAssgCustType(dcustname3,custType1,custType,prcAssg);
-   
+    prcAssgCustType(dcustname3,custType1,custType,prcAssg);
+    
     //---Create SO----
     var dsonum3 = createSalesOrder1(discitem1, 100,dcustname3);
     //---Edit the Sales Order to verify the Discount Applied----
@@ -231,12 +231,12 @@ function main()
     
     
     snooze(0.5);
-   
+    
     
     //----Discount by Item using Amount-----
     //----Item Creation-----
     var discitem2 = "DISCITEM2";
-    copyItem("YTRUCK1",discitem2);
+       copyItem("YTRUCK1",discitem2);
     //---Create Item Site for Item---
     createRIS(discitem2);
     //---Edit the Item to obtain List Price----
@@ -266,7 +266,7 @@ function main()
     var dcustname4 = "DISCUST4";
     var custType = "NORMAL"+"-"+"Normal Domestic Customers";
     createCustomer(custType,dcustname4,"STORE1");
-  
+    
     //---Discount by Item using Amount----
     //---Discount type pricing schedule Creation for an Item-----
     var prcnamed2 ="DISC PRICING SCHEDULE2";
@@ -355,14 +355,14 @@ function main()
     }//End of Main catch
     
     
-   
+    
     //---Pricing Schedule Assignment for a Customer----
     var prcAssg = prcnamed2 +" - " +prcnamed2; 
     prcasscust(dcustname4,prcAssg,prcnamed2);
     //---Create SO----
     var dsonum1 = createSalesOrder1(discitem2, 100,dcustname4);
     
-  
+    
     //---Edit the Sales Order and verify the discount amount applied----
     
     var custprc =  salesCustprice(dsonum1,discitem2);
@@ -374,8 +374,8 @@ function main()
     else
         test.fail("Error in calculating the discount amount against the  Sales Order");
     
-  //----Process of Pricing Schedule Assignment By Customer Ship -To----
-  
+    //----Process of Pricing Schedule Assignment By Customer Ship -To----
+    
     //---Create New Customer with Ship-to address defined-----
     
     //---Craete New Customer----
@@ -388,7 +388,7 @@ function main()
     prcassgship(dcustname5,shipnum,prcAssg);
     //---Create SO----
     var dsonum2 = createSalesOrder1(discitem2, 100 ,dcustname5);
-   
+    
     //---Edit the Sales Order to verify the Discount Applied----
     var custprc =  salesCustprice(dsonum2,discitem2);
     test.log(custprc);
@@ -437,12 +437,12 @@ function main()
     var dcustname6 = "DISCUST6";
     var custType1 = custType+'-'+custType;
     createCustomer(custType1, dcustname6,"STORE1");
-   
+    
     //---Assigning pricing Schedule for the Customer Type-----
-        prcAssgCustType(dcustname6,custType1,custType,prcAssg);
+    prcAssgCustType(dcustname6,custType1,custType,prcAssg);
     
     //---Create SO----
-    var dsonum3 = createSalesOrder1(dcustname6,discitem2, 100);
+    var dsonum3 = createSalesOrder1(discitem2, 100,dcustname6);
     
     //---Edit the Sales Order to verify the Discount Applied----
     var custprc =  salesCustprice(dsonum3,discitem2);

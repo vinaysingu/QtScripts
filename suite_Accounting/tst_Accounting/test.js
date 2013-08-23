@@ -142,7 +142,7 @@ function main()
     }
     
     //     //--------- Enabling Tab View ------
-    //  tabView();
+      tabView();
     
     
     if(appEdition == "PostBooks")
@@ -176,6 +176,48 @@ function main()
             clickItem(":Setup._tree_XTreeWidget", "Master Information.Exchange Rates", 14, 4, 0, Qt.LeftButton);
             clickButton(waitForObject(":_queryParameters.Selected:_QRadioButton"));
             waitForObject(":_queryParameters._items_XComboBox");
+            clickItem(":_queryParameters._items_XComboBox","GBP - £", 0, 0, 5, Qt.LeftButton);
+            
+            waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
+            findObject(":xTuple ERP:*.XDateEdit_XDateEdit").clear();
+            
+            type(":xTuple ERP:*.XDateEdit_XDateEdit", "0");
+            nativeType("<Tab>");
+            
+            waitForObject(":Receivables Workbench.Query_QPushButton");
+            clickButton(":Receivables Workbench.Query_QPushButton");
+            waitForObject(":_frame._conversionRates_XTreeWidget");
+            if(object.exists("{column='0' container=':_frame._conversionRates_XTreeWidget' text='GBP - £' type='QModelIndex'}"))
+            { 
+                
+                waitForObject(":_frame._conversionRates_XTreeWidget");
+                clickItem(":_frame._conversionRates_XTreeWidget","GBP - £", 0, 0, 5, Qt.LeftButton);
+                waitForObject(":_frame.Delete_QPushButton");
+                clickButton(":_frame.Delete_QPushButton");
+            }
+            waitForObject(":_frame.New_QPushButton_2");
+            clickButton(":_frame.New_QPushButton_2");
+            waitForObject(":Cash Receipt._currency_XComboBox");
+            clickItem(":Cash Receipt._currency_XComboBox","GBP - £", 0, 0, 5, Qt.LeftButton);
+            waitForObject(":_stack._rate_XLineEdit");
+            findObject(":_stack._rate_XLineEdit").clear();
+            type(":_stack._rate_XLineEdit","1.56");
+            nativeType("<Tab>");
+            
+            rate = findObject(":_stack._rate_XLineEdit").text;
+            
+            waitForObject(":_stack.XDateEdit_XDateEdit");
+            findObject(":_stack.XDateEdit_XDateEdit").clear();
+            type(":_stack.XDateEdit_XDateEdit", "-15");
+            nativeType("<Tab>");
+            waitForObject(":_stack.XDateEdit_XDateEdit_2");
+            findObject(":_stack.XDateEdit_XDateEdit_2").clear();
+            type(":_stack.XDateEdit_XDateEdit_2", "+365");
+            nativeType("<Tab>");
+            waitForObject(":Cash Receipt.Save_QPushButton_3");
+            clickButton(":Cash Receipt.Save_QPushButton_3");
+            snooze(0.5);
+             waitForObject(":_queryParameters._items_XComboBox");
             clickItem(":_queryParameters._items_XComboBox","EUR - €", 0, 0, 5, Qt.LeftButton);
             
             waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit");
@@ -216,14 +258,15 @@ function main()
             nativeType("<Tab>");
             waitForObject(":Cash Receipt.Save_QPushButton_3");
             clickButton(":Cash Receipt.Save_QPushButton_3");
+
             waitForObject(":Cash Receipt.Save_QPushButton_3");
             clickButton(":Cash Receipt.Save_QPushButton_3");
             
-            test.log("Exchange Rate is created sucessfully for EUR - €");
+            test.log("Exchange Rate is created sucessfully for GBP - £ and EUR - â‚ ");
         }
         catch(e)
         {
-            test.fail("failed to create exchange rates for EUR - €" + e);
+            test.fail("failed to create exchange rates for GBP - £ and EUR - â‚" + e);
         }
         
         
@@ -697,7 +740,7 @@ function main()
         clickButton(waitForObject(":Write Check To:.Vendor_QRadioButton"));
         type(waitForObject(":_widgetStack.VirtualClusterLineEdit_VendorLineEdit"), "TPARTS");
         nativeType("<Tab>");
-        type(waitForObject(":Charge To:.VirtualClusterLineEdit_ExpenseLineEdit"), "VA TAX");
+        type(waitForObject(":Charge To:.VirtualClusterLineEdit_ExpenseLineEdit"), "OFFICE");
         nativeType("<Tab>");
         type(waitForObject(":xTuple ERP:*.XDateEdit_XDateEdit"), "12/2/10");
         nativeType("<Tab>");

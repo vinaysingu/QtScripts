@@ -68,6 +68,7 @@ function main()
      //--------------- Set the window to Tab view mode -------------
 
     tabView();
+ 
     //-----Creating a Purchase Order-----
     try
     {
@@ -156,7 +157,7 @@ function main()
     }
     
     //------Verifying QOH (before receiving Goods)------------
-    var  qtyItem=queryQoh(polineitem,"WH1",appE);
+    var  qtyItem=queryQoh("TBOX1","WH1",appE);
     
     
     //-----Receiving Purchase Goods-----
@@ -187,12 +188,12 @@ function main()
     }
     //----Verifying Updated QOH----
     
-    var result=queryQoh(polineitem,"WH1",appE);
+    var result=queryQoh("TBOX1","WH1",appE);
     test.log(result);
     if(result-parseInt(poquantity) == qtyItem)
-        test.pass(" "+polineitem+" QOH updated sucessfully:");
+        test.pass(" TBOX1 line item QOH updated sucessfully:");
     else
-        test.fail("failed to update QOH: "+polineitem+" ");
+        test.fail("failed to update QOH of TBOX1 item ");
     
     //--------------Verifying Gl Entries-----------------
     

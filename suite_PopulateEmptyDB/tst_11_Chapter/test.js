@@ -1667,8 +1667,8 @@ function main()
         waitForObject(":Show Custom Column.Use Difference_QRadioButton");
         clickButton(":Show Custom Column.Use Difference_QRadioButton");
         clickButton(":List Financial Reports.Save_QPushButton");
-        
-        /* waitForObject(":frame._layout_XTreeWidget");
+        //---------------- from here ------------------
+         waitForObject(":frame._layout_XTreeWidget");
         clickItem(":frame._layout_XTreeWidget", "REVENUE.Sales", 5, 5, 1, Qt.LeftButton);
         snooze(1);
         waitForObject(":frame.Add Account_QPushButton");
@@ -1710,8 +1710,8 @@ function main()
         if(!findObject(":Show Custom Column.Show % of Group Total_QCheckBox").checked)
             clickButton(":Show Custom Column.Show % of Group Total_QCheckBox");
         clickButton(":Show Custom Column.Use Difference_QRadioButton");
-        clickButton(":List Financial Reports.Save_QPushButton"); */
-        
+        clickButton(":List Financial Reports.Save_QPushButton"); 
+        //----------- till here--------------------------------------------------
         waitForObject(":frame._layout_XTreeWidget");
         clickItem(":frame._layout_XTreeWidget", "REVENUE.Sales", 5, 5, 1, Qt.LeftButton);
         snooze(1);

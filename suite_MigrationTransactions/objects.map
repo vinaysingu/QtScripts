@@ -332,8 +332,11 @@
 :Log In.Options_QPushButton	{name='_options' text='Options' type='QPushButton' visible='1' window=':Log In_login2'}
 :Log In.Recent_QPushButton	{name='_recent' text='Recent' type='QPushButton' visible='1' window=':Log In_login2'}
 :Log In.Recent_QPushButton_2	{text='Recent' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
+:Log In._database_QComboBox	{name='_database' type='QComboBox' visible='1' window=':Log In_login2'}
 :Log In._frame_QFrame	{name='_frame' type='QFrame' visible='1' window=':Log In_login2'}
 :Log In._logo_QLabel	{name='_logo' type='QLabel' visible='1' window=':Log In_login2'}
+:Log In._port_QLineEdit	{name='_port' type='QLineEdit' visible='1' window=':Log In_login2'}
+:Log In._server_QLineEdit	{name='_server' type='QLineEdit' visible='1' window=':Log In_login2'}
 :Log In_login2	{name='login2' type='login2' visible='1' windowTitle='Log In'}
 :Login Options.Database:_QLabel	{name='_databaseLit' text='Database:' type='QLabel' visible='1' window=':Login Options_login2Options'}
 :Login Options.Port:_QLabel	{name='_portLit' text='Port:' type='QLabel' visible='1' window=':Login Options_login2Options'}
@@ -474,6 +477,7 @@
 :Reference_HeaderViewItem	{container=':_gltrans_QHeaderView' text='Reference' type='HeaderViewItem'}
 :Registration Key.No_QPushButton	{text='No' type='QPushButton' unnamed='1' visible='1' window=':Registration Key_QMessageBox'}
 :Registration Key.OK_QPushButton	{text='OK' type='QPushButton' unnamed='1' visible='1' window=':Registration Key_QMessageBox'}
+:Registration Key.Yes_QPushButton	{text='Yes' type='QPushButton' unnamed='1' visible='1'}
 :Registration Key_QMessageBox	{type='QMessageBox' unnamed='1' visible='1' windowTitle='Registration Key'}
 :Returned_HeaderViewItem	{container=':_poitem_QHeaderView' text='Returned' type='HeaderViewItem'}
 :Reverse G/L Series_reverseGLSeries	{name='reverseGLSeries' type='reverseGLSeries' visible='1' windowTitle='Reverse G/L Series'}
@@ -620,7 +624,6 @@
 :W/O Schedule by Planner Code.Post_QPushButton_4	{name='_correct' text='Post' type='QPushButton' visible='1'}
 :W/O Schedule by Planner Code.Query_QPushButton	{name='_query' text='Query' type='QPushButton' visible='1'}
 :W/O Schedule by Planner Code.W/O Schedule by Planner Code_QWorkspaceTitleBar	{type='QWorkspaceTitleBar' unnamed='1' visible='1' windowTitle='W/O Schedule by Planner Code'}
-:W/O Schedule by Planner Code.Yes_QPushButton	{text='Yes' type='QPushButton' unnamed='1' visible='1'}
 :W/O Schedule by Planner Code._componentGroup_QGroupBox	{name='_componentGroup' type='QGroupBox' visible='1'}
 :W/O Schedule by Planner Code._itemloc_XTreeWidget	{name='_itemloc' type='XTreeWidget' visible='1'}
 :W/O Schedule by Planner Code._operationGroup_QGroupBox	{name='_operationGroup' type='QGroupBox' visible='1'}
@@ -721,6 +724,7 @@
 :_currency_XComboBox	{buddy=':_generalGroup.Currency:_QLabel' name='_currency' type='XComboBox' visible='1'}
 :_cust_QHeaderView	{container=':List Customers._cust_XTreeWidget' type='QHeaderView' unnamed='1' visible='1'}
 :_database_QLineEdit	{buddy=':Login Options.Database:_QLabel' name='_database' type='QLineEdit' visible='1'}
+:_database_QLineEdit_2	{parentWidget=':Log In._database_QComboBox' type='QLineEdit' unnamed='1' visible='1'}
 :_dateGroup.End Date:_QLabel	{container=':General Ledger Transactions._dateGroup_QGroupBox' name='_endDateLit' text='End Date:' type='QLabel' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit	{name='XDateEdit' type='XDateEdit' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit_2	{container=':Miscellaneous Voucher._dateGroup_QGroupBox' name='XDateEdit' type='XDateEdit' visible='1'}

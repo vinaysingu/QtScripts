@@ -5,7 +5,8 @@ function main()
     
     //-----login Application-----
     loginAppl("CONFIGURE"); 
-     //---find Application Edition------
+    snooze(1);
+    //---find Application Edition------
     try
     {
         
@@ -46,10 +47,10 @@ function main()
         test.fail("Error in identifying the application edition" + e);       
         
     }
-//    //--------------- Set the window to Tab view mode -------------
-      tabView();
-   
-       //------ Creating Vendor ------
+    //--------------- Set the window to Tab view mode -------------
+    tabView();
+    
+  //     ------ Creating Vendor ------
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Purchase");
         activateItem(":xTuple ERP: *_QMenuBar", "Purchase");
@@ -99,7 +100,7 @@ function main()
     {
         test.fail("Error in creating Vendor"+e);
     }
-    snooze(3);
+  snooze(3);
   var sourceitem = "TBOX1";
   var targetitem = "TAXBOX 2";
     //----- Purchase Type Item Creation -----
@@ -167,10 +168,10 @@ function main()
    //--------- Item Site creation -------
    
     createRIS("TAXBOX 2");
-  
+
     //------ Assiging Item to the TAX TYPE -----
     assignTaxType("TAXBOX 2",2);
-    
+  
   //--------- Purchase Order Creation ----------
   try{
       
@@ -238,8 +239,8 @@ function main()
   {
       test.fail("Error in creating purchase order" + e);
   }
-  
-  //-----Releasing Purchase Orders-----
+
+    //-----Releasing Purchase Orders-----
   try
   {
       waitForObjectItem(":xTuple ERP: *_QMenuBar", "Purchase");

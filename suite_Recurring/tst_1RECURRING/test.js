@@ -85,10 +85,10 @@ function main()
             snooze(1);
             waitForObject(":_ccEncKeyName_QLineEdit_2").clear();
             type(":_ccEncKeyName_QLineEdit_2", "xTuple.key");
-            waitForObject(":_stack_FileLineEdit").clear();
-            type(":_stack_FileLineEdit", "c:/crypto");
             waitForObject(":_stack_FileLineEdit_2").clear();
-            type(":_stack_FileLineEdit_2", "/home/administrator/crypto");
+            type(":_stack_FileLineEdit_2", "c:/crypto");
+            waitForObject(":_stack_FileLineEdit").clear();
+            type(":_stack_FileLineEdit", "/home/administrator/crypto");
             waitForObject(":_stack_FileLineEdit_3").clear();
             type(":_stack_FileLineEdit_3", "/users/crypto");
         }
@@ -110,7 +110,7 @@ function main()
    //--------------- Set the window to Tab view mode -------------
    
    tabView();
-   
+ 
      var appEdition = findApplicationEdition();
 
   
@@ -1203,6 +1203,14 @@ function main()
                     test.fail("Error in creating Incidents after Utility Run:");
                 }
               
+                
+                
+                
+                
+              
+              
+              
+                
                 //--------Account Payable Buffer Setup to 30days------//
                 try
                 {

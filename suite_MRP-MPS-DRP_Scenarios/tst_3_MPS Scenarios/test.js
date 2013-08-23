@@ -7,8 +7,30 @@ function main()
     //-----Log into Applicaiton--- 
     loginAppl("CONFIGURE");
     
-    waitForObject(":Registration Key.Yes_QPushButton");
-    clickButton(":Registration Key.Yes_QPushButton");    
+    
+    
+    //--------------- Set the window to Tab view mode -------------
+    try
+    {
+        activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Products"));
+        activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item"));
+        activateItem(waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List..."));
+        if(object.exists(":Work Order Schedule.Close_QToolButton"))
+        {
+            test.log("item screen opened");
+            activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar", "Window"));
+            if(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"))
+            {
+                activateItem(waitForObjectItem(":xTuple ERP:*.Window_QMenu", "Tab View"));
+            }
+            clickButton(waitForObject(":Work Order Schedule.Close_QToolButton"));
+        }
+    }
+    catch(e)
+    {
+        test.fail("exception in changing to Tab view mode" + e);
+        clickButton(waitForObject(":Work Order Schedule.Close_QToolButton"));
+    }
     DelPlanOrdrs();
     DelAllWO();
     DelAllSO();
@@ -17,7 +39,7 @@ function main()
     QOHZero("TBOX1");
     MRP("+99");
     MPS("+999");
-  
+    
     //--------View Planned Orders-----
     try
     {
@@ -29,7 +51,7 @@ function main()
         activateItem(":xTuple ERP:*.Reports_QMenu", "Planned Orders...");
         waitForObject(":Planned Orders.Query_QToolButton");
         clickButton(":Planned Orders.Query_QToolButton");      
-       snooze(2); 
+        snooze(2); 
         
         waitForObject(":_list_XTreeWidget_10");
         if((findObject(":_list_XTreeWidget_10").topLevelItemCount)==0)
@@ -37,13 +59,13 @@ function main()
         else test.fail("Planned Order generated");
         waitForObject(":Planned Orders.Close_QToolButton");
         clickButton(":Planned Orders.Close_QToolButton");
-       
+        
     }
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-         if(object.exists(":Planned Orders.Close_QToolButton"))
-             clickButton(":Planned Orders.Close_QToolButton");
+        if(object.exists(":Planned Orders.Close_QToolButton"))
+            clickButton(":Planned Orders.Close_QToolButton");
     }
     
     //----Setup Item site------
@@ -57,8 +79,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -111,7 +133,7 @@ function main()
     } 
     
     
-   //------Create Production Plan---------
+    //------Create Production Plan---------
     try
     {
         waitForObjectItem(":xTuple ERP:*_QMenuBar", "Schedule");
@@ -131,7 +153,7 @@ function main()
         if(findObject(":_warehouse_WComboBox_7").currentText!="WH1")
             clickItem(":_warehouse_WComboBox_7", "WH1", 0, 0, 1, Qt.LeftButton);
         waitForObject(":_schedtype_QComboBox_2");
-       if(findObject(":_schedtype_QComboBox_2").currentText!="Forecast Netted to MPS")
+        if(findObject(":_schedtype_QComboBox_2").currentText!="Forecast Netted to MPS")
             clickItem(":_schedtype_QComboBox_2", "Forecast Netted to MPS", 0, 0, 1, Qt.LeftButton);
         waitForObject(":Production Plan.XDateEdit_XDateEdit");
         type(":Production Plan.XDateEdit_XDateEdit", "-30");
@@ -154,10 +176,10 @@ function main()
         clickButton(":Production Plan Item.Save_QPushButton");
         waitForObject(":Production Plan.Save_QPushButton");
         clickButton(":Production Plan.Save_QPushButton");
-       
+        
         waitForObject(":List Production Plans.Close_QPushButton");
         clickButton(":List Production Plans.Close_QPushButton");
-          }
+    }
     catch(e)
     {
         test.fail("Error in creating a production plan" + e);
@@ -186,7 +208,7 @@ function main()
         else test.fail("Planned Order generated");
         waitForObject(":Planned Orders.Close_QToolButton");
         clickButton(":Planned Orders.Close_QToolButton");
-          }
+    }
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
@@ -215,8 +237,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -307,9 +329,9 @@ function main()
                 var assign2 = obj_TreeTopLevelItem.text(1);
                 var assign3 = obj_TreeTopLevelItem.text(10);
                 var assign4 = obj_TreeTopLevelItem.text(8)
-                var assign5 = obj_TreeTopLevelItem.text(7)
-                if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="150.00")
-                    test.pass("Expected Planned Order generated");
+                              var assign5 = obj_TreeTopLevelItem.text(7)
+                                            if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="150.00")
+                                                test.pass("Expected Planned Order generated");
                 else 
                     test.fail("Incorrect Planned Order generated");
             }
@@ -318,7 +340,7 @@ function main()
         else test.fail("No Planned Order generated");   
         waitForObject(":Planned Orders.Close_QToolButton");
         clickButton(":Planned Orders.Close_QToolButton");
-            }
+    }
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
@@ -341,8 +363,8 @@ function main()
         
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -406,16 +428,16 @@ function main()
         activateItem(":_QMenu", "List...");
         waitForObject(":_list_XTreeWidget_2");
         type(":_list_XTreeWidget_2"," ");   
-       openItemContextMenu(waitForObject(":_list_XTreeWidget_2"), "BTRUCK-TEST", 58, 10, 0);
-    activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Release"));
+        openItemContextMenu(waitForObject(":_list_XTreeWidget_2"), "BTRUCK-TEST", 58, 10, 0);
+        activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Release"));
         waitForObject(":List Production Plans.Close_QPushButton");
         clickButton(":List Production Plans.Close_QPushButton");
-         
+        
     }
     catch(e)
     {
         test.fail("Error in releasing production plan" + e);
-         if(object.exists(":Production Plan.Save_QPushButton"))
+        if(object.exists(":Production Plan.Save_QPushButton"))
             sendEvent("QCloseEvent", ":Production Plan_XMainWindow");
     }
     
@@ -452,7 +474,7 @@ function main()
                 d = getForwardDate(21);
                 e = getForwardDate(18);
                 
-               if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="100.00")
+                if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="100.00")
                     test.pass("Expected Planned Order generated");
                 else 
                     test.fail("Incorrect Planned Order generated");
@@ -460,15 +482,15 @@ function main()
             else test.fail("Incorrect Planned Order generated");
         }    
         else test.fail("No Planned Order generated");  
-         snooze(1);
+        snooze(1);
         waitForObject(":Planned Orders.Close_QToolButton");
         clickButton(":Planned Orders.Close_QToolButton");
-       }
+    }
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-         if(object.exists(":Planned Orders.Close_QToolButton"))
-           clickButton(":Planned Orders.Close_QToolButton");
+        if(object.exists(":Planned Orders.Close_QToolButton"))
+            clickButton(":Planned Orders.Close_QToolButton");
     }
     
     //MPS – PLAN STATUS “R” - TYPE – FORECAST REPORTING
@@ -495,13 +517,13 @@ function main()
         snooze(1);
         waitForObject(":List Production Plans.Close_QPushButton");
         clickButton(":List Production Plans.Close_QPushButton");
-       
+        
     }
     catch(e)
     {
         test.fail("Error in set up of production plan" + e);
-           if(object.exists(":Planned Orders.Close_QToolButton"))
-           clickButton(":Planned Orders.Close_QToolButton");
+        if(object.exists(":Planned Orders.Close_QToolButton"))
+            clickButton(":Planned Orders.Close_QToolButton");
     } 
     
     
@@ -516,8 +538,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -567,8 +589,8 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up Item Site of BTRUCK1" + e);
-           if(object.exists(":Item Sites.Close_QToolButton"))
-           clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
     }
     
     
@@ -591,13 +613,13 @@ function main()
         else test.fail("Planned Order generated");
         waitForObject(":Planned Orders.Close_QToolButton");
         clickButton(":Planned Orders.Close_QToolButton");
-       
+        
     }
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-           if(object.exists(":Planned Orders.Close_QToolButton"))
-           clickButton(":Planned Orders.Close_QToolButton");
+        if(object.exists(":Planned Orders.Close_QToolButton"))
+            clickButton(":Planned Orders.Close_QToolButton");
     }
     
     //MPS – PLAN STATUS “R” - REORDER POINT TEST
@@ -619,10 +641,10 @@ function main()
             clickItem(":_schedtype_QComboBox_2", "Forecast Netted to MPS", 0, 0, 1, Qt.LeftButton);
         waitForObject(":Production Plan.Save_QPushButton");
         clickButton(":Production Plan.Save_QPushButton");
-     snooze(1);
+        snooze(1);
         waitForObject(":List Production Plans.Close_QPushButton");
         clickButton(":List Production Plans.Close_QPushButton");
-       
+        
     }
     catch(e)
     {
@@ -641,10 +663,10 @@ function main()
         activateItem(":xTuple ERP:*.Inventory_QMenu", "Item Site");
         waitForObjectItem(":_QMenu", "List...");
         activateItem(":_QMenu", "List...");
-       if(!object.exists(":_filterGroup.Manage_QPushButton"))
+        if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -694,8 +716,8 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up Item site of BTRUCK1" + e);
-         if(object.exists(":Item Sites.Close_QToolButton"))
-          clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
     }
     
     
@@ -754,19 +776,19 @@ function main()
             else test.fail("Incorrect Planned Order generated");
         }    
         else test.fail("No Planned Order generated"); 
-         snooze(1);
+        snooze(1);
         waitForObject(":Planned Orders.Close_QToolButton");
         clickButton(":Planned Orders.Close_QToolButton");
-     }
+    }
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-         if(object.exists(":Planned Orders.Close_QToolButton"))
-              clickButton(":Planned Orders.Close_QToolButton");
-             
+        if(object.exists(":Planned Orders.Close_QToolButton"))
+            clickButton(":Planned Orders.Close_QToolButton");
+        
     } 
     
-  
+    
     //MPS – PLAN STATUS “R” - ORDER UP TO TEST
     test.log("MPS – PLAN STATUS “R” - ORDER UP TO TEST");
     
@@ -783,8 +805,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -827,7 +849,7 @@ function main()
             clickButton(":Scheduling.First Group_QCheckBox_4");
         waitForObject(":Item Sites.Save_QPushButton");
         clickButton(":Item Sites.Save_QPushButton");
-         snooze(1);
+        snooze(1);
         waitForObject(":Item Sites.Close_QToolButton");
         clickButton(":Item Sites.Close_QToolButton");
         test.log("Item Site setup for: BTRUCK1");
@@ -836,8 +858,8 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up Item Site of BTRUCK1" + e);
-         if(object.exists(":Item Sites.Close_QToolButton"))
-              clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
     } 
     
     
@@ -854,11 +876,11 @@ function main()
         activateItem(":xTuple ERP:*.Reports_QMenu", "Planned Orders...");
         waitForObject(":Planned Orders.Query_QToolButton");
         clickButton(":Planned Orders.Query_QToolButton");
-       
+        
         waitForObject(":Order #_HeaderViewItem");
         
         mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
-       
+        
         if(findObject(":_planord.Col1_QModelIndex").text> findObject(":_planord.Col2_QModelIndex").text)            
             mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
         
@@ -892,19 +914,19 @@ function main()
             else test.fail("Incorrect Planned Order generated");
         }    
         else test.fail("No Planned Order generated");   
-         snooze(1);
+        snooze(1);
         waitForObject(":Planned Orders.Close_QToolButton");
         clickButton(":Planned Orders.Close_QToolButton");
-         }
+    }
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
         if(object.exists(":Planned Orders.Close_QToolButton"))
-              clickButton(":Planned Orders.Close_QToolButton");
+            clickButton(":Planned Orders.Close_QToolButton");
     }
     
-  //MPS – PLAN STATUS “R” - MINIMUM ORDER QTY TEST
-  test.log("MPS – PLAN STATUS “R” - MINIMUM ORDER QTY TEST");
+    //MPS – PLAN STATUS “R” - MINIMUM ORDER QTY TEST
+    test.log("MPS – PLAN STATUS “R” - MINIMUM ORDER QTY TEST");
     
     
     DelPlanOrdrs();
@@ -920,8 +942,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -964,7 +986,7 @@ function main()
             clickButton(":Scheduling.First Group_QCheckBox_4");
         waitForObject(":Item Sites.Save_QPushButton");
         clickButton(":Item Sites.Save_QPushButton");
-         snooze(1);
+        snooze(1);
         waitForObject(":Item Sites.Close_QToolButton");
         clickButton(":Item Sites.Close_QToolButton");
         test.log("Item Site setup for: BTRUCK1");
@@ -972,8 +994,8 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up Item Site of BTRUCK1" + e);
-         if(object.exists(":Item Sites.Close_QToolButton"))
-               clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
     }
     
     
@@ -991,11 +1013,11 @@ function main()
         waitForObject(":Planned Orders.Query_QToolButton");
         clickButton(":Planned Orders.Query_QToolButton");
         snooze(2);
-//         waitForObject(":Order #_HeaderViewItem");
-//        
-//        mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
-//        if(findObject(":_planord.Col1_QModelIndex").text> findObject(":_planord.Col2_QModelIndex").text)            
-//            mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
+        waitForObject(":Order #_HeaderViewItem");
+        
+        mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
+        if(findObject(":_planord.Col1_QModelIndex").text> findObject(":_planord.Col2_QModelIndex").text)            
+            mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
         
         waitForObject(":_list_XTreeWidget_10");
         var sWidgetTreeControl = ":_list_XTreeWidget_10";
@@ -1023,12 +1045,12 @@ function main()
         else test.fail("No Planned Order generated");   
         waitForObject(":Planned Orders.Close_QToolButton");
         clickButton(":Planned Orders.Close_QToolButton");
-         }
+    }
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-         if(object.exists(":Planned Orders.Close_QToolButton"))
-               clickButton(":Planned Orders.Close_QToolButton");
+        if(object.exists(":Planned Orders.Close_QToolButton"))
+            clickButton(":Planned Orders.Close_QToolButton");
     } 
     
     
@@ -1048,8 +1070,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -1092,7 +1114,7 @@ function main()
             clickButton(":Scheduling.First Group_QCheckBox_4");
         waitForObject(":Item Sites.Save_QPushButton");
         clickButton(":Item Sites.Save_QPushButton");
-         snooze(1);
+        snooze(1);
         waitForObject(":Item Sites.Close_QToolButton");
         clickButton(":Item Sites.Close_QToolButton");
         test.log("Item Site setup for: BTRUCK1");
@@ -1101,7 +1123,7 @@ function main()
     {
         test.fail("Error in setting up Item Site of BTRUCK1" + e);
         if(object.exists(":Item Sites.Close_QToolButton"))
-               clickButton(":Item Sites.Close_QToolButton");
+            clickButton(":Item Sites.Close_QToolButton");
     }
     
     
@@ -1118,7 +1140,7 @@ function main()
         activateItem(":xTuple ERP:*.Reports_QMenu", "Planned Orders...");
         waitForObject(":Planned Orders.Query_QToolButton");
         clickButton(":Planned Orders.Query_QToolButton");      
-         snooze(2);
+        snooze(2);
         waitForObject(":Order #_HeaderViewItem");
         
         mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
@@ -1137,13 +1159,13 @@ function main()
                 var Qnty, DispDate, item;
                 
                 obj_TreeTopLevelItem = obj_TreeRootItem.child(0);
-               if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="50.00")
+                if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="50.00")
                     test.pass("Expected Planned Order generated");
                 else 
                     test.fail("Incorrect Planned Order generated");
                 
                 obj_TreeTopLevelItem = obj_TreeRootItem.child(1);
-               if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="50.00")
+                if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="50.00")
                     test.pass("Expected Planned Order generated");
                 else 
                     test.fail("Incorrect Planned Order generated");
@@ -1153,7 +1175,7 @@ function main()
             else test.fail("Incorrect Planned Order generated");
         }    
         else test.fail("No Planned Order generated");  
-         snooze(1);
+        snooze(1);
         waitForObject(":Planned Orders.Close_QToolButton");
         clickButton(":Planned Orders.Close_QToolButton");
     }
@@ -1180,8 +1202,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -1220,10 +1242,10 @@ function main()
         findObject(":Scheduling.qt_spinbox_lineedit_QLineEdit_10").clear();
         type(":Scheduling.qt_spinbox_lineedit_QLineEdit_10", "1");
         waitForObject(":Scheduling.First Group_QCheckBox_4");
-         snooze(.5);
+        snooze(.5);
         if(!findObject(":Scheduling.First Group_QCheckBox_4").checked)
             clickButton(":Scheduling.First Group_QCheckBox_4");
-         snooze(0.5);
+        snooze(0.5);
         waitForObject(":Item Sites.Save_QPushButton");
         clickButton(":Item Sites.Save_QPushButton");
         
@@ -1234,8 +1256,8 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up Item Site of BTRUCK1" + e);
-         if(object.exists(":Item Sites.Close_QToolButton"))
-              clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
     }
     
     MPS("+150");
@@ -1252,7 +1274,7 @@ function main()
         waitForObject(":Planned Orders.Query_QToolButton");
         clickButton(":Planned Orders.Query_QToolButton");      
         
-         snooze(2);
+        snooze(2);
         waitForObject(":_list_XTreeWidget_10");
         var sWidgetTreeControl = ":_list_XTreeWidget_10";
         var obj_TreeWidget = findObject(sWidgetTreeControl);
@@ -1264,7 +1286,7 @@ function main()
             
             if(iNumberOfRootItems==1)
             {
-               
+                
                 var Qnty, DispDate, item;
                 
                 obj_TreeTopLevelItem = obj_TreeRootItem.child(0);
@@ -1285,7 +1307,7 @@ function main()
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-         if(object.exists(":Planned Orders.Close_QToolButton"))
+        if(object.exists(":Planned Orders.Close_QToolButton"))
             clickButton(":Planned Orders.Close_QToolButton");
     }
     
@@ -1306,8 +1328,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -1343,16 +1365,16 @@ function main()
         type(":Scheduling.qt_spinbox_lineedit_QLineEdit_8", "1");
         findObject(":Scheduling.qt_spinbox_lineedit_QLineEdit_9").clear();
         type(":Scheduling.qt_spinbox_lineedit_QLineEdit_9", "3");
-         snooze(1);
+        snooze(1);
         findObject(":Scheduling.qt_spinbox_lineedit_QLineEdit_10").clear();
-         snooze(0.5);
+        snooze(0.5);
         type(":Scheduling.qt_spinbox_lineedit_QLineEdit_10", "1");
         waitForObject(":Scheduling.First Group_QCheckBox_4");
         if(!findObject(":Scheduling.First Group_QCheckBox_4").checked)
             clickButton(":Scheduling.First Group_QCheckBox_4");
         waitForObject(":Item Sites.Save_QPushButton");
         clickButton(":Item Sites.Save_QPushButton");
-         snooze(0.5);
+        snooze(0.5);
         waitForObject(":Item Sites.Close_QToolButton");
         clickButton(":Item Sites.Close_QToolButton");
         test.log("Item Site setup for: BTRUCK1");
@@ -1360,8 +1382,8 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up Item Site of BTRUCK1" + e);
-         if(object.exists(":Item Sites.Close_QToolButton"))
-              clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
     }
     
     
@@ -1378,8 +1400,8 @@ function main()
         activateItem(":xTuple ERP:*.Reports_QMenu", "Planned Orders...");
         waitForObject(":Planned Orders.Query_QToolButton");
         clickButton(":Planned Orders.Query_QToolButton");      
-   
-                waitForObject(":Order #_HeaderViewItem");
+        
+        waitForObject(":Order #_HeaderViewItem");
         
         mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
         var a=findObject(":_planord.Col1_QModelIndex").text;
@@ -1398,7 +1420,7 @@ function main()
             {
                 var Qnty, DispDate, item;
                 obj_TreeTopLevelItem = obj_TreeRootItem.child(0);
-               if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="50.00")
+                if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="50.00")
                     test.pass("Expected Planned Order generated");
                 else 
                     test.fail("Incorrect Planned Order generated");
@@ -1411,7 +1433,7 @@ function main()
                     test.fail("Incorrect Planned Order generated");
                 
                 obj_TreeTopLevelItem = obj_TreeRootItem.child(2);
-               if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="50.00")
+                if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="50.00")
                     test.pass("Expected Planned Order generated");
                 else 
                     test.fail("Incorrect Planned Order generated");
@@ -1421,14 +1443,14 @@ function main()
             else test.fail("Incorrect Planned Order generated");
         }    
         else test.fail("No Planned Order generated");   
-         snooze(1);
+        snooze(1);
         waitForObject(":Planned Orders.Close_QToolButton");
         clickButton(":Planned Orders.Close_QToolButton");
     }
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-         if(object.exists(":Planned Orders.Close_QToolButton"))
+        if(object.exists(":Planned Orders.Close_QToolButton"))
             clickButton(":Planned Orders.Close_QToolButton");
     }
     
@@ -1447,11 +1469,11 @@ function main()
         activateItem(":xTuple ERP:*.Inventory_QMenu", "Item Site");
         waitForObjectItem(":_QMenu", "List...");
         activateItem(":_QMenu", "List...");
-         snooze(1);
-       if(!object.exists(":_filterGroup.Manage_QPushButton"))
+        snooze(1);
+        if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -1481,7 +1503,7 @@ function main()
         type(":_maximumOrder_XLineEdit_4", "0");
         findObject(":_orderMultiple_XLineEdit_4").clear();
         type(":_orderMultiple_XLineEdit_4", "0");
-         snooze(1);
+        snooze(1);
         findObject(":Scheduling._safetyStock_XLineEdit_4").clear();
         type(":Scheduling._safetyStock_XLineEdit_4", "0");
         findObject(":Scheduling.qt_spinbox_lineedit_QLineEdit_8").clear();
@@ -1502,8 +1524,8 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up Item Site of BTRUCK1" + e);
-         if(object.exists(":Item Sites.Close_QToolButton"))
-              clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
     }
     
     MPS("+150");
@@ -1520,36 +1542,36 @@ function main()
         waitForObject(":Planned Orders.Query_QToolButton");
         clickButton(":Planned Orders.Query_QToolButton");      
         
-         snooze(2);
+        snooze(2);
         waitForObject(":Order #_HeaderViewItem");
         
         mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
-         snooze(2);
+        snooze(2);
         if(findObject(":_planord.Col1_QModelIndex").text> findObject(":_planord.Col2_QModelIndex").text)
-                        mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
+            mouseClick(":Order #_HeaderViewItem", 10, 10, 0, Qt.LeftButton);
         
         waitForObject(":_list_XTreeWidget_10");
-         snooze(2);
+        snooze(2);
         var sWidgetTreeControl = ":_list_XTreeWidget_10";
         var obj_TreeWidget = findObject(sWidgetTreeControl);
         var obj_TreeRootItem=obj_TreeWidget.invisibleRootItem();
         var iNumberOfRootItems = obj_TreeRootItem.childCount();
-         snooze(2);
+        snooze(2);
         if(iNumberOfRootItems>0)
         {
             if(iNumberOfRootItems==2)
             {
                 var Qnty, DispDate, item;
-                 snooze(1);
+                snooze(1);
                 obj_TreeTopLevelItem = obj_TreeRootItem.child(0);
-                 snooze(2);
+                snooze(2);
                 if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="200.00")
                     test.pass("Expected Planned Order generated");
                 else 
                     test.fail("Incorrect Planned Order generated");
-                 snooze(1);
+                snooze(1);
                 obj_TreeTopLevelItem = obj_TreeRootItem.child(1);
-                 snooze(2);
+                snooze(2);
                 if(obj_TreeTopLevelItem.text(4)=="BTRUCK1" && obj_TreeTopLevelItem.text(1)=="W/O" && obj_TreeTopLevelItem.text(10)=="100.00")
                     test.pass("Expected Planned Order generated");
                 else 
@@ -1566,7 +1588,7 @@ function main()
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-         if(object.exists(":Planned Orders.Close_QToolButton"))
+        if(object.exists(":Planned Orders.Close_QToolButton"))
             clickButton(":Planned Orders.Close_QToolButton");
     }
     
@@ -1584,11 +1606,11 @@ function main()
         activateItem(":xTuple ERP:*.Inventory_QMenu", "Item Site");
         waitForObjectItem(":_QMenu", "List...");
         activateItem(":_QMenu", "List...");
-         snooze(1);
+        snooze(1);
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -1634,8 +1656,8 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up Item site of BTRUCK1" + e);
-         if(object.exists(":Item Sites.Close_QToolButton"))
-              clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
     }
     
     MPS("+150");
@@ -1668,7 +1690,7 @@ function main()
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-         if(object.exists(":Planned Orders.Close_QToolButton"))
+        if(object.exists(":Planned Orders.Close_QToolButton"))
             clickButton(":Planned Orders.Close_QToolButton");
     }
     
@@ -1688,8 +1710,8 @@ function main()
         activateItem(":_QMenu", "List...");
         if(!object.exists(":_filterGroup.Manage_QPushButton"))
         {
-        waitForObject(":Item Sites.More_QToolButton");
-        clickButton(":Item Sites.More_QToolButton");
+            waitForObject(":Item Sites.More_QToolButton");
+            clickButton(":Item Sites.More_QToolButton");
         }
         waitForObject(":_filterGroup.xcomboBox1_XComboBox");
         clickItem(":_filterGroup.xcomboBox1_XComboBox","Site", 10, 10, 0, Qt.LeftButton);
@@ -1731,8 +1753,8 @@ function main()
     catch(e)
     {
         test.fail("Error in setting up Item site of BTRUCK1" + e);
-         if(object.exists(":Item Sites.Close_QToolButton"))
-              clickButton(":Item Sites.Close_QToolButton");
+        if(object.exists(":Item Sites.Close_QToolButton"))
+            clickButton(":Item Sites.Close_QToolButton");
     }
     
     
@@ -1749,7 +1771,7 @@ function main()
         activateItem(":xTuple ERP:*.Reports_QMenu", "Planned Orders...");
         waitForObject(":Planned Orders.Query_QToolButton");
         clickButton(":Planned Orders.Query_QToolButton")
-        waitForObject(":_list_XTreeWidget_10");
+                waitForObject(":_list_XTreeWidget_10");
         var sWidgetTreeControl = ":_list_XTreeWidget_10";
         var obj_TreeWidget = findObject(sWidgetTreeControl);
         var obj_TreeRootItem=obj_TreeWidget.invisibleRootItem();
@@ -1775,7 +1797,7 @@ function main()
     catch(e)
     {
         test.fail("Error in viewing planned orders" + e);
-         if(object.exists(":Planned Orders.Close_QToolButton"))
+        if(object.exists(":Planned Orders.Close_QToolButton"))
             clickButton(":Planned Orders.Close_QToolButton");
     }
     

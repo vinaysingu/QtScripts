@@ -8,7 +8,7 @@ function main()
     loginAppl("CONFIGURE"); 
     
     snooze(6);
-  //--------------- Set the window to Tab view mode -------------
+    //--------------- Set the window to Tab view mode -------------
     
     tabView();
     //--Create New Freight Class---
@@ -52,10 +52,10 @@ function main()
     snooze(0.5);
     //---Create New Item---
     var targetitem = "FREIGHT ITEM1";
-     copyItem("YTRUCK1",targetitem);
+    copyItem("YTRUCK1",targetitem);
     //----Create New ItemSite-----
     createRIS(targetitem);
-  
+    
     //----Edit the Item to assign Freight class-----
     var prdwgt
             try
@@ -87,7 +87,7 @@ function main()
     //---Create New Customer----
     var fcustname1 = "FCUST1";
     var custType = "NORMAL"+"-"+"Normal Domestic Customers";
-  createCustomer(custType,fcustname1,"STORE1");
+    createCustomer(custType,fcustname1,"STORE1");
     
     //-----Create Freight Type PricingSchedule using Falt rate------
     var Fghprcname1 ="FREIGHT PRICING SCHEDULE1 ";
@@ -141,7 +141,7 @@ function main()
             clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
         }
     }
-  
+    
     //---Pricing Schedule Assignment for a Customer----
     var prcAssg = Fghprcname1 +" - " +Fghprcname1;  
     prcasscust(fcustname1,prcAssg,Fghprcname1);
@@ -184,13 +184,13 @@ function main()
     var fcustname2 = "FCUST2";
     var shipnum = "STORE2";
     createCustomer(custType,fcustname2,shipnum);
-      
+    
     //---Pricing Schedule Assignment to customer Ship-to--------
     prcassgship(fcustname2,shipnum,prcAssg);
     
     //----Create SalesOrder----
     var fsonum2 = createSalesOrder1(targetitem, 100 ,fcustname2);
-   
+    
     //----Edit the Sales Order to verify the flat rate applied------
     var famnt;
     try
@@ -203,7 +203,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit..."));
         snooze(2);
         clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Line Items");
-         snooze(0.5);
+        snooze(0.5);
         famnt = findObject(":_lineItemsPage.XLineEdit_XLineEdit_2").text;
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2"));
         snooze(0.5);
@@ -259,14 +259,14 @@ function main()
     var fcustname3 = "FCUST3";
     var custType1 = custType+'-'+custType;
     createCustomer(custType1,fcustname3,"STORE1");
-        
+    
     //---Assigning pricing Schedule for the Customer Type-----
     
     prcAssgCustType(fcustname3,custType1,custType,prcAssg);
     
     //----Create SalesOrder----
     var fsonum3 = createSalesOrder1(targetitem, 100 ,fcustname3);
-   
+    
     //----Edit the Sales Order to verify the flat rate applied------
     var famnt;
     try

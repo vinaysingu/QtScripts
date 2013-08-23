@@ -895,7 +895,7 @@
 :_orderMultiple_XLineEdit	{buddy=':Enforce Order Parameters.Order Multiple:_QLabel' name='_orderMultiple' type='XLineEdit' visible='1'}
 :_orderUpToQty_XLineEdit	{buddy=':Enforce Order Parameters.Order Up To:_QLabel' name='_orderUpToQty' type='XLineEdit' visible='1'}
 :_package.xtmfg_QModelIndex	{column='0' container=':xTuple ERP:*._package_XTreeWidget' text='xtmfg' type='QModelIndex'}
-:_password_QLineEdit	{name='_password' type='QLineEdit' visible='1'}
+:_password_QLineEdit	{name='_password' type='QLineEdit' visible='1' window=':Log In_login2'}
 :_plannerCode.MRP-MRP Items_QModelIndex	{container=':_plannerCode_XComboBox' text='MRP-MRP Items' type='QModelIndex'}
 :_plannerCode.MRP-MRP Items_QModelIndex_2	{container=':_plannerCode_XComboBox_2' text='MRP-MRP Items' type='QModelIndex'}
 :_plannerCode.MRP-MRP Items_QModelIndex_3	{container=':_plannerCode_XComboBox_3' text='MRP-MRP Items' type='QModelIndex'}
@@ -979,7 +979,7 @@
 :_tree.Configure_QModelIndex	{column='0' container=':Setup._tree_XTreeWidget' text='Configure' type='QModelIndex'}
 :_tree.Master Information_QModelIndex	{column='0' container=':Setup._tree_XTreeWidget' text='Master Information' type='QModelIndex'}
 :_userGroup.VirtualClusterLineEdit_UsernameLineEdit	{container=':_optionsFrame._userGroup_QGroupBox' name='VirtualClusterLineEdit' type='UsernameLineEdit' visible='1'}
-:_username_QLineEdit	{name='_username' type='QLineEdit' visible='1'}
+:_username_QLineEdit	{name='_username' type='QLineEdit' visible='1' window=':Log In_login2'}
 :_warehouse.All Sites_QRadioButton	{container=':Quantities on Hand by Item._warehouse_WarehouseGroup' name='_all' text='All Sites' type='QRadioButton' visible='1'}
 :_warehouse.All Sites_QRadioButton_2	{container=':Release Work Orders by Planner Code._warehouse_WarehouseGroup' name='_all' text='All Sites' type='QRadioButton' visible='1'}
 :_warehouse.Selected:_QRadioButton	{container=':Quantities on Hand by Item._warehouse_WarehouseGroup' name='_selected' text='Selected:' type='QRadioButton' visible='1'}
@@ -1211,6 +1211,7 @@
 :xTuple ERP:*.Update Status_QMenu	{title='Update Status' type='QMenu' unnamed='1' visible='1'}
 :xTuple ERP:*.VirtualClusterLineEdit_UsernameLineEdit	{name='VirtualClusterLineEdit' type='UsernameLineEdit' visible='1'}
 :xTuple ERP:*.VirtualClusterLineEdit_UsernameLineEdit_2	{name='VirtualClusterLineEdit' occurrence='2' type='UsernameLineEdit' visible='1'}
+:xTuple ERP:*.Window_QMenu	{title='Window' type='QMenu' visible='1'}
 :xTuple ERP:*.Work Order Costing_QFrame	{name='_optionsFrame' type='QFrame' visible='1' windowTitle='Work Order Costing'}
 :xTuple ERP:*.Work Order_QMenu	{title='Work Order' type='QMenu' visible='1'}
 :xTuple ERP:*.XDateEdit_XDateEdit	{container=':Release Work Orders by Planner Code._dateGroup_QGroupBox' name='XDateEdit' type='XDateEdit'}

@@ -6,9 +6,8 @@ function main()
     
     //-----login Application-----
     loginAppl("CONFIGURE"); 
-    waitForObject(":*.Yes_QPushButton");
-    clickButton(":*.Yes_QPushButton");
-  snooze(2);
+
+     snooze(2);
     //-----Editing of preferences----
         try
         {
@@ -19,12 +18,11 @@ function main()
             }
             else
             {
-
-        waitForObjectItem(":xTuple ERP:*_QMenuBar_2", "System");
-        activateItem(":xTuple ERP:*_QMenuBar_2", "System");
-        waitForObjectItem(":xTuple ERP:*.System_QMenu", "Preferences...");
-        activateItem(":xTuple ERP:*.System_QMenu", "Preferences...");
-    }
+                waitForObjectItem(":xTuple ERP:*_QMenuBar_2", "System");
+                activateItem(":xTuple ERP:*_QMenuBar_2", "System");
+                waitForObjectItem(":xTuple ERP:*.System_QMenu", "Preferences...");
+                activateItem(":xTuple ERP:*.System_QMenu", "Preferences...");
+            }
             snooze(0.5);
         if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
         {
@@ -71,8 +69,7 @@ function main()
     snooze(2);
     
     loginAppl("CONFIGURE"); 
-    waitForObject(":*.Yes_QPushButton");
-    clickButton(":*.Yes_QPushButton");
+
     snooze(2);
     
     //---------------Enabling the database options--------- 
@@ -3470,7 +3467,7 @@ function main()
     }
     
     
-  
+
 
     //-------------Creating Customer--------
     try
