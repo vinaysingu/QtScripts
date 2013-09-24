@@ -180,6 +180,7 @@ function main()
     //-------------- Project Creation ---------
     
     var projNum = "PROJECT 5";
+  
     try{
     activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar_2", "CRM"));
     activateItem(waitForObjectItem(":xTuple ERP:*CRM_QMenu", "Project"));
@@ -215,6 +216,38 @@ function main()
     catch(e)
     {
         test.fail("Error in creating Project"+e);
+         if(object.exists(":Vendors.Close_QToolButton_3"))
+            clickButton(":Vendors.Close_QToolButton_3");
     }
     
+    
+    // ----- Posting a Simple  Journal entry ------
+    
+     
+    try{
+    activateItem(waitForObjectItem(":xTuple ERP:*_QMenuBar_2", "Accounting"));
+    activateItem(waitForObjectItem(":xTuple ERP:*.Accounting_QMenu", "General Ledger"));
+    activateItem(waitForObjectItem(":*.General Ledger_QMenu", "Journal Entry"));
+    activateItem(waitForObjectItem(":xTuple ERP: *.Journal Entry_QMenu", "Simple..."));
+    type(waitForObject(":Cash Receipt.XLineEdit_XLineEdit_2"), "150");
+    type(waitForObject(":Simple G/L Journal Entry._docNumber_XLineEdit"), "123");
+    type(waitForObject(":Simple G/L Journal Entry.VirtualClusterLineEdit_GLClusterLineEdit"), "01-01-1000-01");
+    nativeType("<Tab>");
+    type(waitForObject(":Simple G/L Journal Entry.VirtualClusterLineEdit_GLClusterLineEdit_2"), "01-01-1010-01");
+    nativeType("<Tab>");
+    type(waitForObject(":Simple G/L Journal Entry.VirtualClusterLineEdit_ProjectLineEdit"), projNum);
+    type(waitForObject(":Simple G/L Journal Entry.VirtualClusterLineEdit_ProjectLineEdit_2"), projNum);
+    type(waitForObject(":frame._notes_XTextEdit"), "Notes");
+    clickButton(waitForObject(":Simple G/L Journal Entry.Post_QPushButton"));
+    clickButton(waitForObject(":Simple G/L Journal Entry.Close_QPushButton"));
+    test.log("Simple Journal entry posted successfully");
+    
+    }
+    catch(e)
+    {
+        test.fail("Error in posting simple Journal Entry"+e);
+         if(object.exists(":Simple G/L Journal Entry.Close_QPushButton"))
+            clickButton(":Simple G/L Journal Entry.Close_QPushButton");
+    }
+
 }
