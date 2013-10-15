@@ -37,11 +37,13 @@ try
         type(":Log In._server_QLineEdit",url);
         waitForObject(":Log In._server_QLineEdit");
         type(":Log In._server_QLineEdit", "<Tab>");
-        waitForObject(":Log In._port_QLineEdit");
-        findObject(":Log In._port_QLineEdit").clear();
-        type(":Log In._port_QLineEdit",port);
-        waitForObject(":Log In._port_QLineEdit");
-        type(":Log In._port_QLineEdit", "<Tab>");
+        
+//        waitForObject(":Log In._port_QLineEdit");
+//        findObject(":Log In._port_QLineEdit").clear();
+//        type(":Log In._port_QLineEdit",port);
+//        waitForObject(":Log In._port_QLineEdit");
+//        type(":Log In._port_QLineEdit", "<Tab>");
+        
         waitForObject(":_database_QLineEdit_2");
         findObject(":_database_QLineEdit_2").clear();
         type(":_database_QLineEdit_2",db);

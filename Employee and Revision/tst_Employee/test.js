@@ -6,79 +6,79 @@ function main()
     
     //-----login Application-----
     loginAppl("CONFIGURE"); 
-    snooze(3);
+    snooze(6);
     
     
-    //-----Editing of preferences----
-    try
-    {
-        if(OS.name == "Darwin")
-        {
-            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-        }
-        else
-        {
-            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-            activateItem(":xTuple ERP: *_QMenuBar", "System");
-            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-            activateItem(":xTuple ERP: *._System_QMenu", "Preferences..."); 
-        }
-        snooze(0.5);
-        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
-        {
-            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-        }
-        snooze(0.3);
-        if(object.exists(":Notice.Notice_QDialog"))
-        {
-            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
-                clickButton(":Notice.Remind me about this again._QCheckBox");
-            snooze(0.2);
-            waitForObject(":Notice.OK_QPushButton");
-            clickButton(":Notice.OK_QPushButton");
-        }
-        
-        waitForObject(":View Check Run.Save_QPushButton");
-        clickButton(":View Check Run.Save_QPushButton");
-        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-        activateItem(":xTuple ERP: *_QMenuBar", "System");
-        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-        snooze(3);
-    }
-    catch(e)
-    {
-        test.fail("Error in editing preferences"+ e);
-    }  
-    
-    //--------Exiting the application------
-    activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
-    activateItem(waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP..."));
-    
-    snooze(5);
-    
-    if(OS.name=="Linux")
-        startApplication("xtuple.bin");
-    
-    else
-        startApplication("xtuple");
-    
-    snooze(2);
-    
-    loginAppl("CONFIGURE"); 
-    snooze(3);
+//    //-----Editing of preferences----
+//    try
+//    {
+//        if(OS.name == "Darwin")
+//        {
+//            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+//            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+//        }
+//        else
+//        {
+//            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+//            activateItem(":xTuple ERP: *_QMenuBar", "System");
+//            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+//            activateItem(":xTuple ERP: *._System_QMenu", "Preferences..."); 
+//        }
+//        snooze(0.5);
+//        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
+//        {
+//            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+//                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+//        }
+//        snooze(0.3);
+//        if(object.exists(":Notice.Notice_QDialog"))
+//        {
+//            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+//                clickButton(":Notice.Remind me about this again._QCheckBox");
+//            snooze(0.2);
+//            waitForObject(":Notice.OK_QPushButton");
+//            clickButton(":Notice.OK_QPushButton");
+//        }
+//        
+//        waitForObject(":View Check Run.Save_QPushButton");
+//        clickButton(":View Check Run.Save_QPushButton");
+//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+//        activateItem(":xTuple ERP: *_QMenuBar", "System");
+//        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+//        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+//        snooze(3);
+//    }
+//    catch(e)
+//    {
+//        test.fail("Error in editing preferences"+ e);
+//    }  
+//    
+//    //--------Exiting the application------
+//    activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
+//    activateItem(waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP..."));
+//    
+//    snooze(5);
+//    
+//    if(OS.name=="Linux")
+//        startApplication("xtuple.bin");
+//    
+//    else
+//        startApplication("xtuple");
+//    
+//    snooze(2);
+//    
+//    loginAppl("CONFIGURE"); 
+//    snooze(3);
     
     
     
     
     //---Creating a New Employee ----
-    var uName = "code1" //username should be exactly similar to Empcode but in small letters
-    var empCode1 ="CODE1";
+    var uName = "code111" //username should be exactly similar to Empcode but in small letters
+    var empCode1 ="CODE111";
     var empNum1 = "111";
     var empName1 = "EMPLOYEE1";
-    
+  
     try
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
@@ -88,7 +88,7 @@ function main()
         try
         {
             clickButton(waitForObject(":Quotes.New_QToolButton"));
-            type(waitForObject(":_code_XLineEdit_2"),empCode1);
+            type(waitForObject(":_code_XLineEdit_3"),empCode1);
             nativeType("<Tab>");
             type(waitForObject(":xTuple ERP:*._number_XLineEdit"),empNum1);
             snooze(0.5);
@@ -98,17 +98,21 @@ function main()
             type(waitForObject(":xTuple ERP:*._name_XLineEdit"),empName1);
             
             clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Detail");
-            type(waitForObject(":_memberGroup.VirtualClusterLineEdit_EmpClusterLineEdit"), "JSMITH");
+           
+            type(waitForObject(":_memberGroup.VirtualClusterLineEdit_EmpClusterLineEdit_2"), "JSMITH");
             nativeType("<Tab>");
             type(waitForObject(":_filterGroup.XDateEdit_XDateEdit"), "<0>");
             nativeType("<Tab>");
-            type(waitForObject(":_timeclockGroup.VirtualClusterLineEdit_DeptClusterLineEdit"), "ADMIN");
-            nativeType("<Tab>");
-            type(waitForObject(":_timeclockGroup.VirtualClusterLineEdit_ShiftClusterLineEdit"), "DAY");
+            type(waitForObject(":_timeclockGroup.VirtualClusterLineEdit_DeptClusterLineEdit_2"), "ADMIN");            nativeType("<Tab>");
+            type(waitForObject(":_timeclockGroup.VirtualClusterLineEdit_ShiftClusterLineEdit_2"), "DAY");
             nativeType("<Tab>");
             
             clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
             clickButton(waitForObject(":Quotes.Query_QToolButton"));
+            
+            
+            
+            
             //-----Verifying the Employee Created ----
             snooze(1);
             if(object.exists("{column='3' container=':_list_XTreeWidget_3' text='"+empNum1+"' type='QModelIndex'}"))
@@ -174,8 +178,7 @@ function main()
             clickButton(waitForObject(":Quotes.Query_QToolButton"));
             openItemContextMenu(":_list_XTreeWidget_3", empCode1, 5, 5, Qt.LeftButton);
             activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit..."));
-            
-            clickButton(waitForObject(":xTuple ERP:*.CRM Account..._QPushButton"));
+            clickButton(waitForObject(":Employee.CRM Account..._QPushButton"));
             clickButton(waitForObject(":Roles._user_QCheckBox"));
             clickButton(waitForObject(":Roles.User..._QPushButton"));
             clickButton(waitForObject(":User Information.Save_QPushButton"));
@@ -217,13 +220,13 @@ function main()
                 clickButton(":Select Order for Billing.Close_QPushButton");
             
         }
-        
-    
+      
+  
         //-----Operations on Employee-----
         
         
         var editEmpNum = "222";
-        
+      
                 
         //---Performing Operations on Employee----
                 
@@ -238,7 +241,7 @@ function main()
             try
             {
                 clickButton(waitForObject(":Quotes.New_QToolButton"));
-                type(waitForObject(":_code_XLineEdit_2"),empCode1);
+                type(waitForObject(":_code_XLineEdit_3"),empCode1);
                 nativeType("<Tab>");
                 type(waitForObject(":xTuple ERP:*._number_XLineEdit"),"555");
                 snooze(0.5);
@@ -246,19 +249,19 @@ function main()
                     clickButton(":xTuple ERP:*.Active_XCheckBox");
                 
                 type(waitForObject(":xTuple ERP:*._name_XLineEdit"),"ZenEmp2");
-                
                 clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Detail");
-                type(waitForObject(":_memberGroup.VirtualClusterLineEdit_EmpClusterLineEdit"), "JSMITH");
-                nativeType("<Tab>");
-                type(waitForObject(":_filterGroup.XDateEdit_XDateEdit"), "<0>");
-                nativeType("<Tab>");
-                type(waitForObject(":_timeclockGroup.VirtualClusterLineEdit_DeptClusterLineEdit"), "ADMIN");
-                nativeType("<Tab>");
-                type(waitForObject(":_timeclockGroup.VirtualClusterLineEdit_ShiftClusterLineEdit"), "DAY");
-                nativeType("<Tab>");
-                clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
-                snooze(1);
-                if(object.exists(":Sales Order.OK_QPushButton_2"))
+           
+            type(waitForObject(":_memberGroup.VirtualClusterLineEdit_EmpClusterLineEdit_2"), "JSMITH");
+            nativeType("<Tab>");
+            type(waitForObject(":_filterGroup.XDateEdit_XDateEdit"), "<0>");
+            nativeType("<Tab>");
+            type(waitForObject(":_timeclockGroup.VirtualClusterLineEdit_DeptClusterLineEdit_2"), "ADMIN");            nativeType("<Tab>");
+            type(waitForObject(":_timeclockGroup.VirtualClusterLineEdit_ShiftClusterLineEdit_2"), "DAY");
+            nativeType("<Tab>");
+            
+            clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
+            
+            if(object.exists(":Sales Order.OK_QPushButton_2"))
                 {
                     test.pass("It is not possible to duplicate an Employee");
                     clickButton(":Sales Order.OK_QPushButton_2");
@@ -270,7 +273,8 @@ function main()
                     if(object.exists(":Select Order for Billing.Save_QPushButton"))
                         clickButton(":Select Order for Billing.Save_QPushButton");
                 }
-                clickButton(waitForObject(":Quotes.Query_QToolButton"));
+              clickButton(waitForObject(":Quotes.Query_QToolButton"));
+              
                 
             }
             catch(e)
@@ -362,7 +366,7 @@ function main()
                 clickButton(":Quotes.Close_QToolButton");
             
         }
-        
+      
         
         //----For Employee Group----
         
@@ -371,7 +375,7 @@ function main()
         
         var EMPGRP1 = "GROUP1";
         var editEMPGRP = "Employee Desc Group Editied";
-        
+      
         
         
         try
@@ -384,7 +388,7 @@ function main()
             try
             {
                 clickButton(waitForObject(":xTuple ERP:*.New_QPushButton"));
-                type(waitForObject(":xTuple ERP:*._name_XLineEdit"),EMPGRP1);
+                type(waitForObject(":GroupBox1._name_XLineEdit_2"),EMPGRP1);
                 nativeType("<Tab>");
                 type(waitForObject(":GroupBox1._descrip_XLineEdit_2"), "New EMployee GROUP");
                 clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
@@ -503,8 +507,8 @@ function main()
         
         
         
-        
-        
+      
+      
         
         
         //--Attaching an Employee to Employee Group---
@@ -526,7 +530,7 @@ function main()
             try
             {
                 clickButton(waitForObject(":Quotes.New_QToolButton"));
-                type(waitForObject(":_code_XLineEdit_2"),empCode2);
+                type(waitForObject(":_code_XLineEdit_3"),empCode2);
                 nativeType("<Tab>");
                 type(waitForObject(":xTuple ERP:*._number_XLineEdit"),empNum2);
                 snooze(0.5);
@@ -535,18 +539,19 @@ function main()
                 
                 type(waitForObject(":xTuple ERP:*._name_XLineEdit"),empName2);
                 
-                clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Detail");
-                type(waitForObject(":_memberGroup.VirtualClusterLineEdit_EmpClusterLineEdit"), "JSMITH");
-                nativeType("<Tab>");
-                type(waitForObject(":_filterGroup.XDateEdit_XDateEdit"), "<0>");
-                nativeType("<Tab>");
-                type(waitForObject(":_timeclockGroup.VirtualClusterLineEdit_DeptClusterLineEdit"), "ADMIN");
-                nativeType("<Tab>");
-                type(waitForObject(":_timeclockGroup.VirtualClusterLineEdit_ShiftClusterLineEdit"), "DAY");
-                nativeType("<Tab>");
-                
-                clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
-                clickButton(waitForObject(":Quotes.Query_QToolButton"));
+               clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Detail");
+           
+            type(waitForObject(":_memberGroup.VirtualClusterLineEdit_EmpClusterLineEdit_2"), "JSMITH");
+            nativeType("<Tab>");
+            type(waitForObject(":_filterGroup.XDateEdit_XDateEdit"), "<0>");
+            nativeType("<Tab>");
+            type(waitForObject(":_timeclockGroup.VirtualClusterLineEdit_DeptClusterLineEdit_2"), "ADMIN");            nativeType("<Tab>");
+            type(waitForObject(":_timeclockGroup.VirtualClusterLineEdit_ShiftClusterLineEdit_2"), "DAY");
+            nativeType("<Tab>");
+            
+            clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
+            clickButton(waitForObject(":Quotes.Query_QToolButton"));
+           clickButton(waitForObject(":Quotes.Query_QToolButton"));
                 
             }
             catch(e)
@@ -603,7 +608,7 @@ function main()
             try
             {
                 clickButton(waitForObject(":xTuple ERP:*.New_QPushButton"));
-                type(waitForObject(":xTuple ERP:*._name_XLineEdit"),EMPGRP2);
+                type(waitForObject(":GroupBox1._name_XLineEdit_2"),EMPGRP2);
                 nativeType("<Tab>");
                 type(waitForObject(":GroupBox1._descrip_XLineEdit_2"), "New EMployee GROUP");
                 clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
@@ -652,10 +657,15 @@ function main()
             clickButton(waitForObject(":xTuple ERP:*.New_QPushButton"));
             try
             {
-                type(waitForObject(":xTuple ERP:*._name_XLineEdit"),EMPGRP2);
+                type(waitForObject(":GroupBox1._name_XLineEdit_2"),EMPGRP2);
                 nativeType("<Tab>");
                 type(waitForObject(":GroupBox1._descrip_XLineEdit_2"), "New EMployee GROUP Created");
                 snooze(1);
+                clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
+                snooze(1);
+                
+               clickItem(":xTuple ERP:*._empgrp_XTreeWidget",EMPGRP2, 10, 10, 0, Qt.LeftButton);
+             clickButton(waitForObject(":xTuple ERP:*.Edit_QPushButton"));
                 
                 clickButton(waitForObject(":xTuple ERP:*.New_QPushButton_2"));
                 
@@ -809,10 +819,41 @@ function main()
         {
             test.fail("No Employee attached to employee group");
         }
+         
+        
+          //----Deleting an Employee Group after deleting an Employee associated---
+        
+        
+        try
+            {
+                activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
+                activateItem(waitForObjectItem(":xTuple ERP: *._System_QMenu", "Employees"));
+                activateItem(waitForObjectItem(":xTuple ERP:*.Employees_QMenu", "Employee Groups..."));
+                clickItem(":xTuple ERP:*._empgrp_XTreeWidget",EMPGRP2, 0, 0, 5, Qt.LeftButton);
+                snooze(1);
+                clickButton(waitForObject(":xTuple ERP:*.Delete_QPushButton"));
+                snooze(2);
+                
+                 if(object.exists("{column='0' container=':xTuple ERP:*._empgrp_XTreeWidget' text='"+EMPGRP2+"' type='QModelIndex'}"))
+                    test.fail("Failed to delete an employee Group" +EMPGRP2 +"");
+                else
+                    test.pass("Employee Group Deleted Sucessfully");
+                clickButton(":Select Order for Billing.Close_QPushButton");
+                
+            }
+        catch(e)
+        {
+            test.fail("Error in deleting an employee Group after deleting an employee associated"+e);
+             
+                if(object.exists(":Select Order for Billing.Close_QPushButton"))
+                    clickButton(":Select Order for Billing.Close_QPushButton");
+        }
         
         
         
-        //----Attaching an Employee to Group to an Employee and Verify that Employee is attached--
+        
+        
+        //----Attaching an Employee Group to an Employee and Verify that Employee is attached--
         
         //--Creating an Employee Group ----
         
@@ -827,12 +868,14 @@ function main()
             //--Create Employee Group---
             try
             {
-                clickButton(waitForObject(":xTuple ERP:*.New_QPushButton"));
-                type(waitForObject(":xTuple ERP:*._name_XLineEdit"),EMPGRP3);
+                
+                 clickButton(waitForObject(":xTuple ERP:*.New_QPushButton"));
+                type(waitForObject(":GroupBox1._name_XLineEdit_2"),EMPGRP3);
                 nativeType("<Tab>");
                 type(waitForObject(":GroupBox1._descrip_XLineEdit_2"), "New EMployee GROUP");
                 clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
-            }
+                snooze(1);
+              }
             catch(e)
             {
                 test.fail("Error in Creating Employee Group"+e)
@@ -890,7 +933,8 @@ function main()
                 openItemContextMenu(":_list_XTreeWidget_3", empCode2, 5, 5, Qt.LeftButton);
                 activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit..."));
                 clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Groups");
-                clickButton(waitForObject(":_groupTab.Attach_QPushButton"));
+        
+                clickButton(waitForObject(":_groupTab.Attach_QPushButton_2"));
                 snooze(1);
                 waitForObject(":_listTab_XTreeWidget_23");
                 clickItem(":_listTab_XTreeWidget_23",EMPGRP3 ,0, 0, 5, Qt.LeftButton);
@@ -912,7 +956,8 @@ function main()
                 activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit..."));
                 clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Groups");
                 snooze(1);
-                if(object.exists("{column='0' container=':_groupTab._groups_XTreeWidget' text='"+EMPGRP3+"' type='QModelIndex'}"))
+              
+                if(object.exists("{column='0' container=':_groupTab._groups_XTreeWidget_2' text='"+EMPGRP3+"' type='QModelIndex'}"))
                 {
                     
                     flag = "1";
@@ -989,7 +1034,7 @@ function main()
         }
         else
         {
-            test.fail("Error in attaching an employee group to employee"+e);
+            test.fail("Error in attaching an employee group to employee");
         }
         
         
@@ -1017,8 +1062,8 @@ function main()
                 openItemContextMenu(":_list_XTreeWidget_3", empCode2, 5, 5, Qt.LeftButton);
                 activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit..."));
                 clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Groups");
-                clickItem(":_groupTab._groups_XTreeWidget",EMPGRP3,0, 0,5, Qt.LeftButton);
-                clickButton(waitForObject(":_groupTab.Detach_QPushButton"));
+                clickItem(":_groupTab._groups_XTreeWidget_2",EMPGRP3,0, 0,5, Qt.LeftButton);
+                clickButton(waitForObject(":_groupTab.Detach_QPushButton_2"));
                 clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
                 clickButton(waitForObject(":Quotes.Query_QToolButton"));
             }
@@ -1036,7 +1081,7 @@ function main()
                 activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit..."));
                 clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Groups");
                 snooze(1);
-                if(object.exists("{column='0' container=':_groupTab._groups_XTreeWidget' text='"+EMPGRP3+"' type='QModelIndex'}"))
+                if(object.exists("{column='0' container=':_groupTab._groups_XTreeWidget_2' text='"+EMPGRP3+"' type='QModelIndex'}"))
                     
                     test.fail("Employee Group" +EMPGRP3 +" detachment failed");
                 

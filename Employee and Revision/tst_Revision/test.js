@@ -8,69 +8,69 @@ function main()
     snooze(3);
     
                        //-----Editing of preferences----
-    try
-    {
-        if(OS.name == "Darwin")
-        {
-            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-        }
-        else
-        {
-            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-            activateItem(":xTuple ERP: *_QMenuBar", "System");
-            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-            activateItem(":xTuple ERP: *._System_QMenu", "Preferences..."); 
-         }
-        snooze(0.5);
-        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
-        {
-            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-        }
-        snooze(0.3);
-        if(object.exists(":Notice.Notice_QDialog"))
-        {
-            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
-                clickButton(":Notice.Remind me about this again._QCheckBox");
-            snooze(0.2);
-            waitForObject(":Notice.OK_QPushButton");
-            clickButton(":Notice.OK_QPushButton");
-        }
-        
-        waitForObject(":View Check Run.Save_QPushButton");
-        clickButton(":View Check Run.Save_QPushButton");
-        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-        activateItem(":xTuple ERP: *_QMenuBar", "System");
-        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-        snooze(3);
-    }
-    catch(e)
-    {
-        test.fail("Error in editing preferences"+ e);
-    }  
-    
-    //--------Exiting the application------
-    activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
-    activateItem(waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP..."));
-    
-    snooze(5);
-    
-    if(OS.name=="Linux")
-        startApplication("xtuple.bin");
-    
-    else
-        startApplication("xtuple");
-    
-    snooze(2);
-    
-    loginAppl("CONFIGURE"); 
-    snooze(3);
+//    try
+//    {
+//        if(OS.name == "Darwin")
+//        {
+//            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+//            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+//        }
+//        else
+//        {
+//            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+//            activateItem(":xTuple ERP: *_QMenuBar", "System");
+//            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+//            activateItem(":xTuple ERP: *._System_QMenu", "Preferences..."); 
+//         }
+//        snooze(0.5);
+//        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
+//        {
+//            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+//                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+//        }
+//        snooze(0.3);
+//        if(object.exists(":Notice.Notice_QDialog"))
+//        {
+//            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+//                clickButton(":Notice.Remind me about this again._QCheckBox");
+//            snooze(0.2);
+//            waitForObject(":Notice.OK_QPushButton");
+//            clickButton(":Notice.OK_QPushButton");
+//        }
+//        
+//        waitForObject(":View Check Run.Save_QPushButton");
+//        clickButton(":View Check Run.Save_QPushButton");
+//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+//        activateItem(":xTuple ERP: *_QMenuBar", "System");
+//        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+//        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+//        snooze(3);
+//    }
+//    catch(e)
+//    {
+//        test.fail("Error in editing preferences"+ e);
+//    }  
+//    
+//    //--------Exiting the application------
+//    activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
+//    activateItem(waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP..."));
+//    
+//    snooze(5);
+//    
+//    if(OS.name=="Linux")
+//        startApplication("xtuple.bin");
+//    
+//    else
+//        startApplication("xtuple");
+//    
+//    snooze(2);
+//    
+//    loginAppl("CONFIGURE"); 
+//    snooze(3);
     
     var sourceitem = "YTRUCK1";
-    var targetitem1 = "REVITEM111";
-    var targetitem2 = "REVITEM222";
+    var targetitem1 = "REVITEM1111";
+    var targetitem2 = "REVITEM2222";
     var listprice = "2";
     var Wsaleprice = "2";
     var ABOMItem1 = "BPAINT1";
@@ -621,7 +621,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Bill Of Operations"));
         activateItem(waitForObjectItem(":_QMenu", "List..."));
-        clickItem(":_boo_XTreeWidget", targetitem1, 0, 0, 5, Qt.LeftButton);
+        clickItem(":_boo_XTreeWidget_2", targetitem1, 0, 0, 5, Qt.LeftButton);
         clickButton(waitForObject(":xTuple ERP:*.Edit_QPushButton"));
         snooze(1);
         Checkstatus1 =findObject(":xTuple ERP:*.Active_QLabel").text
@@ -659,7 +659,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Bill Of Operations"));
         activateItem(waitForObjectItem(":_QMenu", "List..."));
-        clickItem(":_boo_XTreeWidget", targetitem1, 0, 0, 5, Qt.LeftButton);
+        clickItem(":_boo_XTreeWidget_2", targetitem1, 0, 0, 5, Qt.LeftButton);
         clickButton(waitForObject(":xTuple ERP:*.Edit_QPushButton"));
         
                  //---Revision with Pending state on BOO
