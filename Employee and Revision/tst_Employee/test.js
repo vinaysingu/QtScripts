@@ -222,7 +222,7 @@ function main()
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
         clickButton(waitForObject(":Quotes.Query_QToolButton"));
         clickButton(waitForObject(":Quotes.Close_QToolButton"));
-        test.log("User Account is assigned for an Employee");
+        test.log("sucessfully assigned user Account for an Employee");
     }
     catch(e)
     {
@@ -349,7 +349,7 @@ function main()
             waitForObject(":_list_XTreeWidget_3");
             snooze(1);
             if(object.exists("{column='3' container=':_list_XTreeWidget_3' text='"+data.editEmpNum+"' type='QModelIndex'}"))
-                test.pass("Employee " + data.empCode1 +" edited created sucessfully");
+                test.pass("Employee " + data.empCode[0] +" edited created sucessfully");
             else
                 test.fail("Employee editing failed");
         }
@@ -371,10 +371,10 @@ function main()
             clickButton(waitForObject(":View Check Run.Yes_QPushButton_2"));
             clickButton(waitForObject(":Quotes.Query_QToolButton"));
             if(object.exists("{column='2' container=':_list_XTreeWidget_3' text='"+data.editEmpNum+"' type='QModelIndex'}"))
-                test.fail("Failed to delete Employee");
+                test.fail("Failed to delete "+ data.empCode[0] +" Employee");
             
             else
-                test.pass("Employee Deleted sucessfully");
+                test.pass("Employee "+ data.empCode[0] +"Deleted sucessfully");
             
             clickButton(waitForObject(":Quotes.Close_QToolButton"));
         }
@@ -422,7 +422,7 @@ function main()
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
         snooze(1);
         if(object.exists("{column='0' container=':xTuple ERP:*._empgrp_XTreeWidget' text='"+data.empGrp[0]+"' type='QModelIndex'}"))
-            test.pass("Employee Group" +data.empGrp[0] +" created sucessfully");
+            test.pass("Employee Group" + data.empGrp[0] +" created sucessfully");
         else
             test.fail("Employee Group creation failed");
         clickButton(":Select Order for Billing.Close_QPushButton");
@@ -471,7 +471,7 @@ function main()
         {
             snooze(1);
             if(object.exists("{column='1' container=':xTuple ERP:*._empgrp_XTreeWidget' text='"+data.editEmpGrp+"' type='QModelIndex'}"))
-                test.pass("Employee Group " + data.empGrp[0] +" edited created sucessfully");
+                test.pass("Employee Group " + data.empGrp[0] + " edited created sucessfully");
             else
                 test.fail("Employee Group editing failed");
             
@@ -499,7 +499,7 @@ function main()
             
             
             else
-                test.pass("Employee Group " +data.empGrp[0]+" Deleted sucessfully");
+                test.pass("Employee Group " +data.empGrp[0]+ " Deleted sucessfully");
             
             
         }
@@ -572,7 +572,7 @@ function main()
         if(object.exists("{column='3' container=':_list_XTreeWidget_3' text='"+data.empNum[1]+"' type='QModelIndex'}"))
             test.pass("Employee " + data.empCode[1] +" created sucessfully");
         else
-            test.fail("Employee creation failed");
+            test.fail("Employee " + data.empCode[1] +" creation failed");
         
         clickButton(waitForObject(":Quotes.Close_QToolButton"));
         
@@ -624,7 +624,7 @@ function main()
     
     
     
-    
+  
     
     
     //----Attaching Employee to Employee group craeted
@@ -637,7 +637,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "System"));
         activateItem(waitForObjectItem(":xTuple ERP: *._System_QMenu", "Employees"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Employees_QMenu", "Employee Groups..."));
-        clickButton(waitForObject(":xTuple ERP:*.New_QPushButton"));
+       
         try
         {
             
@@ -672,7 +672,7 @@ function main()
             
         {
             flag ="1";    
-            test.pass("Employee "+data.empCode[1]+"is sucessfully attached to an Employee Group");
+            test.pass("Employee "+data.empCode[1]+" sucessfully attached to an Employee Group");
             
             
         }
@@ -682,17 +682,18 @@ function main()
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));  
         
         clickButton(":Select Order for Billing.Close_QPushButton");
-        test.log(flag);
+        
         
     }//end of main try
     catch(e)
     {
-        test.fail("Error in attaching an employee to employee group"+e)
+        test.fail("Error in attaching an employee to employee group"+e);
+                if(object.exists(":Select Order for Billing.Close_QPushButton"))
+            clickButton(":Select Order for Billing.Close_QPushButton");
                 if(object.exists(":Sales Order.Close_QPushButton"))
                     clickButton(":Sales Order.Close_QPushButton");
         
-        if(object.exists(":Select Order for Billing.Close_QPushButton"))
-            clickButton(":Select Order for Billing.Close_QPushButton");
+        
         
     }
     
@@ -773,7 +774,7 @@ function main()
                 test.fail("Employee " +data.empCode[1] +"failed to delete");
             
             else
-                test.pass("Employee"+data.empCode[1]+"related to employee group deleted sucessfully");
+                test.pass("Employee " +data.empCode[1]+ " related to employee group deleted sucessfully");
             
             clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));  
             
@@ -815,7 +816,7 @@ function main()
         if(object.exists("{column='0' container=':xTuple ERP:*._empgrp_XTreeWidget' text='"+data.empGrp[1]+"' type='QModelIndex'}"))
             test.fail("Failed to delete an employee Group" +data.empGrp[1] +"");
         else
-            test.pass("Employee Group Deleted Sucessfully");
+            test.pass("Employee Group " +data.empGrp[1] +" Deleted Sucessfully");
         clickButton(":Select Order for Billing.Close_QPushButton");
         
     }
@@ -869,7 +870,7 @@ function main()
             if(object.exists("{column='0' container=':xTuple ERP:*._empgrp_XTreeWidget' text='"+data.empGrp[2]+"' type='QModelIndex'}"))
                 test.pass("Employee Group" +data.empGrp[2] +" created sucessfully");
             else
-                test.fail("Employee Group creation failed");
+                test.fail("Employee Group " +data.empGrp[2] +" creation failed");
         }
         catch(e)
         {
@@ -939,11 +940,11 @@ function main()
             {
                 
                 flag = "1";
-                test.pass("Employee Group" +data.empGrp[2] +"attached sucessfully to an employee");
+                test.pass("Employee Group" +data.empGrp[2] +" attached sucessfully to an employee");
                 
             }
             else
-                test.fail("Error in attaching Employee Group");
+                test.fail("Error in attaching " +data.empGrp[2] +" Employee Group");
             clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
             clickButton(waitForObject(":Quotes.Query_QToolButton"));
             clickButton(waitForObject(":Quotes.Close_QToolButton"));
@@ -986,7 +987,7 @@ function main()
                 
             {
                 
-                test.pass("Employee Group"+data.empGrp[2]+"attached to an Employee sucessfully verified");
+                test.pass("Employee Group"+data.empGrp[2]+" attached to an Employee sucessfully verified");
                 
                 
             }
@@ -1066,8 +1067,8 @@ function main()
             else
             {
                 flag = "1";
-                test.log(flag);
-                test.pass("Employee Group Detached sucessfully");
+                
+                test.pass("Employee Group" +data.empGrp[2] +" detached sucessfully");
             }
             clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
             clickButton(waitForObject(":Quotes.Query_QToolButton"));
@@ -1114,12 +1115,12 @@ function main()
                 
             {
                 
-                test.fail("Fail to verify an detach Employee Grup "+data.empGrp[2]+"to an Employee");
+                test.fail("Fail to detach an Employee Group "+data.empGrp[2]+"from an Employee");
                 
                 
             }
             else
-                test.pass("Employee group" +data.empGrp[2] +"detached from an employee sucessfully verified");
+                test.pass("Employee group" +data.empGrp[2] +" sucessfully  detached from an employee");
             
             clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));  
             

@@ -38,11 +38,47 @@ try
         waitForObject(":Log In._server_QLineEdit");
         type(":Log In._server_QLineEdit", "<Tab>");
         
+        
+        //---
+//        waitForObject(":Log In._port_QLineEdit");
+//        var a = findObject(":Log In._port_QLineEdit").text;
+//        test.log(a);
+//        var b =a+";
+//        var mystring = b.substring(0,1);
+//        test.log(mystring)
+//        if(mystring == "5");
+//        {
+//            type(waitForObject(":Log In._port_QLineEdit"), "<Backspace>");
+//            type(waitForObject(":Log In._port_QLineEdit"), "<Backspace>");
+//            type(waitForObject(":Log In._port_QLineEdit"), "<Backspace>");
+//            type(":Log In._port_QLineEdit","433");
+//            var port1 = findObject(":Log In._port_QLineEdit").text;
+//            test.log(port1);
+//            if(port1 == "5433")
+//            test.pass("Sucess");
+//            else
+//            test.fail("fail");
+//          
+//        }
 //        waitForObject(":Log In._port_QLineEdit");
 //        findObject(":Log In._port_QLineEdit").clear();
 //        type(":Log In._port_QLineEdit",port);
 //        waitForObject(":Log In._port_QLineEdit");
 //        type(":Log In._port_QLineEdit", "<Tab>");
+        
+     if(findObject(":Log In._port_QLineEdit").text!=port)    
+    {
+       
+        findObject(":Log In._port_QLineEdit").text=port;
+        
+    }    
+        
+        
+        
+        
+        
+        
+        
         
         waitForObject(":_database_QLineEdit_2");
         findObject(":_database_QLineEdit_2").clear();
@@ -55,7 +91,7 @@ try
         type(":_password_QLineEdit", pwd);
          waitForObject(":Log In.Login_QPushButton_2");
          clickButton(":Log In.Login_QPushButton_2");
-try
+         try
         {
             waitForObject(":Registration Key.Yes_QPushButton");
             clickButton(":Registration Key.Yes_QPushButton");
@@ -66,7 +102,7 @@ try
         }
         test.log("Logged in Application");
         
-    }
+        }
 }
 catch(e)
 {

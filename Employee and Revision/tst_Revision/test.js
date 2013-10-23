@@ -16,8 +16,6 @@ function init()
     data.actBooItem     = testData.field(record,"ACTBOOITEM");
     data.pndBooItem     = testData.field(record,"PNDBOOITEM");
     
-    
-    
     //-----includes-----
     source(findFile("scripts","functions.js"));
     
@@ -25,8 +23,6 @@ function init()
     loginAppl("CONFIGURE"); 
     snooze(1);
 }
-
-
 
 
 
@@ -133,7 +129,7 @@ function main()
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
         clickButton(waitForObject(":Quotes.Query_QToolButton"));
         clickButton(waitForObject(":Quotes.Close_QToolButton"));
-        test.log("Item Site Edited");
+        test.log("Item Site Edited sucessfully for an item"+data.targetItem1);
         
     }
     catch(e)
@@ -172,14 +168,14 @@ function main()
         //---Verifying the status of the revision created for the first time---
         snooze(1);
         Checkstatus1 = findObject(":xTuple ERP:*.Active_QLabel").text;
-        test.log(Checkstatus1);
+        
         if(Checkstatus1 =="Active")
         {
             flag ="1";
-            test.pass("The state of First Revision created for BOM is displayed as active");
+            test.pass("The state of  Revision created for first time on BOM is sucessfully displayed as active");
         }
         else
-            test.fail("The state of revision created doe the first time on BOM is not displayed as active");
+            test.fail("The state of revision created for the first time on BOM is failed to  displayed as active");
         
         if(flag=="1")
         {
@@ -220,7 +216,7 @@ function main()
         
         //----Verifying the BOM displayed uder list of BOM screen
         if(object.exists("{column='0' container=':xTuple ERP:*._bom_XTreeWidget' text='"+data.targetItem1+"' type='QModelIndex'}"))
-            test.pass("Bill Of Material Item " +data.targetItem1+"sucessfully displayed under BOM list screen");
+            test.pass("Bill Of Material Item " +data.targetItem1+ "sucessfully displayed under BOM list screen");
         else
             test.fail("Failed to create Bill Of Material Item");
         
@@ -268,13 +264,13 @@ function main()
             //----Verifying the revision status craeted for second time----
             snooze(1);
             Checkstatus2 = findObject(":xTuple ERP:*.Pending_QLabel").text;
-            test.log(Checkstatus1);
+           
             if(Checkstatus2 =="Pending")
             {
-                test.pass("The state of revision created for second time on BOM item is displayed as pending");
+                test.pass("Revision created for second time on BOM item state is  sucessfully displayed as pending");
             }
             else
-                test.fail("The state revision created for second time is failed to display as pending");
+                test.fail("Revision created for second time on BOM item failed to display its state as pending");
             
             
             
@@ -334,12 +330,12 @@ function main()
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
         clickButton(waitForObject(":Quotes.Query_QToolButton"));
         clickButton(waitForObject(":Quotes.Close_QToolButton"))
-                test.log("Item Created deactivated sucessfully");
+                test.log("Item "+ data.targetItem2+" deactivated sucessfully");
     }
     
     catch(e)
     {
-        test.fail("Error in deactivating an item"+e);
+        test.fail("Error in deactivating an "+ data.targetItem2+" item"+e);
         
         if(object.exists(":Select Order for Billing.Save_QPushButton"))
             clickButton(":Select Order for Billing.Save_QPushButton");
@@ -435,7 +431,7 @@ function main()
         //---Verifying the status of the revision created for the first time---
         snooze(1);
         Checkstatus1 = findObject(":xTuple ERP:*.Active_QLabel").text;
-        test.log(Checkstatus1);
+       
         if(Checkstatus1 =="Active")
         {
             flag ="1";
@@ -460,7 +456,7 @@ function main()
                 if(object.exists("{column='1' container=':frame_2._bomitem_XTreeWidget' text='"+data.actBomItem+"' type='QModelIndex'}"))
                 {
                     
-                    test.pass("Bill Of Material Item " +data.actBomItem +" created");
+                    test.pass("Bill Of Material Item " +data.actBomItem +" created sucessfully");
                     
                 }
                 else
@@ -526,13 +522,13 @@ function main()
         //----Verifying the revision status craeted for second time----
         snooze(1);
         Checkstatus2 = findObject(":xTuple ERP:*.Pending_QLabel").text;
-        test.log(Checkstatus2);
+        
         if(Checkstatus2 =="Pending")
         {
-            test.pass("The state of revision created for second time on BOM is displayed as pending");
+            test.pass("The state of revision created for second time on BOM sucessfully displayed as pending");
         }
         else
-            test.fail("The state revision created for second time on BOM is not displayed as pending");
+            test.fail("The state of the revision created for second time on BOM is failed to display as pending");
         
         
         //---Add BOM---
@@ -620,11 +616,11 @@ function main()
            clickButton(":_stack.Change current Active BOO to Substitute BOO when activating a Pending BOO_QCheckBox");
        }
     clickButton(waitForObject(":View Check Run.Save_QPushButton"));
-    test.log("Sucessfully done product set-up");
+    test.log("Sucessfully made changes in product set-up");
    }
     catch(e)
     {
-        test.fail("Error in setting Products setup"+e);
+        test.fail("Error in setting changes in Products setup"+e);
          if(object.exists(":View Check Run.Save_QPushButton"))
             clickButton(":View Check Run.Save_QPushButton");
     }
@@ -652,11 +648,11 @@ function main()
             clickItem(":_stdopn_XComboBox",data.actBooItem,5,5,0, Qt.LeftButton);
             nativeType("<Tab>");
             clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2"));
-            test.log("Bill Of Operation added sucessfully");
+            test.log("Bill Of Operation "+ data.actBooItem +"added sucessfully");
         }
         catch(e)
         {
-            test.fail("Error in adding Bill Of Operation for active revision"+e);
+            test.fail("Error in adding Bill Of Operation "+ data.actBooItem +" for active revision"+e);
         }
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
         clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));  
@@ -681,12 +677,11 @@ function main()
         clickButton(waitForObject(":xTuple ERP:*.Edit_QPushButton"));
         snooze(1);
         Checkstatus1 =findObject(":xTuple ERP:*.Active_QLabel").text
-                      
-                      test.log(Checkstatus1);
+        
         if(Checkstatus1 =="Active")
         {
             flag ="1";
-            test.pass("The state of revision craeted for the first time is displayed as active in BOO of an item");
+            test.pass("The state of revision created for the first time is displayed as active in BOO of an item");
         }
         else
             test.fail("Failed to display the state of revision created for the first time on Bill of Operations as active ");
@@ -899,7 +894,7 @@ function main()
         nativeType("<Tab>");
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
         clickButton(waitForObject(":Quotes.Close_QToolButton")); 
-        test.log("Sucessfully changed Work Order revision status");
+        test.log("Sucessfully edited Work Order revision status");
         
     }
     catch(e)
