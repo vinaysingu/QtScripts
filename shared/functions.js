@@ -37,11 +37,13 @@ try
         type(":Log In._server_QLineEdit",url);
         waitForObject(":Log In._server_QLineEdit");
         type(":Log In._server_QLineEdit", "<Tab>");
-        waitForObject(":Log In._port_QLineEdit");
-        findObject(":Log In._port_QLineEdit").clear();
-        type(":Log In._port_QLineEdit",port);
-        waitForObject(":Log In._port_QLineEdit");
-        type(":Log In._port_QLineEdit", "<Tab>");
+        
+//        waitForObject(":Log In._port_QLineEdit");
+//        findObject(":Log In._port_QLineEdit").clear();
+//        type(":Log In._port_QLineEdit",port);
+//        waitForObject(":Log In._port_QLineEdit");
+//        type(":Log In._port_QLineEdit", "<Tab>");
+        
         waitForObject(":_database_QLineEdit_2");
         findObject(":_database_QLineEdit_2").clear();
         type(":_database_QLineEdit_2",db);
@@ -348,6 +350,7 @@ catch(e)
             clickItem(":_srcWhs_WComboBox", fromsite, 5,5, 0, Qt.LeftButton);
             waitForObject(":_dstWhs_WComboBox");
             clickItem(":_dstWhs_WComboBox", tosite, 5,5, 0, Qt.LeftButton);
+            
             waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
             clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
             waitForObject(":_lineItemsPage.New_QPushButton");
@@ -451,8 +454,8 @@ catch(e)
     
 }
   //----------costing----------------
- function copyItem(sourceitem,targetitem)
-{
+  function copyitem(sourceitem,targetitem,listprice,Wsaleprice)
+   {
    try
   {
        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products");
@@ -472,31 +475,27 @@ catch(e)
        
        waitForObject(":_targetItemNumber_XLineEdit_2");
        type(":_targetItemNumber_XLineEdit_2", targetitem);
-       
-       if(findObject(":Copy Item.Copy Item Costs_QCheckBox").checked)
+      if(!findObject(":Copy Item.Copy Bill of Materials_XCheckBox").checked)
        {
-           clickButton(":Copy Item.Copy Item Costs_QCheckBox");
+           clickButton(":Copy Item.Copy Bill of Materials_XCheckBox");
        }
-       if(!findObject(":Copy Item.Copy Bill of Materials_QCheckBox").checked)
+    
+     if(!findObject(":Copy Item.Rollup Prices_XCheckBox").checked)
        {
-           clickButton(":Copy Item.Copy Bill of Materials_QCheckBox");
+           clickButton(":Copy Item.Rollup Prices_XCheckBox");
        }
-       if(object.exists(":Copy Item.Copy Bill of Operations_XCheckBox"))
+      if(findObject(":Copy Item.Copy Item Sites_XCheckBox").checked)
        {
-           if(!findObject(":Copy Item.Copy Bill of Operations_XCheckBox").checked)
-           {
-               clickButton(":Copy Item.Copy Bill of Operations_XCheckBox");
-           }
-           if(!findObject(":Copy Item.Copy Used At Operation_XCheckBox").checked)
-           {
-               clickButton(":Copy Item.Copy Used At Operation_XCheckBox");
-           }
+           clickButton(":Copy Item.Copy Item Sites_XCheckBox");
        }
-       waitForObject(":Items.Copy_QPushButton");
-       clickButton(":Items.Copy_QPushButton");
-       
-       waitForObject(":Sales Order.No_QPushButton");
-       clickButton(":Sales Order.No_QPushButton");
+    findObject(":Copy Item._listPrice_XLineEdit").clear();
+    type(waitForObject(":Copy Item._listPrice_XLineEdit"),listprice);
+    nativeType("<Tab>");
+      findObject(":Copy Item._listCost_XLineEdit").clear();
+    type(waitForObject(":Copy Item._listCost_XLineEdit"),Wsaleprice);
+    clickButton(waitForObject(":Items.Copy_QPushButton"));
+       waitForObject(":Quotes.Query_QToolButton");
+       clickButton(":Quotes.Query_QToolButton");
        snooze(1);
        if(object.exists("{column='0' container=':_list_XTreeWidget_3' text='"+targetitem+"' type='QModelIndex'}"))
            test.pass("Item " + targetitem +" created");
@@ -512,7 +511,8 @@ catch(e)
        if(object.exists(":Quotes.Close_QToolButton"))
            clickButton(":Quotes.Close_QToolButton");
    }
-}
+  
+} 
  //------------Create Regular Item Site----------
 function createRIS(item)
 {

@@ -37,7 +37,6 @@ try
         type(":Log In._server_QLineEdit",url);
         waitForObject(":Log In._server_QLineEdit");
         type(":Log In._server_QLineEdit", "<Tab>");
-        
 //        waitForObject(":Log In._port_QLineEdit");
 //        findObject(":Log In._port_QLineEdit").clear();
 //        type(":Log In._port_QLineEdit",port);
@@ -349,7 +348,6 @@ catch(e)
             clickItem(":_srcWhs_WComboBox", fromsite, 5,5, 0, Qt.LeftButton);
             waitForObject(":_dstWhs_WComboBox");
             clickItem(":_dstWhs_WComboBox", tosite, 5,5, 0, Qt.LeftButton);
-            
             waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
             clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
             waitForObject(":_lineItemsPage.New_QPushButton");
@@ -391,6 +389,9 @@ catch(e)
         activateItem(":xTuple ERP: *_QMenuBar", "Inventory");
         waitForObjectItem(":xTuple ERP: *.Inventory_QMenu", "Shipping");
         activateItem(":xTuple ERP: *.Inventory_QMenu", "Shipping");
+        
+      
+                 
         waitForObjectItem(":xTuple ERP: *.Shipping_QMenu", "Issue to Shipping...");
         activateItem(":xTuple ERP: *.Shipping_QMenu", "Issue to Shipping...");
         waitForObject(":_stackedWidget.VirtualClusterLineEdit_OrderLineEdit");
@@ -453,7 +454,7 @@ catch(e)
     
 }
   //----------costing----------------
-  function copyitem(sourceitem,targetitem,listprice,Wsaleprice)
+ function copyitem(sourceitem,targetitem,listprice,Wsaleprice)
    {
    try
   {
@@ -490,7 +491,7 @@ catch(e)
     findObject(":Copy Item._listPrice_XLineEdit").clear();
     type(waitForObject(":Copy Item._listPrice_XLineEdit"),listprice);
     nativeType("<Tab>");
-     findObject(":Copy Item._listCost_XLineEdit").clear();
+      findObject(":Copy Item._listCost_XLineEdit").clear();
     type(waitForObject(":Copy Item._listCost_XLineEdit"),Wsaleprice);
     clickButton(waitForObject(":Items.Copy_QPushButton"));
        waitForObject(":Quotes.Query_QToolButton");
@@ -1628,6 +1629,8 @@ try
         type(":_schedGroup.XDateEdit_XDateEdit_2", "+7");
         waitForObject(":_schedGroup.XDateEdit_XDateEdit_3");
         type(":_schedGroup.XDateEdit_XDateEdit_3", "+8");
+        
+        
         waitForObject(":Sales Order.Save_QPushButton");
         clickButton(":Sales Order.Save_QPushButton");
         waitForObject(":Sales Order.Close_QPushButton_2");
@@ -1700,7 +1703,8 @@ try{
     {
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting"));
     activateItem(waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Setup..."));
-    clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Accounts Receivable");		snooze(0.5);
+    clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Accounts Receivable");	
+    snooze(0.5);
     var cmnum = findObject(":_nextARMemoNumber_XLineEdit").text;
    
     clickButton(waitForObject(":Cash Receipt.Save_QPushButton_3"));
@@ -2885,6 +2889,7 @@ function createRIS1(item, site)
            clickItem(":_listTab_XTreeWidget", "World Toys Ltd\\.", 24, 7, 0, Qt.LeftButton);
            clickButton(waitForObject(":Address.OK_QPushButton"));
            clickButton(waitForObject(":Sales Order.Save_QPushButton_3"));
+           
            clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2"));
            snooze(0.5);
            clickButton(waitForObject(":Sales Order.Cancel_QPushButton_3"));
@@ -3494,5 +3499,95 @@ function createandreturnSalesOrderamnt(item, qty)
     {
         test.fail("Error in Creating a sales order "+e);
     }
+    
+}  
+               //--For Commission---
+           function createSalesOrderDiscp(cust,item,qty,disP)
+           {
+        try
+        {
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
+        activateItem(":xTuple ERP: *_QMenuBar", "Sales");
+        waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Sales Order");
+        activateItem(":xTuple ERP: *.Sales_QMenu", "Sales Order");
+        waitForObjectItem(":xTuple ERP: *.Sales Order_QMenu", "List Open...");
+        activateItem(":xTuple ERP: *.Sales Order_QMenu", "List Open...");
+        snooze(2);
+        waitForObject(":Open Sales Orders.Query_QToolButton");
+        clickButton(":Open Sales Orders.Query_QToolButton");
+        waitForObject(":Open Sales Orders.New_QToolButton");
+        clickButton(":Open Sales Orders.New_QToolButton");
+        waitForObject(":Bill-To.VirtualClusterLineEdit_CLineEdit_2");
+        type(":Bill-To.VirtualClusterLineEdit_CLineEdit_2",cust);
+        snooze(0.5);
+        nativeType("<Tab>");
         
+        waitForObject(":_headerPage._custPONumber_XLineEdit_2");
+        type(":_headerPage._custPONumber_XLineEdit_2", "103");
+        
+        if(findObject(":_headerPage.Print on Save_QCheckBox").checked)
+            clickButton(":_headerPage.Print on Save_QCheckBox");
+        
+        sonumber = findObject(":_headerPage._orderNumber_XLineEdit_2").text;
+        
+        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
+        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
+        waitForObject(":_lineItemsPage.New_QPushButton_2");
+        clickButton(":_lineItemsPage.New_QPushButton_2");
+        waitForObject(":_itemGroup.ItemLineEdit_ItemLineEdit");
+        type(":_itemGroup.ItemLineEdit_ItemLineEdit", item);
+        snooze(0.5);
+        nativeType("<Tab>");
+         
+        waitForObject(":_qtyOrdered_XLineEdit_2");
+        findObject(":_qtyOrdered_XLineEdit_2").clear();
+        type(":_qtyOrdered_XLineEdit_2", qty);
+        
+        soitem = findObject(":_itemGroup.ItemLineEdit_ItemLineEdit").text;
+        
+        soqty = findObject(":_qtyOrdered_XLineEdit_2").text;
+       nativeType("<Tab>");
+        //--Entering Disc%--
+        snooze(2);
+        waitForObject(":_amountGroup._discountFromCust_XLineEdit");
+        findObject(":_amountGroup._discountFromCust_XLineEdit").clear();
+        type(":_amountGroup._discountFromCust_XLineEdit",disP);
+        nativeType("<Tab>");
+        snooze(2);
+        var dis = findObject(":_amountGroup._discountFromCust_XLineEdit").text;
+        test.log(dis);
+       
+          
+        //--
+        waitForObject(":_schedGroup.XDateEdit_XDateEdit_2");
+        type(":_schedGroup.XDateEdit_XDateEdit_2", "+7");
+        waitForObject(":_schedGroup.XDateEdit_XDateEdit_3");
+        type(":_schedGroup.XDateEdit_XDateEdit_3", "+8");
+        clickButton(waitForObject(":Sales Order.Save_QPushButton_3"));
+        if(object.exists(":OK_QPushButton"))
+            clickButton(":OK_QPushButton");
+        clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
+        clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2"));
+        clickButton(waitForObject(":Sales Order.Cancel_QPushButton_3"));
+        
+        
+        waitForObject(":_list_XTreeWidget_5");
+        if(object.exists("{column='0' container=':_list_XTreeWidget_5' text='"+sonumber+"' type='QModelIndex'}"))
+            test.pass("Sales Order creation successful");
+        else  
+            test.fail("Sales Order creation failed");            
+        
+        waitForObject(":Quotes.Close_QToolButton");
+        clickButton(":Quotes.Close_QToolButton");
+        return sonumber;
+     }
+    
+     catch(e)
+    {
+        test.fail("Error in creating the sales order with customer discount"+e)
+    
+                 if(object.exists(":Quotes.Close_QToolButton"))
+           clickButton(":Quotes.Close_QToolButton");
+     }
+    
 }

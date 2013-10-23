@@ -1,13 +1,40 @@
-function main()
+
+function init()
 {
+    data = new Object();
+    var set = testData.dataset("Data.tsv");
+    
+    
+    var record = set[0];
+    data.sourceItem     = testData.field(record,"SOURCEITEM");
+    data.targetItem1    = testData.field(record,"TARGETITEM1");
+    data.targetItem2    = testData.field(record,"TARGETITEM2");
+    data.listPrice      = testData.field(record,"LISTPRICE");
+    data.wSalePrice     = testData.field(record,"WSALEPRICE");
+    data.actBomItem     = testData.field(record,"ACTBOMITEM");
+    data.pndBomItem     = testData.field(record,"PNDBOMITEM");
+    data.actBooItem     = testData.field(record,"ACTBOOITEM");
+    data.pndBooItem     = testData.field(record,"PNDBOOITEM");
+    
+    
+    
     //-----includes-----
     source(findFile("scripts","functions.js"));
     
     //-----login Application-----
     loginAppl("CONFIGURE"); 
-    snooze(3);
-    
-                       //-----Editing of preferences----
+    snooze(1);
+}
+
+
+
+
+
+function main()
+{
+ 
+  
+                     //-----Editing of preferences----
     try
     {
         if(OS.name == "Darwin")
@@ -67,25 +94,25 @@ function main()
     
     loginAppl("CONFIGURE"); 
     snooze(3);
+
+  var Astatus = "1";
+  var Pstatus = "2";
+  var Checkstatus1,Checkstatus2;   
+  var flag = "0";
+  var woqty ="100";
+  
     
-    var sourceitem = "YTRUCK1";
-    var targetitem1 = "REVITEM111";
-    var targetitem2 = "REVITEM222";
-    var listprice = "2";
-    var Wsaleprice = "2";
-    var ABOMItem1 = "BPAINT1";
-    var PBOMItem2 = "YPAINT2";
-    var ABooItem1 = "ASSEMBLY";
-    var PBooItem2 = "PACKAGE";
-    var Astatus = "1";
-    var Pstatus = "2";
-    var Checkstatus1,Checkstatus2;   
-    var flag = "0";
-    var woqty ="100";
+    
+    
+    
+    
+    
+    
+    
     //----Creating an Item---
-    copyitem(sourceitem,targetitem1,listprice,Wsaleprice);
+    copyitem( data.sourceItem,data.targetItem1,data.listPrice,data.wSalePrice);
     //---Creating an ItemSites----
-    createRIS(targetitem1);
+    createRIS(data.targetItem1);
     
     //---Edit the itemsite created---
     try
@@ -95,7 +122,7 @@ function main()
         activateItem(waitForObjectItem(":_QMenu", "List..."));
         clickButton(waitForObject(":Quotes.Query_QToolButton"));
         
-        openItemContextMenu(":_list_XTreeWidget_3",targetitem1, 5, 5, Qt.LeftButton);
+        openItemContextMenu(":_list_XTreeWidget_3",data.targetItem1, 5, 5, Qt.LeftButton);
         activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit..."));
         snooze(1);
         if(findObject(":Items.Site can manufacture this Item_QGroupBox"))
@@ -132,7 +159,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Bill Of Materials"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Bill Of Materials_QMenu", "List..."));
-        clickItem(":xTuple ERP:*._bom_XTreeWidget",targetitem1, 0, 0, 5, Qt.LeftButton);
+        clickItem(":xTuple ERP:*._bom_XTreeWidget",data.targetItem1, 0, 0, 5, Qt.LeftButton);
         clickButton(waitForObject(":xTuple ERP:*.Edit_QPushButton"));
         
         //---Creating New Revision for the first time and verify the status---
@@ -160,20 +187,20 @@ function main()
             try
             {
                 clickButton(waitForObject(":xTuple ERP:*.New_QPushButton_2"));
-                type(waitForObject(":Bill of Materials Item.ItemLineEdit_ItemLineEdit"),ABOMItem1);
+                type(waitForObject(":Bill of Materials Item.ItemLineEdit_ItemLineEdit"),data.actBomItem);
                 nativeType("<Tab>");
                 clickButton(waitForObject(":View Check Run.Save_QPushButton"));  
                 //---Verifying the BOM Item added  ---
                 
                 snooze(1);
-                if(object.exists("{column='1' container=':frame_2._bomitem_XTreeWidget' text='"+ABOMItem1+"' type='QModelIndex'}"))
+                if(object.exists("{column='1' container=':frame_2._bomitem_XTreeWidget' text='"+data.actBomItem+"' type='QModelIndex'}"))
                 {
                     
-                    test.pass("Bill Of Material Item " +ABOMItem1 +"added for active revision");
+                    test.pass("Bill Of Material Item " +data.actBomItem +"added for active revision");
                     
                 }
                 else
-                    test.fail("Error in creating BOM Item for active revision");
+                    test.fail("Error in creating BOM Item "+ data.actBomItem +" for active revision");
                 clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
             }
             catch(e)
@@ -192,8 +219,8 @@ function main()
         }
         
         //----Verifying the BOM displayed uder list of BOM screen
-        if(object.exists("{column='0' container=':xTuple ERP:*._bom_XTreeWidget' text='"+targetitem1+"' type='QModelIndex'}"))
-            test.pass("Bill Of Material Item " + targetitem1 +"sucessfully displayed under BOM list screen");
+        if(object.exists("{column='0' container=':xTuple ERP:*._bom_XTreeWidget' text='"+data.targetItem1+"' type='QModelIndex'}"))
+            test.pass("Bill Of Material Item " +data.targetItem1+"sucessfully displayed under BOM list screen");
         else
             test.fail("Failed to create Bill Of Material Item");
         
@@ -226,7 +253,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Bill Of Materials"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Bill Of Materials_QMenu", "List..."));
-        clickItem(":xTuple ERP:*._bom_XTreeWidget",targetitem1, 0, 0, 5, Qt.LeftButton);
+        clickItem(":xTuple ERP:*._bom_XTreeWidget",data.targetItem1, 0, 0, 5, Qt.LeftButton);
         clickButton(waitForObject(":xTuple ERP:*.Edit_QPushButton"));
         
         //---Creating the revision for second time--
@@ -261,7 +288,7 @@ function main()
         //---Add BOM---
         
         clickButton(waitForObject(":xTuple ERP:*.New_QPushButton_2"));
-        type(waitForObject(":Bill of Materials Item.ItemLineEdit_ItemLineEdit"),PBOMItem2);
+        type(waitForObject(":Bill of Materials Item.ItemLineEdit_ItemLineEdit"),data.pndBomItem);
         nativeType("<Tab>");
         clickButton(waitForObject(":View Check Run.Save_QPushButton"));  
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
@@ -289,7 +316,7 @@ function main()
     
     //----Creating an Inactive item----
     
-    copyitem(sourceitem,targetitem2,listprice,Wsaleprice);
+    copyitem(data.sourceItem,data.targetItem2,data.listPrice,data.wSalePrice);
     //---Deactivate the item created---
     try
     {
@@ -297,7 +324,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Item"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Item_QMenu", "List..."));
         clickButton(waitForObject(":Quotes.Query_QToolButton"));
-        openItemContextMenu(":_list_XTreeWidget_3", targetitem2, 5, 5, Qt.LeftButton);
+        openItemContextMenu(":_list_XTreeWidget_3",data.targetItem2, 5, 5, Qt.LeftButton);
         activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit..."));
         if(findObject(":xTuple ERP:*.Active_QCheckBox").checked)
         {
@@ -333,7 +360,7 @@ function main()
         activateItem(":_QMenu", "New...");
         
         waitForObject(":Item Site.ItemLineEdit_ItemLineEdit");
-        type(":Item Site.ItemLineEdit_ItemLineEdit", targetitem2);
+        type(":Item Site.ItemLineEdit_ItemLineEdit",data.targetItem2);
         nativeType("<Tab>");
         snooze(0.5);
         if(object.exists(":_warehouse_WComboBox_2"))
@@ -377,7 +404,7 @@ function main()
     }
     catch(e)
     {
-        test.fail("Exception in creating Itemsite for "+ targetitem2 +e);
+        test.fail("Exception in creating Itemsite for "+data.targetItem2+e);
     }
     
     
@@ -394,7 +421,7 @@ function main()
             clickButton(":xTuple ERP:*.Show BOMs for Inactive Items_XCheckBox");
         }
         
-        clickItem(":xTuple ERP:*._bom_XTreeWidget",targetitem2, 0, 0, 5, Qt.LeftButton);
+        clickItem(":xTuple ERP:*._bom_XTreeWidget",data.targetItem2, 0, 0, 5, Qt.LeftButton);
         clickButton(waitForObject(":xTuple ERP:*.Edit_QPushButton"));
         
         
@@ -424,16 +451,16 @@ function main()
             try
             {
                 clickButton(waitForObject(":xTuple ERP:*.New_QPushButton_2"));
-                type(waitForObject(":Bill of Materials Item.ItemLineEdit_ItemLineEdit"),ABOMItem1);
+                type(waitForObject(":Bill of Materials Item.ItemLineEdit_ItemLineEdit"),data.actBomItem);
                 nativeType("<Tab>");
                 clickButton(waitForObject(":View Check Run.Save_QPushButton"));  
                 //---Verifying the BOM Item added  ---
                 
                 snooze(1);
-                if(object.exists("{column='1' container=':frame_2._bomitem_XTreeWidget' text='"+ABOMItem1+"' type='QModelIndex'}"))
+                if(object.exists("{column='1' container=':frame_2._bomitem_XTreeWidget' text='"+data.actBomItem+"' type='QModelIndex'}"))
                 {
                     
-                    test.pass("Bill Of Material Item " +ABOMItem1 +" created");
+                    test.pass("Bill Of Material Item " +data.actBomItem +" created");
                     
                 }
                 else
@@ -461,8 +488,8 @@ function main()
             clickButton(":xTuple ERP:*.Show BOMs for Inactive Items_XCheckBox");
         }
         
-        if(object.exists("{column='0' container=':xTuple ERP:*._bom_XTreeWidget' text='"+targetitem2+"' type='QModelIndex'}"))
-            test.pass("Bill Of Material Item " + targetitem2 +" created sucessfull displayed under BOM list");
+        if(object.exists("{column='0' container=':xTuple ERP:*._bom_XTreeWidget' text='"+data.targetItem2+"' type='QModelIndex'}"))
+            test.pass("Bill Of Material Item " + data.targetItem2 +" created sucessfull displayed under BOM list");
         else
             test.fail("Failed to create Bill Of Material Item");
         
@@ -486,7 +513,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Bill Of Materials"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Bill Of Materials_QMenu", "List..."));
-        clickItem(":xTuple ERP:*._bom_XTreeWidget",targetitem2, 0, 0, 5, Qt.LeftButton);
+        clickItem(":xTuple ERP:*._bom_XTreeWidget",data.targetItem2, 0, 0, 5, Qt.LeftButton);
         clickButton(waitForObject(":xTuple ERP:*.Edit_QPushButton"));
         
         //---Creating the revision for second time--
@@ -511,7 +538,7 @@ function main()
         //---Add BOM---
         
         clickButton(waitForObject(":xTuple ERP:*.New_QPushButton_2"));
-        type(waitForObject(":Bill of Materials Item.ItemLineEdit_ItemLineEdit"),PBOMItem2);
+        type(waitForObject(":Bill of Materials Item.ItemLineEdit_ItemLineEdit"),data.pndBomItem);
         nativeType("<Tab>");
         clickButton(waitForObject(":View Check Run.Save_QPushButton"));  
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
@@ -528,8 +555,7 @@ function main()
         
     }
     
-    //---Done2---
-    
+   
     
     //---Operation on BOM-----
     
@@ -540,11 +566,11 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP:*.Bill Of Materials_QMenu", "List..."));
         
         //---Add Parent item as BOM item---
-        clickItem(":xTuple ERP:*._bom_XTreeWidget",targetitem1, 0, 0, 5, Qt.LeftButton);
+        clickItem(":xTuple ERP:*._bom_XTreeWidget",data.targetItem1, 0, 0, 5, Qt.LeftButton);
         clickButton(waitForObject(":xTuple ERP:*.Edit_QPushButton"));
         
         clickButton(waitForObject(":xTuple ERP:*.New_QPushButton_2"));
-        type(waitForObject(":Bill of Materials Item.ItemLineEdit_ItemLineEdit"),targetitem1);
+        type(waitForObject(":Bill of Materials Item.ItemLineEdit_ItemLineEdit"),data.targetItem1);
         nativeType("<Tab>");
         clickButton(waitForObject(":View Check Run.Save_QPushButton"));  
         
@@ -573,6 +599,36 @@ function main()
     
     var flag = "0";
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+           //---Product SetUp---
+    try
+    {
+    activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+    activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Setup..."));
+    if(!findObject(":_stack.Change current Active BOO to Substitute BOO when activating a Pending BOO_QCheckBox").checked)
+       {
+           clickButton(":_stack.Change current Active BOO to Substitute BOO when activating a Pending BOO_QCheckBox");
+       }
+    clickButton(waitForObject(":View Check Run.Save_QPushButton"));
+    test.log("Sucessfully done product set-up");
+   }
+    catch(e)
+    {
+        test.fail("Error in setting Products setup"+e);
+         if(object.exists(":View Check Run.Save_QPushButton"))
+            clickButton(":View Check Run.Save_QPushButton");
+    }
+
     //----Creating Revision and verifying status on BOO Screen--
     
     //---Creating revision for BOO for First Time-----
@@ -582,7 +638,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Bill Of Operations"));
         activateItem(waitForObjectItem(":_QMenu", "List..."));
         clickButton(waitForObject(":xTuple ERP:*.New_QPushButton"));
-        type(waitForObject(":xTuple ERP:*.ItemLineEdit_ItemLineEdit"),targetitem1);
+        type(waitForObject(":xTuple ERP:*.ItemLineEdit_ItemLineEdit"),data.targetItem1);
         nativeType("<Tab>");
         //---Create revision in active state on BOO
         type(waitForObject(":xTuple ERP:*.VirtualClusterLineEdit_RevisionLineEdit"), Astatus);
@@ -593,7 +649,7 @@ function main()
         try
         {
             clickButton(waitForObject(":xTuple ERP:*.New_QPushButton_2"));
-            clickItem(":_stdopn_XComboBox",ABooItem1,5,5,0, Qt.LeftButton);
+            clickItem(":_stdopn_XComboBox",data.actBooItem,5,5,0, Qt.LeftButton);
             nativeType("<Tab>");
             clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2"));
             test.log("Bill Of Operation added sucessfully");
@@ -621,7 +677,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Bill Of Operations"));
         activateItem(waitForObjectItem(":_QMenu", "List..."));
-        clickItem(":_boo_XTreeWidget", targetitem1, 0, 0, 5, Qt.LeftButton);
+        clickItem(":_boo_XTreeWidget_2", data.targetItem1, 0, 0, 5, Qt.LeftButton);
         clickButton(waitForObject(":xTuple ERP:*.Edit_QPushButton"));
         snooze(1);
         Checkstatus1 =findObject(":xTuple ERP:*.Active_QLabel").text
@@ -659,7 +715,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Bill Of Operations"));
         activateItem(waitForObjectItem(":_QMenu", "List..."));
-        clickItem(":_boo_XTreeWidget", targetitem1, 0, 0, 5, Qt.LeftButton);
+        clickItem(":_boo_XTreeWidget_2", data.targetItem1, 0, 0, 5, Qt.LeftButton);
         clickButton(waitForObject(":xTuple ERP:*.Edit_QPushButton"));
         
                  //---Revision with Pending state on BOO
@@ -685,16 +741,32 @@ function main()
         else
             test.fail("Failed to display the revision state as pending created for second time  on Bill of Operations ");
         
+        
+        
         //---Add BOO 
         clickButton(waitForObject(":xTuple ERP:*.New_QPushButton_2"));
         
-        clickItem(":_stdopn_XComboBox",PBooItem2 ,5,5,0, Qt.LeftButton);
+        clickItem(":_stdopn_XComboBox",data.pndBooItem ,5,5,0, Qt.LeftButton);
         nativeType("<Tab>");
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2"));
         
-        clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
-        clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));  
+       
+                 //---Changing state of revision from pending to Substitute---
         
+        clickButton(waitForObject(":xTuple ERP:*.Activate_QPushButton"));
+        clickButton(waitForObject(":View Check Run.Yes_QPushButton_2"));
+ 
+        sendEvent("QMouseEvent", waitForObject(":_revisionGroup_QLabel"), QEvent.MouseButtonPress, 15, 7, Qt.LeftButton, 0);
+        activateItem(waitForObjectItem(":_QMenu", "List..."));
+        waitForObject(":_listTab_XTreeWidget_24");
+        clickItem(":_listTab_XTreeWidget_24",Astatus,0, 0, 5, Qt.LeftButton);
+        
+        clickButton(waitForObject(":Sales Order.OK_QPushButton_2"));
+        clickButton(waitForObject(":xTuple ERP:*.Activate_QPushButton"));    
+        clickButton(waitForObject(":View Check Run.Yes_QPushButton_2")); 
+       
+         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
+        clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));  
     }
     catch(e)
     {
@@ -705,13 +777,12 @@ function main()
             clickButton(":Select Order for Billing.Close_QPushButton");
     }
     
-    
-    
-    //---Create a WO for revision enabled item---
+  
+  //---Create a WO for revision enabled item---
     
     //---Create WO For revision enabled item----
     
-    var WOnum = createWorkOrder(targetitem1, woqty)
+    var WOnum = createWorkOrder(data.targetItem1, woqty)
                 
                 //---View WO materials and Operations for active revision---
                 try
@@ -729,7 +800,7 @@ function main()
             snooze(2);
             clickButton(waitForObject(":xTuple ERP:*.Query_QToolButton"));
             waitForObject(":_list_XTreeWidget_11")
-                    if(object.exists("{column='0' container=':_list_XTreeWidget_11' text='"+ ABOMItem1 +"' type='QModelIndex'}"))
+                    if(object.exists("{column='0' container=':_list_XTreeWidget_11' text='"+ data.actBomItem +"' type='QModelIndex'}"))
                         test.pass("Bill Of Materials related to in Active state revision are displayed sucessfully");
             else
                 
@@ -753,7 +824,7 @@ function main()
             openItemContextMenu(":_list_XTreeWidget_3",WOnum, 5, 5, Qt.LeftButton);
             activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "View Operations..."));
             waitForObject(":_list_XTreeWidget_12");
-            if(object.exists("{column='3' container=':_list_XTreeWidget_12' text='"+ABooItem1+"' type='QModelIndex'}"))
+            if(object.exists("{column='3' container=':_list_XTreeWidget_12' text='"+data.actBooItem+"' type='QModelIndex'}"))
                 test.pass("Active state revision Bill Of Operations are displayed sucessfully");
             else
                 test.fail("Failed to display active state revision Bill Of Operations of an item");
@@ -824,7 +895,7 @@ function main()
         type(":xTuple ERP:*.VirtualClusterLineEdit_RevisionLineEdit",Pstatus);
         nativeType("<Tab>");
         waitForObject(":Bill of Operations.VirtualClusterLineEdit_RevisionLineEdit").clear();
-        type(":Bill of Operations.VirtualClusterLineEdit_RevisionLineEdit",PBOO);
+        type(":Bill of Operations.VirtualClusterLineEdit_RevisionLineEdit",Astatus+Pstatus);
         nativeType("<Tab>");
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton"));
         clickButton(waitForObject(":Quotes.Close_QToolButton")); 
@@ -861,7 +932,7 @@ function main()
             activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "View Material Requirements..."));
             snooze(1);
             waitForObject(":_list_XTreeWidget_11");
-            if(object.exists("{column='0' container=':_list_XTreeWidget_11' text='"+ PBOMItem2  +"' type='QModelIndex'}"))
+            if(object.exists("{column='0' container=':_list_XTreeWidget_11' text='"+ data.pndBomItem  +"' type='QModelIndex'}"))
                 test.pass("Pending state revision Bill Of Materials are displayed sucessfully for a WO");
             else
                 test.fail("Failed to display pending state revision Bill Of material");
@@ -884,7 +955,7 @@ function main()
             openItemContextMenu(":_list_XTreeWidget_3",WOnum, 5, 5, Qt.LeftButton);
             activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "View Operations..."));
             waitForObject(":_list_XTreeWidget_12");
-            if(object.exists("{column='3' container=':_list_XTreeWidget_12' text='"+PBooItem2+"' type='QModelIndex'}"))
+            if(object.exists("{column='3' container=':_list_XTreeWidget_12' text='"+data.pndBooItem+"' type='QModelIndex'}"))
                 test.pass("Pending state revision Bill Of Operations are displayed sucessfully for a WO");
             else
                 test.fail("Failed to display pending state revision Bill Of material");
