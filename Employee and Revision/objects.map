@@ -954,6 +954,7 @@
 :_listTab_XTreeWidget_21	{buddy=':_timeclockGroup.Shifts_QLabel' name='_listTab' type='XTreeWidget' visible='1'}
 :_listTab_XTreeWidget_22	{buddy=':Employees.Employees_QLabel' name='_listTab' type='XTreeWidget' visible='1'}
 :_listTab_XTreeWidget_23	{buddy=':Employee Groups.Employee Groups_QLabel' name='_listTab' type='XTreeWidget' visible='1'}
+:_listTab_XTreeWidget_24	{buddy=':_revisionGroup.Revisions_QLabel' name='_listTab' type='XTreeWidget' visible='1'}
 :_listTab_XTreeWidget_3	{buddy=':_headerPage._titleLit_QLabel_2' name='_listTab' type='XTreeWidget' visible='1'}
 :_listTab_XTreeWidget_4	{buddy=':Issue to Shipping.Orders_QLabel' name='_listTab' type='XTreeWidget' visible='1'}
 :_listTab_XTreeWidget_5	{buddy=':Cash Receipt._titleLit_QLabel' name='_listTab' type='XTreeWidget' visible='1'}
@@ -1048,6 +1049,8 @@
 :_reorderLevel_XLineEdit	{buddy=':Enforce Order Parameters.Reorder Level:_QLabel' name='_reorderLevel' type='XLineEdit' visible='1'}
 :_revision.Bill of Operations_QGroupBox	{container=':qt_tabwidget_stackedwidget._revision_QWidget' name='_booGroup' title='Bill of Operations' type='QGroupBox' visible='1'}
 :_revisionGroup.Prod. Lead Time:_QLabel	{container=':xTuple ERP:*._revisionGroup_QGroupBox' name='_productionLeadTimeLit' text='Prod. Lead Time:' type='QLabel' visible='1'}
+:_revisionGroup.Revisions_QLabel	{container=':xTuple ERP:*._revisionGroup_QGroupBox' name='_titleLit' text='Revisions' type='QLabel' visible='1'}
+:_revisionGroup_QLabel	{container=':xTuple ERP:*._revisionGroup_QGroupBox' type='QLabel' unnamed='1' visible='1'}
 :_salesrep.admin-Administrator_QModelIndex	{container=':_salesrep_XComboBox_2' text='admin-Administrator' type='QModelIndex'}
 :_salesrep_XComboBox	{buddy=':Prospect.Sales Rep:_QLabel' name='_salesrep' type='XComboBox' visible='1'}
 :_salesrep_XComboBox_2	{buddy=':groupBox.Sales Rep:_QLabel' name='_salesrep' type='XComboBox' visible='1'}
@@ -1086,6 +1089,7 @@
 :_sourceGroup._source_XComboBox	{container=':General Ledger Transactions._sourceGroup_QGroupBox' name='_source' type='XComboBox' visible='1'}
 :_srcWhs.WH1_QModelIndex	{container=':_srcWhs_WComboBox' text='WH1' type='QModelIndex'}
 :_srcWhs_WComboBox	{buddy=':Ship From.     Site:_QLabel' name='_srcWhs' type='WComboBox' visible='1'}
+:_stack.Change current Active BOO to Substitute BOO when activating a Pending BOO_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_boosub' text='Change current Active BOO to Substitute BOO when activating a Pending BOO' type='QCheckBox' visible='1'}
 :_stack.Edit_QPushButton	{container=':Setup._stack_QStackedWidget' name='_edit' text='Edit' type='QPushButton' visible='1'}
 :_stack.Key File Name:_QLabel	{container=':Setup._stack_QStackedWidget' name='_ccEncKeyNameLit' text='Key File Name:' type='QLabel' visible='1'}
 :_stack.Use toolbars on displays when available_QCheckBox	{container=':Setup._stack_QStackedWidget' name='_useToolbars' text='Use toolbars on displays when available' type='QCheckBox' visible='1'}
@@ -1318,10 +1322,12 @@
 :xTuple ERP:*.Account_QMenu	{name='menu.accnt.coa' title='Account' type='QMenu' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
 :xTuple ERP:*.Account_QMenu_2	{name='menu.crm.accounts' title='Account' type='QMenu' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
 :xTuple ERP:*.Accounts Payable_QMenu	{name='menu.accnt.ap' title='Accounts Payable' type='QMenu' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
+:xTuple ERP:*.Activate_QPushButton	{name='_activate' text='Activate' type='QPushButton' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
 :xTuple ERP:*.Active_QCheckBox	{name='_active' text='Active' type='QCheckBox' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
 :xTuple ERP:*.Active_QLabel	{name='_description' text='Active' type='QLabel' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
 :xTuple ERP:*.Active_XCheckBox	{name='_active' text='Active' type='XCheckBox' visible='1' window=':Employee_employee'}
 :xTuple ERP:*.Bill Of Materials_QMenu	{name='menu.prod.bom' title='Bill Of Materials' type='QMenu' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
+:xTuple ERP:*.Bill of Operations_QMdiSubWindow	{type='QMdiSubWindow' unnamed='1' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2' windowTitle='Bill of Operations'}
 :xTuple ERP:*.Bills of Operations:_QLabel	{name='_booLit' text='Bills of Operations:' type='QLabel' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
 :xTuple ERP:*.Bills of Operations_QMdiSubWindow	{type='QMdiSubWindow' unnamed='1' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2' windowTitle='Bills of Operations'}
 :xTuple ERP:*.CRM Account..._QPushButton	{name='_crmacct' text='CRM Account...' type='QPushButton' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}

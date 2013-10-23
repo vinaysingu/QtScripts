@@ -490,7 +490,7 @@ catch(e)
     findObject(":Copy Item._listPrice_XLineEdit").clear();
     type(waitForObject(":Copy Item._listPrice_XLineEdit"),listprice);
     nativeType("<Tab>");
-      findObject(":Copy Item._listCost_XLineEdit").clear();
+     findObject(":Copy Item._listCost_XLineEdit").clear();
     type(waitForObject(":Copy Item._listCost_XLineEdit"),Wsaleprice);
     clickButton(waitForObject(":Items.Copy_QPushButton"));
        waitForObject(":Quotes.Query_QToolButton");
